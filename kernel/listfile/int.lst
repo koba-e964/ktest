@@ -1,0 +1,114 @@
+GAS LISTING int.gas 			page 1
+
+
+   1              		.file	"int.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __Z8init_picv
+   6              		.def	__Z8init_picv;	.scl	2;	.type	32;	.endef
+   7              	__Z8init_picv:
+   8 0000 55       		pushl	%ebp
+   9 0001 B8FF0000 		movl	$255, %eax
+   9      00
+  10 0006 89E5     		movl	%esp, %ebp
+  11 0008 83EC08   		subl	$8, %esp
+  12 000b 89442404 		movl	%eax, 4(%esp)
+  13 000f C7042421 		movl	$33, (%esp)
+  13      000000
+  14 0016 E8000000 		call	_io_out8
+  14      00
+  15 001b C70424A1 		movl	$161, (%esp)
+  15      000000
+  16 0022 B9FF0000 		movl	$255, %ecx
+  16      00
+  17 0027 894C2404 		movl	%ecx, 4(%esp)
+  18 002b E8000000 		call	_io_out8
+  18      00
+  19 0030 C7042420 		movl	$32, (%esp)
+  19      000000
+  20 0037 BA110000 		movl	$17, %edx
+  20      00
+  21 003c 89542404 		movl	%edx, 4(%esp)
+  22 0040 E8000000 		call	_io_out8
+  22      00
+  23 0045 C7042421 		movl	$33, (%esp)
+  23      000000
+  24 004c B8200000 		movl	$32, %eax
+  24      00
+  25 0051 89442404 		movl	%eax, 4(%esp)
+  26 0055 E8000000 		call	_io_out8
+  26      00
+  27 005a C7042421 		movl	$33, (%esp)
+  27      000000
+  28 0061 B8040000 		movl	$4, %eax
+  28      00
+  29 0066 89442404 		movl	%eax, 4(%esp)
+  30 006a E8000000 		call	_io_out8
+  30      00
+  31 006f C7042421 		movl	$33, (%esp)
+  31      000000
+  32 0076 B8010000 		movl	$1, %eax
+  32      00
+  33 007b 89442404 		movl	%eax, 4(%esp)
+  34 007f E8000000 		call	_io_out8
+  34      00
+  35 0084 C70424A0 		movl	$160, (%esp)
+  35      000000
+  36 008b B8110000 		movl	$17, %eax
+  36      00
+  37 0090 89442404 		movl	%eax, 4(%esp)
+GAS LISTING int.gas 			page 2
+
+
+  38 0094 E8000000 		call	_io_out8
+  38      00
+  39 0099 C70424A1 		movl	$161, (%esp)
+  39      000000
+  40 00a0 B8280000 		movl	$40, %eax
+  40      00
+  41 00a5 89442404 		movl	%eax, 4(%esp)
+  42 00a9 E8000000 		call	_io_out8
+  42      00
+  43 00ae C70424A1 		movl	$161, (%esp)
+  43      000000
+  44 00b5 B8020000 		movl	$2, %eax
+  44      00
+  45 00ba 89442404 		movl	%eax, 4(%esp)
+  46 00be E8000000 		call	_io_out8
+  46      00
+  47 00c3 C70424A1 		movl	$161, (%esp)
+  47      000000
+  48 00ca B9010000 		movl	$1, %ecx
+  48      00
+  49 00cf 894C2404 		movl	%ecx, 4(%esp)
+  50 00d3 E8000000 		call	_io_out8
+  50      00
+  51 00d8 C7042421 		movl	$33, (%esp)
+  51      000000
+  52 00df BAFB0000 		movl	$251, %edx
+  52      00
+  53 00e4 89542404 		movl	%edx, 4(%esp)
+  54 00e8 E8000000 		call	_io_out8
+  54      00
+  55 00ed C70424A1 		movl	$161, (%esp)
+  55      000000
+  56 00f4 B8FF0000 		movl	$255, %eax
+  56      00
+  57 00f9 89442404 		movl	%eax, 4(%esp)
+  58 00fd E8000000 		call	_io_out8
+  58      00
+  59 0102 C9       		leave
+  60 0103 C3       		ret
+  61 0104 90909090 		.def	_io_out8;	.scl	3;	.type	32;	.endef
+  61      90909090 
+  61      90909090 
+GAS LISTING int.gas 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 int.cpp
+             int.gas:7      .text:00000000 __Z8init_picv
+
+UNDEFINED SYMBOLS
+_io_out8

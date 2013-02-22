@@ -1,0 +1,185 @@
+	.file	"io.c"
+	.text
+	.balign 2
+	.p2align 4,,15
+.globl _kos_size
+	.def	_kos_size;	.scl	2;	.type	32;	.endef
+_kos_size:
+	pushl	%ebp
+	movl	%esp, %ebp
+	subl	$12, %esp
+	leal	-4(%ebp), %eax
+	pushl	%eax
+	leal	-8(%ebp), %eax
+	pushl	%eax
+	movl	8(%ebp), %eax
+	pushl	%eax
+	call	_nio_size
+	movl	-8(%ebp), %eax
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.balign 2
+	.p2align 4,,15
+.globl _kos_size64
+	.def	_kos_size64;	.scl	2;	.type	32;	.endef
+_kos_size64:
+	pushl	%ebp
+	movl	%esp, %ebp
+	pushl	%ebx
+	subl	$24, %esp
+	leal	-8(%ebp), %eax
+	movl	8(%ebp), %edx
+	pushl	%eax
+	leal	-12(%ebp), %eax
+	pushl	%eax
+	pushl	%edx
+	call	_nio_size
+	movl	-8(%ebp), %ecx
+	movl	-12(%ebp), %eax
+	movl	%ecx, %ebx
+	movl	%eax, %edx
+	xorl	%ecx, %ecx
+	sarl	$31, %edx
+	orl	%ecx, %eax
+	orl	%ebx, %edx
+	movl	-4(%ebp), %ebx
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.balign 2
+	.p2align 4,,15
+.globl _kos_tell
+	.def	_kos_tell;	.scl	2;	.type	32;	.endef
+_kos_tell:
+	pushl	%ebp
+	movl	%esp, %ebp
+	subl	$12, %esp
+	leal	-4(%ebp), %eax
+	movl	8(%ebp), %ecx
+	pushl	%eax
+	leal	-8(%ebp), %eax
+	pushl	%eax
+	pushl	%ecx
+	call	_nio_tell
+	movl	-8(%ebp), %eax
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.balign 2
+	.p2align 4,,15
+.globl _kos_tell64
+	.def	_kos_tell64;	.scl	2;	.type	32;	.endef
+_kos_tell64:
+	pushl	%ebp
+	movl	%esp, %ebp
+	pushl	%ebx
+	subl	$24, %esp
+	leal	-8(%ebp), %eax
+	movl	8(%ebp), %ebx
+	pushl	%eax
+	leal	-12(%ebp), %eax
+	pushl	%eax
+	pushl	%ebx
+	call	_nio_tell
+	movl	-8(%ebp), %ecx
+	movl	-12(%ebp), %eax
+	movl	%ecx, %ebx
+	movl	%eax, %edx
+	xorl	%ecx, %ecx
+	sarl	$31, %edx
+	orl	%ecx, %eax
+	orl	%ebx, %edx
+	movl	-4(%ebp), %ebx
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.balign 2
+	.p2align 4,,15
+.globl _kos_seek
+	.def	_kos_seek;	.scl	2;	.type	32;	.endef
+_kos_seek:
+	pushl	%ebp
+	movl	%esp, %ebp
+	subl	$12, %esp
+	movl	12(%ebp), %eax
+	pushl	$0
+	pushl	%eax
+	movl	8(%ebp), %eax
+	pushl	%eax
+	call	_nio_seek
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.balign 2
+	.p2align 4,,15
+.globl _kos_seek64
+	.def	_kos_seek64;	.scl	2;	.type	32;	.endef
+_kos_seek64:
+	pushl	%ebp
+	movl	%esp, %ebp
+	pushl	%ebx
+	movl	12(%ebp), %eax
+	movl	16(%ebp), %edx
+	movl	%edx, 16(%ebp)
+	movl	%eax, 12(%ebp)
+	popl	%ebx
+	popl	%ebp
+	jmp	_nio_seek
+	.balign 2
+	.p2align 4,,15
+.globl _kos_seteof
+	.def	_kos_seteof;	.scl	2;	.type	32;	.endef
+_kos_seteof:
+	pushl	%ebp
+	movl	%esp, %ebp
+	subl	$12, %esp
+	movl	12(%ebp), %eax
+	pushl	$0
+	pushl	%eax
+	movl	8(%ebp), %eax
+	pushl	%eax
+	call	_nio_seteof
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.balign 2
+	.p2align 4,,15
+.globl _kos_seteof64
+	.def	_kos_seteof64;	.scl	2;	.type	32;	.endef
+_kos_seteof64:
+	pushl	%ebp
+	movl	%esp, %ebp
+	pushl	%ebx
+	movl	12(%ebp), %eax
+	movl	16(%ebp), %edx
+	movl	%edx, 16(%ebp)
+	movl	%eax, 12(%ebp)
+	popl	%ebx
+	popl	%ebp
+	jmp	_nio_seteof
+	.balign 2
+	.p2align 4,,15
+.globl _kos_open
+	.def	_kos_open;	.scl	2;	.type	32;	.endef
+_kos_open:
+	pushl	%ebp
+	movl	%esp, %ebp
+	subl	$12, %esp
+	movl	12(%ebp), %edx
+	movl	8(%ebp), %eax
+	pushl	%edx
+	pushl	%eax
+	pushl	%eax
+	call	_strlen
+	movl	%eax, (%esp)
+	call	_nio_open
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.def	_strlen;	.scl	2;	.type	32;	.endef
+	.def	_nio_open;	.scl	2;	.type	32;	.endef
+	.def	_nio_seteof;	.scl	2;	.type	32;	.endef
+	.def	_nio_seek;	.scl	2;	.type	32;	.endef
+	.def	_nio_tell;	.scl	2;	.type	32;	.endef
+	.def	_nio_size;	.scl	2;	.type	32;	.endef

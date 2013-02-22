@@ -1,0 +1,783 @@
+GAS LISTING device/floppy.gas 			page 1
+
+
+   1              		.file	"floppy.cpp"
+   2              	.globl __ZN6device6floppy7bMovingE
+   3              		.bss
+   4              	__ZN6device6floppy7bMovingE:
+   5 0000 00       		.space 1
+   6              	.globl __ZN6device46_GLOBAL__N_device_floppy.cpp_1B2C3856_5435050A9fdc_intedE
+   7              	__ZN6device46_GLOBAL__N_device_floppy.cpp_1B2C3856_5435050A9fdc_intedE:
+   8 0001 00       		.space 1
+   9 0002 00000000 		.text
+   9      00000000 
+   9      00000000 
+   9      0000
+  10              		.align 2
+  11              		.p2align 4,,15
+  12              	.globl __ZN6device12send_fdc_cmdEPci
+  13              		.def	__ZN6device12send_fdc_cmdEPci;	.scl	2;	.type	32;	.endef
+  14              	__ZN6device12send_fdc_cmdEPci:
+  15 0000 55       		pushl	%ebp
+  16 0001 89E5     		movl	%esp, %ebp
+  17 0003 56       		pushl	%esi
+  18 0004 53       		pushl	%ebx
+  19 0005 83EC10   		subl	$16, %esp
+  20 0008 8B7508   		movl	8(%ebp), %esi
+  21 000b 8B5D0C   		movl	12(%ebp), %ebx
+  22 000e 803E08   		cmpb	$8, (%esi)
+  23 0011 7464     		je	L7
+  24 0013 8DB60000 		.p2align 4,,15
+  24      00008DBC 
+  24      27000000 
+  24      00
+  25              	L3:
+  26 0020 C70424F4 		movl	$1012, (%esp)
+  26      030000
+  27 0027 E8000000 		call	_io_in8
+  27      00
+  28 002c A811     		testb	$17, %al
+  29 002e 75F0     		jne	L3
+  30              		.p2align 4,,15
+  31              	L16:
+  32 0030 85DB     		testl	%ebx, %ebx
+  33 0032 7E3C     		jle	L15
+  34              	L19:
+  35 0034 C70424F4 		movl	$1012, (%esp)
+  35      030000
+  36 003b E8000000 		call	_io_in8
+  36      00
+  37 0040 25C00000 		andl	$192, %eax
+  37      00
+  38 0045 83C080   		addl	$-128, %eax
+  39 0048 75E6     		jne	L16
+  40 004a 0FBE06   		movsbl	(%esi),%eax
+  41 004d 4B       		decl	%ebx
+  42 004e 46       		incl	%esi
+  43 004f C70424F5 		movl	$1013, (%esp)
+  43      030000
+  44 0056 89442404 		movl	%eax, 4(%esp)
+  45 005a E8000000 		call	_io_out8
+GAS LISTING device/floppy.gas 			page 2
+
+
+  45      00
+  46 005f 85DB     		testl	%ebx, %ebx
+  47 0061 7FD1     		jg	L19
+  48 0063 8DB60000 		.p2align 4,,15
+  48      00008DBC 
+  48      27000000 
+  48      00
+  49              	L15:
+  50 0070 83C410   		addl	$16, %esp
+  51 0073 5B       		popl	%ebx
+  52 0074 5E       		popl	%esi
+  53 0075 5D       		popl	%ebp
+  54 0076 C3       		ret
+  55              		.p2align 4,,7
+  56              	L7:
+  57 0077 C70424F4 		movl	$1012, (%esp)
+  57      030000
+  58 007e E8000000 		call	_io_in8
+  58      00
+  59 0083 A810     		testb	$16, %al
+  60 0085 74A9     		je	L16
+  61 0087 C70424F4 		movl	$1012, (%esp)
+  61      030000
+  62 008e E8000000 		call	_io_in8
+  62      00
+  63 0093 A810     		testb	$16, %al
+  64 0095 75E0     		jne	L7
+  65 0097 EB97     		jmp	L16
+  66 0099 90       		.align 2
+  67 009a 8DB60000 		.p2align 4,,15
+  67      0000
+  68              	.globl __ZN6device11get_fdc_cmdEPci
+  69              		.def	__ZN6device11get_fdc_cmdEPci;	.scl	2;	.type	32;	.endef
+  70              	__ZN6device11get_fdc_cmdEPci:
+  71 00a0 55       		pushl	%ebp
+  72 00a1 89E5     		movl	%esp, %ebp
+  73 00a3 56       		pushl	%esi
+  74 00a4 53       		pushl	%ebx
+  75 00a5 83EC10   		subl	$16, %esp
+  76 00a8 8B7508   		movl	8(%ebp), %esi
+  77 00ab 8B5D0C   		movl	12(%ebp), %ebx
+  78 00ae EB10     		jmp	L32
+  79              		.p2align 4,,7
+  80              	L34:
+  81 00b0 C70424F5 		movl	$1013, (%esp)
+  81      030000
+  82 00b7 E8000000 		call	_io_in8
+  82      00
+  83 00bc 8806     		movb	%al, (%esi)
+  84 00be 4B       		decl	%ebx
+  85 00bf 46       		incl	%esi
+  86              	L32:
+  87 00c0 85DB     		testl	%ebx, %ebx
+  88 00c2 7E1F     		jle	L33
+  89              	L31:
+  90 00c4 C70424F4 		movl	$1012, (%esp)
+  90      030000
+GAS LISTING device/floppy.gas 			page 3
+
+
+  91 00cb E8000000 		call	_io_in8
+  91      00
+  92 00d0 25C00000 		andl	$192, %eax
+  92      00
+  93 00d5 3DC00000 		cmpl	$192, %eax
+  93      00
+  94 00da 74D4     		je	L34
+  95 00dc E8000000 		call	_io_hlt
+  95      00
+  96 00e1 EBE1     		jmp	L31
+  97              	L33:
+  98 00e3 83C410   		addl	$16, %esp
+  99 00e6 5B       		popl	%ebx
+ 100 00e7 5E       		popl	%esi
+ 101 00e8 5D       		popl	%ebp
+ 102 00e9 C3       		ret
+ 103              		.section .rdata,"dr"
+ 104              	LC0:
+ 105 0000 4572726F 		.ascii "Error 0x40(fdc)\12\0"
+ 105      72203078 
+ 105      34302866 
+ 105      6463290A 
+ 105      00
+ 106              	LC1:
+ 107 0011 42616420 		.ascii "Bad Command (fdc)\12\0"
+ 107      436F6D6D 
+ 107      616E6420 
+ 107      28666463 
+ 107      290A00
+ 108              		.text
+ 109              		.align 2
+ 110 00ea 8DB60000 		.p2align 4,,15
+ 110      0000
+ 111              	.globl __ZN6device9check_st0Ec
+ 112              		.def	__ZN6device9check_st0Ec;	.scl	2;	.type	32;	.endef
+ 113              	__ZN6device9check_st0Ec:
+ 114 00f0 55       		pushl	%ebp
+ 115 00f1 89E5     		movl	%esp, %ebp
+ 116 00f3 83EC18   		subl	$24, %esp
+ 117 00f6 0FBE4508 		movsbl	8(%ebp),%eax
+ 118 00fa 25C00000 		andl	$192, %eax
+ 118      00
+ 119 00ff 83F840   		cmpl	$64, %eax
+ 120 0102 7409     		je	L38
+ 121 0104 83C080   		addl	$-128, %eax
+ 122 0107 742A     		je	L39
+ 123 0109 C9       		leave
+ 124 010a 31C0     		xorl	%eax, %eax
+ 125 010c C3       		ret
+ 126              	L38:
+ 127 010d BA000000 		movl	$LC0, %edx
+ 127      00
+ 128 0112 89542408 		movl	%edx, 8(%esp)
+ 129              	L40:
+ 130 0116 A1000000 		movl	_l_console, %eax
+ 130      00
+ 131 011b 89442404 		movl	%eax, 4(%esp)
+GAS LISTING device/floppy.gas 			page 4
+
+
+ 132 011f A1000000 		movl	_layerctl, %eax
+ 132      00
+ 133 0124 890424   		movl	%eax, (%esp)
+ 134 0127 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 134      00
+ 135 012c C9       		leave
+ 136 012d B8FFFFFF 		movl	$-1, %eax
+ 136      FF
+ 137 0132 C3       		ret
+ 138              	L39:
+ 139 0133 B8110000 		movl	$LC1, %eax
+ 139      00
+ 140 0138 89442408 		movl	%eax, 8(%esp)
+ 141 013c EBD8     		jmp	L40
+ 142              		.align 2
+ 143 013e 89F6     		.p2align 4,,15
+ 144              	.globl __ZN6device12fdc_queryintEv
+ 145              		.def	__ZN6device12fdc_queryintEv;	.scl	2;	.type	32;	.endef
+ 146              	__ZN6device12fdc_queryintEv:
+ 147 0140 55       		pushl	%ebp
+ 148 0141 89E5     		movl	%esp, %ebp
+ 149 0143 83EC18   		subl	$24, %esp
+ 150 0146 E8000000 		call	_io_sti
+ 150      00
+ 151 014b 0FB60501 		movzbl	__ZN6device46_GLOBAL__N_device_floppy.cpp_1B2C3856_5435050A9fdc_intedE, %eax
+ 151      000000
+ 152 0152 84C0     		testb	%al, %al
+ 153 0154 751A     		jne	L46
+ 154 0156 8D76008D 		.p2align 4,,15
+ 154      BC270000 
+ 154      0000
+ 155              	L48:
+ 156 0160 E8000000 		call	_io_hlt
+ 156      00
+ 157 0165 0FB60501 		movzbl	__ZN6device46_GLOBAL__N_device_floppy.cpp_1B2C3856_5435050A9fdc_intedE, %eax
+ 157      000000
+ 158 016c 84C0     		testb	%al, %al
+ 159 016e 74F0     		je	L48
+ 160              	L46:
+ 161 0170 C645FF08 		movb	$8, -1(%ebp)
+ 162 0174 B8010000 		movl	$1, %eax
+ 162      00
+ 163 0179 89442404 		movl	%eax, 4(%esp)
+ 164 017d 8D45FF   		leal	-1(%ebp), %eax
+ 165 0180 890424   		movl	%eax, (%esp)
+ 166 0183 E878FEFF 		call	__ZN6device12send_fdc_cmdEPci
+ 166      FF
+ 167 0188 8D45FC   		leal	-4(%ebp), %eax
+ 168 018b B9020000 		movl	$2, %ecx
+ 168      00
+ 169 0190 894C2404 		movl	%ecx, 4(%esp)
+ 170 0194 890424   		movl	%eax, (%esp)
+ 171 0197 E804FFFF 		call	__ZN6device11get_fdc_cmdEPci
+ 171      FF
+ 172 019c 0FBE45FC 		movsbl	-4(%ebp),%eax
+ 173 01a0 C6050100 		movb	$0, __ZN6device46_GLOBAL__N_device_floppy.cpp_1B2C3856_5435050A9fdc_intedE
+ 173      000000
+GAS LISTING device/floppy.gas 			page 5
+
+
+ 174 01a7 890424   		movl	%eax, (%esp)
+ 175 01aa E841FFFF 		call	__ZN6device9check_st0Ec
+ 175      FF
+ 176 01af C9       		leave
+ 177 01b0 C3       		ret
+ 178 01b1 90       		.align 2
+ 179 01b2 8DB42600 		.p2align 4,,15
+ 179      0000008D 
+ 179      BC270000 
+ 179      0000
+ 180              	.globl __ZN6device15fdc_recalibrateEv
+ 181              		.def	__ZN6device15fdc_recalibrateEv;	.scl	2;	.type	32;	.endef
+ 182              	__ZN6device15fdc_recalibrateEv:
+ 183 01c0 55       		pushl	%ebp
+ 184 01c1 B8020000 		movl	$2, %eax
+ 184      00
+ 185 01c6 89E5     		movl	%esp, %ebp
+ 186 01c8 83EC18   		subl	$24, %esp
+ 187 01cb 89442404 		movl	%eax, 4(%esp)
+ 188 01cf 8D45FE   		leal	-2(%ebp), %eax
+ 189 01d2 890424   		movl	%eax, (%esp)
+ 190 01d5 66C745FE 		movw	$7, -2(%ebp)
+ 190      0700
+ 191 01db E820FEFF 		call	__ZN6device12send_fdc_cmdEPci
+ 191      FF
+ 192 01e0 E85BFFFF 		call	__ZN6device12fdc_queryintEv
+ 192      FF
+ 193 01e5 C9       		leave
+ 194 01e6 C3       		ret
+ 195 01e7 90       		.align 2
+ 196 01e8 908DB426 		.p2align 4,,15
+ 196      00000000 
+ 197              	.globl __ZN6device8fdc_seekEii
+ 198              		.def	__ZN6device8fdc_seekEii;	.scl	2;	.type	32;	.endef
+ 199              	__ZN6device8fdc_seekEii:
+ 200 01f0 55       		pushl	%ebp
+ 201 01f1 89E5     		movl	%esp, %ebp
+ 202 01f3 83EC28   		subl	$40, %esp
+ 203 01f6 C645E80F 		movb	$15, -24(%ebp)
+ 204 01fa 8B450C   		movl	12(%ebp), %eax
+ 205 01fd C1E002   		sall	$2, %eax
+ 206 0200 8845E9   		movb	%al, -23(%ebp)
+ 207 0203 8B4508   		movl	8(%ebp), %eax
+ 208 0206 8845EA   		movb	%al, -22(%ebp)
+ 209 0209 B8030000 		movl	$3, %eax
+ 209      00
+ 210 020e 89442404 		movl	%eax, 4(%esp)
+ 211 0212 8D45E8   		leal	-24(%ebp), %eax
+ 212 0215 890424   		movl	%eax, (%esp)
+ 213 0218 E8E3FDFF 		call	__ZN6device12send_fdc_cmdEPci
+ 213      FF
+ 214 021d E81EFFFF 		call	__ZN6device12fdc_queryintEv
+ 214      FF
+ 215 0222 C9       		leave
+ 216 0223 C3       		ret
+ 217              		.align 2
+ 218 0224 8DB60000 		.p2align 4,,15
+GAS LISTING device/floppy.gas 			page 6
+
+
+ 218      00008DBF 
+ 218      00000000 
+ 219              	.globl __ZN6device8fdc_readEiiii
+ 220              		.def	__ZN6device8fdc_readEiiii;	.scl	2;	.type	32;	.endef
+ 221              	__ZN6device8fdc_readEiiii:
+ 222 0230 55       		pushl	%ebp
+ 223 0231 89E5     		movl	%esp, %ebp
+ 224 0233 57       		pushl	%edi
+ 225 0234 8D7DC8   		leal	-56(%ebp), %edi
+ 226 0237 56       		pushl	%esi
+ 227 0238 53       		pushl	%ebx
+ 228 0239 83EC3C   		subl	$60, %esp
+ 229 023c 31DB     		xorl	%ebx, %ebx
+ 230 023e C645D8E6 		movb	$-26, -40(%ebp)
+ 231 0242 8B750C   		movl	12(%ebp), %esi
+ 232 0245 C645DD02 		movb	$2, -35(%ebp)
+ 233 0249 C645DE12 		movb	$18, -34(%ebp)
+ 234 024d 8D04B500 		leal	0(,%esi,4), %eax
+ 234      000000
+ 235 0254 8845D9   		movb	%al, -39(%ebp)
+ 236 0257 0FB64508 		movzbl	8(%ebp), %eax
+ 237 025b C645DF01 		movb	$1, -33(%ebp)
+ 238 025f C645E0FF 		movb	$-1, -32(%ebp)
+ 239 0263 8845DA   		movb	%al, -38(%ebp)
+ 240 0266 89F0     		movl	%esi, %eax
+ 241 0268 8845DB   		movb	%al, -37(%ebp)
+ 242 026b 8B4510   		movl	16(%ebp), %eax
+ 243 026e 8845DC   		movb	%al, -36(%ebp)
+ 244 0271 EB0D9090 		.p2align 4,,15
+ 244      90909090 
+ 244      90909090 
+ 244      909090
+ 245              	L59:
+ 246 0280 B8090000 		movl	$9, %eax
+ 246      00
+ 247 0285 89442404 		movl	%eax, 4(%esp)
+ 248 0289 8D45D8   		leal	-40(%ebp), %eax
+ 249 028c 890424   		movl	%eax, (%esp)
+ 250 028f E86CFDFF 		call	__ZN6device12send_fdc_cmdEPci
+ 250      FF
+ 251 0294 0FB60501 		movzbl	__ZN6device46_GLOBAL__N_device_floppy.cpp_1B2C3856_5435050A9fdc_intedE, %eax
+ 251      000000
+ 252 029b 84C0     		testb	%al, %al
+ 253 029d 7511     		jne	L62
+ 254 029f 90       		.p2align 4,,15
+ 255              	L64:
+ 256 02a0 E8000000 		call	_io_hlt
+ 256      00
+ 257 02a5 0FB60501 		movzbl	__ZN6device46_GLOBAL__N_device_floppy.cpp_1B2C3856_5435050A9fdc_intedE, %eax
+ 257      000000
+ 258 02ac 84C0     		testb	%al, %al
+ 259 02ae 74F0     		je	L64
+ 260              	L62:
+ 261 02b0 C6050100 		movb	$0, __ZN6device46_GLOBAL__N_device_floppy.cpp_1B2C3856_5435050A9fdc_intedE
+ 261      000000
+ 262 02b7 B8070000 		movl	$7, %eax
+ 262      00
+GAS LISTING device/floppy.gas 			page 7
+
+
+ 263 02bc 89442404 		movl	%eax, 4(%esp)
+ 264 02c0 893C24   		movl	%edi, (%esp)
+ 265 02c3 E8D8FDFF 		call	__ZN6device11get_fdc_cmdEPci
+ 265      FF
+ 266 02c8 0FBE45C8 		movsbl	-56(%ebp),%eax
+ 267 02cc 890424   		movl	%eax, (%esp)
+ 268 02cf E81CFEFF 		call	__ZN6device9check_st0Ec
+ 268      FF
+ 269 02d4 85C0     		testl	%eax, %eax
+ 270 02d6 741A     		je	L53
+ 271 02d8 E8E3FEFF 		call	__ZN6device15fdc_recalibrateEv
+ 271      FF
+ 272 02dd 89742404 		movl	%esi, 4(%esp)
+ 273 02e1 8B4508   		movl	8(%ebp), %eax
+ 274 02e4 43       		incl	%ebx
+ 275 02e5 890424   		movl	%eax, (%esp)
+ 276 02e8 E803FFFF 		call	__ZN6device8fdc_seekEii
+ 276      FF
+ 277 02ed 83FB04   		cmpl	$4, %ebx
+ 278 02f0 7E8E     		jle	L59
+ 279              	L53:
+ 280 02f2 83C43C   		addl	$60, %esp
+ 281 02f5 5B       		popl	%ebx
+ 282 02f6 5E       		popl	%esi
+ 283 02f7 5F       		popl	%edi
+ 284 02f8 5D       		popl	%ebp
+ 285 02f9 C3       		ret
+ 286              		.align 2
+ 287 02fa 8DB60000 		.p2align 4,,15
+ 287      0000
+ 288              	.globl __ZN6device6floppy9disk_readEiii
+ 289              		.def	__ZN6device6floppy9disk_readEiii;	.scl	2;	.type	32;	.endef
+ 290              	__ZN6device6floppy9disk_readEiii:
+ 291 0300 55       		pushl	%ebp
+ 292 0301 B8060000 		movl	$6, %eax
+ 292      00
+ 293 0306 89E5     		movl	%esp, %ebp
+ 294 0308 57       		pushl	%edi
+ 295 0309 56       		pushl	%esi
+ 296 030a 53       		pushl	%ebx
+ 297 030b 83EC1C   		subl	$28, %esp
+ 298 030e 8B5D08   		movl	8(%ebp), %ebx
+ 299 0311 89442404 		movl	%eax, 4(%esp)
+ 300 0315 8B7D0C   		movl	12(%ebp), %edi
+ 301 0318 8B7510   		movl	16(%ebp), %esi
+ 302 031b C704240B 		movl	$11, (%esp)
+ 302      000000
+ 303 0322 E8000000 		call	_io_out8
+ 303      00
+ 304 0327 C7042405 		movl	$5, (%esp)
+ 304      000000
+ 305 032e B8FF0000 		movl	$255, %eax
+ 305      00
+ 306 0333 89442404 		movl	%eax, 4(%esp)
+ 307 0337 E8000000 		call	_io_out8
+ 307      00
+ 308 033c C7042405 		movl	$5, (%esp)
+GAS LISTING device/floppy.gas 			page 8
+
+
+ 308      000000
+ 309 0343 B8230000 		movl	$35, %eax
+ 309      00
+ 310 0348 89442404 		movl	%eax, 4(%esp)
+ 311 034c E8000000 		call	_io_out8
+ 311      00
+ 312 0351 C7042404 		movl	$4, (%esp)
+ 312      000000
+ 313 0358 0FB6C3   		movzbl	%bl,%eax
+ 314 035b 89442404 		movl	%eax, 4(%esp)
+ 315 035f E8000000 		call	_io_out8
+ 315      00
+ 316 0364 C7042404 		movl	$4, (%esp)
+ 316      000000
+ 317 036b 0FB6C7   		movzbl	%bh, %eax
+ 318 036e C1FB10   		sarl	$16, %ebx
+ 319 0371 89442404 		movl	%eax, 4(%esp)
+ 320 0375 81E3FF00 		andl	$255, %ebx
+ 320      0000
+ 321 037b E8000000 		call	_io_out8
+ 321      00
+ 322 0380 895C2404 		movl	%ebx, 4(%esp)
+ 323 0384 BB020000 		movl	$2, %ebx
+ 323      00
+ 324 0389 C7042481 		movl	$129, (%esp)
+ 324      000000
+ 325 0390 E8000000 		call	_io_out8
+ 325      00
+ 326 0395 895C2404 		movl	%ebx, 4(%esp)
+ 327 0399 C704240A 		movl	$10, (%esp)
+ 327      000000
+ 328 03a0 E8000000 		call	_io_out8
+ 328      00
+ 329 03a5 E816FEFF 		call	__ZN6device15fdc_recalibrateEv
+ 329      FF
+ 330 03aa 89742404 		movl	%esi, 4(%esp)
+ 331 03ae 893C24   		movl	%edi, (%esp)
+ 332 03b1 E83AFEFF 		call	__ZN6device8fdc_seekEii
+ 332      FF
+ 333 03b6 89742404 		movl	%esi, 4(%esp)
+ 334 03ba B9120000 		movl	$18, %ecx
+ 334      00
+ 335 03bf BA010000 		movl	$1, %edx
+ 335      00
+ 336 03c4 894C240C 		movl	%ecx, 12(%esp)
+ 337 03c8 89542408 		movl	%edx, 8(%esp)
+ 338 03cc 893C24   		movl	%edi, (%esp)
+ 339 03cf E85CFEFF 		call	__ZN6device8fdc_readEiiii
+ 339      FF
+ 340 03d4 C704240A 		movl	$10, (%esp)
+ 340      000000
+ 341 03db B8060000 		movl	$6, %eax
+ 341      00
+ 342 03e0 89442404 		movl	%eax, 4(%esp)
+ 343 03e4 E8000000 		call	_io_out8
+ 343      00
+ 344 03e9 83C41C   		addl	$28, %esp
+GAS LISTING device/floppy.gas 			page 9
+
+
+ 345 03ec 31C0     		xorl	%eax, %eax
+ 346 03ee 5B       		popl	%ebx
+ 347 03ef 5E       		popl	%esi
+ 348 03f0 5F       		popl	%edi
+ 349 03f1 5D       		popl	%ebp
+ 350 03f2 C3       		ret
+ 351 03f3 90       		.align 2
+ 352 03f4 8DB60000 		.p2align 4,,15
+ 352      00008DBF 
+ 352      00000000 
+ 353              	.globl __ZN6device6floppy10disk_writeEiii
+ 354              		.def	__ZN6device6floppy10disk_writeEiii;	.scl	2;	.type	32;	.endef
+ 355              	__ZN6device6floppy10disk_writeEiii:
+ 356 0400 55       		pushl	%ebp
+ 357 0401 B8FFFFFF 		movl	$-1, %eax
+ 357      FF
+ 358 0406 89E5     		movl	%esp, %ebp
+ 359 0408 5D       		popl	%ebp
+ 360 0409 C3       		ret
+ 361              		.section .rdata,"dr"
+ 362              	LC2:
+ 363 0024 66645F63 		.ascii "fd_checksum=%08x\12\0"
+ 363      6865636B 
+ 363      73756D3D 
+ 363      25303878 
+ 363      0A00
+ 364 0036 00000000 		.text
+ 364      00000000 
+ 364      0000
+ 365              		.align 2
+ 366 040a 8DB60000 		.p2align 4,,15
+ 366      0000
+ 367              	.globl __ZN6device6floppy12disk_readallEv
+ 368              		.def	__ZN6device6floppy12disk_readallEv;	.scl	2;	.type	32;	.endef
+ 369              	__ZN6device6floppy12disk_readallEv:
+ 370 0410 55       		pushl	%ebp
+ 371 0411 89E5     		movl	%esp, %ebp
+ 372 0413 56       		pushl	%esi
+ 373 0414 53       		pushl	%ebx
+ 374 0415 81EC1001 		subl	$272, %esp
+ 374      0000
+ 375 041b E8000000 		call	_io_sti
+ 375      00
+ 376 0420 C70424D6 		movl	$214, (%esp)
+ 376      000000
+ 377 0427 B8C00000 		movl	$192, %eax
+ 377      00
+ 378 042c 89442404 		movl	%eax, 4(%esp)
+ 379 0430 E8000000 		call	_io_out8
+ 379      00
+ 380 0435 C70424C0 		movl	$192, (%esp)
+ 380      000000
+ 381 043c 31C0     		xorl	%eax, %eax
+ 382 043e 89442404 		movl	%eax, 4(%esp)
+ 383 0442 E8000000 		call	_io_out8
+ 383      00
+ 384 0447 C704240A 		movl	$10, (%esp)
+GAS LISTING device/floppy.gas 			page 10
+
+
+ 384      000000
+ 385 044e B8060000 		movl	$6, %eax
+ 385      00
+ 386 0453 89442404 		movl	%eax, 4(%esp)
+ 387 0457 E8000000 		call	_io_out8
+ 387      00
+ 388 045c C70424F2 		movl	$1010, (%esp)
+ 388      030000
+ 389 0463 B81C0000 		movl	$28, %eax
+ 389      00
+ 390 0468 89442404 		movl	%eax, 4(%esp)
+ 391 046c E8000000 		call	_io_out8
+ 391      00
+ 392 0471 C7042414 		movl	$20, (%esp)
+ 392      000000
+ 393 0478 E8000000 		call	__Z6uSleepj
+ 393      00
+ 394 047d 0FBE1DF0 		movsbl	4080,%ebx
+ 394      0F0000
+ 395 0484 83FB4F   		cmpl	$79, %ebx
+ 396 0487 0F8F8100 		jg	L77
+ 396      0000
+ 397 048d 8D34DB   		leal	(%ebx,%ebx,8), %esi
+ 398 0490 C1E60B   		sall	$11, %esi
+ 399              	L71:
+ 400 0493 895C2404 		movl	%ebx, 4(%esp)
+ 401 0497 31C0     		xorl	%eax, %eax
+ 402 0499 89442408 		movl	%eax, 8(%esp)
+ 403 049d C7042400 		movl	$2544640, (%esp)
+ 403      D42600
+ 404 04a4 E857FEFF 		call	__ZN6device6floppy9disk_readEiii
+ 404      FF
+ 405 04a9 B9002400 		movl	$9216, %ecx
+ 405      00
+ 406 04ae BA00D426 		movl	$2544640, %edx
+ 406      00
+ 407 04b3 8D860000 		leal	1048576(%esi), %eax
+ 407      1000
+ 408 04b9 894C2408 		movl	%ecx, 8(%esp)
+ 409 04bd 89542404 		movl	%edx, 4(%esp)
+ 410 04c1 890424   		movl	%eax, (%esp)
+ 411 04c4 E8000000 		call	_memcpy
+ 411      00
+ 412 04c9 895C2404 		movl	%ebx, 4(%esp)
+ 413 04cd B8010000 		movl	$1, %eax
+ 413      00
+ 414 04d2 43       		incl	%ebx
+ 415 04d3 89442408 		movl	%eax, 8(%esp)
+ 416 04d7 C7042400 		movl	$2544640, (%esp)
+ 416      D42600
+ 417 04de E81DFEFF 		call	__ZN6device6floppy9disk_readEiii
+ 417      FF
+ 418 04e3 8D860024 		leal	1057792(%esi), %eax
+ 418      1000
+ 419 04e9 B9002400 		movl	$9216, %ecx
+ 419      00
+ 420 04ee BA00D426 		movl	$2544640, %edx
+GAS LISTING device/floppy.gas 			page 11
+
+
+ 420      00
+ 421 04f3 894C2408 		movl	%ecx, 8(%esp)
+ 422 04f7 81C60048 		addl	$18432, %esi
+ 422      0000
+ 423 04fd 89542404 		movl	%edx, 4(%esp)
+ 424 0501 890424   		movl	%eax, (%esp)
+ 425 0504 E8000000 		call	_memcpy
+ 425      00
+ 426 0509 83FB4F   		cmpl	$79, %ebx
+ 427 050c 7E85     		jle	L71
+ 428              	L77:
+ 429 050e C70424F2 		movl	$1010, (%esp)
+ 429      030000
+ 430 0515 B80C0000 		movl	$12, %eax
+ 430      00
+ 431 051a 89442404 		movl	%eax, 4(%esp)
+ 432 051e E8000000 		call	_io_out8
+ 432      00
+ 433 0523 31C9     		xorl	%ecx, %ecx
+ 434 0525 31D2     		xorl	%edx, %edx
+ 435 0527 89F68DBC 		.p2align 4,,15
+ 435      27000000 
+ 435      00
+ 436              	L75:
+ 437 0530 0FB68200 		movzbl	1048576(%edx), %eax
+ 437      001000
+ 438 0537 0FAFC2   		imull	%edx, %eax
+ 439 053a 42       		incl	%edx
+ 440 053b 01C1     		addl	%eax, %ecx
+ 441 053d 81FAFF7F 		cmpl	$1474559, %edx
+ 441      1600
+ 442 0543 7EEB     		jle	L75
+ 443 0545 894C2408 		movl	%ecx, 8(%esp)
+ 444 0549 8D9DF8FE 		leal	-264(%ebp), %ebx
+ 444      FFFF
+ 445 054f B8240000 		movl	$LC2, %eax
+ 445      00
+ 446 0554 891C24   		movl	%ebx, (%esp)
+ 447 0557 89442404 		movl	%eax, 4(%esp)
+ 448 055b E8000000 		call	_sprintf
+ 448      00
+ 449 0560 895C2408 		movl	%ebx, 8(%esp)
+ 450 0564 A1000000 		movl	_l_console, %eax
+ 450      00
+ 451 0569 89442404 		movl	%eax, 4(%esp)
+ 452 056d A1000000 		movl	_layerctl, %eax
+ 452      00
+ 453 0572 890424   		movl	%eax, (%esp)
+ 454 0575 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 454      00
+ 455 057a 81C41001 		addl	$272, %esp
+ 455      0000
+ 456 0580 31C0     		xorl	%eax, %eax
+ 457 0582 5B       		popl	%ebx
+ 458 0583 5E       		popl	%esi
+ 459 0584 5D       		popl	%ebp
+ 460 0585 C3       		ret
+GAS LISTING device/floppy.gas 			page 12
+
+
+ 461              		.align 2
+ 462 0586 8D76008D 		.p2align 4,,15
+ 462      BC270000 
+ 462      0000
+ 463              	.globl __ZN6device6floppy11start_motorEv
+ 464              		.def	__ZN6device6floppy11start_motorEv;	.scl	2;	.type	32;	.endef
+ 465              	__ZN6device6floppy11start_motorEv:
+ 466 0590 55       		pushl	%ebp
+ 467 0591 89E5     		movl	%esp, %ebp
+ 468 0593 83EC08   		subl	$8, %esp
+ 469 0596 803D0000 		cmpb	$0, __ZN6device6floppy7bMovingE
+ 469      000000
+ 470 059d 7402     		je	L82
+ 471 059f C9       		leave
+ 472 05a0 C3       		ret
+ 473              		.p2align 4,,7
+ 474              	L82:
+ 475 05a1 C70424F2 		movl	$1010, (%esp)
+ 475      030000
+ 476 05a8 B81C0000 		movl	$28, %eax
+ 476      00
+ 477 05ad 89442404 		movl	%eax, 4(%esp)
+ 478 05b1 E8000000 		call	_io_out8
+ 478      00
+ 479 05b6 C6050000 		movb	$1, __ZN6device6floppy7bMovingE
+ 479      000001
+ 480 05bd C9       		leave
+ 481 05be C3       		ret
+ 482 05bf 90       		.align 2
+ 483              		.p2align 4,,15
+ 484              	.globl __ZN6device6floppy10stop_motorEv
+ 485              		.def	__ZN6device6floppy10stop_motorEv;	.scl	2;	.type	32;	.endef
+ 486              	__ZN6device6floppy10stop_motorEv:
+ 487 05c0 55       		pushl	%ebp
+ 488 05c1 89E5     		movl	%esp, %ebp
+ 489 05c3 83EC08   		subl	$8, %esp
+ 490 05c6 803D0000 		cmpb	$0, __ZN6device6floppy7bMovingE
+ 490      000000
+ 491 05cd 7502     		jne	L85
+ 492 05cf C9       		leave
+ 493 05d0 C3       		ret
+ 494              		.p2align 4,,7
+ 495              	L85:
+ 496 05d1 C70424F2 		movl	$1010, (%esp)
+ 496      030000
+ 497 05d8 BA0C0000 		movl	$12, %edx
+ 497      00
+ 498 05dd 89542404 		movl	%edx, 4(%esp)
+ 499 05e1 E8000000 		call	_io_out8
+ 499      00
+ 500 05e6 C6050000 		movb	$0, __ZN6device6floppy7bMovingE
+ 500      000000
+ 501 05ed C9       		leave
+ 502 05ee C3       		ret
+ 503 05ef 90       		.align 2
+ 504              		.p2align 4,,15
+ 505              	.globl _inthandler26
+GAS LISTING device/floppy.gas 			page 13
+
+
+ 506              		.def	_inthandler26;	.scl	2;	.type	32;	.endef
+ 507              	_inthandler26:
+ 508 05f0 55       		pushl	%ebp
+ 509 05f1 89E5     		movl	%esp, %ebp
+ 510 05f3 83EC08   		subl	$8, %esp
+ 511 05f6 C70424F4 		movl	$1012, (%esp)
+ 511      030000
+ 512 05fd E8000000 		call	_io_in8
+ 512      00
+ 513 0602 C7042420 		movl	$32, (%esp)
+ 513      000000
+ 514 0609 B9660000 		movl	$102, %ecx
+ 514      00
+ 515 060e 894C2404 		movl	%ecx, 4(%esp)
+ 516 0612 E8000000 		call	_io_out8
+ 516      00
+ 517 0617 C6050100 		movb	$1, __ZN6device46_GLOBAL__N_device_floppy.cpp_1B2C3856_5435050A9fdc_intedE
+ 517      000001
+ 518 061e C9       		leave
+ 519 061f C3       		ret
+ 520              		.def	_memcpy;	.scl	2;	.type	32;	.endef
+ 521              		.def	_sprintf;	.scl	2;	.type	32;	.endef
+ 522              		.def	__Z6uSleepj;	.scl	3;	.type	32;	.endef
+ 523              		.def	_io_sti;	.scl	3;	.type	32;	.endef
+ 524              		.def	__Z11layer_printP8LayerCtl5uid_tPc;	.scl	3;	.type	32;	.endef
+ 525              		.def	_io_hlt;	.scl	3;	.type	32;	.endef
+ 526              		.def	_io_out8;	.scl	3;	.type	32;	.endef
+ 527              		.def	_io_in8;	.scl	3;	.type	32;	.endef
+GAS LISTING device/floppy.gas 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 floppy.cpp
+   device/floppy.gas:4      .bss:00000000 __ZN6device6floppy7bMovingE
+   device/floppy.gas:7      .bss:00000001 __ZN6device46_GLOBAL__N_device_floppy.cpp_1B2C3856_5435050A9fdc_intedE
+   device/floppy.gas:14     .text:00000000 __ZN6device12send_fdc_cmdEPci
+   device/floppy.gas:70     .text:000000a0 __ZN6device11get_fdc_cmdEPci
+   device/floppy.gas:113    .text:000000f0 __ZN6device9check_st0Ec
+   device/floppy.gas:146    .text:00000140 __ZN6device12fdc_queryintEv
+   device/floppy.gas:182    .text:000001c0 __ZN6device15fdc_recalibrateEv
+   device/floppy.gas:199    .text:000001f0 __ZN6device8fdc_seekEii
+   device/floppy.gas:221    .text:00000230 __ZN6device8fdc_readEiiii
+   device/floppy.gas:290    .text:00000300 __ZN6device6floppy9disk_readEiii
+   device/floppy.gas:355    .text:00000400 __ZN6device6floppy10disk_writeEiii
+   device/floppy.gas:369    .text:00000410 __ZN6device6floppy12disk_readallEv
+   device/floppy.gas:465    .text:00000590 __ZN6device6floppy11start_motorEv
+   device/floppy.gas:486    .text:000005c0 __ZN6device6floppy10stop_motorEv
+   device/floppy.gas:507    .text:000005f0 _inthandler26
+
+UNDEFINED SYMBOLS
+_l_console
+_layerctl
+_memcpy
+_sprintf
+__Z6uSleepj
+_io_sti
+__Z11layer_printP8LayerCtl5uid_tPc
+_io_hlt
+_io_out8
+_io_in8

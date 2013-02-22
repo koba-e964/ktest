@@ -1,0 +1,338 @@
+GAS LISTING dsctbl.gas 			page 1
+
+
+   1              		.file	"dsctbl.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __Z12set_segmdescP18segment_descriptorjii
+   6              		.def	__Z12set_segmdescP18segment_descriptorjii;	.scl	2;	.type	32;	.endef
+   7              	__Z12set_segmdescP18segment_descriptorjii:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 83EC08   		subl	$8, %esp
+  11 0006 891C24   		movl	%ebx, (%esp)
+  12 0009 8B4D0C   		movl	12(%ebp), %ecx
+  13 000c 8B4510   		movl	16(%ebp), %eax
+  14 000f 89742404 		movl	%esi, 4(%esp)
+  15 0013 8B5D14   		movl	20(%ebp), %ebx
+  16 0016 81F9FFFF 		cmpl	$1048575, %ecx
+  16      0F00
+  17 001c 8B7508   		movl	8(%ebp), %esi
+  18 001f 7609     		jbe	L2
+  19 0021 81CB0080 		orl	$32768, %ebx
+  19      0000
+  20 0027 C1E90C   		shrl	$12, %ecx
+  21              	L2:
+  22 002a 66894602 		movw	%ax, 2(%esi)
+  23 002e C1F810   		sarl	$16, %eax
+  24 0031 89DA     		movl	%ebx, %edx
+  25 0033 884604   		movb	%al, 4(%esi)
+  26 0036 C1F808   		sarl	$8, %eax
+  27 0039 C1FA08   		sarl	$8, %edx
+  28 003c 884607   		movb	%al, 7(%esi)
+  29 003f 89C8     		movl	%ecx, %eax
+  30 0041 C1E810   		shrl	$16, %eax
+  31 0044 66890E   		movw	%cx, (%esi)
+  32 0047 240F     		andb	$15, %al
+  33 0049 80E2F0   		andb	$-16, %dl
+  34 004c 885E05   		movb	%bl, 5(%esi)
+  35 004f 08D0     		orb	%dl, %al
+  36 0051 884606   		movb	%al, 6(%esi)
+  37 0054 8B1C24   		movl	(%esp), %ebx
+  38 0057 8B742404 		movl	4(%esp), %esi
+  39 005b 89EC     		movl	%ebp, %esp
+  40 005d 5D       		popl	%ebp
+  41 005e C3       		ret
+  42 005f 90       		.align 2
+  43              		.p2align 4,,15
+  44              	.globl __Z12set_gatedescP15gate_descriptoriii
+  45              		.def	__Z12set_gatedescP15gate_descriptoriii;	.scl	2;	.type	32;	.endef
+  46              	__Z12set_gatedescP15gate_descriptoriii:
+  47 0060 55       		pushl	%ebp
+  48 0061 89E5     		movl	%esp, %ebp
+  49 0063 8B5508   		movl	8(%ebp), %edx
+  50 0066 8B450C   		movl	12(%ebp), %eax
+  51 0069 8B4D14   		movl	20(%ebp), %ecx
+  52 006c 668902   		movw	%ax, (%edx)
+  53 006f C1F810   		sarl	$16, %eax
+  54 0072 66894206 		movw	%ax, 6(%edx)
+  55 0076 8B4510   		movl	16(%ebp), %eax
+GAS LISTING dsctbl.gas 			page 2
+
+
+  56 0079 884A05   		movb	%cl, 5(%edx)
+  57 007c 66894202 		movw	%ax, 2(%edx)
+  58 0080 89C8     		movl	%ecx, %eax
+  59 0082 C1F808   		sarl	$8, %eax
+  60 0085 884204   		movb	%al, 4(%edx)
+  61 0088 5D       		popl	%ebp
+  62 0089 C3       		ret
+  63              		.align 2
+  64 008a 8DB60000 		.p2align 4,,15
+  64      0000
+  65              	.globl __Z11init_gdtidtv
+  66              		.def	__Z11init_gdtidtv;	.scl	2;	.type	32;	.endef
+  67              	__Z11init_gdtidtv:
+  68 0090 55       		pushl	%ebp
+  69 0091 89E5     		movl	%esp, %ebp
+  70 0093 56       		pushl	%esi
+  71 0094 BEFF1F00 		movl	$8191, %esi
+  71      00
+  72 0099 53       		pushl	%ebx
+  73 009a 83EC10   		subl	$16, %esp
+  74 009d BB000027 		movl	$2555904, %ebx
+  74      00
+  75 00a2 8DB42600 		.p2align 4,,15
+  75      0000008D 
+  75      BC270000 
+  75      0000
+  76              	L9:
+  77 00b0 891C24   		movl	%ebx, (%esp)
+  78 00b3 31C0     		xorl	%eax, %eax
+  79 00b5 83C308   		addl	$8, %ebx
+  80 00b8 8944240C 		movl	%eax, 12(%esp)
+  81 00bc 31C0     		xorl	%eax, %eax
+  82 00be 89442408 		movl	%eax, 8(%esp)
+  83 00c2 31C0     		xorl	%eax, %eax
+  84 00c4 89442404 		movl	%eax, 4(%esp)
+  85 00c8 E833FFFF 		call	__Z12set_segmdescP18segment_descriptorjii
+  85      FF
+  86 00cd 4E       		decl	%esi
+  87 00ce 79E0     		jns	L9
+  88 00d0 C7042408 		movl	$2555912, (%esp)
+  88      002700
+  89 00d7 31C9     		xorl	%ecx, %ecx
+  90 00d9 BAFFFFFF 		movl	$-1, %edx
+  90      FF
+  91 00de 894C2408 		movl	%ecx, 8(%esp)
+  92 00e2 BB924000 		movl	$16530, %ebx
+  92      00
+  93 00e7 BEFF0000 		movl	$255, %esi
+  93      00
+  94 00ec 89542404 		movl	%edx, 4(%esp)
+  95 00f0 895C240C 		movl	%ebx, 12(%esp)
+  96 00f4 BB00F826 		movl	$2553856, %ebx
+  96      00
+  97 00f9 E802FFFF 		call	__Z12set_segmdescP18segment_descriptorjii
+  97      FF
+  98 00fe C7042410 		movl	$2555920, (%esp)
+  98      002700
+GAS LISTING dsctbl.gas 			page 3
+
+
+  99 0105 B89A4000 		movl	$16538, %eax
+  99      00
+ 100 010a 8944240C 		movl	%eax, 12(%esp)
+ 101 010e B8000028 		movl	$2621440, %eax
+ 101      00
+ 102 0113 89442408 		movl	%eax, 8(%esp)
+ 103 0117 B8FFFF07 		movl	$524287, %eax
+ 103      00
+ 104 011c 89442404 		movl	%eax, 4(%esp)
+ 105 0120 E8DBFEFF 		call	__Z12set_segmdescP18segment_descriptorjii
+ 105      FF
+ 106 0125 C70424FF 		movl	$65535, (%esp)
+ 106      FF0000
+ 107 012c B8000027 		movl	$2555904, %eax
+ 107      00
+ 108 0131 89442404 		movl	%eax, 4(%esp)
+ 109 0135 E8000000 		call	_load_gdtr
+ 109      00
+ 110              	L13:
+ 111 013a 891C24   		movl	%ebx, (%esp)
+ 112 013d 31C0     		xorl	%eax, %eax
+ 113 013f 31C9     		xorl	%ecx, %ecx
+ 114 0141 8944240C 		movl	%eax, 12(%esp)
+ 115 0145 31C0     		xorl	%eax, %eax
+ 116 0147 83C308   		addl	$8, %ebx
+ 117 014a 89442408 		movl	%eax, 8(%esp)
+ 118 014e 894C2404 		movl	%ecx, 4(%esp)
+ 119 0152 E809FFFF 		call	__Z12set_gatedescP15gate_descriptoriii
+ 119      FF
+ 120 0157 4E       		decl	%esi
+ 121 0158 79E0     		jns	L13
+ 122 015a C70424FF 		movl	$2047, (%esp)
+ 122      070000
+ 123 0161 BA00F826 		movl	$2553856, %edx
+ 123      00
+ 124 0166 BE8E0000 		movl	$142, %esi
+ 124      00
+ 125 016b 89542404 		movl	%edx, 4(%esp)
+ 126 016f E8000000 		call	_load_idtr
+ 126      00
+ 127 0174 C7042460 		movl	$2553952, (%esp)
+ 127      F82600
+ 128 017b B88E0000 		movl	$142, %eax
+ 128      00
+ 129 0180 BB100000 		movl	$16, %ebx
+ 129      00
+ 130 0185 8944240C 		movl	%eax, 12(%esp)
+ 131 0189 B8100000 		movl	$16, %eax
+ 131      00
+ 132 018e 89442408 		movl	%eax, 8(%esp)
+ 133 0192 B8000000 		movl	$_asm_inthandler0c, %eax
+ 133      00
+ 134 0197 89442404 		movl	%eax, 4(%esp)
+ 135 019b E8C0FEFF 		call	__Z12set_gatedescP15gate_descriptoriii
+ 135      FF
+ 136 01a0 C7042468 		movl	$2553960, (%esp)
+ 136      F82600
+GAS LISTING dsctbl.gas 			page 4
+
+
+ 137 01a7 B88E0000 		movl	$142, %eax
+ 137      00
+ 138 01ac 8944240C 		movl	%eax, 12(%esp)
+ 139 01b0 B8100000 		movl	$16, %eax
+ 139      00
+ 140 01b5 89442408 		movl	%eax, 8(%esp)
+ 141 01b9 B8000000 		movl	$_asm_inthandler0d, %eax
+ 141      00
+ 142 01be 89442404 		movl	%eax, 4(%esp)
+ 143 01c2 E899FEFF 		call	__Z12set_gatedescP15gate_descriptoriii
+ 143      FF
+ 144 01c7 8974240C 		movl	%esi, 12(%esp)
+ 145 01cb B9000000 		movl	$_asm_inthandler21, %ecx
+ 145      00
+ 146 01d0 BE100000 		movl	$16, %esi
+ 146      00
+ 147 01d5 894C2404 		movl	%ecx, 4(%esp)
+ 148 01d9 895C2408 		movl	%ebx, 8(%esp)
+ 149 01dd BB000000 		movl	$_asm_inthandler20, %ebx
+ 149      00
+ 150 01e2 C7042408 		movl	$2554120, (%esp)
+ 150      F92600
+ 151 01e9 E872FEFF 		call	__Z12set_gatedescP15gate_descriptoriii
+ 151      FF
+ 152 01ee C7042430 		movl	$2554160, (%esp)
+ 152      F92600
+ 153 01f5 B8100000 		movl	$16, %eax
+ 153      00
+ 154 01fa BA8E0000 		movl	$142, %edx
+ 154      00
+ 155 01ff 89442408 		movl	%eax, 8(%esp)
+ 156 0203 B8000000 		movl	$_asm_inthandler26, %eax
+ 156      00
+ 157 0208 8954240C 		movl	%edx, 12(%esp)
+ 158 020c 89442404 		movl	%eax, 4(%esp)
+ 159 0210 E84BFEFF 		call	__Z12set_gatedescP15gate_descriptoriii
+ 159      FF
+ 160 0215 C7042460 		movl	$2554208, (%esp)
+ 160      F92600
+ 161 021c B88E0000 		movl	$142, %eax
+ 161      00
+ 162 0221 8944240C 		movl	%eax, 12(%esp)
+ 163 0225 B8100000 		movl	$16, %eax
+ 163      00
+ 164 022a 89442408 		movl	%eax, 8(%esp)
+ 165 022e B8000000 		movl	$_asm_inthandler2c, %eax
+ 165      00
+ 166 0233 89442404 		movl	%eax, 4(%esp)
+ 167 0237 E824FEFF 		call	__Z12set_gatedescP15gate_descriptoriii
+ 167      FF
+ 168 023c 89742408 		movl	%esi, 8(%esp)
+ 169 0240 B88E0000 		movl	$142, %eax
+ 169      00
+ 170 0245 8944240C 		movl	%eax, 12(%esp)
+ 171 0249 895C2404 		movl	%ebx, 4(%esp)
+ 172 024d C7042400 		movl	$2554112, (%esp)
+ 172      F92600
+GAS LISTING dsctbl.gas 			page 5
+
+
+ 173 0254 E807FEFF 		call	__Z12set_gatedescP15gate_descriptoriii
+ 173      FF
+ 174 0259 C7042400 		movl	$2554368, (%esp)
+ 174      FA2600
+ 175 0260 B98E0000 		movl	$142, %ecx
+ 175      00
+ 176 0265 BA100000 		movl	$16, %edx
+ 176      00
+ 177 026a 894C240C 		movl	%ecx, 12(%esp)
+ 178 026e B8000000 		movl	$_asm_inthandler40, %eax
+ 178      00
+ 179 0273 89542408 		movl	%edx, 8(%esp)
+ 180 0277 89442404 		movl	%eax, 4(%esp)
+ 181 027b E8E0FDFF 		call	__Z12set_gatedescP15gate_descriptoriii
+ 181      FF
+ 182 0280 83C410   		addl	$16, %esp
+ 183 0283 5B       		popl	%ebx
+ 184 0284 5E       		popl	%esi
+ 185 0285 5D       		popl	%ebp
+ 186 0286 C3       		ret
+ 187 0287 90       		.align 2
+ 188 0288 908DB426 		.p2align 4,,15
+ 188      00000000 
+ 189              	.globl __ZN6dsctbl11getPhysAddrEP18segment_descriptorj
+ 190              		.def	__ZN6dsctbl11getPhysAddrEP18segment_descriptorj;	.scl	2;	.type	32;	.endef
+ 191              	__ZN6dsctbl11getPhysAddrEP18segment_descriptorj:
+ 192 0290 55       		pushl	%ebp
+ 193 0291 89E5     		movl	%esp, %ebp
+ 194 0293 8B5508   		movl	8(%ebp), %edx
+ 195 0296 56       		pushl	%esi
+ 196 0297 8B750C   		movl	12(%ebp), %esi
+ 197 029a 53       		pushl	%ebx
+ 198 029b 0FB64204 		movzbl	4(%edx), %eax
+ 199 029f 0FB75A02 		movzwl	2(%edx), %ebx
+ 200 02a3 0FB70A   		movzwl	(%edx), %ecx
+ 201 02a6 C1E010   		sall	$16, %eax
+ 202 02a9 09C3     		orl	%eax, %ebx
+ 203 02ab 0FB64207 		movzbl	7(%edx), %eax
+ 204 02af 0FBE5206 		movsbl	6(%edx),%edx
+ 205 02b3 C1E018   		sall	$24, %eax
+ 206 02b6 09C3     		orl	%eax, %ebx
+ 207 02b8 89D0     		movl	%edx, %eax
+ 208 02ba 83E00F   		andl	$15, %eax
+ 209 02bd C1E010   		sall	$16, %eax
+ 210 02c0 09C1     		orl	%eax, %ecx
+ 211 02c2 81E28000 		andl	$128, %edx
+ 211      0000
+ 212 02c8 7409     		je	L19
+ 213 02ca C1E10C   		sall	$12, %ecx
+ 214 02cd 81C1FF0F 		addl	$4095, %ecx
+ 214      0000
+ 215              	L19:
+ 216 02d3 31C0     		xorl	%eax, %eax
+ 217 02d5 39CE     		cmpl	%ecx, %esi
+ 218 02d7 7703     		ja	L18
+ 219 02d9 8D0433   		leal	(%ebx,%esi), %eax
+ 220              	L18:
+GAS LISTING dsctbl.gas 			page 6
+
+
+ 221 02dc 5B       		popl	%ebx
+ 222 02dd 5E       		popl	%esi
+ 223 02de 5D       		popl	%ebp
+ 224 02df C3       		ret
+ 225              		.def	_asm_inthandler40;	.scl	3;	.type	32;	.endef
+ 226              		.def	_asm_inthandler20;	.scl	3;	.type	32;	.endef
+ 227              		.def	_asm_inthandler2c;	.scl	3;	.type	32;	.endef
+ 228              		.def	_asm_inthandler26;	.scl	3;	.type	32;	.endef
+ 229              		.def	_asm_inthandler21;	.scl	3;	.type	32;	.endef
+ 230              		.def	_asm_inthandler0d;	.scl	3;	.type	32;	.endef
+ 231              		.def	_asm_inthandler0c;	.scl	3;	.type	32;	.endef
+ 232              		.def	_load_idtr;	.scl	3;	.type	32;	.endef
+ 233              		.def	__Z12set_gatedescP15gate_descriptoriii;	.scl	3;	.type	32;	.endef
+ 234              		.def	_load_gdtr;	.scl	3;	.type	32;	.endef
+ 235              		.def	__Z12set_segmdescP18segment_descriptorjii;	.scl	3;	.type	32;	.endef
+GAS LISTING dsctbl.gas 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 dsctbl.cpp
+          dsctbl.gas:67     .text:00000090 __Z11init_gdtidtv
+          dsctbl.gas:191    .text:00000290 __ZN6dsctbl11getPhysAddrEP18segment_descriptorj
+          dsctbl.gas:46     .text:00000060 __Z12set_gatedescP15gate_descriptoriii
+          dsctbl.gas:7      .text:00000000 __Z12set_segmdescP18segment_descriptorjii
+
+UNDEFINED SYMBOLS
+_asm_inthandler40
+_asm_inthandler20
+_asm_inthandler2c
+_asm_inthandler26
+_asm_inthandler21
+_asm_inthandler0d
+_asm_inthandler0c
+_load_idtr
+_load_gdtr

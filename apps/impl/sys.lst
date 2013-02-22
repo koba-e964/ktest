@@ -1,0 +1,20 @@
+     1 00000000                                 [format "WCOFF"]
+     2 00000000                                 [INSTRSET "i486p"]
+     3 00000000                                 [BITS 32]
+     4 00000000                                 [FILE "sys.nas"]
+     5 00000000                                 global  _sys_exit,_sys_end
+     6 00000000                                 ;int sys_exit(int result,int affix);
+     7                                          [SECTION .text]
+     8 00000000                                 _sys_end: ;void sys_end();=>sys_exit(0,0);
+     9 00000000 6A 00                           	push 0
+    10 00000002 6A 00                           	push 0
+    11 00000004 E8 00000004                     	call _sys_exit
+    12 00000009 83 C4 08                        	add esp,8
+    13 0000000C C3                              	ret
+    14 0000000D                                 _sys_exit:
+    15 0000000D B8 00000002                     	mov eax,2
+    16 00000012 8B 4C 24 04                     	mov ecx,[esp +4];
+    17 00000016 8B 54 24 08                     	mov edx,[esp + 8]
+    18 0000001A CD 40                           	int 0x40;
+    19 0000001C C3                              	ret
+    20 0000001D                                 

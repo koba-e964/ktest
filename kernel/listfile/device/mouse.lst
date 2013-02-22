@@ -1,0 +1,757 @@
+GAS LISTING device/mouse.gas 			page 1
+
+
+   1              		.file	"mouse.cpp"
+   2              	.globl _mcursor
+   3              		.bss
+   4              		.align 32
+   5              	_mcursor:
+   6 0000 00000000 		.space 256
+   6      00000000 
+   6      00000000 
+   6      00000000 
+   6      00000000 
+   7              	.globl _moldbuf
+   8              		.align 4
+   9              	_moldbuf:
+  10 0100 00000000 		.space 16
+  10      00000000 
+  10      00000000 
+  10      00000000 
+  11              	.globl _mbuf
+  12              		.align 4
+  13              	_mbuf:
+  14 0110 00000000 		.space 16
+  14      00000000 
+  14      00000000 
+  14      00000000 
+  15              	.lcomm _my,16
+  16              	.lcomm _mx,16
+  17              	.lcomm _mcbuf,256
+  18              		.text
+  19              		.align 2
+  20              		.p2align 4,,15
+  21              	.globl __Z12enable_mousev
+  22              		.def	__Z12enable_mousev;	.scl	2;	.type	32;	.endef
+  23              	__Z12enable_mousev:
+  24 0000 55       		pushl	%ebp
+  25 0001 B8000100 		movl	$256, %eax
+  25      00
+  26 0006 89E5     		movl	%esp, %ebp
+  27 0008 B9400100 		movl	$_mcbuf, %ecx
+  27      00
+  28 000d 83EC18   		subl	$24, %esp
+  29 0010 89442408 		movl	%eax, 8(%esp)
+  30 0014 894C2404 		movl	%ecx, 4(%esp)
+  31 0018 C7042400 		movl	$_mouse_fifo, (%esp)
+  31      000000
+  32 001f E8000000 		call	__Z10init_fifo8P5Fifo8Pci
+  32      00
+  33 0024 E8000000 		call	__Z18wait_kbc_sendreadyv
+  33      00
+  34 0029 C7042464 		movl	$100, (%esp)
+  34      000000
+  35 0030 BAD40000 		movl	$212, %edx
+  35      00
+  36 0035 89542404 		movl	%edx, 4(%esp)
+  37 0039 E8000000 		call	_io_out8
+  37      00
+  38 003e E8000000 		call	__Z18wait_kbc_sendreadyv
+  38      00
+GAS LISTING device/mouse.gas 			page 2
+
+
+  39 0043 C7042460 		movl	$96, (%esp)
+  39      000000
+  40 004a B8F40000 		movl	$244, %eax
+  40      00
+  41 004f 89442404 		movl	%eax, 4(%esp)
+  42 0053 E8000000 		call	_io_out8
+  42      00
+  43 0058 C6051301 		movb	$0, _mbuf+3
+  43      000000
+  44 005f C9       		leave
+  45 0060 C3       		ret
+  46 0061 90       		.align 2
+  47 0062 8DB42600 		.p2align 4,,15
+  47      0000008D 
+  47      BC270000 
+  47      0000
+  48              	.globl _inthandler2c
+  49              		.def	_inthandler2c;	.scl	2;	.type	32;	.endef
+  50              	_inthandler2c:
+  51 0070 55       		pushl	%ebp
+  52 0071 B8640000 		movl	$100, %eax
+  52      00
+  53 0076 89E5     		movl	%esp, %ebp
+  54 0078 83EC08   		subl	$8, %esp
+  55 007b 89442404 		movl	%eax, 4(%esp)
+  56 007f C70424A0 		movl	$160, (%esp)
+  56      000000
+  57 0086 E8000000 		call	_io_out8
+  57      00
+  58 008b C7042420 		movl	$32, (%esp)
+  58      000000
+  59 0092 B8620000 		movl	$98, %eax
+  59      00
+  60 0097 89442404 		movl	%eax, 4(%esp)
+  61 009b E8000000 		call	_io_out8
+  61      00
+  62 00a0 C7042460 		movl	$96, (%esp)
+  62      000000
+  63 00a7 E8000000 		call	_io_in8
+  63      00
+  64 00ac C7042400 		movl	$_mouse_fifo, (%esp)
+  64      000000
+  65 00b3 0FBEC0   		movsbl	%al,%eax
+  66 00b6 89442404 		movl	%eax, 4(%esp)
+  67 00ba E8000000 		call	__Z9put_fifo8P5Fifo8c
+  67      00
+  68 00bf C9       		leave
+  69 00c0 C3       		ret
+  70 00c1 90       		.align 2
+  71 00c2 8DB42600 		.p2align 4,,15
+  71      0000008D 
+  71      BC270000 
+  71      0000
+  72              	.globl __Z14mouse_initdrawv
+  73              		.def	__Z14mouse_initdrawv;	.scl	2;	.type	32;	.endef
+  74              	__Z14mouse_initdrawv:
+  75 00d0 55       		pushl	%ebp
+GAS LISTING device/mouse.gas 			page 3
+
+
+  76 00d1 89E5     		movl	%esp, %ebp
+  77 00d3 83EC38   		subl	$56, %esp
+  78 00d6 A1000000 		movl	_layerctl, %eax
+  78      00
+  79 00db 890424   		movl	%eax, (%esp)
+  80 00de E8000000 		call	__Z11layer_allocP8LayerCtl
+  80      00
+  81 00e3 0FBF15F4 		movswl	4084,%edx
+  81      0F0000
+  82 00ea A3000000 		movl	%eax, _lymouse
+  82      00
+  83 00ef 89D0     		movl	%edx, %eax
+  84 00f1 83E810   		subl	$16, %eax
+  85 00f4 0F889800 		js	L7
+  85      0000
+  86 00fa 0FBF0DF6 		movswl	4086,%ecx
+  86      0F0000
+  87 0101 C1F802   		sarl	$2, %eax
+  88 0104 8D0440   		leal	(%eax,%eax,2), %eax
+  89 0107 A3300100 		movl	%eax, _mx
+  89      00
+  90 010c 89CA     		movl	%ecx, %edx
+  91 010e 83EA2C   		subl	$44, %edx
+  92 0111 0F88A900 		js	L8
+  92      0000
+  93              	L5:
+  94 0117 8945E8   		movl	%eax, -24(%ebp)
+  95 011a C1FA02   		sarl	$2, %edx
+  96 011d 8D1452   		leal	(%edx,%edx,2), %edx
+  97 0120 8955EC   		movl	%edx, -20(%ebp)
+  98 0123 83C010   		addl	$16, %eax
+  99 0126 8945F0   		movl	%eax, -16(%ebp)
+ 100 0129 B87F0000 		movl	$127, %eax
+ 100      00
+ 101 012e 89152001 		movl	%edx, _my
+ 101      0000
+ 102 0134 83C210   		addl	$16, %edx
+ 103 0137 8955F4   		movl	%edx, -12(%ebp)
+ 104 013a 89442404 		movl	%eax, 4(%esp)
+ 105 013e C7042400 		movl	$_mcursor, (%esp)
+ 105      000000
+ 106 0145 E8000000 		call	__Z18init_mouse_cursor8Pcc
+ 106      00
+ 107 014a B8010000 		movl	$1, %eax
+ 107      00
+ 108 014f 8944241C 		movl	%eax, 28(%esp)
+ 109 0153 8B45E8   		movl	-24(%ebp), %eax
+ 110 0156 8944240C 		movl	%eax, 12(%esp)
+ 111 015a 8B45EC   		movl	-20(%ebp), %eax
+ 112 015d 89442410 		movl	%eax, 16(%esp)
+ 113 0161 8B45F0   		movl	-16(%ebp), %eax
+ 114 0164 89442414 		movl	%eax, 20(%esp)
+ 115 0168 8B45F4   		movl	-12(%ebp), %eax
+ 116 016b 89442418 		movl	%eax, 24(%esp)
+ 117 016f B8000000 		movl	$_mcursor, %eax
+ 117      00
+ 118 0174 89442408 		movl	%eax, 8(%esp)
+GAS LISTING device/mouse.gas 			page 4
+
+
+ 119 0178 A1000000 		movl	_lymouse, %eax
+ 119      00
+ 120 017d 89442404 		movl	%eax, 4(%esp)
+ 121 0181 A1000000 		movl	_layerctl, %eax
+ 121      00
+ 122 0186 890424   		movl	%eax, (%esp)
+ 123 0189 E8000000 		call	__Z10layer_drawP8LayerCtl5uid_tPc4Rectj
+ 123      00
+ 124 018e C9       		leave
+ 125 018f 31C0     		xorl	%eax, %eax
+ 126 0191 C3       		ret
+ 127              		.p2align 4,,7
+ 128              	L7:
+ 129 0192 0FBF0DF6 		movswl	4086,%ecx
+ 129      0F0000
+ 130 0199 8D42F3   		leal	-13(%edx), %eax
+ 131 019c C1F802   		sarl	$2, %eax
+ 132 019f 8D0440   		leal	(%eax,%eax,2), %eax
+ 133 01a2 A3300100 		movl	%eax, _mx
+ 133      00
+ 134 01a7 89CA     		movl	%ecx, %edx
+ 135 01a9 83EA2C   		subl	$44, %edx
+ 136 01ac 0F8965FF 		jns	L5
+ 136      FFFF
+ 137 01b2 8DB42600 		.p2align 4,,15
+ 137      0000008D 
+ 137      BC270000 
+ 137      0000
+ 138              	L8:
+ 139 01c0 8D51D7   		leal	-41(%ecx), %edx
+ 140 01c3 E94FFFFF 		jmp	L5
+ 140      FF
+ 141              		.align 2
+ 142 01c8 908DB426 		.p2align 4,,15
+ 142      00000000 
+ 143              	.globl __Z12mouse_decodeP12_tagMouseBufh
+ 144              		.def	__Z12mouse_decodeP12_tagMouseBufh;	.scl	2;	.type	32;	.endef
+ 145              	__Z12mouse_decodeP12_tagMouseBufh:
+ 146 01d0 55       		pushl	%ebp
+ 147 01d1 89E5     		movl	%esp, %ebp
+ 148 01d3 53       		pushl	%ebx
+ 149 01d4 83EC04   		subl	$4, %esp
+ 150 01d7 8B5D08   		movl	8(%ebp), %ebx
+ 151 01da 8B550C   		movl	12(%ebp), %edx
+ 152 01dd 0FB64303 		movzbl	3(%ebx), %eax
+ 153 01e1 88D1     		movb	%dl, %cl
+ 154 01e3 3C01     		cmpb	$1, %al
+ 155 01e5 7419     		je	L13
+ 156 01e7 0F8E8300 		jle	L22
+ 156      0000
+ 157 01ed 3C02     		cmpb	$2, %al
+ 158 01ef 7421     		je	L15
+ 159 01f1 3C03     		cmpb	$3, %al
+ 160 01f3 742B     		je	L16
+ 161              	L10:
+ 162 01f5 5A       		popl	%edx
+ 163 01f6 B8FFFFFF 		movl	$-1, %eax
+GAS LISTING device/mouse.gas 			page 5
+
+
+ 163      FF
+ 164 01fb 5B       		popl	%ebx
+ 165 01fc 5D       		popl	%ebp
+ 166 01fd C3       		ret
+ 167 01fe 89F6     		.p2align 4,,7
+ 168              	L13:
+ 169 0200 89D0     		movl	%edx, %eax
+ 170 0202 25C80000 		andl	$200, %eax
+ 170      00
+ 171 0207 83F808   		cmpl	$8, %eax
+ 172 020a 745A     		je	L23
+ 173              	L21:
+ 174 020c 31C0     		xorl	%eax, %eax
+ 175              	L24:
+ 176 020e 5A       		popl	%edx
+ 177 020f 5B       		popl	%ebx
+ 178 0210 5D       		popl	%ebp
+ 179 0211 C3       		ret
+ 180              		.p2align 4,,7
+ 181              	L15:
+ 182 0212 885301   		movb	%dl, 1(%ebx)
+ 183 0215 31C0     		xorl	%eax, %eax
+ 184 0217 C6430303 		movb	$3, 3(%ebx)
+ 185 021b EBF1     		jmp	L24
+ 186 021d 8D7600   		.p2align 4,,7
+ 187              	L16:
+ 188 0220 0FB603   		movzbl	(%ebx), %eax
+ 189 0223 885302   		movb	%dl, 2(%ebx)
+ 190 0226 0FBEC9   		movsbl	%cl,%ecx
+ 191 0229 C6430301 		movb	$1, 3(%ebx)
+ 192 022d 0FBED0   		movsbl	%al,%edx
+ 193 0230 8845FB   		movb	%al, -5(%ebp)
+ 194 0233 89D0     		movl	%edx, %eax
+ 195 0235 83E007   		andl	$7, %eax
+ 196 0238 89430C   		movl	%eax, 12(%ebx)
+ 197 023b F6C210   		testb	$16, %dl
+ 198 023e 0FBE4301 		movsbl	1(%ebx),%eax
+ 199 0242 7405     		je	L20
+ 200 0244 0D00FFFF 		orl	$-256, %eax
+ 200      FF
+ 201              	L20:
+ 202 0249 F645FB20 		testb	$32, -5(%ebp)
+ 203 024d 894304   		movl	%eax, 4(%ebx)
+ 204 0250 7406     		je	L18
+ 205 0252 81C900FF 		orl	$-256, %ecx
+ 205      FFFF
+ 206              	L18:
+ 207 0258 F7D9     		negl	%ecx
+ 208 025a B8010000 		movl	$1, %eax
+ 208      00
+ 209 025f 894B08   		movl	%ecx, 8(%ebx)
+ 210 0262 5A       		popl	%edx
+ 211 0263 5B       		popl	%ebx
+ 212 0264 5D       		popl	%ebp
+ 213 0265 C3       		ret
+ 214              	L23:
+ 215 0266 8813     		movb	%dl, (%ebx)
+GAS LISTING device/mouse.gas 			page 6
+
+
+ 216 0268 31C0     		xorl	%eax, %eax
+ 217 026a C6430302 		movb	$2, 3(%ebx)
+ 218 026e EB9E     		jmp	L24
+ 219              		.p2align 4,,7
+ 220              	L22:
+ 221 0270 84C0     		testb	%al, %al
+ 222 0272 7581     		jne	L10
+ 223 0274 80FAFA   		cmpb	$-6, %dl
+ 224 0277 7593     		jne	L21
+ 225 0279 C6430301 		movb	$1, 3(%ebx)
+ 226 027d 31C0     		xorl	%eax, %eax
+ 227 027f EB8D     		jmp	L24
+ 228 0281 90       		.align 2
+ 229 0282 8DB42600 		.p2align 4,,15
+ 229      0000008D 
+ 229      BC270000 
+ 229      0000
+ 230              	.globl __Z12mouse_motionii
+ 231              		.def	__Z12mouse_motionii;	.scl	2;	.type	32;	.endef
+ 232              	__Z12mouse_motionii:
+ 233 0290 55       		pushl	%ebp
+ 234 0291 89E5     		movl	%esp, %ebp
+ 235 0293 83EC18   		subl	$24, %esp
+ 236 0296 895DF8   		movl	%ebx, -8(%ebp)
+ 237 0299 8B5D0C   		movl	12(%ebp), %ebx
+ 238 029c 8975FC   		movl	%esi, -4(%ebp)
+ 239 029f 8B7508   		movl	8(%ebp), %esi
+ 240 02a2 895C2404 		movl	%ebx, 4(%esp)
+ 241 02a6 893424   		movl	%esi, (%esp)
+ 242 02a9 E8000000 		call	__Z9getWindowii
+ 242      00
+ 243 02ae 85C0     		testl	%eax, %eax
+ 244 02b0 7819     		js	L26
+ 245 02b2 895C240C 		movl	%ebx, 12(%esp)
+ 246 02b6 B9020100 		movl	$258, %ecx
+ 246      00
+ 247 02bb 89742408 		movl	%esi, 8(%esp)
+ 248 02bf 894C2404 		movl	%ecx, 4(%esp)
+ 249 02c3 890424   		movl	%eax, (%esp)
+ 250 02c6 E8000000 		call	__Z8sampleWHiiii
+ 250      00
+ 251              	L26:
+ 252 02cb 8B5DF8   		movl	-8(%ebp), %ebx
+ 253 02ce 31C0     		xorl	%eax, %eax
+ 254 02d0 8B75FC   		movl	-4(%ebp), %esi
+ 255 02d3 89EC     		movl	%ebp, %esp
+ 256 02d5 5D       		popl	%ebp
+ 257 02d6 C3       		ret
+ 258 02d7 90       		.align 2
+ 259 02d8 908DB426 		.p2align 4,,15
+ 259      00000000 
+ 260              	.globl __Z11mouse_raiseiii
+ 261              		.def	__Z11mouse_raiseiii;	.scl	2;	.type	32;	.endef
+ 262              	__Z11mouse_raiseiii:
+ 263 02e0 55       		pushl	%ebp
+ 264 02e1 89E5     		movl	%esp, %ebp
+ 265 02e3 83EC28   		subl	$40, %esp
+GAS LISTING device/mouse.gas 			page 7
+
+
+ 266 02e6 8975F8   		movl	%esi, -8(%ebp)
+ 267 02e9 8B750C   		movl	12(%ebp), %esi
+ 268 02ec 897DFC   		movl	%edi, -4(%ebp)
+ 269 02ef 8B7D08   		movl	8(%ebp), %edi
+ 270 02f2 895DF4   		movl	%ebx, -12(%ebp)
+ 271 02f5 89742404 		movl	%esi, 4(%esp)
+ 272 02f9 893C24   		movl	%edi, (%esp)
+ 273 02fc E8000000 		call	__Z9getWindowii
+ 273      00
+ 274 0301 85C0     		testl	%eax, %eax
+ 275 0303 89C3     		movl	%eax, %ebx
+ 276 0305 780C     		js	L28
+ 277 0307 F6451001 		testb	$1, 16(%ebp)
+ 278 030b 7543     		jne	L33
+ 279              	L29:
+ 280 030d F6451002 		testb	$2, 16(%ebp)
+ 281 0311 750F     		jne	L34
+ 282              	L28:
+ 283 0313 8B5DF4   		movl	-12(%ebp), %ebx
+ 284 0316 31C0     		xorl	%eax, %eax
+ 285 0318 8B75F8   		movl	-8(%ebp), %esi
+ 286 031b 8B7DFC   		movl	-4(%ebp), %edi
+ 287 031e 89EC     		movl	%ebp, %esp
+ 288 0320 5D       		popl	%ebp
+ 289 0321 C3       		ret
+ 290              		.p2align 4,,7
+ 291              	L34:
+ 292 0322 8974240C 		movl	%esi, 12(%esp)
+ 293 0326 BE060100 		movl	$262, %esi
+ 293      00
+ 294 032b 897C2408 		movl	%edi, 8(%esp)
+ 295 032f 89742404 		movl	%esi, 4(%esp)
+ 296 0333 891C24   		movl	%ebx, (%esp)
+ 297 0336 E8000000 		call	__Z13t_SendMessageiiii
+ 297      00
+ 298 033b 8B5DF4   		movl	-12(%ebp), %ebx
+ 299 033e 31C0     		xorl	%eax, %eax
+ 300 0340 8B75F8   		movl	-8(%ebp), %esi
+ 301 0343 8B7DFC   		movl	-4(%ebp), %edi
+ 302 0346 89EC     		movl	%ebp, %esp
+ 303 0348 5D       		popl	%ebp
+ 304 0349 C3       		ret
+ 305 034a 8DB60000 		.p2align 4,,7
+ 305      0000
+ 306              	L33:
+ 307 0350 8974240C 		movl	%esi, 12(%esp)
+ 308 0354 B8050100 		movl	$261, %eax
+ 308      00
+ 309 0359 897C2408 		movl	%edi, 8(%esp)
+ 310 035d 89442404 		movl	%eax, 4(%esp)
+ 311 0361 891C24   		movl	%ebx, (%esp)
+ 312 0364 E8000000 		call	__Z13t_SendMessageiiii
+ 312      00
+ 313 0369 EBA2     		jmp	L29
+ 314 036b 90       		.align 2
+ 315 036c 8D742600 		.p2align 4,,15
+ 316              	.globl __Z11mouse_clickiii
+GAS LISTING device/mouse.gas 			page 8
+
+
+ 317              		.def	__Z11mouse_clickiii;	.scl	2;	.type	32;	.endef
+ 318              	__Z11mouse_clickiii:
+ 319 0370 55       		pushl	%ebp
+ 320 0371 89E5     		movl	%esp, %ebp
+ 321 0373 83EC28   		subl	$40, %esp
+ 322 0376 8975F8   		movl	%esi, -8(%ebp)
+ 323 0379 8B750C   		movl	12(%ebp), %esi
+ 324 037c 897DFC   		movl	%edi, -4(%ebp)
+ 325 037f 8B7D08   		movl	8(%ebp), %edi
+ 326 0382 895DF4   		movl	%ebx, -12(%ebp)
+ 327 0385 89742404 		movl	%esi, 4(%esp)
+ 328 0389 893C24   		movl	%edi, (%esp)
+ 329 038c E8000000 		call	__Z9getWindowii
+ 329      00
+ 330 0391 85C0     		testl	%eax, %eax
+ 331 0393 89C3     		movl	%eax, %ebx
+ 332 0395 780C     		js	L36
+ 333 0397 F6451001 		testb	$1, 16(%ebp)
+ 334 039b 7543     		jne	L41
+ 335              	L37:
+ 336 039d F6451002 		testb	$2, 16(%ebp)
+ 337 03a1 750F     		jne	L42
+ 338              	L36:
+ 339 03a3 8B5DF4   		movl	-12(%ebp), %ebx
+ 340 03a6 31C0     		xorl	%eax, %eax
+ 341 03a8 8B75F8   		movl	-8(%ebp), %esi
+ 342 03ab 8B7DFC   		movl	-4(%ebp), %edi
+ 343 03ae 89EC     		movl	%ebp, %esp
+ 344 03b0 5D       		popl	%ebp
+ 345 03b1 C3       		ret
+ 346              		.p2align 4,,7
+ 347              	L42:
+ 348 03b2 8974240C 		movl	%esi, 12(%esp)
+ 349 03b6 B8040100 		movl	$260, %eax
+ 349      00
+ 350 03bb 897C2408 		movl	%edi, 8(%esp)
+ 351 03bf 891C24   		movl	%ebx, (%esp)
+ 352 03c2 89442404 		movl	%eax, 4(%esp)
+ 353 03c6 E8000000 		call	__Z13t_SendMessageiiii
+ 353      00
+ 354 03cb 8B5DF4   		movl	-12(%ebp), %ebx
+ 355 03ce 31C0     		xorl	%eax, %eax
+ 356 03d0 8B75F8   		movl	-8(%ebp), %esi
+ 357 03d3 8B7DFC   		movl	-4(%ebp), %edi
+ 358 03d6 89EC     		movl	%ebp, %esp
+ 359 03d8 5D       		popl	%ebp
+ 360 03d9 C3       		ret
+ 361 03da 8DB60000 		.p2align 4,,7
+ 361      0000
+ 362              	L41:
+ 363 03e0 8974240C 		movl	%esi, 12(%esp)
+ 364 03e4 B8030100 		movl	$259, %eax
+ 364      00
+ 365 03e9 897C2408 		movl	%edi, 8(%esp)
+ 366 03ed 89442404 		movl	%eax, 4(%esp)
+ 367 03f1 891C24   		movl	%ebx, (%esp)
+ 368 03f4 E8000000 		call	__Z13t_SendMessageiiii
+GAS LISTING device/mouse.gas 			page 9
+
+
+ 368      00
+ 369 03f9 EBA2     		jmp	L37
+ 370 03fb 90       		.align 2
+ 371 03fc 8D742600 		.p2align 4,,15
+ 372              	.globl __Z11mouse_eventv
+ 373              		.def	__Z11mouse_eventv;	.scl	2;	.type	32;	.endef
+ 374              	__Z11mouse_eventv:
+ 375 0400 55       		pushl	%ebp
+ 376 0401 89E5     		movl	%esp, %ebp
+ 377 0403 57       		pushl	%edi
+ 378 0404 56       		pushl	%esi
+ 379 0405 53       		pushl	%ebx
+ 380 0406 83EC4C   		subl	$76, %esp
+ 381 0409 C7042400 		movl	$_mouse_fifo, (%esp)
+ 381      000000
+ 382 0410 E8000000 		call	__Z9get_fifo8P5Fifo8
+ 382      00
+ 383 0415 89C3     		movl	%eax, %ebx
+ 384 0417 E8000000 		call	_io_sti
+ 384      00
+ 385 041c C7042410 		movl	$_mbuf, (%esp)
+ 385      010000
+ 386 0423 0FB6C3   		movzbl	%bl, %eax
+ 387 0426 89442404 		movl	%eax, 4(%esp)
+ 388 042a E8A1FDFF 		call	__Z12mouse_decodeP12_tagMouseBufh
+ 388      FF
+ 389 042f 85C0     		testl	%eax, %eax
+ 390 0431 0F8E8E01 		jle	L44
+ 390      0000
+ 391 0437 C744241C 		movl	$1, 28(%esp)
+ 391      01000000 
+ 392 043f A1300100 		movl	_mx, %eax
+ 392      00
+ 393 0444 8B152001 		movl	_my, %edx
+ 393      0000
+ 394 044a C7442418 		movl	$127, 24(%esp)
+ 394      7F000000 
+ 395 0452 8B351401 		movl	_mbuf+4, %esi
+ 395      0000
+ 396 0458 8D5810   		leal	16(%eax), %ebx
+ 397 045b 8945D8   		movl	%eax, -40(%ebp)
+ 398 045e 8D4A10   		leal	16(%edx), %ecx
+ 399 0461 8B3D1801 		movl	_mbuf+8, %edi
+ 399      0000
+ 400 0467 89442408 		movl	%eax, 8(%esp)
+ 401 046b A1000000 		movl	_lymouse, %eax
+ 401      00
+ 402 0470 8955DC   		movl	%edx, -36(%ebp)
+ 403 0473 8954240C 		movl	%edx, 12(%esp)
+ 404 0477 89442404 		movl	%eax, 4(%esp)
+ 405 047b A1000000 		movl	_layerctl, %eax
+ 405      00
+ 406 0480 895DE0   		movl	%ebx, -32(%ebp)
+ 407 0483 894DE4   		movl	%ecx, -28(%ebp)
+ 408 0486 895C2410 		movl	%ebx, 16(%esp)
+ 409 048a 894C2414 		movl	%ecx, 20(%esp)
+ 410 048e 890424   		movl	%eax, (%esp)
+GAS LISTING device/mouse.gas 			page 10
+
+
+ 411 0491 E8000000 		call	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+ 411      00
+ 412 0496 8B152001 		movl	_my, %edx
+ 412      0000
+ 413 049c A1300100 		movl	_mx, %eax
+ 413      00
+ 414 04a1 01FA     		addl	%edi, %edx
+ 415 04a3 01F0     		addl	%esi, %eax
+ 416 04a5 0F882501 		js	L52
+ 416      0000
+ 417 04ab A3300100 		movl	%eax, _mx
+ 417      00
+ 418 04b0 85D2     		testl	%edx, %edx
+ 419 04b2 0F882801 		js	L53
+ 419      0000
+ 420              	L51:
+ 421 04b8 89152001 		movl	%edx, _my
+ 421      0000
+ 422              	L46:
+ 423 04be 0FBF05F4 		movswl	4084,%eax
+ 423      0F0000
+ 424 04c5 8B1D3001 		movl	_mx, %ebx
+ 424      0000
+ 425 04cb 83E810   		subl	$16, %eax
+ 426 04ce 39D8     		cmpl	%ebx, %eax
+ 427 04d0 7D07     		jge	L47
+ 428 04d2 A3300100 		movl	%eax, _mx
+ 428      00
+ 429 04d7 89C3     		movl	%eax, %ebx
+ 430              	L47:
+ 431 04d9 0FBF05F6 		movswl	4086,%eax
+ 431      0F0000
+ 432 04e0 8B0D2001 		movl	_my, %ecx
+ 432      0000
+ 433 04e6 83E810   		subl	$16, %eax
+ 434 04e9 39C8     		cmpl	%ecx, %eax
+ 435 04eb 7D07     		jge	L48
+ 436 04ed A3200100 		movl	%eax, _my
+ 436      00
+ 437 04f2 89C1     		movl	%eax, %ecx
+ 438              	L48:
+ 439 04f4 895DC8   		movl	%ebx, -56(%ebp)
+ 440 04f7 8D4110   		leal	16(%ecx), %eax
+ 441 04fa 8D5310   		leal	16(%ebx), %edx
+ 442 04fd 8945D4   		movl	%eax, -44(%ebp)
+ 443 0500 89442418 		movl	%eax, 24(%esp)
+ 444 0504 A1000000 		movl	_lymouse, %eax
+ 444      00
+ 445 0509 895C240C 		movl	%ebx, 12(%esp)
+ 446 050d BB000000 		movl	$_mcursor, %ebx
+ 446      00
+ 447 0512 89442404 		movl	%eax, 4(%esp)
+ 448 0516 A1000000 		movl	_layerctl, %eax
+ 448      00
+ 449 051b 894DCC   		movl	%ecx, -52(%ebp)
+ 450 051e 8955D0   		movl	%edx, -48(%ebp)
+ 451 0521 C744241C 		movl	$1, 28(%esp)
+GAS LISTING device/mouse.gas 			page 11
+
+
+ 451      01000000 
+ 452 0529 894C2410 		movl	%ecx, 16(%esp)
+ 453 052d 89542414 		movl	%edx, 20(%esp)
+ 454 0531 895C2408 		movl	%ebx, 8(%esp)
+ 455 0535 890424   		movl	%eax, (%esp)
+ 456 0538 E8000000 		call	__Z10layer_drawP8LayerCtl5uid_tPc4Rectj
+ 456      00
+ 457 053d 09FE     		orl	%edi, %esi
+ 458 053f 0F85AB00 		jne	L54
+ 458      0000
+ 459              	L49:
+ 460 0545 A10C0100 		movl	_moldbuf+12, %eax
+ 460      00
+ 461 054a 8B0D1C01 		movl	_mbuf+12, %ecx
+ 461      0000
+ 462 0550 F7D0     		notl	%eax
+ 463 0552 21C8     		andl	%ecx, %eax
+ 464 0554 83E007   		andl	$7, %eax
+ 465 0557 89442408 		movl	%eax, 8(%esp)
+ 466 055b A1200100 		movl	_my, %eax
+ 466      00
+ 467 0560 89442404 		movl	%eax, 4(%esp)
+ 468 0564 A1300100 		movl	_mx, %eax
+ 468      00
+ 469 0569 890424   		movl	%eax, (%esp)
+ 470 056c E8FFFDFF 		call	__Z11mouse_clickiii
+ 470      FF
+ 471 0571 A11C0100 		movl	_mbuf+12, %eax
+ 471      00
+ 472 0576 8B150C01 		movl	_moldbuf+12, %edx
+ 472      0000
+ 473 057c F7D0     		notl	%eax
+ 474 057e 21D0     		andl	%edx, %eax
+ 475 0580 83E007   		andl	$7, %eax
+ 476 0583 89442408 		movl	%eax, 8(%esp)
+ 477 0587 A1200100 		movl	_my, %eax
+ 477      00
+ 478 058c 89442404 		movl	%eax, 4(%esp)
+ 479 0590 A1300100 		movl	_mx, %eax
+ 479      00
+ 480 0595 890424   		movl	%eax, (%esp)
+ 481 0598 E843FDFF 		call	__Z11mouse_raiseiii
+ 481      FF
+ 482 059d A1100100 		movl	_mbuf, %eax
+ 482      00
+ 483 05a2 A3000100 		movl	%eax, _moldbuf
+ 483      00
+ 484 05a7 A1140100 		movl	_mbuf+4, %eax
+ 484      00
+ 485 05ac A3040100 		movl	%eax, _moldbuf+4
+ 485      00
+ 486 05b1 A1180100 		movl	_mbuf+8, %eax
+ 486      00
+ 487 05b6 A3080100 		movl	%eax, _moldbuf+8
+ 487      00
+ 488 05bb A11C0100 		movl	_mbuf+12, %eax
+ 488      00
+GAS LISTING device/mouse.gas 			page 12
+
+
+ 489 05c0 A30C0100 		movl	%eax, _moldbuf+12
+ 489      00
+ 490              	L44:
+ 491 05c5 83C44C   		addl	$76, %esp
+ 492 05c8 31C0     		xorl	%eax, %eax
+ 493 05ca 5B       		popl	%ebx
+ 494 05cb 5E       		popl	%esi
+ 495 05cc 5F       		popl	%edi
+ 496 05cd 5D       		popl	%ebp
+ 497 05ce C3       		ret
+ 498 05cf 90       		.p2align 4,,7
+ 499              	L52:
+ 500 05d0 31C9     		xorl	%ecx, %ecx
+ 501 05d2 85D2     		testl	%edx, %edx
+ 502 05d4 890D3001 		movl	%ecx, _mx
+ 502      0000
+ 503 05da 0F89D8FE 		jns	L51
+ 503      FFFF
+ 504              		.p2align 4,,15
+ 505              	L53:
+ 506 05e0 31C0     		xorl	%eax, %eax
+ 507 05e2 A3200100 		movl	%eax, _my
+ 507      00
+ 508 05e7 E9D2FEFF 		jmp	L46
+ 508      FF
+ 509 05ec 8D742600 		.p2align 4,,7
+ 510              	L54:
+ 511 05f0 A1200100 		movl	_my, %eax
+ 511      00
+ 512 05f5 89442404 		movl	%eax, 4(%esp)
+ 513 05f9 A1300100 		movl	_mx, %eax
+ 513      00
+ 514 05fe 890424   		movl	%eax, (%esp)
+ 515 0601 E88AFCFF 		call	__Z12mouse_motionii
+ 515      FF
+ 516 0606 E93AFFFF 		jmp	L49
+ 516      FF
+ 517              		.def	__Z13t_SendMessageiiii;	.scl	3;	.type	32;	.endef
+ 518              		.def	__Z8sampleWHiiii;	.scl	3;	.type	32;	.endef
+ 519              		.def	__Z9getWindowii;	.scl	3;	.type	32;	.endef
+ 520              		.def	__Z11mouse_raiseiii;	.scl	3;	.type	32;	.endef
+ 521              		.def	__Z11mouse_clickiii;	.scl	3;	.type	32;	.endef
+ 522              		.def	__Z12mouse_motionii;	.scl	3;	.type	32;	.endef
+ 523              		.def	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj;	.scl	3;	.type	32;	.endef
+ 524              		.def	__Z12mouse_decodeP12_tagMouseBufh;	.scl	3;	.type	32;	.endef
+ 525              		.def	_io_sti;	.scl	3;	.type	32;	.endef
+ 526              		.def	__Z9get_fifo8P5Fifo8;	.scl	3;	.type	32;	.endef
+ 527              		.def	__Z10layer_drawP8LayerCtl5uid_tPc4Rectj;	.scl	3;	.type	32;	.endef
+ 528              		.def	__Z18init_mouse_cursor8Pcc;	.scl	3;	.type	32;	.endef
+ 529              		.def	__Z11layer_allocP8LayerCtl;	.scl	3;	.type	32;	.endef
+ 530              		.def	__Z9put_fifo8P5Fifo8c;	.scl	3;	.type	32;	.endef
+ 531              		.def	_io_in8;	.scl	3;	.type	32;	.endef
+ 532              		.def	_io_out8;	.scl	3;	.type	32;	.endef
+ 533              		.def	__Z18wait_kbc_sendreadyv;	.scl	3;	.type	32;	.endef
+ 534 060b 90909090 		.def	__Z10init_fifo8P5Fifo8Pci;	.scl	3;	.type	32;	.endef
+ 534      90
+GAS LISTING device/mouse.gas 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 mouse.cpp
+    device/mouse.gas:5      .bss:00000000 _mcursor
+    device/mouse.gas:9      .bss:00000100 _moldbuf
+    device/mouse.gas:13     .bss:00000110 _mbuf
+    device/mouse.gas:15     .bss:00000120 _my
+    device/mouse.gas:16     .bss:00000130 _mx
+    device/mouse.gas:17     .bss:00000140 _mcbuf
+    device/mouse.gas:23     .text:00000000 __Z12enable_mousev
+    device/mouse.gas:50     .text:00000070 _inthandler2c
+    device/mouse.gas:74     .text:000000d0 __Z14mouse_initdrawv
+    device/mouse.gas:374    .text:00000400 __Z11mouse_eventv
+    device/mouse.gas:262    .text:000002e0 __Z11mouse_raiseiii
+    device/mouse.gas:318    .text:00000370 __Z11mouse_clickiii
+    device/mouse.gas:232    .text:00000290 __Z12mouse_motionii
+    device/mouse.gas:145    .text:000001d0 __Z12mouse_decodeP12_tagMouseBufh
+
+UNDEFINED SYMBOLS
+_mouse_fifo
+_layerctl
+_lymouse
+__Z13t_SendMessageiiii
+__Z8sampleWHiiii
+__Z9getWindowii
+__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+_io_sti
+__Z9get_fifo8P5Fifo8
+__Z10layer_drawP8LayerCtl5uid_tPc4Rectj
+__Z18init_mouse_cursor8Pcc
+__Z11layer_allocP8LayerCtl
+__Z9put_fifo8P5Fifo8c
+_io_in8
+_io_out8
+__Z18wait_kbc_sendreadyv
+__Z10init_fifo8P5Fifo8Pci

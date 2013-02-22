@@ -1,0 +1,452 @@
+GAS LISTING timer.gas 			page 1
+
+
+   1              		.file	"timer.cpp"
+   2              	.lcomm _notify_buf,1024
+   3              		.text
+   4              		.align 2
+   5              		.p2align 4,,15
+   6              	.globl __Z8init_pitv
+   7              		.def	__Z8init_pitv;	.scl	2;	.type	32;	.endef
+   8              	__Z8init_pitv:
+   9 0000 55       		pushl	%ebp
+  10 0001 B8340000 		movl	$52, %eax
+  10      00
+  11 0006 89E5     		movl	%esp, %ebp
+  12 0008 83EC18   		subl	$24, %esp
+  13 000b 89442404 		movl	%eax, 4(%esp)
+  14 000f C7042443 		movl	$67, (%esp)
+  14      000000
+  15 0016 E8000000 		call	_io_out8
+  15      00
+  16 001b C7042440 		movl	$64, (%esp)
+  16      000000
+  17 0022 B89C0000 		movl	$156, %eax
+  17      00
+  18 0027 89442404 		movl	%eax, 4(%esp)
+  19 002b E8000000 		call	_io_out8
+  19      00
+  20 0030 C7042440 		movl	$64, (%esp)
+  20      000000
+  21 0037 B82E0000 		movl	$46, %eax
+  21      00
+  22 003c 89442404 		movl	%eax, 4(%esp)
+  23 0040 E8000000 		call	_io_out8
+  23      00
+  24 0045 31C0     		xorl	%eax, %eax
+  25 0047 BAF30100 		movl	$499, %edx
+  25      00
+  26 004c A3000000 		movl	%eax, _timerctl
+  26      00
+  27 0051 31C0     		xorl	%eax, %eax
+  28 0053 A3040000 		movl	%eax, _timerctl+4
+  28      00
+  29 0058 31C0     		xorl	%eax, %eax
+  30 005a 8DB60000 		.p2align 4,,15
+  30      0000
+  31              	L5:
+  32 0060 B9FFFFFF 		movl	$-1, %ecx
+  32      FF
+  33 0065 89881C00 		movl	%ecx, _timerctl+28(%eax)
+  33      0000
+  34 006b 31C9     		xorl	%ecx, %ecx
+  35 006d 89882000 		movl	%ecx, _timerctl+32(%eax)
+  35      0000
+  36 0073 31C9     		xorl	%ecx, %ecx
+  37 0075 89882400 		movl	%ecx, _timerctl+36(%eax)
+  37      0000
+  38 007b 31C9     		xorl	%ecx, %ecx
+  39 007d 89882800 		movl	%ecx, _timerctl+40(%eax)
+  39      0000
+GAS LISTING timer.gas 			page 2
+
+
+  40 0083 31C9     		xorl	%ecx, %ecx
+  41 0085 89882C00 		movl	%ecx, _timerctl+44(%eax)
+  41      0000
+  42 008b 83C01C   		addl	$28, %eax
+  43 008e 4A       		decl	%edx
+  44 008f 79CF     		jns	L5
+  45 0091 C7042408 		movl	$_timerctl+8, (%esp)
+  45      000000
+  46 0098 BA000100 		movl	$256, %edx
+  46      00
+  47 009d B8000000 		movl	$_notify_buf, %eax
+  47      00
+  48 00a2 89542408 		movl	%edx, 8(%esp)
+  49 00a6 89442404 		movl	%eax, 4(%esp)
+  50 00aa E8000000 		call	__Z11init_fifo32P6Fifo32Pii
+  50      00
+  51 00af C9       		leave
+  52 00b0 C3       		ret
+  53 00b1 90       		.align 2
+  54 00b2 8DB42600 		.p2align 4,,15
+  54      0000008D 
+  54      BC270000 
+  54      0000
+  55              		.def	__Z18set_timer_internaljjPFiiiEiii;	.scl	3;	.type	32;	.endef
+  56              	__Z18set_timer_internaljjPFiiiEiii:
+  57 00c0 55       		pushl	%ebp
+  58 00c1 89E5     		movl	%esp, %ebp
+  59 00c3 57       		pushl	%edi
+  60 00c4 56       		pushl	%esi
+  61 00c5 53       		pushl	%ebx
+  62 00c6 83EC5C   		subl	$92, %esp
+  63 00c9 813D1800 		cmpl	$499, _timerctl+24
+  63      0000F301 
+  63      0000
+  64 00d3 8945C4   		movl	%eax, -60(%ebp)
+  65 00d6 B8FFFFFF 		movl	$-1, %eax
+  65      FF
+  66 00db 8955C0   		movl	%edx, -64(%ebp)
+  67 00de 894DBC   		movl	%ecx, -68(%ebp)
+  68 00e1 7F6B     		jg	L9
+  69 00e3 E8000000 		call	_io_cli
+  69      00
+  70 00e8 8B4510   		movl	16(%ebp), %eax
+  71 00eb 8B5DC4   		movl	-60(%ebp), %ebx
+  72 00ee 8945B8   		movl	%eax, -72(%ebp)
+  73 00f1 40       		incl	%eax
+  74 00f2 7462     		je	L24
+  75              	L12:
+  76 00f4 31FF     		xorl	%edi, %edi
+  77 00f6 31C9     		xorl	%ecx, %ecx
+  78 00f8 908DB426 		.p2align 4,,15
+  78      00000000 
+  79              	L19:
+  80 0100 83B91C00 		cmpl	$-1, _timerctl+28(%ecx)
+  80      0000FF
+  81 0107 8DB10C00 		leal	_timerctl+12(%ecx), %esi
+  81      0000
+GAS LISTING timer.gas 			page 3
+
+
+  82 010d 0F84C900 		je	L22
+  82      0000
+  83 0113 8B812400 		movl	_timerctl+36(%ecx), %eax
+  83      0000
+  84 0119 8D911400 		leal	_timerctl+20(%ecx), %edx
+  84      0000
+  85 011f 39C3     		cmpl	%eax, %ebx
+  86 0121 7C4D     		jl	L23
+  87 0123 47       		incl	%edi
+  88 0124 29C3     		subl	%eax, %ebx
+  89 0126 83C11C   		addl	$28, %ecx
+  90 0129 81FFF301 		cmpl	$499, %edi
+  90      0000
+  91 012f 7ECF     		jle	L19
+  92 0131 EB0D9090 		.p2align 4,,15
+  92      90909090 
+  92      90909090 
+  92      909090
+  93              	L17:
+  94 0140 FF051800 		incl	_timerctl+24
+  94      0000
+  95 0146 E8000000 		call	_io_sti
+  95      00
+  96 014b 8B45B8   		movl	-72(%ebp), %eax
+  97              	L9:
+  98 014e 83C45C   		addl	$92, %esp
+  99 0151 5B       		popl	%ebx
+ 100 0152 5E       		popl	%esi
+ 101 0153 5F       		popl	%edi
+ 102 0154 5D       		popl	%ebp
+ 103 0155 C3       		ret
+ 104              	L24:
+ 105 0156 8B150400 		movl	_timerctl+4, %edx
+ 105      0000
+ 106 015c 89D0     		movl	%edx, %eax
+ 107 015e 40       		incl	%eax
+ 108 015f 8955B8   		movl	%edx, -72(%ebp)
+ 109 0162 A3040000 		movl	%eax, _timerctl+4
+ 109      00
+ 110 0167 EB8B     		jmp	L12
+ 111 0169 8DB42600 		.p2align 4,,7
+ 111      000000
+ 112              	L23:
+ 113 0170 29D8     		subl	%ebx, %eax
+ 114 0172 8B4DB8   		movl	-72(%ebp), %ecx
+ 115 0175 894210   		movl	%eax, 16(%edx)
+ 116 0178 8B45C0   		movl	-64(%ebp), %eax
+ 117 017b 895DD0   		movl	%ebx, -48(%ebp)
+ 118 017e 8B55C4   		movl	-60(%ebp), %edx
+ 119 0181 894DC8   		movl	%ecx, -56(%ebp)
+ 120 0184 8B4DBC   		movl	-68(%ebp), %ecx
+ 121 0187 897C2404 		movl	%edi, 4(%esp)
+ 122 018b 8B5D08   		movl	8(%ebp), %ebx
+ 123 018e 8945CC   		movl	%eax, -52(%ebp)
+ 124 0191 8B450C   		movl	12(%ebp), %eax
+ 125 0194 8955D4   		movl	%edx, -44(%ebp)
+ 126 0197 BAF40100 		movl	$500, %edx
+GAS LISTING timer.gas 			page 4
+
+
+ 126      00
+ 127 019c 8945E0   		movl	%eax, -32(%ebp)
+ 128 019f A1180000 		movl	_timerctl+24, %eax
+ 128      00
+ 129 01a4 894DD8   		movl	%ecx, -40(%ebp)
+ 130 01a7 B91C0000 		movl	$28, %ecx
+ 130      00
+ 131 01ac 89442410 		movl	%eax, 16(%esp)
+ 132 01b0 B8010000 		movl	$1, %eax
+ 132      00
+ 133 01b5 8944240C 		movl	%eax, 12(%esp)
+ 134 01b9 8D45C8   		leal	-56(%ebp), %eax
+ 135 01bc 895DDC   		movl	%ebx, -36(%ebp)
+ 136 01bf 894C2418 		movl	%ecx, 24(%esp)
+ 137 01c3 89542414 		movl	%edx, 20(%esp)
+ 138 01c7 89442408 		movl	%eax, 8(%esp)
+ 139 01cb C704241C 		movl	$_timerctl+28, (%esp)
+ 139      000000
+ 140 01d2 E8000000 		call	__Z12insert_arrayPviS_iiij
+ 140      00
+ 141 01d7 E964FFFF 		jmp	L17
+ 141      FF
+ 142              	L22:
+ 143 01dc 8B45B8   		movl	-72(%ebp), %eax
+ 144 01df 8D911000 		leal	_timerctl+16(%ecx), %edx
+ 144      0000
+ 145 01e5 894610   		movl	%eax, 16(%esi)
+ 146 01e8 8B45C0   		movl	-64(%ebp), %eax
+ 147 01eb 894210   		movl	%eax, 16(%edx)
+ 148 01ee 8D811400 		leal	_timerctl+20(%ecx), %eax
+ 148      0000
+ 149 01f4 895810   		movl	%ebx, 16(%eax)
+ 150 01f7 8B5DC4   		movl	-60(%ebp), %ebx
+ 151 01fa 89992800 		movl	%ebx, _timerctl+40(%ecx)
+ 151      0000
+ 152 0200 8B5D08   		movl	8(%ebp), %ebx
+ 153 0203 8B4DBC   		movl	-68(%ebp), %ecx
+ 154 0206 895A20   		movl	%ebx, 32(%edx)
+ 155 0209 8B550C   		movl	12(%ebp), %edx
+ 156 020c 894E20   		movl	%ecx, 32(%esi)
+ 157 020f 895020   		movl	%edx, 32(%eax)
+ 158 0212 E929FFFF 		jmp	L17
+ 158      FF
+ 159 0217 90       		.align 2
+ 160 0218 908DB426 		.p2align 4,,15
+ 160      00000000 
+ 161              	.globl __Z14set_timer_procjjPFiiiEii
+ 162              		.def	__Z14set_timer_procjjPFiiiEii;	.scl	2;	.type	32;	.endef
+ 163              	__Z14set_timer_procjjPFiiiEii:
+ 164 0220 55       		pushl	%ebp
+ 165 0221 89E5     		movl	%esp, %ebp
+ 166 0223 53       		pushl	%ebx
+ 167 0224 8B5D18   		movl	24(%ebp), %ebx
+ 168 0227 8B550C   		movl	12(%ebp), %edx
+ 169 022a 8B4508   		movl	8(%ebp), %eax
+ 170 022d 8B4D10   		movl	16(%ebp), %ecx
+ 171 0230 895D0C   		movl	%ebx, 12(%ebp)
+GAS LISTING timer.gas 			page 5
+
+
+ 172 0233 8B5D14   		movl	20(%ebp), %ebx
+ 173 0236 C74510FF 		movl	$-1, 16(%ebp)
+ 173      FFFFFF
+ 174 023d 895D08   		movl	%ebx, 8(%ebp)
+ 175 0240 5B       		popl	%ebx
+ 176 0241 5D       		popl	%ebp
+ 177 0242 E979FEFF 		jmp	__Z18set_timer_internaljjPFiiiEiii
+ 177      FF
+ 178 0247 90       		.align 2
+ 179 0248 908DB426 		.p2align 4,,15
+ 179      00000000 
+ 180              	.globl __Z9set_timerjj
+ 181              		.def	__Z9set_timerjj;	.scl	2;	.type	32;	.endef
+ 182              	__Z9set_timerjj:
+ 183 0250 55       		pushl	%ebp
+ 184 0251 B9FFFFFF 		movl	$-1, %ecx
+ 184      FF
+ 185 0256 89E5     		movl	%esp, %ebp
+ 186 0258 83EC18   		subl	$24, %esp
+ 187 025b 8B4508   		movl	8(%ebp), %eax
+ 188 025e 894C2408 		movl	%ecx, 8(%esp)
+ 189 0262 8B550C   		movl	12(%ebp), %edx
+ 190 0265 31C9     		xorl	%ecx, %ecx
+ 191 0267 894C2404 		movl	%ecx, 4(%esp)
+ 192 026b 31C9     		xorl	%ecx, %ecx
+ 193 026d C7042400 		movl	$0, (%esp)
+ 193      000000
+ 194 0274 E847FEFF 		call	__Z18set_timer_internaljjPFiiiEiii
+ 194      FF
+ 195 0279 C9       		leave
+ 196 027a C3       		ret
+ 197 027b 90       		.align 2
+ 198 027c 8D742600 		.p2align 4,,15
+ 199              	.globl _inthandler20
+ 200              		.def	_inthandler20;	.scl	2;	.type	32;	.endef
+ 201              	_inthandler20:
+ 202 0280 55       		pushl	%ebp
+ 203 0281 B8600000 		movl	$96, %eax
+ 203      00
+ 204 0286 89E5     		movl	%esp, %ebp
+ 205 0288 57       		pushl	%edi
+ 206 0289 56       		pushl	%esi
+ 207 028a 53       		pushl	%ebx
+ 208 028b 83EC2C   		subl	$44, %esp
+ 209 028e 89442404 		movl	%eax, 4(%esp)
+ 210 0292 C7042420 		movl	$32, (%esp)
+ 210      000000
+ 211 0299 E8000000 		call	_io_out8
+ 211      00
+ 212 029e FF050000 		incl	_timerctl
+ 212      0000
+ 213 02a4 8B151800 		movl	_timerctl+24, %edx
+ 213      0000
+ 214 02aa 85D2     		testl	%edx, %edx
+ 215 02ac 7E22     		jle	L27
+ 216 02ae A1240000 		movl	_timerctl+36, %eax
+ 216      00
+GAS LISTING timer.gas 			page 6
+
+
+ 217 02b3 85C0     		testl	%eax, %eax
+ 218 02b5 0F848800 		je	L36
+ 218      0000
+ 219 02bb 48       		decl	%eax
+ 220 02bc 85C0     		testl	%eax, %eax
+ 221 02be A3240000 		movl	%eax, _timerctl+36
+ 221      00
+ 222 02c3 0F847A00 		je	L36
+ 222      0000
+ 223 02c9 8DB42600 		.p2align 4,,15
+ 223      000000
+ 224              	L27:
+ 225 02d0 83C42C   		addl	$44, %esp
+ 226 02d3 5B       		popl	%ebx
+ 227 02d4 5E       		popl	%esi
+ 228 02d5 5F       		popl	%edi
+ 229 02d6 5D       		popl	%ebp
+ 230 02d7 C3       		ret
+ 231              		.p2align 4,,7
+ 232              	L40:
+ 233 02d8 895C2408 		movl	%ebx, 8(%esp)
+ 234 02dc 8B45E8   		movl	-24(%ebp), %eax
+ 235 02df 89F1     		movl	%esi, %ecx
+ 236 02e1 89FA     		movl	%edi, %edx
+ 237 02e3 89442404 		movl	%eax, 4(%esp)
+ 238 02e7 8B45EC   		movl	-20(%ebp), %eax
+ 239 02ea 890424   		movl	%eax, (%esp)
+ 240 02ed 8B45F0   		movl	-16(%ebp), %eax
+ 241 02f0 E8CBFDFF 		call	__Z18set_timer_internaljjPFiiiEiii
+ 241      FF
+ 242 02f5 3B1D0000 		cmpl	_thctl_timer, %ebx
+ 242      0000
+ 243 02fb 0F84CD00 		je	L33
+ 243      0000
+ 244 0301 EB0D9090 		.p2align 4,,15
+ 244      90909090 
+ 244      90909090 
+ 244      909090
+ 245              	L41:
+ 246 0310 895C2404 		movl	%ebx, 4(%esp)
+ 247 0314 C7042408 		movl	$_timerctl+8, (%esp)
+ 247      000000
+ 248 031b E8000000 		call	__Z10put_fifo32P6Fifo32i
+ 248      00
+ 249 0320 85F6     		testl	%esi, %esi
+ 250 0322 740F     		je	L30
+ 251 0324 8B45E8   		movl	-24(%ebp), %eax
+ 252 0327 89442404 		movl	%eax, 4(%esp)
+ 253 032b 8B45EC   		movl	-20(%ebp), %eax
+ 254 032e 890424   		movl	%eax, (%esp)
+ 255 0331 FFD6     		call	*%esi
+ 256              	L30:
+ 257 0333 8B1D2400 		movl	_timerctl+36, %ebx
+ 257      0000
+ 258 0339 85DB     		testl	%ebx, %ebx
+ 259 033b 7593     		jne	L27
+ 260 033d 8B151800 		movl	_timerctl+24, %edx
+GAS LISTING timer.gas 			page 7
+
+
+ 260      0000
+ 261              	L36:
+ 262 0343 8954240C 		movl	%edx, 12(%esp)
+ 263 0347 A1280000 		movl	_timerctl+40, %eax
+ 263      00
+ 264 034c 31C9     		xorl	%ecx, %ecx
+ 265 034e 894C2404 		movl	%ecx, 4(%esp)
+ 266 0352 8B3D2000 		movl	_timerctl+32, %edi
+ 266      0000
+ 267 0358 8B1D1C00 		movl	_timerctl+28, %ebx
+ 267      0000
+ 268 035e 8945F0   		movl	%eax, -16(%ebp)
+ 269 0361 A1300000 		movl	_timerctl+48, %eax
+ 269      00
+ 270 0366 8B352C00 		movl	_timerctl+44, %esi
+ 270      0000
+ 271 036c C704241C 		movl	$_timerctl+28, (%esp)
+ 271      000000
+ 272 0373 8945EC   		movl	%eax, -20(%ebp)
+ 273 0376 A1340000 		movl	_timerctl+52, %eax
+ 273      00
+ 274 037b 8945E8   		movl	%eax, -24(%ebp)
+ 275 037e B81C0000 		movl	$28, %eax
+ 275      00
+ 276 0383 89442410 		movl	%eax, 16(%esp)
+ 277 0387 B8010000 		movl	$1, %eax
+ 277      00
+ 278 038c 89442408 		movl	%eax, 8(%esp)
+ 279 0390 E8000000 		call	__Z11erase_arrayPviiij
+ 279      00
+ 280 0395 8B151800 		movl	_timerctl+24, %edx
+ 280      0000
+ 281 039b 8D04D500 		leal	0(,%edx,8), %eax
+ 281      000000
+ 282 03a2 29D0     		subl	%edx, %eax
+ 283 03a4 BAFFFFFF 		movl	$-1, %edx
+ 283      FF
+ 284 03a9 89148500 		movl	%edx, _timerctl(,%eax,4)
+ 284      000000
+ 285 03b0 FF0D1800 		decl	_timerctl+24
+ 285      0000
+ 286 03b6 F7C70100 		testl	$1, %edi
+ 286      0000
+ 287 03bc 0F8516FF 		jne	L40
+ 287      FFFF
+ 288 03c2 3B1D0000 		cmpl	_thctl_timer, %ebx
+ 288      0000
+ 289 03c8 0F8542FF 		jne	L41
+ 289      FFFF
+ 290              	L33:
+ 291 03ce E8000000 		call	__Z13thread_switchv
+ 291      00
+ 292 03d3 E95BFFFF 		jmp	L30
+ 292      FF
+ 293              		.def	_io_sti;	.scl	3;	.type	32;	.endef
+ 294              		.def	__Z12insert_arrayPviS_iiij;	.scl	3;	.type	32;	.endef
+ 295              		.def	_io_cli;	.scl	3;	.type	32;	.endef
+GAS LISTING timer.gas 			page 8
+
+
+ 296              		.def	__Z13thread_switchv;	.scl	3;	.type	32;	.endef
+ 297              		.def	__Z10put_fifo32P6Fifo32i;	.scl	3;	.type	32;	.endef
+ 298              		.def	__Z11erase_arrayPviiij;	.scl	3;	.type	32;	.endef
+ 299              		.def	__Z11init_fifo32P6Fifo32Pii;	.scl	3;	.type	32;	.endef
+ 300 03d8 90909090 		.def	_io_out8;	.scl	3;	.type	32;	.endef
+ 300      90909090 
+GAS LISTING timer.gas 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 timer.cpp
+           timer.gas:2      .bss:00000000 _notify_buf
+           timer.gas:8      .text:00000000 __Z8init_pitv
+           timer.gas:56     .text:000000c0 __Z18set_timer_internaljjPFiiiEiii
+           timer.gas:163    .text:00000220 __Z14set_timer_procjjPFiiiEii
+           timer.gas:182    .text:00000250 __Z9set_timerjj
+           timer.gas:201    .text:00000280 _inthandler20
+
+UNDEFINED SYMBOLS
+_timerctl
+_thctl_timer
+_io_sti
+__Z12insert_arrayPviS_iiij
+_io_cli
+__Z13thread_switchv
+__Z10put_fifo32P6Fifo32i
+__Z11erase_arrayPviiij
+__Z11init_fifo32P6Fifo32Pii
+_io_out8

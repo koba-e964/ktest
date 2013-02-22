@@ -1,0 +1,115 @@
+GAS LISTING util/find.gas 			page 1
+
+
+   1              		.file	"find.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __Z17find_bit_in_arrayPKcii
+   6              		.def	__Z17find_bit_in_arrayPKcii;	.scl	2;	.type	32;	.endef
+   7              	__Z17find_bit_in_arrayPKcii:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 57       		pushl	%edi
+  11 0004 56       		pushl	%esi
+  12 0005 53       		pushl	%ebx
+  13 0006 83EC08   		subl	$8, %esp
+  14 0009 8B7510   		movl	16(%ebp), %esi
+  15 000c C745EC00 		movl	$0, -20(%ebp)
+  15      000000
+  16 0013 8B7D0C   		movl	12(%ebp), %edi
+  17 0016 89F0     		movl	%esi, %eax
+  18 0018 C1F803   		sarl	$3, %eax
+  19 001b 85FF     		testl	%edi, %edi
+  20 001d 8945F0   		movl	%eax, -16(%ebp)
+  21 0020 7507     		jne	L3
+  22 0022 C745ECFF 		movl	$255, -20(%ebp)
+  22      000000
+  23              	L3:
+  24 0029 8B45F0   		movl	-16(%ebp), %eax
+  25 002c 31DB     		xorl	%ebx, %ebx
+  26 002e C1E003   		sall	$3, %eax
+  27 0031 29C6     		subl	%eax, %esi
+  28 0033 3B5DF0   		cmpl	-16(%ebp), %ebx
+  29 0036 7D2F     		jge	L20
+  30              	L28:
+  31 0038 8B4D08   		movl	8(%ebp), %ecx
+  32 003b 0FBE140B 		movsbl	(%ebx,%ecx),%edx
+  33 003f 0FB6C2   		movzbl	%dl,%eax
+  34 0042 3B45EC   		cmpl	-20(%ebp), %eax
+  35 0045 741A     		je	L6
+  36 0047 31C9     		xorl	%ecx, %ecx
+  37 0049 8DB42600 		.p2align 4,,15
+  37      000000
+  38              	L12:
+  39 0050 89D0     		movl	%edx, %eax
+  40 0052 D3F8     		sarl	%cl, %eax
+  41 0054 83E001   		andl	$1, %eax
+  42 0057 39F8     		cmpl	%edi, %eax
+  43 0059 7444     		je	L24
+  44 005b 41       		incl	%ecx
+  45 005c 83F907   		cmpl	$7, %ecx
+  46 005f 7EEF     		jle	L12
+  47              	L6:
+  48 0061 43       		incl	%ebx
+  49 0062 3B5DF0   		cmpl	-16(%ebp), %ebx
+  50 0065 7CD1     		jl	L28
+  51              	L20:
+  52 0067 8B5508   		movl	8(%ebp), %edx
+  53 006a 31DB     		xorl	%ebx, %ebx
+  54 006c 8B45F0   		movl	-16(%ebp), %eax
+GAS LISTING util/find.gas 			page 2
+
+
+  55 006f 39F3     		cmpl	%esi, %ebx
+  56 0071 8D14C2   		leal	(%edx,%eax,8), %edx
+  57 0074 895508   		movl	%edx, 8(%ebp)
+  58 0077 7D19     		jge	L23
+  59 0079 0FBE12   		movsbl	(%edx),%edx
+  60 007c 8D742600 		.p2align 4,,15
+  61              	L18:
+  62 0080 89D0     		movl	%edx, %eax
+  63 0082 88D9     		movb	%bl, %cl
+  64 0084 D3F8     		sarl	%cl, %eax
+  65 0086 83E001   		andl	$1, %eax
+  66 0089 39F8     		cmpl	%edi, %eax
+  67 008b 741D     		je	L25
+  68 008d 43       		incl	%ebx
+  69 008e 39F3     		cmpl	%esi, %ebx
+  70 0090 7CEE     		jl	L18
+  71              	L23:
+  72 0092 83C408   		addl	$8, %esp
+  73 0095 B8FFFFFF 		movl	$-1, %eax
+  73      FF
+  74 009a 5B       		popl	%ebx
+  75 009b 5E       		popl	%esi
+  76 009c 5F       		popl	%edi
+  77 009d 5D       		popl	%ebp
+  78 009e C3       		ret
+  79              	L24:
+  80 009f 83C408   		addl	$8, %esp
+  81 00a2 8D04D9   		leal	(%ecx,%ebx,8), %eax
+  82 00a5 5B       		popl	%ebx
+  83 00a6 5E       		popl	%esi
+  84 00a7 5F       		popl	%edi
+  85 00a8 5D       		popl	%ebp
+  86 00a9 C3       		ret
+  87              	L25:
+  88 00aa 8B55F0   		movl	-16(%ebp), %edx
+  89 00ad 83C408   		addl	$8, %esp
+  90 00b0 8D04D3   		leal	(%ebx,%edx,8), %eax
+  91 00b3 5B       		popl	%ebx
+  92 00b4 5E       		popl	%esi
+  93 00b5 5F       		popl	%edi
+  94 00b6 5D       		popl	%ebp
+  95 00b7 C3909090 		ret
+  95      90909090 
+  95      90
+GAS LISTING util/find.gas 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 find.cpp
+       util/find.gas:7      .text:00000000 __Z17find_bit_in_arrayPKcii
+
+NO UNDEFINED SYMBOLS

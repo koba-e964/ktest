@@ -1,0 +1,26 @@
+rsrc file
+目的
+staticにlayoutなどが決まるwindowに対して、コードではなくリソースに記述することで、
+実行ファイルの長さを減らすこと。
+
+方法
+1.リソースを書く(*.def)
+
+2.コンパイルする(*.def->*.rsrc)
+
+
+使い方
+1.使うものを定義する(name="testwin",type=WindowStyle,width=200,height=300とする)
+
+2.
+----testwin.c
+#include <rsrc.h>
+int main(void)
+{
+	Module thismod=getModuleByName("");
+	Resource rsrc=getResourceByModule(thismod);
+	Window testwin=createWindowByRsrc(thismod,"testwin");
+	return 0;
+}
+----eof
+

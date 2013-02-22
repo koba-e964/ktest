@@ -1,0 +1,38 @@
+int 13h;
+ah=2	->BIOS readdisk
+al	:num ofsector to read
+es:bx	:addr of buf(bx<<16+es)
+dl	:drive num
+
+ch	:cylinder
+dh	:header(0 or 1)
+cl	:sector
+
+
+int 10h;
+ah=0eh	->putchar
+al	:put
+bx	:color code
+
+
+
+nihongo化について
+
+jpn16v00.binを調査したところ、
+一文字0x40bytes(全角)
+0x20bytesの半角文字を2個印字するように
+全角文字を印字できる(隣り合う2個の半角文字と見立てる)
+
+
+C++について
+
+global変数のコンストラクタが呼べない
+newができない
+
+
+disk_readallでは、なぜかimg[0x437d]が0x92 -> 0x93になるようだ。
+原因不明。
+-> asmhead.nasのsement descriptor に鍵がある。
+勝手に書き換えられるのだろうか。
+
+

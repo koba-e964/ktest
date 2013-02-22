@@ -1,0 +1,54 @@
+GAS LISTING mem_asm.gas 			page 1
+
+
+   1              		.file	"mem_asm.cpp"
+   2              	/APP
+   3              		.text
+   4              	.globl _memtest_sub_iasm
+   5              	.def	_memtest_sub_iasm;	.scl 3;	.type 32;	.endef
+   6              	_memtest_sub_iasm:
+   7 0000 57       		pushl %edi
+   8 0001 56       		pushl %esi
+   9 0002 53       		pushl %ebx
+  10 0003 BE55AA55 		movl $0xaa55aa55,%esi
+  10      AA
+  11 0008 BFAA55AA 		movl $0x55aa55aa,%edi
+  11      55
+  12 000d 8B442410 		movl 0x10(%esp),%eax
+  13              		l77_mts_loop:
+  14 0011 8D98FC0F 		leal 0xffc(%eax),%ebx
+  14      0000
+  15 0017 8B13     		movl (%ebx),%edx
+  16 0019 8933     		movl %esi,(%ebx)
+  17 001b 8333FF   		xorl $-1,(%ebx)
+  18 001e 3B3B     		cmpl (%ebx),%edi
+  19 0020 7518     		jne l77_mts_fin
+  20 0022 8333FF   		xorl $-1,(%ebx)
+  21 0025 3B33     		cmpl (%ebx),%esi
+  22 0027 7511     		jne l77_mts_fin
+  23 0029 8913     		movl %edx,(%ebx)
+  24 002b 05001000 		addl $0x1000,%eax
+  24      00
+  25 0030 3B442414 		cmpl 0x14(%esp),%eax
+  26 0034 76DB     		jbe l77_mts_loop
+  27 0036 5B       		popl %ebx;
+  28 0037 5E       	popl %esi;
+  29 0038 5F       	popl %edi
+  30 0039 C3       		ret
+  31              		l77_mts_fin:
+  32 003a 8913     		movl %edx,(%ebx)
+  33 003c 5B       		popl %ebx;
+  34 003d 5E       	popl %esi;
+  35 003e 5F       	popl %edi
+  36 003f C3       		ret
+  37              		
+GAS LISTING mem_asm.gas 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 mem_asm.cpp
+         mem_asm.gas:6      .text:00000000 _memtest_sub_iasm
+         mem_asm.gas:13     .text:00000011 l77_mts_loop
+         mem_asm.gas:31     .text:0000003a l77_mts_fin
+
+NO UNDEFINED SYMBOLS

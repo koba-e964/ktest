@@ -1,0 +1,1694 @@
+GAS LISTING layer.gas 			page 1
+
+
+   1              		.file	"layer.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __Z8rect_andP4RectS_
+   6              		.def	__Z8rect_andP4RectS_;	.scl	2;	.type	32;	.endef
+   7              	__Z8rect_andP4RectS_:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 53       		pushl	%ebx
+  11 0004 8B5D08   		movl	8(%ebp), %ebx
+  12 0007 8B450C   		movl	12(%ebp), %eax
+  13 000a 8B0B     		movl	(%ebx), %ecx
+  14 000c 39C1     		cmpl	%eax, %ecx
+  15 000e 7D38     		jge	L15
+  16 0010 8B5308   		movl	8(%ebx), %edx
+  17 0013 39C2     		cmpl	%eax, %edx
+  18 0015 89D1     		movl	%edx, %ecx
+  19 0017 7E02     		jle	L4
+  20 0019 89C1     		movl	%eax, %ecx
+  21              	L4:
+  22 001b 890B     		movl	%ecx, (%ebx)
+  23 001d 8B4514   		movl	20(%ebp), %eax
+  24 0020 39C2     		cmpl	%eax, %edx
+  25 0022 7F2E     		jg	L18
+  26              	L5:
+  27 0024 8B5304   		movl	4(%ebx), %edx
+  28 0027 8B4510   		movl	16(%ebp), %eax
+  29 002a 39C2     		cmpl	%eax, %edx
+  30 002c 7D37     		jge	L16
+  31              	L20:
+  32 002e 8B4B0C   		movl	12(%ebx), %ecx
+  33 0031 39C1     		cmpl	%eax, %ecx
+  34 0033 89CA     		movl	%ecx, %edx
+  35 0035 7E02     		jle	L11
+  36 0037 89C2     		movl	%eax, %edx
+  37              	L11:
+  38 0039 895304   		movl	%edx, 4(%ebx)
+  39 003c 8B4518   		movl	24(%ebp), %eax
+  40 003f 39C1     		cmpl	%eax, %ecx
+  41 0041 7F2C     		jg	L19
+  42              	L12:
+  43 0043 5B       		popl	%ebx
+  44 0044 31C0     		xorl	%eax, %eax
+  45 0046 5D       		popl	%ebp
+  46 0047 C3       		ret
+  47              		.p2align 4,,7
+  48              	L15:
+  49 0048 8B5308   		movl	8(%ebx), %edx
+  50 004b 8B4514   		movl	20(%ebp), %eax
+  51 004e 39C2     		cmpl	%eax, %edx
+  52 0050 7ED2     		jle	L5
+  53              	L18:
+  54 0052 39C1     		cmpl	%eax, %ecx
+  55 0054 7C02     		jl	L8
+  56 0056 89C8     		movl	%ecx, %eax
+  57              	L8:
+GAS LISTING layer.gas 			page 2
+
+
+  58 0058 894308   		movl	%eax, 8(%ebx)
+  59 005b 8B5304   		movl	4(%ebx), %edx
+  60 005e 8B4510   		movl	16(%ebp), %eax
+  61 0061 39C2     		cmpl	%eax, %edx
+  62 0063 7CC9     		jl	L20
+  63              	L16:
+  64 0065 8B4B0C   		movl	12(%ebx), %ecx
+  65 0068 8B4518   		movl	24(%ebp), %eax
+  66 006b 39C1     		cmpl	%eax, %ecx
+  67 006d 7ED4     		jle	L12
+  68              	L19:
+  69 006f 39C2     		cmpl	%eax, %edx
+  70 0071 7E02     		jle	L14
+  71 0073 89C2     		movl	%eax, %edx
+  72              	L14:
+  73 0075 89530C   		movl	%edx, 12(%ebx)
+  74 0078 31C0     		xorl	%eax, %eax
+  75 007a 5B       		popl	%ebx
+  76 007b 5D       		popl	%ebp
+  77 007c C3       		ret
+  78 007d 90       		.align 2
+  79 007e 89F6     		.p2align 4,,15
+  80              	.globl __Z16rect_checkbounds4RectS_
+  81              		.def	__Z16rect_checkbounds4RectS_;	.scl	2;	.type	32;	.endef
+  82              	__Z16rect_checkbounds4RectS_:
+  83 0080 55       		pushl	%ebp
+  84 0081 89E5     		movl	%esp, %ebp
+  85 0083 8B4518   		movl	24(%ebp), %eax
+  86 0086 394508   		cmpl	%eax, 8(%ebp)
+  87 0089 7C25     		jl	L22
+  88 008b 8B4520   		movl	32(%ebp), %eax
+  89 008e 394510   		cmpl	%eax, 16(%ebp)
+  90 0091 7F1D     		jg	L22
+  91 0093 8B451C   		movl	28(%ebp), %eax
+  92 0096 39450C   		cmpl	%eax, 12(%ebp)
+  93 0099 7C15     		jl	L22
+  94 009b 8B4524   		movl	36(%ebp), %eax
+  95 009e 31D2     		xorl	%edx, %edx
+  96 00a0 394514   		cmpl	%eax, 20(%ebp)
+  97 00a3 7E10     		jle	L21
+  98 00a5 8D742600 		.p2align 4,,15
+  98      8DBC2700 
+  98      000000
+  99              	L22:
+ 100 00b0 BAFFFFFF 		movl	$-1, %edx
+ 100      FF
+ 101              	L21:
+ 102 00b5 5D       		popl	%ebp
+ 103 00b6 89D0     		movl	%edx, %eax
+ 104 00b8 C3       		ret
+ 105 00b9 90       		.align 2
+ 106 00ba 8DB60000 		.p2align 4,,15
+ 106      0000
+ 107              	.globl __Z13layerctl_initP8LayerCtlii
+ 108              		.def	__Z13layerctl_initP8LayerCtlii;	.scl	2;	.type	32;	.endef
+ 109              	__Z13layerctl_initP8LayerCtlii:
+ 110 00c0 55       		pushl	%ebp
+GAS LISTING layer.gas 			page 3
+
+
+ 111 00c1 31D2     		xorl	%edx, %edx
+ 112 00c3 89E5     		movl	%esp, %ebp
+ 113 00c5 83EC18   		subl	$24, %esp
+ 114 00c8 8B4D08   		movl	8(%ebp), %ecx
+ 115 00cb 89C8     		movl	%ecx, %eax
+ 116 00cd 8D7600   		.p2align 4,,15
+ 117              	L27:
+ 118 00d0 C7400400 		movl	$0, 4(%eax)
+ 118      000000
+ 119 00d7 C7400800 		movl	$0, 8(%eax)
+ 119      000000
+ 120 00de C7400C00 		movl	$0, 12(%eax)
+ 120      000000
+ 121 00e5 C7401000 		movl	$0, 16(%eax)
+ 121      000000
+ 122 00ec C7849100 		movl	$-1, 5120(%ecx,%edx,4)
+ 122      140000FF 
+ 122      FFFFFF
+ 123 00f7 42       		incl	%edx
+ 124 00f8 C7000000 		movl	$0, (%eax)
+ 124      0000
+ 125 00fe 83C014   		addl	$20, %eax
+ 126 0101 81FAFF00 		cmpl	$255, %edx
+ 126      0000
+ 127 0107 7EC7     		jle	L27
+ 128 0109 8B450C   		movl	12(%ebp), %eax
+ 129 010c 31D2     		xorl	%edx, %edx
+ 130 010e 89810018 		movl	%eax, 6144(%ecx)
+ 130      0000
+ 131 0114 8B4510   		movl	16(%ebp), %eax
+ 132 0117 89910818 		movl	%edx, 6152(%ecx)
+ 132      0000
+ 133 011d 89810418 		movl	%eax, 6148(%ecx)
+ 133      0000
+ 134 0123 B8C80000 		movl	$200, %eax
+ 134      00
+ 135 0128 89442408 		movl	%eax, 8(%esp)
+ 136 012c 8D811418 		leal	6164(%ecx), %eax
+ 136      0000
+ 137 0132 89442404 		movl	%eax, 4(%esp)
+ 138 0136 8D81341B 		leal	6964(%ecx), %eax
+ 138      0000
+ 139 013c 890424   		movl	%eax, (%esp)
+ 140 013f E8000000 		call	__Z11init_fifo32P6Fifo32Pii
+ 140      00
+ 141 0144 C9       		leave
+ 142 0145 31C0     		xorl	%eax, %eax
+ 143 0147 C3       		ret
+ 144              		.align 2
+ 145 0148 908DB426 		.p2align 4,,15
+ 145      00000000 
+ 146              	.globl __Z13layer_getsizeP8LayerCtl5uid_tP4Rect
+ 147              		.def	__Z13layer_getsizeP8LayerCtl5uid_tP4Rect;	.scl	2;	.type	32;	.endef
+ 148              	__Z13layer_getsizeP8LayerCtl5uid_tP4Rect:
+ 149 0150 55       		pushl	%ebp
+ 150 0151 89E5     		movl	%esp, %ebp
+ 151 0153 53       		pushl	%ebx
+GAS LISTING layer.gas 			page 4
+
+
+ 152 0154 83EC24   		subl	$36, %esp
+ 153 0157 8B450C   		movl	12(%ebp), %eax
+ 154 015a 8B4D08   		movl	8(%ebp), %ecx
+ 155 015d 8B5D10   		movl	16(%ebp), %ebx
+ 156 0160 85C0     		testl	%eax, %eax
+ 157 0162 7808     		js	L32
+ 158 0164 39810818 		cmpl	%eax, 6152(%ecx)
+ 158      0000
+ 159 016a 7F0B     		jg	L31
+ 160              	L32:
+ 161 016c 83C424   		addl	$36, %esp
+ 162 016f B8FFFFFF 		movl	$-1, %eax
+ 162      FF
+ 163 0174 5B       		popl	%ebx
+ 164 0175 5D       		popl	%ebp
+ 165 0176 C3       		ret
+ 166              		.p2align 4,,7
+ 167              	L31:
+ 168 0177 8D0480   		leal	(%eax,%eax,4), %eax
+ 169 017a C1E002   		sall	$2, %eax
+ 170 017d 8B1408   		movl	(%eax,%ecx), %edx
+ 171 0180 8955D8   		movl	%edx, -40(%ebp)
+ 172 0183 8B540804 		movl	4(%eax,%ecx), %edx
+ 173 0187 8955DC   		movl	%edx, -36(%ebp)
+ 174 018a 8B540808 		movl	8(%eax,%ecx), %edx
+ 175 018e 8955E0   		movl	%edx, -32(%ebp)
+ 176 0191 8B54080C 		movl	12(%eax,%ecx), %edx
+ 177 0195 8955E4   		movl	%edx, -28(%ebp)
+ 178 0198 8B440810 		movl	16(%eax,%ecx), %eax
+ 179 019c 8945E8   		movl	%eax, -24(%ebp)
+ 180 019f 89430C   		movl	%eax, 12(%ebx)
+ 181 01a2 31C0     		xorl	%eax, %eax
+ 182 01a4 C7030000 		movl	$0, (%ebx)
+ 182      0000
+ 183 01aa C7430400 		movl	$0, 4(%ebx)
+ 183      000000
+ 184 01b1 895308   		movl	%edx, 8(%ebx)
+ 185 01b4 83C424   		addl	$36, %esp
+ 186 01b7 5B       		popl	%ebx
+ 187 01b8 5D       		popl	%ebp
+ 188 01b9 C3       		ret
+ 189              		.align 2
+ 190 01ba 8DB60000 		.p2align 4,,15
+ 190      0000
+ 191              	.globl __Z12layer_updownP8LayerCtl5uid_ti
+ 192              		.def	__Z12layer_updownP8LayerCtl5uid_ti;	.scl	2;	.type	32;	.endef
+ 193              	__Z12layer_updownP8LayerCtl5uid_ti:
+ 194 01c0 55       		pushl	%ebp
+ 195 01c1 89E5     		movl	%esp, %ebp
+ 196 01c3 56       		pushl	%esi
+ 197 01c4 53       		pushl	%ebx
+ 198 01c5 83EC20   		subl	$32, %esp
+ 199 01c8 8B7510   		movl	16(%ebp), %esi
+ 200 01cb 8B5D08   		movl	8(%ebp), %ebx
+ 201 01ce 85F6     		testl	%esi, %esi
+ 202 01d0 0F888500 		js	L44
+ 202      0000
+GAS LISTING layer.gas 			page 5
+
+
+ 203 01d6 8B930818 		movl	6152(%ebx), %edx
+ 203      0000
+ 204              	L34:
+ 205 01dc 31C0     		xorl	%eax, %eax
+ 206 01de 83FA00   		cmpl	$0, %edx
+ 207 01e1 7E1B     		jle	L40
+ 208 01e3 8B4D0C   		movl	12(%ebp), %ecx
+ 209 01e6 8D76008D 		.p2align 4,,15
+ 209      BC270000 
+ 209      0000
+ 210              	L39:
+ 211 01f0 398C8300 		cmpl	%ecx, 5120(%ebx,%eax,4)
+ 211      140000
+ 212 01f7 7455     		je	L36
+ 213 01f9 40       		incl	%eax
+ 214 01fa 39C2     		cmpl	%eax, %edx
+ 215 01fc 7FF2     		jg	L39
+ 216              	L40:
+ 217 01fe 39F2     		cmpl	%esi, %edx
+ 218 0200 B8FFFFFF 		movl	$-1, %eax
+ 218      FF
+ 219 0205 7C40     		jl	L33
+ 220 0207 89542410 		movl	%edx, 16(%esp)
+ 221 020b B8040000 		movl	$4, %eax
+ 221      00
+ 222 0210 B9000100 		movl	$256, %ecx
+ 222      00
+ 223 0215 89442418 		movl	%eax, 24(%esp)
+ 224 0219 B8010000 		movl	$1, %eax
+ 224      00
+ 225 021e 8944240C 		movl	%eax, 12(%esp)
+ 226 0222 8D450C   		leal	12(%ebp), %eax
+ 227 0225 89442408 		movl	%eax, 8(%esp)
+ 228 0229 8D830014 		leal	5120(%ebx), %eax
+ 228      0000
+ 229 022f 894C2414 		movl	%ecx, 20(%esp)
+ 230 0233 89742404 		movl	%esi, 4(%esp)
+ 231 0237 890424   		movl	%eax, (%esp)
+ 232 023a E8000000 		call	__Z12insert_arrayPviS_iiij
+ 232      00
+ 233 023f FF830818 		incl	6152(%ebx)
+ 233      0000
+ 234 0245 31C0     		xorl	%eax, %eax
+ 235              	L33:
+ 236 0247 83C420   		addl	$32, %esp
+ 237 024a 5B       		popl	%ebx
+ 238 024b 5E       		popl	%esi
+ 239 024c 5D       		popl	%ebp
+ 240 024d C3       		ret
+ 241              	L36:
+ 242 024e 39C2     		cmpl	%eax, %edx
+ 243 0250 7EAC     		jle	L40
+ 244 0252 4A       		decl	%edx
+ 245 0253 89930818 		movl	%edx, 6152(%ebx)
+ 245      0000
+ 246 0259 EBA3     		jmp	L40
+ 247              	L44:
+GAS LISTING layer.gas 			page 6
+
+
+ 248 025b 8B930818 		movl	6152(%ebx), %edx
+ 248      0000
+ 249 0261 B8FFFFFF 		movl	$-1, %eax
+ 249      FF
+ 250 0266 39F2     		cmpl	%esi, %edx
+ 251 0268 0F8D6EFF 		jge	L34
+ 251      FFFF
+ 252 026e EBD7     		jmp	L33
+ 253              		.align 2
+ 254              		.p2align 4,,15
+ 255              	.globl __Z11layer_allocP8LayerCtl
+ 256              		.def	__Z11layer_allocP8LayerCtl;	.scl	2;	.type	32;	.endef
+ 257              	__Z11layer_allocP8LayerCtl:
+ 258 0270 55       		pushl	%ebp
+ 259 0271 89E5     		movl	%esp, %ebp
+ 260 0273 57       		pushl	%edi
+ 261 0274 56       		pushl	%esi
+ 262 0275 31F6     		xorl	%esi, %esi
+ 263 0277 53       		pushl	%ebx
+ 264 0278 83EC1C   		subl	$28, %esp
+ 265 027b 8B7D08   		movl	8(%ebp), %edi
+ 266 027e 8B870418 		movl	6148(%edi), %eax
+ 266      0000
+ 267 0284 8B9F0018 		movl	6144(%edi), %ebx
+ 267      0000
+ 268 028a 0FAFC3   		imull	%ebx, %eax
+ 269 028d 8945F0   		movl	%eax, -16(%ebp)
+ 270 0290 89F8     		movl	%edi, %eax
+ 271 0292 EB18     		jmp	L51
+ 272              		.p2align 4,,7
+ 273              	L54:
+ 274 0294 81FEFF00 		cmpl	$255, %esi
+ 274      0000
+ 275 029a 0F848000 		je	L53
+ 275      0000
+ 276 02a0 46       		incl	%esi
+ 277 02a1 83C014   		addl	$20, %eax
+ 278 02a4 81FEFF00 		cmpl	$255, %esi
+ 278      0000
+ 279 02aa 7F06     		jg	L47
+ 280              	L51:
+ 281 02ac 8B08     		movl	(%eax), %ecx
+ 282 02ae 85C9     		testl	%ecx, %ecx
+ 283 02b0 75E2     		jne	L54
+ 284              	L47:
+ 285 02b2 8B45F0   		movl	-16(%ebp), %eax
+ 286 02b5 8D1CB6   		leal	(%esi,%esi,4), %ebx
+ 287 02b8 C1E302   		sall	$2, %ebx
+ 288 02bb 890424   		movl	%eax, (%esp)
+ 289 02be E8000000 		call	__Z15memmng_alloc_4ki
+ 289      00
+ 290 02c3 89043B   		movl	%eax, (%ebx,%edi)
+ 291 02c6 8B55F0   		movl	-16(%ebp), %edx
+ 292 02c9 01FB     		addl	%edi, %ebx
+ 293 02cb 890424   		movl	%eax, (%esp)
+ 294 02ce 89542408 		movl	%edx, 8(%esp)
+ 295 02d2 BA7F0000 		movl	$127, %edx
+GAS LISTING layer.gas 			page 7
+
+
+ 295      00
+ 296 02d7 89542404 		movl	%edx, 4(%esp)
+ 297 02db E8000000 		call	_memset
+ 297      00
+ 298 02e0 C7430400 		movl	$0, 4(%ebx)
+ 298      000000
+ 299 02e7 C7430800 		movl	$0, 8(%ebx)
+ 299      000000
+ 300 02ee 8B870018 		movl	6144(%edi), %eax
+ 300      0000
+ 301 02f4 89430C   		movl	%eax, 12(%ebx)
+ 302 02f7 8B870418 		movl	6148(%edi), %eax
+ 302      0000
+ 303 02fd 894310   		movl	%eax, 16(%ebx)
+ 304 0300 8B870818 		movl	6152(%edi), %eax
+ 304      0000
+ 305 0306 89742404 		movl	%esi, 4(%esp)
+ 306 030a 893C24   		movl	%edi, (%esp)
+ 307 030d 89442408 		movl	%eax, 8(%esp)
+ 308 0311 E8AAFEFF 		call	__Z12layer_updownP8LayerCtl5uid_ti
+ 308      FF
+ 309 0316 83C41C   		addl	$28, %esp
+ 310 0319 89F0     		movl	%esi, %eax
+ 311 031b 5B       		popl	%ebx
+ 312 031c 5E       		popl	%esi
+ 313 031d 5F       		popl	%edi
+ 314 031e 5D       		popl	%ebp
+ 315 031f C3       		ret
+ 316              	L53:
+ 317 0320 83C41C   		addl	$28, %esp
+ 318 0323 B8FFFFFF 		movl	$-1, %eax
+ 318      FF
+ 319 0328 5B       		popl	%ebx
+ 320 0329 5E       		popl	%esi
+ 321 032a 5F       		popl	%edi
+ 322 032b 5D       		popl	%ebp
+ 323 032c C3       		ret
+ 324 032d 90       		.align 2
+ 325 032e 89F6     		.p2align 4,,15
+ 326              	.globl __Z20layerctl_wholescreenP8LayerCtlP4Rect
+ 327              		.def	__Z20layerctl_wholescreenP8LayerCtlP4Rect;	.scl	2;	.type	32;	.endef
+ 328              	__Z20layerctl_wholescreenP8LayerCtlP4Rect:
+ 329 0330 55       		pushl	%ebp
+ 330 0331 89E5     		movl	%esp, %ebp
+ 331 0333 8B550C   		movl	12(%ebp), %edx
+ 332 0336 8B4D08   		movl	8(%ebp), %ecx
+ 333 0339 C7020000 		movl	$0, (%edx)
+ 333      0000
+ 334 033f C7420400 		movl	$0, 4(%edx)
+ 334      000000
+ 335 0346 8B810018 		movl	6144(%ecx), %eax
+ 335      0000
+ 336 034c 894208   		movl	%eax, 8(%edx)
+ 337 034f 8B810418 		movl	6148(%ecx), %eax
+ 337      0000
+ 338 0355 89420C   		movl	%eax, 12(%edx)
+ 339 0358 31C0     		xorl	%eax, %eax
+GAS LISTING layer.gas 			page 8
+
+
+ 340 035a 5D       		popl	%ebp
+ 341 035b C3       		ret
+ 342              		.align 2
+ 343 035c 8D742600 		.p2align 4,,15
+ 344              	.globl __Z16layerctl_repaintP8LayerCtl4Rect
+ 345              		.def	__Z16layerctl_repaintP8LayerCtl4Rect;	.scl	2;	.type	32;	.endef
+ 346              	__Z16layerctl_repaintP8LayerCtl4Rect:
+ 347 0360 55       		pushl	%ebp
+ 348 0361 89E5     		movl	%esp, %ebp
+ 349 0363 57       		pushl	%edi
+ 350 0364 56       		pushl	%esi
+ 351 0365 53       		pushl	%ebx
+ 352 0366 83EC7C   		subl	$124, %esp
+ 353 0369 A1F80F00 		movl	4088, %eax
+ 353      00
+ 354 036e 8945A4   		movl	%eax, -92(%ebp)
+ 355 0371 8D45D8   		leal	-40(%ebp), %eax
+ 356 0374 89442404 		movl	%eax, 4(%esp)
+ 357 0378 8B5508   		movl	8(%ebp), %edx
+ 358 037b 891424   		movl	%edx, (%esp)
+ 359 037e E8ADFFFF 		call	__Z20layerctl_wholescreenP8LayerCtlP4Rect
+ 359      FF
+ 360 0383 8B4DD8   		movl	-40(%ebp), %ecx
+ 361 0386 8B5DE4   		movl	-28(%ebp), %ebx
+ 362 0389 8B4518   		movl	24(%ebp), %eax
+ 363 038c 894DC8   		movl	%ecx, -56(%ebp)
+ 364 038f 8B5514   		movl	20(%ebp), %edx
+ 365 0392 8B75DC   		movl	-36(%ebp), %esi
+ 366 0395 895DD4   		movl	%ebx, -44(%ebp)
+ 367 0398 8B4D10   		movl	16(%ebp), %ecx
+ 368 039b 8B7DE0   		movl	-32(%ebp), %edi
+ 369 039e 8945C4   		movl	%eax, -60(%ebp)
+ 370 03a1 8B5D0C   		movl	12(%ebp), %ebx
+ 371 03a4 8B45D8   		movl	-40(%ebp), %eax
+ 372 03a7 8975CC   		movl	%esi, -52(%ebp)
+ 373 03aa 8955C0   		movl	%edx, -64(%ebp)
+ 374 03ad 897DD0   		movl	%edi, -48(%ebp)
+ 375 03b0 895DB8   		movl	%ebx, -72(%ebp)
+ 376 03b3 894DBC   		movl	%ecx, -68(%ebp)
+ 377 03b6 89442410 		movl	%eax, 16(%esp)
+ 378 03ba 89742414 		movl	%esi, 20(%esp)
+ 379 03be 897C2418 		movl	%edi, 24(%esp)
+ 380 03c2 8B75E4   		movl	-28(%ebp), %esi
+ 381 03c5 89542408 		movl	%edx, 8(%esp)
+ 382 03c9 891C24   		movl	%ebx, (%esp)
+ 383 03cc 8974241C 		movl	%esi, 28(%esp)
+ 384 03d0 894C2404 		movl	%ecx, 4(%esp)
+ 385 03d4 8B4518   		movl	24(%ebp), %eax
+ 386 03d7 8944240C 		movl	%eax, 12(%esp)
+ 387 03db E8A0FCFF 		call	__Z16rect_checkbounds4RectS_
+ 387      FF
+ 388 03e0 85C0     		testl	%eax, %eax
+ 389 03e2 BAFEFFFF 		movl	$-2, %edx
+ 389      FF
+ 390 03e7 0F889401 		js	L56
+ 390      0000
+ 391 03ed C745A000 		movl	$0, -96(%ebp)
+GAS LISTING layer.gas 			page 9
+
+
+ 391      000000
+ 392 03f4 8B5508   		movl	8(%ebp), %edx
+ 393 03f7 8BB20818 		movl	6152(%edx), %esi
+ 393      0000
+ 394 03fd 85F6     		testl	%esi, %esi
+ 395 03ff 0F8E6C01 		jle	L82
+ 395      0000
+ 396              	L63:
+ 397 0405 8B4DA0   		movl	-96(%ebp), %ecx
+ 398 0408 8D75B8   		leal	-72(%ebp), %esi
+ 399 040b 8B5D08   		movl	8(%ebp), %ebx
+ 400 040e 8B848B00 		movl	5120(%ebx,%ecx,4), %eax
+ 400      140000
+ 401 0415 89742408 		movl	%esi, 8(%esp)
+ 402 0419 891C24   		movl	%ebx, (%esp)
+ 403 041c 89442404 		movl	%eax, 4(%esp)
+ 404 0420 E82BFDFF 		call	__Z13layer_getsizeP8LayerCtl5uid_tP4Rect
+ 404      FF
+ 405 0425 8B45B8   		movl	-72(%ebp), %eax
+ 406 0428 8B55BC   		movl	-68(%ebp), %edx
+ 407 042b 8B4DDC   		movl	-36(%ebp), %ecx
+ 408 042e 8945C8   		movl	%eax, -56(%ebp)
+ 409 0431 8B45E4   		movl	-28(%ebp), %eax
+ 410 0434 8B7DC0   		movl	-64(%ebp), %edi
+ 411 0437 8955CC   		movl	%edx, -52(%ebp)
+ 412 043a 8B75C4   		movl	-60(%ebp), %esi
+ 413 043d 8B55E0   		movl	-32(%ebp), %edx
+ 414 0440 8945B4   		movl	%eax, -76(%ebp)
+ 415 0443 8B5DD8   		movl	-40(%ebp), %ebx
+ 416 0446 8B45B8   		movl	-72(%ebp), %eax
+ 417 0449 8955B0   		movl	%edx, -80(%ebp)
+ 418 044c 897DD0   		movl	%edi, -48(%ebp)
+ 419 044f 8975D4   		movl	%esi, -44(%ebp)
+ 420 0452 895DA8   		movl	%ebx, -88(%ebp)
+ 421 0455 894DAC   		movl	%ecx, -84(%ebp)
+ 422 0458 89442410 		movl	%eax, 16(%esp)
+ 423 045c 8B45BC   		movl	-68(%ebp), %eax
+ 424 045f 897C2418 		movl	%edi, 24(%esp)
+ 425 0463 8974241C 		movl	%esi, 28(%esp)
+ 426 0467 89442414 		movl	%eax, 20(%esp)
+ 427 046b 891C24   		movl	%ebx, (%esp)
+ 428 046e 894C2404 		movl	%ecx, 4(%esp)
+ 429 0472 89542408 		movl	%edx, 8(%esp)
+ 430 0476 8B55E4   		movl	-28(%ebp), %edx
+ 431 0479 8954240C 		movl	%edx, 12(%esp)
+ 432 047d E8FEFBFF 		call	__Z16rect_checkbounds4RectS_
+ 432      FF
+ 433 0482 85C0     		testl	%eax, %eax
+ 434 0484 0F881401 		js	L88
+ 434      0000
+ 435 048a FF45A0   		incl	-96(%ebp)
+ 436 048d 8B5D08   		movl	8(%ebp), %ebx
+ 437 0490 8B8B0818 		movl	6152(%ebx), %ecx
+ 437      0000
+ 438 0496 3B4DA0   		cmpl	-96(%ebp), %ecx
+ 439 0499 0F8F66FF 		jg	L63
+ 439      FFFF
+GAS LISTING layer.gas 			page 10
+
+
+ 440 049f C745A000 		movl	$0, -96(%ebp)
+ 440      000000
+ 441 04a6 83F900   		cmpl	$0, %ecx
+ 442 04a9 0F8EC200 		jle	L82
+ 442      0000
+ 443 04af 8B5518   		movl	24(%ebp), %edx
+ 444              	L78:
+ 445 04b2 8B75A0   		movl	-96(%ebp), %esi
+ 446 04b5 8B5D08   		movl	8(%ebp), %ebx
+ 447 04b8 8B7D10   		movl	16(%ebp), %edi
+ 448 04bb 8B84B300 		movl	5120(%ebx,%esi,4), %eax
+ 448      140000
+ 449 04c2 39FA     		cmpl	%edi, %edx
+ 450 04c4 8D0480   		leal	(%eax,%eax,4), %eax
+ 451 04c7 8B3483   		movl	(%ebx,%eax,4), %esi
+ 452 04ca 0F8E9500 		jle	L84
+ 452      0000
+ 453 04d0 8B5D14   		movl	20(%ebp), %ebx
+ 454 04d3 8DB60000 		.p2align 4,,15
+ 454      00008DBC 
+ 454      27000000 
+ 454      00
+ 455              	L77:
+ 456 04e0 8B45E0   		movl	-32(%ebp), %eax
+ 457 04e3 8B4D0C   		movl	12(%ebp), %ecx
+ 458 04e6 0FAFC7   		imull	%edi, %eax
+ 459 04e9 39CB     		cmpl	%ecx, %ebx
+ 460 04eb 89459C   		movl	%eax, -100(%ebp)
+ 461 04ee 7F40     		jg	L76
+ 462 04f0 EB65     		jmp	L86
+ 463              		.p2align 4,,7
+ 464              	L90:
+ 465 04f2 0FB60432 		movzbl	(%edx,%esi), %eax
+ 466 04f6 3C7F     		cmpb	$127, %al
+ 467 04f8 0F849200 		je	L73
+ 467      0000
+ 468 04fe 807C1601 		cmpb	$127, 1(%esi,%edx)
+ 468      7F
+ 469 0503 0F848700 		je	L73
+ 469      0000
+ 470 0509 807C1602 		cmpb	$127, 2(%esi,%edx)
+ 470      7F
+ 471 050e 0F847C00 		je	L73
+ 471      0000
+ 472 0514 807C1603 		cmpb	$127, 3(%esi,%edx)
+ 472      7F
+ 473 0519 7475     		je	L73
+ 474 051b 8B5DA4   		movl	-92(%ebp), %ebx
+ 475 051e 83C104   		addl	$4, %ecx
+ 476 0521 8B0432   		movl	(%edx,%esi), %eax
+ 477 0524 89041A   		movl	%eax, (%edx,%ebx)
+ 478 0527 8B5D14   		movl	20(%ebp), %ebx
+ 479              	L70:
+ 480 052a 39CB     		cmpl	%ecx, %ebx
+ 481 052c 7E26     		jle	L89
+ 482 052e 89F6     		.p2align 4,,15
+ 483              	L76:
+GAS LISTING layer.gas 			page 11
+
+
+ 484 0530 8B559C   		movl	-100(%ebp), %edx
+ 485 0533 89D8     		movl	%ebx, %eax
+ 486 0535 29C8     		subl	%ecx, %eax
+ 487 0537 01CA     		addl	%ecx, %edx
+ 488 0539 83F803   		cmpl	$3, %eax
+ 489 053c 7FB4     		jg	L90
+ 490 053e 0FB60432 		movzbl	(%edx,%esi), %eax
+ 491              	L72:
+ 492 0542 3C7F     		cmpb	$127, %al
+ 493 0544 7409     		je	L75
+ 494 0546 8B5DA4   		movl	-92(%ebp), %ebx
+ 495 0549 88041A   		movb	%al, (%edx,%ebx)
+ 496 054c 8B5D14   		movl	20(%ebp), %ebx
+ 497              	L75:
+ 498 054f 41       		incl	%ecx
+ 499 0550 39CB     		cmpl	%ecx, %ebx
+ 500 0552 7FDC     		jg	L76
+ 501              	L89:
+ 502 0554 8B5518   		movl	24(%ebp), %edx
+ 503              	L86:
+ 504 0557 47       		incl	%edi
+ 505 0558 39FA     		cmpl	%edi, %edx
+ 506 055a 7F84     		jg	L77
+ 507 055c 8B7508   		movl	8(%ebp), %esi
+ 508 055f 8B8E0818 		movl	6152(%esi), %ecx
+ 508      0000
+ 509              	L84:
+ 510 0565 FF45A0   		incl	-96(%ebp)
+ 511 0568 3B4DA0   		cmpl	-96(%ebp), %ecx
+ 512 056b 0F8F41FF 		jg	L78
+ 512      FFFF
+ 513              	L82:
+ 514 0571 8B5508   		movl	8(%ebp), %edx
+ 515 0574 A1000000 		movl	_timerctl, %eax
+ 515      00
+ 516 0579 89820C18 		movl	%eax, 6156(%edx)
+ 516      0000
+ 517 057f 31D2     		xorl	%edx, %edx
+ 518              	L56:
+ 519 0581 83C47C   		addl	$124, %esp
+ 520 0584 89D0     		movl	%edx, %eax
+ 521 0586 5B       		popl	%ebx
+ 522 0587 5E       		popl	%esi
+ 523 0588 5F       		popl	%edi
+ 524 0589 5D       		popl	%ebp
+ 525 058a C3       		ret
+ 526 058b 908D7426 		.p2align 4,,7
+ 526      00
+ 527              	L73:
+ 528 0590 813C327F 		cmpl	$2139062143, (%edx,%esi)
+ 528      7F7F7F
+ 529 0597 75A9     		jne	L72
+ 530 0599 83C104   		addl	$4, %ecx
+ 531 059c EB8C     		jmp	L70
+ 532              	L88:
+ 533 059e 83C47C   		addl	$124, %esp
+ 534 05a1 BAFDFFFF 		movl	$-3, %edx
+GAS LISTING layer.gas 			page 12
+
+
+ 534      FF
+ 535 05a6 89D0     		movl	%edx, %eax
+ 536 05a8 5B       		popl	%ebx
+ 537 05a9 5E       		popl	%esi
+ 538 05aa 5F       		popl	%edi
+ 539 05ab 5D       		popl	%ebp
+ 540 05ac C3       		ret
+ 541 05ad 90       		.align 2
+ 542 05ae 89F6     		.p2align 4,,15
+ 543              		.def	__Z12repaint_procii;	.scl	3;	.type	32;	.endef
+ 544              	__Z12repaint_procii:
+ 545 05b0 55       		pushl	%ebp
+ 546 05b1 89E5     		movl	%esp, %ebp
+ 547 05b3 83EC58   		subl	$88, %esp
+ 548 05b6 895DF4   		movl	%ebx, -12(%ebp)
+ 549 05b9 8975F8   		movl	%esi, -8(%ebp)
+ 550 05bc 897DFC   		movl	%edi, -4(%ebp)
+ 551 05bf E8000000 		call	_load_eflags
+ 551      00
+ 552 05c4 8945D0   		movl	%eax, -48(%ebp)
+ 553 05c7 E8000000 		call	_io_cli
+ 553      00
+ 554 05cc 8B5D08   		movl	8(%ebp), %ebx
+ 555 05cf 81C3341B 		addl	$6964, %ebx
+ 555      0000
+ 556 05d5 891C24   		movl	%ebx, (%esp)
+ 557 05d8 E8000000 		call	__Z10get_fifo32P6Fifo32
+ 557      00
+ 558 05dd 8945D4   		movl	%eax, -44(%ebp)
+ 559 05e0 891C24   		movl	%ebx, (%esp)
+ 560 05e3 E8000000 		call	__Z10get_fifo32P6Fifo32
+ 560      00
+ 561 05e8 891C24   		movl	%ebx, (%esp)
+ 562 05eb 89C7     		movl	%eax, %edi
+ 563 05ed E8000000 		call	__Z10get_fifo32P6Fifo32
+ 563      00
+ 564 05f2 891C24   		movl	%ebx, (%esp)
+ 565 05f5 89C6     		movl	%eax, %esi
+ 566 05f7 E8000000 		call	__Z10get_fifo32P6Fifo32
+ 566      00
+ 567 05fc 8945E4   		movl	%eax, -28(%ebp)
+ 568 05ff 8B55D4   		movl	-44(%ebp), %edx
+ 569 0602 8B45D0   		movl	-48(%ebp), %eax
+ 570 0605 8975DC   		movl	%esi, -36(%ebp)
+ 571 0608 8955D8   		movl	%edx, -40(%ebp)
+ 572 060b 897DE0   		movl	%edi, -32(%ebp)
+ 573 060e 890424   		movl	%eax, (%esp)
+ 574 0611 E8000000 		call	_store_eflags
+ 574      00
+ 575 0616 8B45D8   		movl	-40(%ebp), %eax
+ 576 0619 8B5508   		movl	8(%ebp), %edx
+ 577 061c 89442404 		movl	%eax, 4(%esp)
+ 578 0620 8B45DC   		movl	-36(%ebp), %eax
+ 579 0623 891424   		movl	%edx, (%esp)
+ 580 0626 89442408 		movl	%eax, 8(%esp)
+ 581 062a 8B45E0   		movl	-32(%ebp), %eax
+ 582 062d 8944240C 		movl	%eax, 12(%esp)
+GAS LISTING layer.gas 			page 13
+
+
+ 583 0631 8B45E4   		movl	-28(%ebp), %eax
+ 584 0634 89442410 		movl	%eax, 16(%esp)
+ 585 0638 E823FDFF 		call	__Z16layerctl_repaintP8LayerCtl4Rect
+ 585      FF
+ 586 063d 8B4508   		movl	8(%ebp), %eax
+ 587 0640 C6801018 		movb	$0, 6160(%eax)
+ 587      000000
+ 588 0647 8B5DF4   		movl	-12(%ebp), %ebx
+ 589 064a 31C0     		xorl	%eax, %eax
+ 590 064c 8B75F8   		movl	-8(%ebp), %esi
+ 591 064f 8B7DFC   		movl	-4(%ebp), %edi
+ 592 0652 89EC     		movl	%ebp, %esp
+ 593 0654 5D       		popl	%ebp
+ 594 0655 C3       		ret
+ 595              		.align 2
+ 596 0656 8D76008D 		.p2align 4,,15
+ 596      BC270000 
+ 596      0000
+ 597              	.globl __Z10layer_drawP8LayerCtl5uid_tPc4Rectj
+ 598              		.def	__Z10layer_drawP8LayerCtl5uid_tPc4Rectj;	.scl	2;	.type	32;	.endef
+ 599              	__Z10layer_drawP8LayerCtl5uid_tPc4Rectj:
+ 600 0660 55       		pushl	%ebp
+ 601 0661 89E5     		movl	%esp, %ebp
+ 602 0663 57       		pushl	%edi
+ 603 0664 56       		pushl	%esi
+ 604 0665 53       		pushl	%ebx
+ 605 0666 83EC7C   		subl	$124, %esp
+ 606 0669 8B4D0C   		movl	12(%ebp), %ecx
+ 607 066c 8B5508   		movl	8(%ebp), %edx
+ 608 066f 8D0489   		leal	(%ecx,%ecx,4), %eax
+ 609 0672 8B0482   		movl	(%edx,%eax,4), %eax
+ 610 0675 894C2404 		movl	%ecx, 4(%esp)
+ 611 0679 891424   		movl	%edx, (%esp)
+ 612 067c 8945B4   		movl	%eax, -76(%ebp)
+ 613 067f 8D45D8   		leal	-40(%ebp), %eax
+ 614 0682 89442408 		movl	%eax, 8(%esp)
+ 615 0686 E8C5FAFF 		call	__Z13layer_getsizeP8LayerCtl5uid_tP4Rect
+ 615      FF
+ 616 068b 8B45E0   		movl	-32(%ebp), %eax
+ 617 068e 8B551C   		movl	28(%ebp), %edx
+ 618 0691 8B4DDC   		movl	-36(%ebp), %ecx
+ 619 0694 8945D0   		movl	%eax, -48(%ebp)
+ 620 0697 8B45E4   		movl	-28(%ebp), %eax
+ 621 069a 8B5DD8   		movl	-40(%ebp), %ebx
+ 622 069d 8955AC   		movl	%edx, -84(%ebp)
+ 623 06a0 8B7D14   		movl	20(%ebp), %edi
+ 624 06a3 8B7518   		movl	24(%ebp), %esi
+ 625 06a6 894DCC   		movl	%ecx, -52(%ebp)
+ 626 06a9 8945D4   		movl	%eax, -44(%ebp)
+ 627 06ac 8955C0   		movl	%edx, -64(%ebp)
+ 628 06af 8B5520   		movl	32(%ebp), %edx
+ 629 06b2 894C2414 		movl	%ecx, 20(%esp)
+ 630 06b6 8B4DE0   		movl	-32(%ebp), %ecx
+ 631 06b9 8944241C 		movl	%eax, 28(%esp)
+ 632 06bd 8B45AC   		movl	-84(%ebp), %eax
+ 633 06c0 8955A8   		movl	%edx, -88(%ebp)
+ 634 06c3 8955C4   		movl	%edx, -60(%ebp)
+GAS LISTING layer.gas 			page 14
+
+
+ 635 06c6 8954240C 		movl	%edx, 12(%esp)
+ 636 06ca 895DC8   		movl	%ebx, -56(%ebp)
+ 637 06cd 897DB8   		movl	%edi, -72(%ebp)
+ 638 06d0 8975BC   		movl	%esi, -68(%ebp)
+ 639 06d3 895C2410 		movl	%ebx, 16(%esp)
+ 640 06d7 894C2418 		movl	%ecx, 24(%esp)
+ 641 06db 893C24   		movl	%edi, (%esp)
+ 642 06de 89742404 		movl	%esi, 4(%esp)
+ 643 06e2 89442408 		movl	%eax, 8(%esp)
+ 644 06e6 E895F9FF 		call	__Z16rect_checkbounds4RectS_
+ 644      FF
+ 645 06eb 85C0     		testl	%eax, %eax
+ 646 06ed BAFEFFFF 		movl	$-2, %edx
+ 646      FF
+ 647 06f2 0F88BF00 		js	L92
+ 647      0000
+ 648 06f8 8975B0   		movl	%esi, -80(%ebp)
+ 649 06fb 8B45AC   		movl	-84(%ebp), %eax
+ 650 06fe 29F8     		subl	%edi, %eax
+ 651 0700 0FAFC6   		imull	%esi, %eax
+ 652 0703 01F8     		addl	%edi, %eax
+ 653 0705 3975A8   		cmpl	%esi, -88(%ebp)
+ 654 0708 0F8EA100 		jle	L104
+ 654      0000
+ 655 070e 8B4DAC   		movl	-84(%ebp), %ecx
+ 656 0711 F7D8     		negl	%eax
+ 657 0713 89459C   		movl	%eax, -100(%ebp)
+ 658 0716 8D76008D 		.p2align 4,,15
+ 658      BC270000 
+ 658      0000
+ 659              	L101:
+ 660 0720 8B4514   		movl	20(%ebp), %eax
+ 661 0723 89CE     		movl	%ecx, %esi
+ 662 0725 8B5DE0   		movl	-32(%ebp), %ebx
+ 663 0728 8B7DB0   		movl	-80(%ebp), %edi
+ 664 072b 8B55B0   		movl	-80(%ebp), %edx
+ 665 072e 29C6     		subl	%eax, %esi
+ 666 0730 0FAFF7   		imull	%edi, %esi
+ 667 0733 0FAFD3   		imull	%ebx, %edx
+ 668 0736 39C1     		cmpl	%eax, %ecx
+ 669 0738 89C3     		movl	%eax, %ebx
+ 670 073a 7E64     		jle	L106
+ 671 073c 8B45B4   		movl	-76(%ebp), %eax
+ 672 073f 8B7D10   		movl	16(%ebp), %edi
+ 673 0742 01D0     		addl	%edx, %eax
+ 674 0744 8945A0   		movl	%eax, -96(%ebp)
+ 675 0747 8B459C   		movl	-100(%ebp), %eax
+ 676 074a 01F0     		addl	%esi, %eax
+ 677 074c 01F8     		addl	%edi, %eax
+ 678 074e 8D3C03   		leal	(%ebx,%eax), %edi
+ 679 0751 8B4510   		movl	16(%ebp), %eax
+ 680 0754 01F0     		addl	%esi, %eax
+ 681 0756 8B759C   		movl	-100(%ebp), %esi
+ 682 0759 01F0     		addl	%esi, %eax
+ 683 075b 8D3403   		leal	(%ebx,%eax), %esi
+ 684 075e EB1A     		jmp	L100
+ 685              		.p2align 4,,7
+GAS LISTING layer.gas 			page 15
+
+
+ 686              	L107:
+ 687 0760 8B4DB4   		movl	-76(%ebp), %ecx
+ 688 0763 83C704   		addl	$4, %edi
+ 689 0766 8B06     		movl	(%esi), %eax
+ 690 0768 83C604   		addl	$4, %esi
+ 691 076b 01D9     		addl	%ebx, %ecx
+ 692 076d 83C304   		addl	$4, %ebx
+ 693 0770 890411   		movl	%eax, (%ecx,%edx)
+ 694 0773 8B4D1C   		movl	28(%ebp), %ecx
+ 695 0776 39D9     		cmpl	%ebx, %ecx
+ 696 0778 7E26     		jle	L106
+ 697              	L100:
+ 698 077a 29D9     		subl	%ebx, %ecx
+ 699 077c 83F903   		cmpl	$3, %ecx
+ 700 077f 7FDF     		jg	L107
+ 701 0781 0FB607   		movzbl	(%edi), %eax
+ 702 0784 46       		incl	%esi
+ 703 0785 8B4DA0   		movl	-96(%ebp), %ecx
+ 704 0788 47       		incl	%edi
+ 705 0789 880419   		movb	%al, (%ecx,%ebx)
+ 706 078c 8B4D1C   		movl	28(%ebp), %ecx
+ 707 078f 43       		incl	%ebx
+ 708 0790 39D9     		cmpl	%ebx, %ecx
+ 709 0792 7FE6     		jg	L100
+ 710 0794 8DB60000 		.p2align 4,,15
+ 710      00008DBF 
+ 710      00000000 
+ 711              	L106:
+ 712 07a0 FF45B0   		incl	-80(%ebp)
+ 713 07a3 8B45B0   		movl	-80(%ebp), %eax
+ 714 07a6 394520   		cmpl	%eax, 32(%ebp)
+ 715 07a9 0F8F71FF 		jg	L101
+ 715      FFFF
+ 716              	L104:
+ 717 07af F6452401 		testb	$1, 36(%ebp)
+ 718 07b3 750C     		jne	L108
+ 719              	L102:
+ 720 07b5 31D2     		xorl	%edx, %edx
+ 721              	L92:
+ 722 07b7 83C47C   		addl	$124, %esp
+ 723 07ba 89D0     		movl	%edx, %eax
+ 724 07bc 5B       		popl	%ebx
+ 725 07bd 5E       		popl	%esi
+ 726 07be 5F       		popl	%edi
+ 727 07bf 5D       		popl	%ebp
+ 728 07c0 C3       		ret
+ 729              	L108:
+ 730 07c1 8B4514   		movl	20(%ebp), %eax
+ 731 07c4 8B5508   		movl	8(%ebp), %edx
+ 732 07c7 89442404 		movl	%eax, 4(%esp)
+ 733 07cb 8B4518   		movl	24(%ebp), %eax
+ 734 07ce 891424   		movl	%edx, (%esp)
+ 735 07d1 89442408 		movl	%eax, 8(%esp)
+ 736 07d5 8B451C   		movl	28(%ebp), %eax
+ 737 07d8 8944240C 		movl	%eax, 12(%esp)
+ 738 07dc 8B4520   		movl	32(%ebp), %eax
+ 739 07df 89442410 		movl	%eax, 16(%esp)
+GAS LISTING layer.gas 			page 16
+
+
+ 740 07e3 E878FBFF 		call	__Z16layerctl_repaintP8LayerCtl4Rect
+ 740      FF
+ 741 07e8 85C0     		testl	%eax, %eax
+ 742 07ea BAFFFFFF 		movl	$-1, %edx
+ 742      FF
+ 743 07ef 79C4     		jns	L102
+ 744 07f1 EBC4     		jmp	L92
+ 745 07f3 90       		.align 2
+ 746 07f4 8DB60000 		.p2align 4,,15
+ 746      00008DBF 
+ 746      00000000 
+ 747              	.globl __Z10layer_freeP8LayerCtl5uid_t
+ 748              		.def	__Z10layer_freeP8LayerCtl5uid_t;	.scl	2;	.type	32;	.endef
+ 749              	__Z10layer_freeP8LayerCtl5uid_t:
+ 750 0800 55       		pushl	%ebp
+ 751 0801 89E5     		movl	%esp, %ebp
+ 752 0803 83EC28   		subl	$40, %esp
+ 753 0806 895DF8   		movl	%ebx, -8(%ebp)
+ 754 0809 8B5D08   		movl	8(%ebp), %ebx
+ 755 080c 8975FC   		movl	%esi, -4(%ebp)
+ 756 080f 8B750C   		movl	12(%ebp), %esi
+ 757 0812 8B930018 		movl	6144(%ebx), %edx
+ 757      0000
+ 758 0818 8B830418 		movl	6148(%ebx), %eax
+ 758      0000
+ 759 081e 0FAFC2   		imull	%edx, %eax
+ 760 0821 89442404 		movl	%eax, 4(%esp)
+ 761 0825 8D04B6   		leal	(%esi,%esi,4), %eax
+ 762 0828 8B0483   		movl	(%ebx,%eax,4), %eax
+ 763 082b 890424   		movl	%eax, (%esp)
+ 764 082e E8000000 		call	__Z14memmng_free_4kPvi
+ 764      00
+ 765 0833 B8140000 		movl	$20, %eax
+ 765      00
+ 766 0838 89442410 		movl	%eax, 16(%esp)
+ 767 083c 8B830818 		movl	6152(%ebx), %eax
+ 767      0000
+ 768 0842 89742404 		movl	%esi, 4(%esp)
+ 769 0846 891C24   		movl	%ebx, (%esp)
+ 770 0849 8944240C 		movl	%eax, 12(%esp)
+ 771 084d 8D4601   		leal	1(%esi), %eax
+ 772 0850 89442408 		movl	%eax, 8(%esp)
+ 773 0854 E8000000 		call	__Z11erase_arrayPviiij
+ 773      00
+ 774 0859 FF8B0818 		decl	6152(%ebx)
+ 774      0000
+ 775 085f 31C0     		xorl	%eax, %eax
+ 776 0861 8B5DF8   		movl	-8(%ebp), %ebx
+ 777 0864 8B75FC   		movl	-4(%ebp), %esi
+ 778 0867 89EC     		movl	%ebp, %esp
+ 779 0869 5D       		popl	%ebp
+ 780 086a C3       		ret
+ 781 086b 90       		.align 2
+ 782 086c 8D742600 		.p2align 4,,15
+ 783              	.globl __Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+ 784              		.def	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj;	.scl	2;	.type	32;	.endef
+ 785              	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj:
+GAS LISTING layer.gas 			page 17
+
+
+ 786 0870 55       		pushl	%ebp
+ 787 0871 89E5     		movl	%esp, %ebp
+ 788 0873 57       		pushl	%edi
+ 789 0874 56       		pushl	%esi
+ 790 0875 53       		pushl	%ebx
+ 791 0876 83EC6C   		subl	$108, %esp
+ 792 0879 8B5D0C   		movl	12(%ebp), %ebx
+ 793 087c 0FB64520 		movzbl	32(%ebp), %eax
+ 794 0880 895C2404 		movl	%ebx, 4(%esp)
+ 795 0884 8845B7   		movb	%al, -73(%ebp)
+ 796 0887 8D45D8   		leal	-40(%ebp), %eax
+ 797 088a 89442408 		movl	%eax, 8(%esp)
+ 798 088e 8B4508   		movl	8(%ebp), %eax
+ 799 0891 890424   		movl	%eax, (%esp)
+ 800 0894 E8B7F8FF 		call	__Z13layer_getsizeP8LayerCtl5uid_tP4Rect
+ 800      FF
+ 801 0899 8B45E4   		movl	-28(%ebp), %eax
+ 802 089c 8B5DD8   		movl	-40(%ebp), %ebx
+ 803 089f 8B55E0   		movl	-32(%ebp), %edx
+ 804 08a2 8945D4   		movl	%eax, -44(%ebp)
+ 805 08a5 8B45D8   		movl	-40(%ebp), %eax
+ 806 08a8 8B4DDC   		movl	-36(%ebp), %ecx
+ 807 08ab 895DC8   		movl	%ebx, -56(%ebp)
+ 808 08ae 8B5D10   		movl	16(%ebp), %ebx
+ 809 08b1 8B7D18   		movl	24(%ebp), %edi
+ 810 08b4 89442410 		movl	%eax, 16(%esp)
+ 811 08b8 8B45E4   		movl	-28(%ebp), %eax
+ 812 08bb 8B751C   		movl	28(%ebp), %esi
+ 813 08be 895DB0   		movl	%ebx, -80(%ebp)
+ 814 08c1 895DB8   		movl	%ebx, -72(%ebp)
+ 815 08c4 8B5D14   		movl	20(%ebp), %ebx
+ 816 08c7 8944241C 		movl	%eax, 28(%esp)
+ 817 08cb 8B45B0   		movl	-80(%ebp), %eax
+ 818 08ce 8955D0   		movl	%edx, -48(%ebp)
+ 819 08d1 89542418 		movl	%edx, 24(%esp)
+ 820 08d5 894DCC   		movl	%ecx, -52(%ebp)
+ 821 08d8 895DBC   		movl	%ebx, -68(%ebp)
+ 822 08db 897DC0   		movl	%edi, -64(%ebp)
+ 823 08de 8975C4   		movl	%esi, -60(%ebp)
+ 824 08e1 894C2414 		movl	%ecx, 20(%esp)
+ 825 08e5 890424   		movl	%eax, (%esp)
+ 826 08e8 895C2404 		movl	%ebx, 4(%esp)
+ 827 08ec 897C2408 		movl	%edi, 8(%esp)
+ 828 08f0 8974240C 		movl	%esi, 12(%esp)
+ 829 08f4 E887F7FF 		call	__Z16rect_checkbounds4RectS_
+ 829      FF
+ 830 08f9 85C0     		testl	%eax, %eax
+ 831 08fb BAFFFFFF 		movl	$-1, %edx
+ 831      FF
+ 832 0900 7872     		js	L110
+ 833 0902 8B4DB0   		movl	-80(%ebp), %ecx
+ 834 0905 29DE     		subl	%ebx, %esi
+ 835 0907 29CF     		subl	%ecx, %edi
+ 836 0909 0FAFFE   		imull	%esi, %edi
+ 837 090c 893C24   		movl	%edi, (%esp)
+ 838 090f E8000000 		call	__Z15memmng_alloc_4ki
+ 838      00
+GAS LISTING layer.gas 			page 18
+
+
+ 839 0914 897C2408 		movl	%edi, 8(%esp)
+ 840 0918 89C6     		movl	%eax, %esi
+ 841 091a 0FBE45B7 		movsbl	-73(%ebp),%eax
+ 842 091e 893424   		movl	%esi, (%esp)
+ 843 0921 89442404 		movl	%eax, 4(%esp)
+ 844 0925 E8000000 		call	_memset
+ 844      00
+ 845 092a 89742408 		movl	%esi, 8(%esp)
+ 846 092e 8B4524   		movl	36(%ebp), %eax
+ 847 0931 8B5D0C   		movl	12(%ebp), %ebx
+ 848 0934 8944241C 		movl	%eax, 28(%esp)
+ 849 0938 8B4510   		movl	16(%ebp), %eax
+ 850 093b 895C2404 		movl	%ebx, 4(%esp)
+ 851 093f 8944240C 		movl	%eax, 12(%esp)
+ 852 0943 8B4514   		movl	20(%ebp), %eax
+ 853 0946 89442410 		movl	%eax, 16(%esp)
+ 854 094a 8B4518   		movl	24(%ebp), %eax
+ 855 094d 89442414 		movl	%eax, 20(%esp)
+ 856 0951 8B451C   		movl	28(%ebp), %eax
+ 857 0954 89442418 		movl	%eax, 24(%esp)
+ 858 0958 8B4508   		movl	8(%ebp), %eax
+ 859 095b 890424   		movl	%eax, (%esp)
+ 860 095e E8FDFCFF 		call	__Z10layer_drawP8LayerCtl5uid_tPc4Rectj
+ 860      FF
+ 861 0963 897C2404 		movl	%edi, 4(%esp)
+ 862 0967 893424   		movl	%esi, (%esp)
+ 863 096a E8000000 		call	__Z14memmng_free_4kPvi
+ 863      00
+ 864 096f BAFEFFFF 		movl	$-2, %edx
+ 864      FF
+ 865              	L110:
+ 866 0974 83C46C   		addl	$108, %esp
+ 867 0977 89D0     		movl	%edx, %eax
+ 868 0979 5B       		popl	%ebx
+ 869 097a 5E       		popl	%esi
+ 870 097b 5F       		popl	%edi
+ 871 097c 5D       		popl	%ebp
+ 872 097d C3       		ret
+ 873              		.align 2
+ 874 097e 89F6     		.p2align 4,,15
+ 875              	.globl __Z14layer_putfont8P8LayerCtl5uid_tiicPcj
+ 876              		.def	__Z14layer_putfont8P8LayerCtl5uid_tiicPcj;	.scl	2;	.type	32;	.endef
+ 877              	__Z14layer_putfont8P8LayerCtl5uid_tiicPcj:
+ 878 0980 55       		pushl	%ebp
+ 879 0981 89E5     		movl	%esp, %ebp
+ 880 0983 57       		pushl	%edi
+ 881 0984 56       		pushl	%esi
+ 882 0985 53       		pushl	%ebx
+ 883 0986 81EC0C01 		subl	$268, %esp
+ 883      0000
+ 884 098c 8B4510   		movl	16(%ebp), %eax
+ 885 098f 0FB64D18 		movzbl	24(%ebp), %ecx
+ 886 0993 8B5514   		movl	20(%ebp), %edx
+ 887 0996 8B750C   		movl	12(%ebp), %esi
+ 888 0999 8945D8   		movl	%eax, -40(%ebp)
+ 889 099c 83C008   		addl	$8, %eax
+ 890 099f 8945E0   		movl	%eax, -32(%ebp)
+GAS LISTING layer.gas 			page 19
+
+
+ 891 09a2 8D45C8   		leal	-56(%ebp), %eax
+ 892 09a5 89442408 		movl	%eax, 8(%esp)
+ 893 09a9 8B4508   		movl	8(%ebp), %eax
+ 894 09ac 8955DC   		movl	%edx, -36(%ebp)
+ 895 09af 83C210   		addl	$16, %edx
+ 896 09b2 888D27FF 		movb	%cl, -217(%ebp)
+ 896      FFFF
+ 897 09b8 8955E4   		movl	%edx, -28(%ebp)
+ 898 09bb 89742404 		movl	%esi, 4(%esp)
+ 899 09bf 890424   		movl	%eax, (%esp)
+ 900 09c2 E889F7FF 		call	__Z13layer_getsizeP8LayerCtl5uid_tP4Rect
+ 900      FF
+ 901 09c7 8B75D8   		movl	-40(%ebp), %esi
+ 902 09ca 8B45D4   		movl	-44(%ebp), %eax
+ 903 09cd 8B4DD0   		movl	-48(%ebp), %ecx
+ 904 09d0 89B520FF 		movl	%esi, -224(%ebp)
+ 904      FFFF
+ 905 09d6 8B55CC   		movl	-52(%ebp), %edx
+ 906 09d9 8B5DC8   		movl	-56(%ebp), %ebx
+ 907 09dc 8975A8   		movl	%esi, -88(%ebp)
+ 908 09df 8B75DC   		movl	-36(%ebp), %esi
+ 909 09e2 8945C4   		movl	%eax, -60(%ebp)
+ 910 09e5 8944241C 		movl	%eax, 28(%esp)
+ 911 09e9 8B8520FF 		movl	-224(%ebp), %eax
+ 911      FFFF
+ 912 09ef 89B51CFF 		movl	%esi, -228(%ebp)
+ 912      FFFF
+ 913 09f5 8975AC   		movl	%esi, -84(%ebp)
+ 914 09f8 8B75E0   		movl	-32(%ebp), %esi
+ 915 09fb 894DC0   		movl	%ecx, -64(%ebp)
+ 916 09fe 894C2418 		movl	%ecx, 24(%esp)
+ 917 0a02 8B8D1CFF 		movl	-228(%ebp), %ecx
+ 917      FFFF
+ 918 0a08 89B518FF 		movl	%esi, -232(%ebp)
+ 918      FFFF
+ 919 0a0e 8975B0   		movl	%esi, -80(%ebp)
+ 920 0a11 8B75E4   		movl	-28(%ebp), %esi
+ 921 0a14 890424   		movl	%eax, (%esp)
+ 922 0a17 8955BC   		movl	%edx, -68(%ebp)
+ 923 0a1a 89B514FF 		movl	%esi, -236(%ebp)
+ 923      FFFF
+ 924 0a20 8B8514FF 		movl	-236(%ebp), %eax
+ 924      FFFF
+ 925 0a26 8975B4   		movl	%esi, -76(%ebp)
+ 926 0a29 8BB518FF 		movl	-232(%ebp), %esi
+ 926      FFFF
+ 927 0a2f 89542414 		movl	%edx, 20(%esp)
+ 928 0a33 895DB8   		movl	%ebx, -72(%ebp)
+ 929 0a36 895C2410 		movl	%ebx, 16(%esp)
+ 930 0a3a 894C2404 		movl	%ecx, 4(%esp)
+ 931 0a3e 89742408 		movl	%esi, 8(%esp)
+ 932 0a42 8944240C 		movl	%eax, 12(%esp)
+ 933 0a46 E835F6FF 		call	__Z16rect_checkbounds4RectS_
+ 933      FF
+ 934 0a4b 85C0     		testl	%eax, %eax
+ 935 0a4d BAFFFFFF 		movl	$-1, %edx
+ 935      FF
+GAS LISTING layer.gas 			page 20
+
+
+ 936 0a52 0F88B000 		js	L112
+ 936      0000
+ 937 0a58 8D4DE8   		leal	-24(%ebp), %ecx
+ 938 0a5b 31FF     		xorl	%edi, %edi
+ 939 0a5d BE800000 		movl	$128, %esi
+ 939      00
+ 940 0a62 898D10FF 		movl	%ecx, -240(%ebp)
+ 940      FFFF
+ 941 0a68 908DB426 		.p2align 4,,15
+ 941      00000000 
+ 942              	L123:
+ 943 0a70 8B451C   		movl	28(%ebp), %eax
+ 944 0a73 B9070000 		movl	$7, %ecx
+ 944      00
+ 945 0a78 8B9510FF 		movl	-240(%ebp), %edx
+ 945      FFFF
+ 946 0a7e 0FBE1C07 		movsbl	(%edi,%eax),%ebx
+ 947 0a82 81EAB900 		subl	$185, %edx
+ 947      0000
+ 948 0a88 EB13     		jmp	L122
+ 949 0a8a 8DB60000 		.p2align 4,,7
+ 949      0000
+ 950              	L130:
+ 951 0a90 0FB68527 		movzbl	-217(%ebp), %eax
+ 951      FFFFFF
+ 952 0a97 8802     		movb	%al, (%edx)
+ 953 0a99 4A       		decl	%edx
+ 954 0a9a 49       		decl	%ecx
+ 955 0a9b 780F     		js	L129
+ 956              	L122:
+ 957 0a9d 89F0     		movl	%esi, %eax
+ 958 0a9f D3F8     		sarl	%cl, %eax
+ 959 0aa1 85D8     		testl	%eax, %ebx
+ 960 0aa3 75EB     		jne	L130
+ 961 0aa5 C6027F   		movb	$127, (%edx)
+ 962 0aa8 4A       		decl	%edx
+ 963 0aa9 49       		decl	%ecx
+ 964 0aaa 79F1     		jns	L122
+ 965              	L129:
+ 966 0aac 838510FF 		addl	$8, -240(%ebp)
+ 966      FFFF08
+ 967 0ab3 47       		incl	%edi
+ 968 0ab4 83FF0F   		cmpl	$15, %edi
+ 969 0ab7 7EB7     		jle	L123
+ 970 0ab9 8B4520   		movl	32(%ebp), %eax
+ 971 0abc 8B8D20FF 		movl	-224(%ebp), %ecx
+ 971      FFFF
+ 972 0ac2 8BB51CFF 		movl	-228(%ebp), %esi
+ 972      FFFF
+ 973 0ac8 8944241C 		movl	%eax, 28(%esp)
+ 974 0acc 8B8518FF 		movl	-232(%ebp), %eax
+ 974      FFFF
+ 975 0ad2 894C240C 		movl	%ecx, 12(%esp)
+ 976 0ad6 8B8D14FF 		movl	-236(%ebp), %ecx
+ 976      FFFF
+ 977 0adc 89442414 		movl	%eax, 20(%esp)
+ 978 0ae0 8D8528FF 		leal	-216(%ebp), %eax
+GAS LISTING layer.gas 			page 21
+
+
+ 978      FFFF
+ 979 0ae6 89742410 		movl	%esi, 16(%esp)
+ 980 0aea 8B750C   		movl	12(%ebp), %esi
+ 981 0aed 89442408 		movl	%eax, 8(%esp)
+ 982 0af1 8B4508   		movl	8(%ebp), %eax
+ 983 0af4 894C2418 		movl	%ecx, 24(%esp)
+ 984 0af8 89742404 		movl	%esi, 4(%esp)
+ 985 0afc 890424   		movl	%eax, (%esp)
+ 986 0aff E85CFBFF 		call	__Z10layer_drawP8LayerCtl5uid_tPc4Rectj
+ 986      FF
+ 987 0b04 99       		cltd
+ 988 0b05 83E283   		andl	$-125, %edx
+ 989              	L112:
+ 990 0b08 81C40C01 		addl	$268, %esp
+ 990      0000
+ 991 0b0e 89D0     		movl	%edx, %eax
+ 992 0b10 5B       		popl	%ebx
+ 993 0b11 5E       		popl	%esi
+ 994 0b12 5F       		popl	%edi
+ 995 0b13 5D       		popl	%ebp
+ 996 0b14 C3       		ret
+ 997              	.lcomm _ZZ11layer_printP8LayerCtl5uid_tPcE7gl_xpos,16
+ 998              	.lcomm _ZZ11layer_printP8LayerCtl5uid_tPcE7gl_ypos,16
+ 999              	.lcomm _ZZ11layer_printP8LayerCtl5uid_tPcE6conbuf,5408
+ 1000              	.lcomm _ZZ11layer_printP8LayerCtl5uid_tPcE7locking,16
+ 1001              		.data
+ 1002              		.align 4
+ 1003              	_ZZ11layer_printP8LayerCtl5uid_tPcE8lastline:
+ 1004 0000 FFFFFFFF 		.long	-1
+ 1005 0004 00000000 		.section .rdata,"dr"
+ 1005      00000000 
+ 1005      00000000 
+ 1006              	LC0:
+ 1007 0000 0A00     		.ascii "\12\0"
+ 1008 0002 00000000 		.text
+ 1008      00000000 
+ 1008      00000000 
+ 1008      0000
+ 1009 0b15 90       		.align 2
+ 1010 0b16 8D76008D 		.p2align 4,,15
+ 1010      BC270000 
+ 1010      0000
+ 1011              	.globl __Z11layer_printP8LayerCtl5uid_tPc
+ 1012              		.def	__Z11layer_printP8LayerCtl5uid_tPc;	.scl	2;	.type	32;	.endef
+ 1013              	__Z11layer_printP8LayerCtl5uid_tPc:
+ 1014 0b20 55       		pushl	%ebp
+ 1015 0b21 89E5     		movl	%esp, %ebp
+ 1016 0b23 57       		pushl	%edi
+ 1017 0b24 56       		pushl	%esi
+ 1018 0b25 53       		pushl	%ebx
+ 1019 0b26 83EC4C   		subl	$76, %esp
+ 1020 0b29 8B7D10   		movl	16(%ebp), %edi
+ 1021 0b2c C645D700 		movb	$0, -41(%ebp)
+ 1022 0b30 0FB607   		movzbl	(%edi), %eax
+ 1023 0b33 84C0     		testb	%al, %al
+ 1024 0b35 741F     		je	L167
+ 1025              	L183:
+GAS LISTING layer.gas 			page 22
+
+
+ 1026 0b37 3C0A     		cmpb	$10, %al
+ 1027 0b39 0F84D201 		je	L136
+ 1027      0000
+ 1028 0b3f 3C0D     		cmpb	$13, %al
+ 1029 0b41 0F85DA00 		jne	L153
+ 1029      0000
+ 1030 0b47 31C0     		xorl	%eax, %eax
+ 1031 0b49 A3000000 		movl	%eax, _ZZ11layer_printP8LayerCtl5uid_tPcE7gl_xpos
+ 1031      00
+ 1032              	L134:
+ 1033 0b4e 47       		incl	%edi
+ 1034              	L184:
+ 1035 0b4f 0FB607   		movzbl	(%edi), %eax
+ 1036 0b52 84C0     		testb	%al, %al
+ 1037 0b54 75E1     		jne	L183
+ 1038              	L167:
+ 1039 0b56 A1000000 		movl	_ZZ11layer_printP8LayerCtl5uid_tPcE8lastline, %eax
+ 1039      00
+ 1040 0b5b 85C0     		testl	%eax, %eax
+ 1041 0b5d 0F883102 		js	L179
+ 1041      0000
+ 1042 0b63 8B150000 		movl	_timerctl, %edx
+ 1042      0000
+ 1043 0b69 83C00A   		addl	$10, %eax
+ 1044 0b6c B9FFFFFF 		movl	$-1, %ecx
+ 1044      FF
+ 1045 0b71 39C2     		cmpl	%eax, %edx
+ 1046 0b73 0F829E00 		jb	L131
+ 1046      0000
+ 1047              	L156:
+ 1048 0b79 807DD700 		cmpb	$0, -41(%ebp)
+ 1049 0b7d 89150000 		movl	%edx, _ZZ11layer_printP8LayerCtl5uid_tPcE8lastline
+ 1049      0000
+ 1050 0b83 7474     		je	L157
+ 1051 0b85 C745D000 		movl	$0, -48(%ebp)
+ 1051      000000
+ 1052 0b8c 31FF     		xorl	%edi, %edi
+ 1053              	L165:
+ 1054 0b8e 8B75D0   		movl	-48(%ebp), %esi
+ 1055 0b91 31DB     		xorl	%ebx, %ebx
+ 1056 0b93 C1E604   		sall	$4, %esi
+ 1057 0b96 8D76008D 		.p2align 4,,15
+ 1057      BC270000 
+ 1057      0000
+ 1058              	L164:
+ 1059 0ba0 8974240C 		movl	%esi, 12(%esp)
+ 1060 0ba4 B8010000 		movl	$1, %eax
+ 1060      00
+ 1061 0ba9 89442418 		movl	%eax, 24(%esp)
+ 1062 0bad 0FBE841F 		movsbl	_ZZ11layer_printP8LayerCtl5uid_tPcE6conbuf(%edi,%ebx),%eax
+ 1062      20000000 
+ 1063 0bb5 C1E004   		sall	$4, %eax
+ 1064 0bb8 05000000 		addl	$_hankaku, %eax
+ 1064      00
+ 1065 0bbd 89442414 		movl	%eax, 20(%esp)
+ 1066 0bc1 B8010000 		movl	$1, %eax
+ 1066      00
+GAS LISTING layer.gas 			page 23
+
+
+ 1067 0bc6 89442410 		movl	%eax, 16(%esp)
+ 1068 0bca 8D04DD00 		leal	0(,%ebx,8), %eax
+ 1068      000000
+ 1069 0bd1 43       		incl	%ebx
+ 1070 0bd2 89442408 		movl	%eax, 8(%esp)
+ 1071 0bd6 8B450C   		movl	12(%ebp), %eax
+ 1072 0bd9 89442404 		movl	%eax, 4(%esp)
+ 1073 0bdd 8B4508   		movl	8(%ebp), %eax
+ 1074 0be0 890424   		movl	%eax, (%esp)
+ 1075 0be3 E898FDFF 		call	__Z14layer_putfont8P8LayerCtl5uid_tiicPcj
+ 1075      FF
+ 1076 0be8 83FB77   		cmpl	$119, %ebx
+ 1077 0beb 7EB3     		jle	L164
+ 1078 0bed FF45D0   		incl	-48(%ebp)
+ 1079 0bf0 83C778   		addl	$120, %edi
+ 1080 0bf3 837DD02C 		cmpl	$44, -48(%ebp)
+ 1081 0bf7 7E95     		jle	L165
+ 1082              	L157:
+ 1083 0bf9 C745D800 		movl	$0, -40(%ebp)
+ 1083      000000
+ 1084 0c00 31C9     		xorl	%ecx, %ecx
+ 1085 0c02 C745DC00 		movl	$0, -36(%ebp)
+ 1085      000000
+ 1086 0c09 C745E0C0 		movl	$960, -32(%ebp)
+ 1086      030000
+ 1087 0c10 C745E4D0 		movl	$720, -28(%ebp)
+ 1087      020000
+ 1088              	L131:
+ 1089 0c17 83C44C   		addl	$76, %esp
+ 1090 0c1a 89C8     		movl	%ecx, %eax
+ 1091 0c1c 5B       		popl	%ebx
+ 1092 0c1d 5E       		popl	%esi
+ 1093 0c1e 5F       		popl	%edi
+ 1094 0c1f 5D       		popl	%ebp
+ 1095 0c20 C3       		ret
+ 1096              	L153:
+ 1097 0c21 A1100000 		movl	_ZZ11layer_printP8LayerCtl5uid_tPcE7gl_ypos, %eax
+ 1097      00
+ 1098 0c26 BE010000 		movl	$1, %esi
+ 1098      00
+ 1099 0c2b 8B150000 		movl	_ZZ11layer_printP8LayerCtl5uid_tPcE7gl_xpos, %edx
+ 1099      0000
+ 1100 0c31 8974241C 		movl	%esi, 28(%esp)
+ 1101 0c35 C1E004   		sall	$4, %eax
+ 1102 0c38 BE7F0000 		movl	$127, %esi
+ 1102      00
+ 1103 0c3d 8945DC   		movl	%eax, -36(%ebp)
+ 1104 0c40 8D480F   		leal	15(%eax), %ecx
+ 1105 0c43 C1E203   		sall	$3, %edx
+ 1106 0c46 8944240C 		movl	%eax, 12(%esp)
+ 1107 0c4a 8B450C   		movl	12(%ebp), %eax
+ 1108 0c4d 8D5A07   		leal	7(%edx), %ebx
+ 1109 0c50 8955D8   		movl	%edx, -40(%ebp)
+ 1110 0c53 89442404 		movl	%eax, 4(%esp)
+ 1111 0c57 8B4508   		movl	8(%ebp), %eax
+ 1112 0c5a 894DE4   		movl	%ecx, -28(%ebp)
+ 1113 0c5d 89542408 		movl	%edx, 8(%esp)
+GAS LISTING layer.gas 			page 24
+
+
+ 1114 0c61 894C2414 		movl	%ecx, 20(%esp)
+ 1115 0c65 895DE0   		movl	%ebx, -32(%ebp)
+ 1116 0c68 89742418 		movl	%esi, 24(%esp)
+ 1117 0c6c 895C2410 		movl	%ebx, 16(%esp)
+ 1118 0c70 890424   		movl	%eax, (%esp)
+ 1119 0c73 E8F8FBFF 		call	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+ 1119      FF
+ 1120 0c78 B8010000 		movl	$1, %eax
+ 1120      00
+ 1121 0c7d 89442418 		movl	%eax, 24(%esp)
+ 1122 0c81 0FBE07   		movsbl	(%edi),%eax
+ 1123 0c84 C1E004   		sall	$4, %eax
+ 1124 0c87 05000000 		addl	$_hankaku, %eax
+ 1124      00
+ 1125 0c8c 89442414 		movl	%eax, 20(%esp)
+ 1126 0c90 B8010000 		movl	$1, %eax
+ 1126      00
+ 1127 0c95 89442410 		movl	%eax, 16(%esp)
+ 1128 0c99 A1100000 		movl	_ZZ11layer_printP8LayerCtl5uid_tPcE7gl_ypos, %eax
+ 1128      00
+ 1129 0c9e C1E004   		sall	$4, %eax
+ 1130 0ca1 8944240C 		movl	%eax, 12(%esp)
+ 1131 0ca5 A1000000 		movl	_ZZ11layer_printP8LayerCtl5uid_tPcE7gl_xpos, %eax
+ 1131      00
+ 1132 0caa C1E003   		sall	$3, %eax
+ 1133 0cad 89442408 		movl	%eax, 8(%esp)
+ 1134 0cb1 8B450C   		movl	12(%ebp), %eax
+ 1135 0cb4 89442404 		movl	%eax, 4(%esp)
+ 1136 0cb8 8B4508   		movl	8(%ebp), %eax
+ 1137 0cbb 890424   		movl	%eax, (%esp)
+ 1138 0cbe E8BDFCFF 		call	__Z14layer_putfont8P8LayerCtl5uid_tiicPcj
+ 1138      FF
+ 1139 0cc3 8B151000 		movl	_ZZ11layer_printP8LayerCtl5uid_tPcE7gl_ypos, %edx
+ 1139      0000
+ 1140 0cc9 8B0D0000 		movl	_ZZ11layer_printP8LayerCtl5uid_tPcE7gl_xpos, %ecx
+ 1140      0000
+ 1141 0ccf 89D0     		movl	%edx, %eax
+ 1142 0cd1 C1E004   		sall	$4, %eax
+ 1143 0cd4 29D0     		subl	%edx, %eax
+ 1144 0cd6 0FB617   		movzbl	(%edi), %edx
+ 1145 0cd9 8894C120 		movb	%dl, _ZZ11layer_printP8LayerCtl5uid_tPcE6conbuf(%ecx,%eax,8)
+ 1145      000000
+ 1146 0ce0 41       		incl	%ecx
+ 1147 0ce1 83F977   		cmpl	$119, %ecx
+ 1148 0ce4 890D0000 		movl	%ecx, _ZZ11layer_printP8LayerCtl5uid_tPcE7gl_xpos
+ 1148      0000
+ 1149 0cea 0F8E5EFE 		jle	L134
+ 1149      FFFF
+ 1150 0cf0 B8000000 		movl	$LC0, %eax
+ 1150      00
+ 1151 0cf5 47       		incl	%edi
+ 1152 0cf6 89442408 		movl	%eax, 8(%esp)
+ 1153 0cfa 8B450C   		movl	12(%ebp), %eax
+ 1154 0cfd 89442404 		movl	%eax, 4(%esp)
+ 1155 0d01 8B4508   		movl	8(%ebp), %eax
+ 1156 0d04 890424   		movl	%eax, (%esp)
+ 1157 0d07 E814FEFF 		call	__Z11layer_printP8LayerCtl5uid_tPc
+GAS LISTING layer.gas 			page 25
+
+
+ 1157      FF
+ 1158 0d0c E93EFEFF 		jmp	L184
+ 1158      FF
+ 1159              	L136:
+ 1160 0d11 E8000000 		call	_io_cli
+ 1160      00
+ 1161 0d16 803D4015 		cmpb	$0, _ZZ11layer_printP8LayerCtl5uid_tPcE7locking
+ 1161      000000
+ 1162 0d1d 740E     		je	L169
+ 1163              	L185:
+ 1164 0d1f E8000000 		call	_io_hlt
+ 1164      00
+ 1165 0d24 803D4015 		cmpb	$0, _ZZ11layer_printP8LayerCtl5uid_tPcE7locking
+ 1165      000000
+ 1166 0d2b 75F2     		jne	L185
+ 1167              	L169:
+ 1168 0d2d C6054015 		movb	$1, _ZZ11layer_printP8LayerCtl5uid_tPcE7locking
+ 1168      000001
+ 1169 0d34 E8000000 		call	_io_sti
+ 1169      00
+ 1170 0d39 8B151000 		movl	_ZZ11layer_printP8LayerCtl5uid_tPcE7gl_ypos, %edx
+ 1170      0000
+ 1171 0d3f 31C0     		xorl	%eax, %eax
+ 1172 0d41 A3000000 		movl	%eax, _ZZ11layer_printP8LayerCtl5uid_tPcE7gl_xpos
+ 1172      00
+ 1173 0d46 8D4201   		leal	1(%edx), %eax
+ 1174 0d49 83F82C   		cmpl	$44, %eax
+ 1175 0d4c 7E51     		jle	L140
+ 1176 0d4e 31F6     		xorl	%esi, %esi
+ 1177 0d50 31DB     		xorl	%ebx, %ebx
+ 1178              	L148:
+ 1179 0d52 31C9     		xorl	%ecx, %ecx
+ 1180 0d54 8DB60000 		.p2align 4,,15
+ 1180      00008DBF 
+ 1180      00000000 
+ 1181              	L147:
+ 1182 0d60 8D140B   		leal	(%ebx,%ecx), %edx
+ 1183 0d63 41       		incl	%ecx
+ 1184 0d64 83F977   		cmpl	$119, %ecx
+ 1185 0d67 0FB68298 		movzbl	_ZZ11layer_printP8LayerCtl5uid_tPcE6conbuf+120(%edx), %eax
+ 1185      000000
+ 1186 0d6e 88822000 		movb	%al, _ZZ11layer_printP8LayerCtl5uid_tPcE6conbuf(%edx)
+ 1186      0000
+ 1187 0d74 7EEA     		jle	L147
+ 1188 0d76 46       		incl	%esi
+ 1189 0d77 83C378   		addl	$120, %ebx
+ 1190 0d7a 83FE2B   		cmpl	$43, %esi
+ 1191 0d7d 7ED3     		jle	L148
+ 1192 0d7f 31C9     		xorl	%ecx, %ecx
+ 1193              	L152:
+ 1194 0d81 C681C014 		movb	$0, _ZZ11layer_printP8LayerCtl5uid_tPcE6conbuf+5280(%ecx)
+ 1194      000000
+ 1195 0d88 41       		incl	%ecx
+ 1196 0d89 83F977   		cmpl	$119, %ecx
+ 1197 0d8c 7EF3     		jle	L152
+ 1198 0d8e C645D701 		movb	$1, -41(%ebp)
+ 1199 0d92 EB10     		jmp	L182
+GAS LISTING layer.gas 			page 26
+
+
+ 1200              	L179:
+ 1201 0d94 8B150000 		movl	_timerctl, %edx
+ 1201      0000
+ 1202 0d9a E9DAFDFF 		jmp	L156
+ 1202      FF
+ 1203              	L140:
+ 1204 0d9f A3100000 		movl	%eax, _ZZ11layer_printP8LayerCtl5uid_tPcE7gl_ypos
+ 1204      00
+ 1205              	L182:
+ 1206 0da4 E8000000 		call	_io_cli
+ 1206      00
+ 1207 0da9 C6054015 		movb	$0, _ZZ11layer_printP8LayerCtl5uid_tPcE7locking
+ 1207      000000
+ 1208 0db0 47       		incl	%edi
+ 1209 0db1 E8000000 		call	_io_sti
+ 1209      00
+ 1210 0db6 E994FDFF 		jmp	L184
+ 1210      FF
+ 1211 0dbb 90       		.align 2
+ 1212 0dbc 8D742600 		.p2align 4,,15
+ 1213              	.globl __Z11layer_fill8P8LayerCtl5uid_tcj
+ 1214              		.def	__Z11layer_fill8P8LayerCtl5uid_tcj;	.scl	2;	.type	32;	.endef
+ 1215              	__Z11layer_fill8P8LayerCtl5uid_tcj:
+ 1216 0dc0 55       		pushl	%ebp
+ 1217 0dc1 89E5     		movl	%esp, %ebp
+ 1218 0dc3 83EC48   		subl	$72, %esp
+ 1219 0dc6 0FB64510 		movzbl	16(%ebp), %eax
+ 1220 0dca 895DF8   		movl	%ebx, -8(%ebp)
+ 1221 0dcd 8B5D0C   		movl	12(%ebp), %ebx
+ 1222 0dd0 8975FC   		movl	%esi, -4(%ebp)
+ 1223 0dd3 8B7508   		movl	8(%ebp), %esi
+ 1224 0dd6 85DB     		testl	%ebx, %ebx
+ 1225 0dd8 8845E7   		movb	%al, -25(%ebp)
+ 1226 0ddb 7808     		js	L188
+ 1227 0ddd 399E0818 		cmpl	%ebx, 6152(%esi)
+ 1227      0000
+ 1228 0de3 7F0F     		jg	L187
+ 1229              	L188:
+ 1230 0de5 8B5DF8   		movl	-8(%ebp), %ebx
+ 1231 0de8 B8FFFFFF 		movl	$-1, %eax
+ 1231      FF
+ 1232 0ded 8B75FC   		movl	-4(%ebp), %esi
+ 1233 0df0 89EC     		movl	%ebp, %esp
+ 1234 0df2 5D       		popl	%ebp
+ 1235 0df3 C3       		ret
+ 1236              		.p2align 4,,7
+ 1237              	L187:
+ 1238 0df4 895C2404 		movl	%ebx, 4(%esp)
+ 1239 0df8 8D45E8   		leal	-24(%ebp), %eax
+ 1240 0dfb 893424   		movl	%esi, (%esp)
+ 1241 0dfe 89442408 		movl	%eax, 8(%esp)
+ 1242 0e02 E849F3FF 		call	__Z13layer_getsizeP8LayerCtl5uid_tP4Rect
+ 1242      FF
+ 1243 0e07 8B4514   		movl	20(%ebp), %eax
+ 1244 0e0a 8944241C 		movl	%eax, 28(%esp)
+ 1245 0e0e 0FBE45E7 		movsbl	-25(%ebp),%eax
+ 1246 0e12 89442418 		movl	%eax, 24(%esp)
+GAS LISTING layer.gas 			page 27
+
+
+ 1247 0e16 8B45E8   		movl	-24(%ebp), %eax
+ 1248 0e19 89442408 		movl	%eax, 8(%esp)
+ 1249 0e1d 8B45EC   		movl	-20(%ebp), %eax
+ 1250 0e20 8944240C 		movl	%eax, 12(%esp)
+ 1251 0e24 8B45F0   		movl	-16(%ebp), %eax
+ 1252 0e27 89442410 		movl	%eax, 16(%esp)
+ 1253 0e2b 8B45F4   		movl	-12(%ebp), %eax
+ 1254 0e2e 895C2404 		movl	%ebx, 4(%esp)
+ 1255 0e32 893424   		movl	%esi, (%esp)
+ 1256 0e35 89442414 		movl	%eax, 20(%esp)
+ 1257 0e39 E832FAFF 		call	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+ 1257      FF
+ 1258 0e3e 8B5DF8   		movl	-8(%ebp), %ebx
+ 1259 0e41 31C0     		xorl	%eax, %eax
+ 1260 0e43 8B75FC   		movl	-4(%ebp), %esi
+ 1261 0e46 89EC     		movl	%ebp, %esp
+ 1262 0e48 5D       		popl	%ebp
+ 1263 0e49 C3       		ret
+ 1264              		.align 2
+ 1265 0e4a 8DB60000 		.p2align 4,,15
+ 1265      0000
+ 1266              	.globl __Z13layer_putstr8P8LayerCtl5uid_tiicPcS2_j
+ 1267              		.def	__Z13layer_putstr8P8LayerCtl5uid_tiicPcS2_j;	.scl	2;	.type	32;	.endef
+ 1268              	__Z13layer_putstr8P8LayerCtl5uid_tiicPcS2_j:
+ 1269 0e50 55       		pushl	%ebp
+ 1270 0e51 89E5     		movl	%esp, %ebp
+ 1271 0e53 57       		pushl	%edi
+ 1272 0e54 56       		pushl	%esi
+ 1273 0e55 53       		pushl	%ebx
+ 1274 0e56 83EC1C   		subl	$28, %esp
+ 1275 0e59 8B5D1C   		movl	28(%ebp), %ebx
+ 1276 0e5c 0FB65518 		movzbl	24(%ebp), %edx
+ 1277 0e60 8B7510   		movl	16(%ebp), %esi
+ 1278 0e63 0FB603   		movzbl	(%ebx), %eax
+ 1279 0e66 84C0     		testb	%al, %al
+ 1280 0e68 7448     		je	L195
+ 1281 0e6a 0FBEFA   		movsbl	%dl,%edi
+ 1282 0e6d 8D7600   		.p2align 4,,15
+ 1283              	L193:
+ 1284 0e70 89742408 		movl	%esi, 8(%esp)
+ 1285 0e74 8B5524   		movl	36(%ebp), %edx
+ 1286 0e77 0FB6C0   		movzbl	%al, %eax
+ 1287 0e7a 897C2410 		movl	%edi, 16(%esp)
+ 1288 0e7e C1E004   		sall	$4, %eax
+ 1289 0e81 43       		incl	%ebx
+ 1290 0e82 83C608   		addl	$8, %esi
+ 1291 0e85 89542418 		movl	%edx, 24(%esp)
+ 1292 0e89 8B5520   		movl	32(%ebp), %edx
+ 1293 0e8c 01D0     		addl	%edx, %eax
+ 1294 0e8e 89442414 		movl	%eax, 20(%esp)
+ 1295 0e92 8B4514   		movl	20(%ebp), %eax
+ 1296 0e95 8B550C   		movl	12(%ebp), %edx
+ 1297 0e98 8944240C 		movl	%eax, 12(%esp)
+ 1298 0e9c 8B4508   		movl	8(%ebp), %eax
+ 1299 0e9f 89542404 		movl	%edx, 4(%esp)
+ 1300 0ea3 890424   		movl	%eax, (%esp)
+ 1301 0ea6 E8D5FAFF 		call	__Z14layer_putfont8P8LayerCtl5uid_tiicPcj
+GAS LISTING layer.gas 			page 28
+
+
+ 1301      FF
+ 1302 0eab 0FB603   		movzbl	(%ebx), %eax
+ 1303 0eae 84C0     		testb	%al, %al
+ 1304 0eb0 75BE     		jne	L193
+ 1305              	L195:
+ 1306 0eb2 83C41C   		addl	$28, %esp
+ 1307 0eb5 31C0     		xorl	%eax, %eax
+ 1308 0eb7 5B       		popl	%ebx
+ 1309 0eb8 5E       		popl	%esi
+ 1310 0eb9 5F       		popl	%edi
+ 1311 0eba 5D       		popl	%ebp
+ 1312 0ebb C3       		ret
+ 1313              		.def	__Z14layer_putfont8P8LayerCtl5uid_tiicPcj;	.scl	3;	.type	32;	.endef
+ 1314              		.def	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj;	.scl	3;	.type	32;	.endef
+ 1315              		.def	_io_sti;	.scl	3;	.type	32;	.endef
+ 1316              		.def	_io_hlt;	.scl	3;	.type	32;	.endef
+ 1317              		.def	__Z11erase_arrayPviiij;	.scl	3;	.type	32;	.endef
+ 1318              		.def	__Z14memmng_free_4kPvi;	.scl	3;	.type	32;	.endef
+ 1319              		.def	__Z20layerctl_wholescreenP8LayerCtlP4Rect;	.scl	3;	.type	32;	.endef
+ 1320              		.def	_store_eflags;	.scl	3;	.type	32;	.endef
+ 1321              		.def	__Z10get_fifo32P6Fifo32;	.scl	3;	.type	32;	.endef
+ 1322              		.def	_io_cli;	.scl	3;	.type	32;	.endef
+ 1323              		.def	_load_eflags;	.scl	3;	.type	32;	.endef
+ 1324              		.def	__Z16layerctl_repaintP8LayerCtl4Rect;	.scl	3;	.type	32;	.endef
+ 1325              		.def	__Z12insert_arrayPviS_iiij;	.scl	3;	.type	32;	.endef
+ 1326              		.def	__Z12layer_updownP8LayerCtl5uid_ti;	.scl	3;	.type	32;	.endef
+ 1327              		.def	_memset;	.scl	2;	.type	32;	.endef
+ 1328              		.def	__Z15memmng_alloc_4ki;	.scl	3;	.type	32;	.endef
+ 1329 0ebc 90909090 		.def	__Z11init_fifo32P6Fifo32Pii;	.scl	3;	.type	32;	.endef
+GAS LISTING layer.gas 			page 29
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 layer.cpp
+           layer.gas:7      .text:00000000 __Z8rect_andP4RectS_
+           layer.gas:82     .text:00000080 __Z16rect_checkbounds4RectS_
+           layer.gas:109    .text:000000c0 __Z13layerctl_initP8LayerCtlii
+           layer.gas:148    .text:00000150 __Z13layer_getsizeP8LayerCtl5uid_tP4Rect
+           layer.gas:257    .text:00000270 __Z11layer_allocP8LayerCtl
+           layer.gas:544    .text:000005b0 __Z12repaint_procii
+           layer.gas:599    .text:00000660 __Z10layer_drawP8LayerCtl5uid_tPc4Rectj
+           layer.gas:749    .text:00000800 __Z10layer_freeP8LayerCtl5uid_t
+           layer.gas:997    .bss:00000000 _ZZ11layer_printP8LayerCtl5uid_tPcE7gl_xpos
+           layer.gas:998    .bss:00000010 _ZZ11layer_printP8LayerCtl5uid_tPcE7gl_ypos
+           layer.gas:999    .bss:00000020 _ZZ11layer_printP8LayerCtl5uid_tPcE6conbuf
+           layer.gas:1000   .bss:00001540 _ZZ11layer_printP8LayerCtl5uid_tPcE7locking
+           layer.gas:1003   .data:00000000 _ZZ11layer_printP8LayerCtl5uid_tPcE8lastline
+           layer.gas:1013   .text:00000b20 __Z11layer_printP8LayerCtl5uid_tPc
+           layer.gas:1215   .text:00000dc0 __Z11layer_fill8P8LayerCtl5uid_tcj
+           layer.gas:1268   .text:00000e50 __Z13layer_putstr8P8LayerCtl5uid_tiicPcS2_j
+           layer.gas:877    .text:00000980 __Z14layer_putfont8P8LayerCtl5uid_tiicPcj
+           layer.gas:785    .text:00000870 __Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+           layer.gas:328    .text:00000330 __Z20layerctl_wholescreenP8LayerCtlP4Rect
+           layer.gas:346    .text:00000360 __Z16layerctl_repaintP8LayerCtl4Rect
+           layer.gas:193    .text:000001c0 __Z12layer_updownP8LayerCtl5uid_ti
+
+UNDEFINED SYMBOLS
+_timerctl
+_hankaku
+_io_sti
+_io_hlt
+__Z11erase_arrayPviiij
+__Z14memmng_free_4kPvi
+_store_eflags
+__Z10get_fifo32P6Fifo32
+_io_cli
+_load_eflags
+__Z12insert_arrayPviS_iiij
+_memset
+__Z15memmng_alloc_4ki
+__Z11init_fifo32P6Fifo32Pii

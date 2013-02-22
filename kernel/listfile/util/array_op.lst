@@ -1,0 +1,142 @@
+GAS LISTING util/array_op.gas 			page 1
+
+
+   1              		.file	"array_op.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __Z11erase_arrayPviiij
+   6              		.def	__Z11erase_arrayPviiij;	.scl	2;	.type	32;	.endef
+   7              	__Z11erase_arrayPviiij:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 83EC18   		subl	$24, %esp
+  11 0006 895DF4   		movl	%ebx, -12(%ebp)
+  12 0009 8B5D0C   		movl	12(%ebp), %ebx
+  13 000c 8B4D14   		movl	20(%ebp), %ecx
+  14 000f 8975F8   		movl	%esi, -8(%ebp)
+  15 0012 8B7510   		movl	16(%ebp), %esi
+  16 0015 89DA     		movl	%ebx, %edx
+  17 0017 897DFC   		movl	%edi, -4(%ebp)
+  18 001a C1EA1F   		shrl	$31, %edx
+  19 001d 8B7D18   		movl	24(%ebp), %edi
+  20 0020 39F3     		cmpl	%esi, %ebx
+  21 0022 0F9DC0   		setge	%al
+  22 0025 08D0     		orb	%dl, %al
+  23 0027 750E     		jne	L3
+  24 0029 39CE     		cmpl	%ecx, %esi
+  25 002b 0F9FC2   		setg	%dl
+  26 002e 85FF     		testl	%edi, %edi
+  27 0030 0F94C0   		sete	%al
+  28 0033 08C2     		orb	%al, %dl
+  29 0035 740F     		je	L2
+  30              	L3:
+  31 0037 8B5DF4   		movl	-12(%ebp), %ebx
+  32 003a 31C0     		xorl	%eax, %eax
+  33 003c 8B75F8   		movl	-8(%ebp), %esi
+  34 003f 8B7DFC   		movl	-4(%ebp), %edi
+  35 0042 89EC     		movl	%ebp, %esp
+  36 0044 5D       		popl	%ebp
+  37 0045 C3       		ret
+  38              		.p2align 4,,7
+  39              	L2:
+  40 0046 89F8     		movl	%edi, %eax
+  41 0048 8B5508   		movl	8(%ebp), %edx
+  42 004b 29F1     		subl	%esi, %ecx
+  43 004d 0FAFC3   		imull	%ebx, %eax
+  44 0050 29DE     		subl	%ebx, %esi
+  45 0052 0FAFCF   		imull	%edi, %ecx
+  46 0055 01D0     		addl	%edx, %eax
+  47 0057 89F2     		movl	%esi, %edx
+  48 0059 0FAFD7   		imull	%edi, %edx
+  49 005c 894C2408 		movl	%ecx, 8(%esp)
+  50 0060 89442404 		movl	%eax, 4(%esp)
+  51 0064 01C2     		addl	%eax, %edx
+  52 0066 891424   		movl	%edx, (%esp)
+  53 0069 E8000000 		call	__Z8k_memmovPKvPvj
+  53      00
+  54 006e 89F0     		movl	%esi, %eax
+  55 0070 8B5DF4   		movl	-12(%ebp), %ebx
+  56 0073 8B75F8   		movl	-8(%ebp), %esi
+GAS LISTING util/array_op.gas 			page 2
+
+
+  57 0076 8B7DFC   		movl	-4(%ebp), %edi
+  58 0079 89EC     		movl	%ebp, %esp
+  59 007b 5D       		popl	%ebp
+  60 007c C3       		ret
+  61 007d 90       		.align 2
+  62 007e 89F6     		.p2align 4,,15
+  63              	.globl __Z12insert_arrayPviS_iiij
+  64              		.def	__Z12insert_arrayPviS_iiij;	.scl	2;	.type	32;	.endef
+  65              	__Z12insert_arrayPviS_iiij:
+  66 0080 55       		pushl	%ebp
+  67 0081 89E5     		movl	%esp, %ebp
+  68 0083 83EC18   		subl	$24, %esp
+  69 0086 897DFC   		movl	%edi, -4(%ebp)
+  70 0089 8B7D0C   		movl	12(%ebp), %edi
+  71 008c 8B4D14   		movl	20(%ebp), %ecx
+  72 008f 895DF4   		movl	%ebx, -12(%ebp)
+  73 0092 8B5518   		movl	24(%ebp), %edx
+  74 0095 89F8     		movl	%edi, %eax
+  75 0097 8975F8   		movl	%esi, -8(%ebp)
+  76 009a 09C8     		orl	%ecx, %eax
+  77 009c 780C     		js	L7
+  78 009e 85D2     		testl	%edx, %edx
+  79 00a0 7808     		js	L7
+  80 00a2 8D0411   		leal	(%ecx,%edx), %eax
+  81 00a5 3B451C   		cmpl	28(%ebp), %eax
+  82 00a8 7E16     		jle	L6
+  83              	L7:
+  84 00aa 8B5DF4   		movl	-12(%ebp), %ebx
+  85 00ad B8FFFFFF 		movl	$-1, %eax
+  85      FF
+  86 00b2 8B75F8   		movl	-8(%ebp), %esi
+  87 00b5 8B7DFC   		movl	-4(%ebp), %edi
+  88 00b8 89EC     		movl	%ebp, %esp
+  89 00ba 5D       		popl	%ebp
+  90 00bb C3       		ret
+  91 00bc 8D742600 		.p2align 4,,7
+  92              	L6:
+  93 00c0 8B5D20   		movl	32(%ebp), %ebx
+  94 00c3 29FA     		subl	%edi, %edx
+  95 00c5 8B7508   		movl	8(%ebp), %esi
+  96 00c8 0FAFDF   		imull	%edi, %ebx
+  97 00cb 01F3     		addl	%esi, %ebx
+  98 00cd 8B7520   		movl	32(%ebp), %esi
+  99 00d0 0FAFF1   		imull	%ecx, %esi
+ 100 00d3 8B4D20   		movl	32(%ebp), %ecx
+ 101 00d6 891C24   		movl	%ebx, (%esp)
+ 102 00d9 0FAFD1   		imull	%ecx, %edx
+ 103 00dc 8D041E   		leal	(%esi,%ebx), %eax
+ 104 00df 89442404 		movl	%eax, 4(%esp)
+ 105 00e3 89542408 		movl	%edx, 8(%esp)
+ 106 00e7 E8000000 		call	__Z8k_memmovPKvPvj
+ 106      00
+ 107 00ec 89742408 		movl	%esi, 8(%esp)
+ 108 00f0 895C2404 		movl	%ebx, 4(%esp)
+ 109 00f4 8B4510   		movl	16(%ebp), %eax
+ 110 00f7 890424   		movl	%eax, (%esp)
+ 111 00fa E8000000 		call	__Z8k_memmovPKvPvj
+GAS LISTING util/array_op.gas 			page 3
+
+
+ 111      00
+ 112 00ff 8B5DF4   		movl	-12(%ebp), %ebx
+ 113 0102 31C0     		xorl	%eax, %eax
+ 114 0104 8B75F8   		movl	-8(%ebp), %esi
+ 115 0107 8B7DFC   		movl	-4(%ebp), %edi
+ 116 010a 89EC     		movl	%ebp, %esp
+ 117 010c 5D       		popl	%ebp
+ 118 010d C3       		ret
+ 119 010e 9090     		.def	__Z8k_memmovPKvPvj;	.scl	3;	.type	32;	.endef
+GAS LISTING util/array_op.gas 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 array_op.cpp
+   util/array_op.gas:7      .text:00000000 __Z11erase_arrayPviiij
+   util/array_op.gas:65     .text:00000080 __Z12insert_arrayPviS_iiij
+
+UNDEFINED SYMBOLS
+__Z8k_memmovPKvPvj

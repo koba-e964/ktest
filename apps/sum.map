@@ -1,0 +1,44 @@
+text size :    580(0x00244)
+data size :     32(0x00020)
+bss  size :      0(0x00000)
+
+0x00000024 : _KMain
+0x00000024 : (.text)
+0x00000064 : (.text)
+0x00000064 : _sys_end
+0x00000071 : _sys_exit
+0x00000081 : (.text)
+0x00000081 : _nio_open
+0x00000088 : _kos_read
+0x0000008F : _kos_write
+0x00000096 : _nio_seek
+0x0000009D : _nio_tell
+0x000000A4 : _nio_size
+0x000000AB : _nio_seteof
+0x000000B2 : _kos_close
+0x000000C8 : _kos_size
+0x000000C8 : (.text)
+0x000000E8 : _kos_size64
+0x00000128 : _kos_tell
+0x00000148 : _kos_tell64
+0x00000188 : _kos_seek
+0x000001A8 : _kos_seek64
+0x000001C8 : _kos_seteof
+0x000001E8 : _kos_seteof64
+0x00000208 : _kos_open
+0x00000228 : _KStartup
+0x00000228 : (.text)
+0x00000248 : _strlen
+0x00000248 : (.text)
+0x00000000 : (.data)
+0x00000000 : (.data)
+0x00000000 : (.data)
+0x00000000 : (.data)
+0x00000000 : (.data)
+0x00000400 : (.data)
+0x00000000 : (.bss)
+0x00000000 : (.bss)
+0x00000000 : (.bss)
+0x00000000 : (.bss)
+0x00000000 : (.bss)
+0x00000000 : (.bss)

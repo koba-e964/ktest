@@ -1,0 +1,729 @@
+GAS LISTING fs/fat12.gas 			page 1
+
+
+   1              		.file	"fat12.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __ZN2fs5fat129nameParseEPKcPcS3_
+   6              		.def	__ZN2fs5fat129nameParseEPKcPcS3_;	.scl	2;	.type	32;	.endef
+   7              	__ZN2fs5fat129nameParseEPKcPcS3_:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 57       		pushl	%edi
+  11 0004 56       		pushl	%esi
+  12 0005 53       		pushl	%ebx
+  13 0006 83EC0C   		subl	$12, %esp
+  14 0009 8B4508   		movl	8(%ebp), %eax
+  15 000c 890424   		movl	%eax, (%esp)
+  16 000f E8000000 		call	_strlen
+  16      00
+  17 0014 89C7     		movl	%eax, %edi
+  18 0016 83FF0C   		cmpl	$12, %edi
+  19 0019 B802001E 		movl	$-249692158, %eax
+  19      F1
+  20 001e 0F8FA900 		jg	L1
+  20      0000
+  21 0024 31F6     		xorl	%esi, %esi
+  22 0026 BA010000 		movl	$1, %edx
+  22      00
+  23              	L7:
+  24 002b 8B4D08   		movl	8(%ebp), %ecx
+  25 002e 89F8     		movl	%edi, %eax
+  26 0030 29D0     		subl	%edx, %eax
+  27 0032 807C01FF 		cmpb	$46, -1(%ecx,%eax)
+  27      2E
+  28 0037 0F849800 		je	L10
+  28      0000
+  29 003d 42       		incl	%edx
+  30 003e 83FA03   		cmpl	$3, %edx
+  31 0041 7EE8     		jle	L7
+  32              	L4:
+  33 0043 89FA     		movl	%edi, %edx
+  34 0045 31DB     		xorl	%ebx, %ebx
+  35 0047 29F2     		subl	%esi, %edx
+  36 0049 85F6     		testl	%esi, %esi
+  37 004b B803001E 		movl	$-249692157, %eax
+  37      F1
+  38 0050 0F95C3   		setne	%bl
+  39 0053 29DA     		subl	%ebx, %edx
+  40 0055 83FA08   		cmpl	$8, %edx
+  41 0058 89D3     		movl	%edx, %ebx
+  42 005a 7F71     		jg	L1
+  43 005c 89542408 		movl	%edx, 8(%esp)
+  44 0060 8B4508   		movl	8(%ebp), %eax
+  45 0063 8B550C   		movl	12(%ebp), %edx
+  46 0066 89442404 		movl	%eax, 4(%esp)
+  47 006a 891424   		movl	%edx, (%esp)
+  48 006d E8000000 		call	_memcpy
+  48      00
+  49 0072 8B4D0C   		movl	12(%ebp), %ecx
+GAS LISTING fs/fat12.gas 			page 2
+
+
+  50 0075 B8090000 		movl	$9, %eax
+  50      00
+  51 007a 29D8     		subl	%ebx, %eax
+  52 007c 89442408 		movl	%eax, 8(%esp)
+  53 0080 8D140B   		leal	(%ebx,%ecx), %edx
+  54 0083 31C9     		xorl	%ecx, %ecx
+  55 0085 894C2404 		movl	%ecx, 4(%esp)
+  56 0089 891424   		movl	%edx, (%esp)
+  57 008c E8000000 		call	_memset
+  57      00
+  58 0091 89742408 		movl	%esi, 8(%esp)
+  59 0095 8B5508   		movl	8(%ebp), %edx
+  60 0098 8B4D10   		movl	16(%ebp), %ecx
+  61 009b 8D0417   		leal	(%edi,%edx), %eax
+  62 009e 29F0     		subl	%esi, %eax
+  63 00a0 890C24   		movl	%ecx, (%esp)
+  64 00a3 89442404 		movl	%eax, 4(%esp)
+  65 00a7 E8000000 		call	_memcpy
+  65      00
+  66 00ac 8B4D10   		movl	16(%ebp), %ecx
+  67 00af B8040000 		movl	$4, %eax
+  67      00
+  68 00b4 29F0     		subl	%esi, %eax
+  69 00b6 89442408 		movl	%eax, 8(%esp)
+  70 00ba 8D140E   		leal	(%esi,%ecx), %edx
+  71 00bd 31C0     		xorl	%eax, %eax
+  72 00bf 89442404 		movl	%eax, 4(%esp)
+  73 00c3 891424   		movl	%edx, (%esp)
+  74 00c6 E8000000 		call	_memset
+  74      00
+  75 00cb 31C0     		xorl	%eax, %eax
+  76              	L1:
+  77 00cd 83C40C   		addl	$12, %esp
+  78 00d0 5B       		popl	%ebx
+  79 00d1 5E       		popl	%esi
+  80 00d2 5F       		popl	%edi
+  81 00d3 5D       		popl	%ebp
+  82 00d4 C3       		ret
+  83              	L10:
+  84 00d5 89D6     		movl	%edx, %esi
+  85 00d7 E967FFFF 		jmp	L4
+  85      FF
+  86              		.align 2
+  87 00dc 8D742600 		.p2align 4,,15
+  88              	.globl __ZN2fs13fat12_readfatEPiPKh
+  89              		.def	__ZN2fs13fat12_readfatEPiPKh;	.scl	2;	.type	32;	.endef
+  90              	__ZN2fs13fat12_readfatEPiPKh:
+  91 00e0 55       		pushl	%ebp
+  92 00e1 89E5     		movl	%esp, %ebp
+  93 00e3 8B4D0C   		movl	12(%ebp), %ecx
+  94 00e6 57       		pushl	%edi
+  95 00e7 8B7D08   		movl	8(%ebp), %edi
+  96 00ea 56       		pushl	%esi
+  97 00eb 31F6     		xorl	%esi, %esi
+  98 00ed 53       		pushl	%ebx
+  99 00ee 31DB     		xorl	%ebx, %ebx
+ 100 00f0 0FB7410E 		movzwl	14(%ecx), %eax
+GAS LISTING fs/fat12.gas 			page 3
+
+
+ 101 00f4 C1E009   		sall	$9, %eax
+ 102 00f7 01C1     		addl	%eax, %ecx
+ 103 00f9 8DB42600 		.p2align 4,,15
+ 103      000000
+ 104              	L16:
+ 105 0100 0FB64431 		movzbl	1(%ecx,%esi), %eax
+ 105      01
+ 106 0105 0FB6140E 		movzbl	(%esi,%ecx), %edx
+ 107 0109 C1E008   		sall	$8, %eax
+ 108 010c 09C2     		orl	%eax, %edx
+ 109 010e 81E2FF0F 		andl	$4095, %edx
+ 109      0000
+ 110 0114 89149F   		movl	%edx, (%edi,%ebx,4)
+ 111 0117 0FB64431 		movzbl	1(%ecx,%esi), %eax
+ 111      01
+ 112 011c C0E804   		shrb	$4, %al
+ 113 011f 0FB6D0   		movzbl	%al, %edx
+ 114 0122 0FB64431 		movzbl	2(%ecx,%esi), %eax
+ 114      02
+ 115 0127 83C603   		addl	$3, %esi
+ 116 012a C1E004   		sall	$4, %eax
+ 117 012d 09C2     		orl	%eax, %edx
+ 118 012f 89549F04 		movl	%edx, 4(%edi,%ebx,4)
+ 119 0133 83C302   		addl	$2, %ebx
+ 120 0136 81FB3F0B 		cmpl	$2879, %ebx
+ 120      0000
+ 121 013c 7EC2     		jle	L16
+ 122 013e 5B       		popl	%ebx
+ 123 013f 5E       		popl	%esi
+ 124 0140 5F       		popl	%edi
+ 125 0141 5D       		popl	%ebp
+ 126 0142 C3       		ret
+ 127 0143 90       		.align 2
+ 128 0144 8DB60000 		.p2align 4,,15
+ 128      00008DBF 
+ 128      00000000 
+ 129              	.globl __ZN2fs10FAT12ImageC2Ev
+ 130              		.def	__ZN2fs10FAT12ImageC2Ev;	.scl	2;	.type	32;	.endef
+ 131              	__ZN2fs10FAT12ImageC2Ev:
+ 132 0150 55       		pushl	%ebp
+ 133 0151 89E5     		movl	%esp, %ebp
+ 134 0153 5D       		popl	%ebp
+ 135 0154 C3       		ret
+ 136 0155 90       		.align 2
+ 137 0156 8D76008D 		.p2align 4,,15
+ 137      BC270000 
+ 137      0000
+ 138              	.globl __ZN2fs10FAT12ImageC1Ev
+ 139              		.def	__ZN2fs10FAT12ImageC1Ev;	.scl	2;	.type	32;	.endef
+ 140              	__ZN2fs10FAT12ImageC1Ev:
+ 141 0160 55       		pushl	%ebp
+ 142 0161 89E5     		movl	%esp, %ebp
+ 143 0163 5D       		popl	%ebp
+ 144 0164 C3       		ret
+ 145 0165 90       		.align 2
+ 146 0166 8D76008D 		.p2align 4,,15
+ 146      BC270000 
+GAS LISTING fs/fat12.gas 			page 4
+
+
+ 146      0000
+ 147              	.globl __ZN2fs10FAT12Image5chmodENS0_12reading_modeE
+ 148              		.def	__ZN2fs10FAT12Image5chmodENS0_12reading_modeE;	.scl	2;	.type	32;	.endef
+ 149              	__ZN2fs10FAT12Image5chmodENS0_12reading_modeE:
+ 150 0170 55       		pushl	%ebp
+ 151 0171 89E5     		movl	%esp, %ebp
+ 152 0173 8B550C   		movl	12(%ebp), %edx
+ 153 0176 8B4508   		movl	8(%ebp), %eax
+ 154 0179 8990045A 		movl	%edx, 23044(%eax)
+ 154      0000
+ 155 017f 5D       		popl	%ebp
+ 156 0180 C3       		ret
+ 157 0181 90       		.align 2
+ 158 0182 8DB42600 		.p2align 4,,15
+ 158      0000008D 
+ 158      BC270000 
+ 158      0000
+ 159              	.globl __ZN2fs10FAT12Image9checkDualEv
+ 160              		.def	__ZN2fs10FAT12Image9checkDualEv;	.scl	2;	.type	32;	.endef
+ 161              	__ZN2fs10FAT12Image9checkDualEv:
+ 162 0190 55       		pushl	%ebp
+ 163 0191 89E5     		movl	%esp, %ebp
+ 164 0193 83EC0C   		subl	$12, %esp
+ 165 0196 897DFC   		movl	%edi, -4(%ebp)
+ 166 0199 8B4508   		movl	8(%ebp), %eax
+ 167 019c 8975F8   		movl	%esi, -8(%ebp)
+ 168 019f FC       		cld
+ 169 01a0 8BB0085A 		movl	23048(%eax), %esi
+ 169      0000
+ 170 01a6 0FB74616 		movzwl	22(%esi), %eax
+ 171 01aa C1E009   		sall	$9, %eax
+ 172 01ad 8945F4   		movl	%eax, -12(%ebp)
+ 173 01b0 8B7DF4   		movl	-12(%ebp), %edi
+ 174 01b3 0FB7460E 		movzwl	14(%esi), %eax
+ 175 01b7 C1E009   		sall	$9, %eax
+ 176 01ba 01C6     		addl	%eax, %esi
+ 177 01bc 8B45F4   		movl	-12(%ebp), %eax
+ 178 01bf 01F7     		addl	%esi, %edi
+ 179 01c1 89C1     		movl	%eax, %ecx
+ 180 01c3 39C0     		cmpl	%eax, %eax
+ 181 01c5 F3       		repe
+ 182 01c6 A6       		cmpsb
+ 183 01c7 0F92C0   		setb	%al
+ 184 01ca 0F97C2   		seta	%dl
+ 185 01cd 8B75F8   		movl	-8(%ebp), %esi
+ 186 01d0 28C2     		subb	%al, %dl
+ 187 01d2 8B7DFC   		movl	-4(%ebp), %edi
+ 188 01d5 0FBEC2   		movsbl	%dl,%eax
+ 189 01d8 83F801   		cmpl	$1, %eax
+ 190 01db 19C0     		sbbl	%eax, %eax
+ 191 01dd 89EC     		movl	%ebp, %esp
+ 192 01df 5D       		popl	%ebp
+ 193 01e0 F7D0     		notl	%eax
+ 194 01e2 C3       		ret
+ 195              		.section .rdata,"dr"
+ 196              	LC0:
+ 197 0000 73697A65 		.ascii "sizeof F12LFN = %d\12\0"
+GAS LISTING fs/fat12.gas 			page 5
+
+
+ 197      6F662046 
+ 197      31324C46 
+ 197      4E203D20 
+ 197      25640A00 
+ 198              	LC1:
+ 199 0014 32204641 		.ascii "2 FATs are not identical.\12\0"
+ 199      54732061 
+ 199      7265206E 
+ 199      6F742069 
+ 199      64656E74 
+ 200              	LC2:
+ 201 002f 32204641 		.ascii "2 FATs are identical.\12\0"
+ 201      54732061 
+ 201      72652069 
+ 201      64656E74 
+ 201      6963616C 
+ 202 0046 00000000 		.text
+ 202      00000000 
+ 202      0000
+ 203 01e3 90       		.align 2
+ 204 01e4 8DB60000 		.p2align 4,,15
+ 204      00008DBF 
+ 204      00000000 
+ 205              	.globl __ZN2fs10FAT12Image4ctorEPh
+ 206              		.def	__ZN2fs10FAT12Image4ctorEPh;	.scl	2;	.type	32;	.endef
+ 207              	__ZN2fs10FAT12Image4ctorEPh:
+ 208 01f0 55       		pushl	%ebp
+ 209 01f1 B8200000 		movl	$32, %eax
+ 209      00
+ 210 01f6 89E5     		movl	%esp, %ebp
+ 211 01f8 81EC2801 		subl	$296, %esp
+ 211      0000
+ 212 01fe 89442408 		movl	%eax, 8(%esp)
+ 213 0202 B8000000 		movl	$LC0, %eax
+ 213      00
+ 214 0207 8975F8   		movl	%esi, -8(%ebp)
+ 215 020a 8DB5E8FE 		leal	-280(%ebp), %esi
+ 215      FFFF
+ 216 0210 895DF4   		movl	%ebx, -12(%ebp)
+ 217 0213 8B5D08   		movl	8(%ebp), %ebx
+ 218 0216 897DFC   		movl	%edi, -4(%ebp)
+ 219 0219 8B7D0C   		movl	12(%ebp), %edi
+ 220 021c 89442404 		movl	%eax, 4(%esp)
+ 221 0220 893424   		movl	%esi, (%esp)
+ 222 0223 E8000000 		call	_sprintf
+ 222      00
+ 223 0228 89742408 		movl	%esi, 8(%esp)
+ 224 022c A1000000 		movl	_l_console, %eax
+ 224      00
+ 225 0231 89442404 		movl	%eax, 4(%esp)
+ 226 0235 A1000000 		movl	_layerctl, %eax
+ 226      00
+ 227 023a 890424   		movl	%eax, (%esp)
+ 228 023d E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 228      00
+ 229 0242 897C2404 		movl	%edi, 4(%esp)
+ 230 0246 891C24   		movl	%ebx, (%esp)
+GAS LISTING fs/fat12.gas 			page 6
+
+
+ 231 0249 E892FEFF 		call	__ZN2fs13fat12_readfatEPiPKh
+ 231      FF
+ 232 024e 89BB085A 		movl	%edi, 23048(%ebx)
+ 232      0000
+ 233 0254 B8010000 		movl	$1, %eax
+ 233      00
+ 234 0259 BFFFFFFF 		movl	$-1, %edi
+ 234      FF
+ 235 025e C683005A 		movb	$0, 23040(%ebx)
+ 235      000000
+ 236 0265 8983045A 		movl	%eax, 23044(%ebx)
+ 236      0000
+ 237 026b 89BB0CEF 		movl	%edi, 126732(%ebx)
+ 237      0100
+ 238 0271 C68310EF 		movb	$0, 126736(%ebx)
+ 238      010000
+ 239 0278 891C24   		movl	%ebx, (%esp)
+ 240 027b E810FFFF 		call	__ZN2fs10FAT12Image9checkDualEv
+ 240      FF
+ 241 0280 85C0     		testl	%eax, %eax
+ 242 0282 742C     		je	L26
+ 243 0284 BE140000 		movl	$LC1, %esi
+ 243      00
+ 244 0289 89742408 		movl	%esi, 8(%esp)
+ 245              	L28:
+ 246 028d A1000000 		movl	_l_console, %eax
+ 246      00
+ 247 0292 89442404 		movl	%eax, 4(%esp)
+ 248 0296 A1000000 		movl	_layerctl, %eax
+ 248      00
+ 249 029b 890424   		movl	%eax, (%esp)
+ 250 029e E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 250      00
+ 251 02a3 8B5DF4   		movl	-12(%ebp), %ebx
+ 252 02a6 8B75F8   		movl	-8(%ebp), %esi
+ 253 02a9 8B7DFC   		movl	-4(%ebp), %edi
+ 254 02ac 89EC     		movl	%ebp, %esp
+ 255 02ae 5D       		popl	%ebp
+ 256 02af C3       		ret
+ 257              		.p2align 4,,7
+ 258              	L26:
+ 259 02b0 BB2F0000 		movl	$LC2, %ebx
+ 259      00
+ 260 02b5 895C2408 		movl	%ebx, 8(%esp)
+ 261 02b9 EBD2     		jmp	L28
+ 262 02bb 90       		.align 2
+ 263 02bc 8D742600 		.p2align 4,,15
+ 264              	.globl __ZN2fs10FAT12Image7getInfoEiiPKcS2_
+ 265              		.def	__ZN2fs10FAT12Image7getInfoEiiPKcS2_;	.scl	2;	.type	32;	.endef
+ 266              	__ZN2fs10FAT12Image7getInfoEiiPKcS2_:
+ 267 02c0 55       		pushl	%ebp
+ 268 02c1 89E5     		movl	%esp, %ebp
+ 269 02c3 57       		pushl	%edi
+ 270 02c4 56       		pushl	%esi
+ 271 02c5 53       		pushl	%ebx
+ 272 02c6 83EC2C   		subl	$44, %esp
+ 273 02c9 8B4508   		movl	8(%ebp), %eax
+GAS LISTING fs/fat12.gas 			page 7
+
+
+ 274 02cc 8B4D14   		movl	20(%ebp), %ecx
+ 275 02cf 8B5D18   		movl	24(%ebp), %ebx
+ 276 02d2 8BB0085A 		movl	23048(%eax), %esi
+ 276      0000
+ 277 02d8 8B450C   		movl	12(%ebp), %eax
+ 278 02db 01C6     		addl	%eax, %esi
+ 279 02dd 31C0     		xorl	%eax, %eax
+ 280 02df 90       		.p2align 4,,15
+ 281              	L33:
+ 282 02e0 C64428D8 		movb	$32, -40(%eax,%ebp)
+ 282      20
+ 283 02e5 40       		incl	%eax
+ 284 02e6 83F80A   		cmpl	$10, %eax
+ 285 02e9 7EF5     		jle	L33
+ 286 02eb 31D2     		xorl	%edx, %edx
+ 287 02ed 8D7600   		.p2align 4,,15
+ 288              	L38:
+ 289 02f0 0FB6040A 		movzbl	(%edx,%ecx), %eax
+ 290 02f4 84C0     		testb	%al, %al
+ 291 02f6 740A     		je	L35
+ 292 02f8 88442AD8 		movb	%al, -40(%edx,%ebp)
+ 293 02fc 42       		incl	%edx
+ 294 02fd 83FA07   		cmpl	$7, %edx
+ 295 0300 7EEE     		jle	L38
+ 296              	L35:
+ 297 0302 31D2     		xorl	%edx, %edx
+ 298              	L43:
+ 299 0304 0FB6041A 		movzbl	(%edx,%ebx), %eax
+ 300 0308 84C0     		testb	%al, %al
+ 301 030a 740A     		je	L40
+ 302 030c 88442AE0 		movb	%al, -32(%edx,%ebp)
+ 303 0310 42       		incl	%edx
+ 304 0311 83FA02   		cmpl	$2, %edx
+ 305 0314 7EEE     		jle	L43
+ 306              	L40:
+ 307 0316 31C9     		xorl	%ecx, %ecx
+ 308 0318 908DB426 		.p2align 4,,15
+ 308      00000000 
+ 309              	L48:
+ 310 0320 0FB65429 		movzbl	-40(%ecx,%ebp), %edx
+ 310      D8
+ 311 0325 0FBEC2   		movsbl	%dl,%eax
+ 312 0328 83E861   		subl	$97, %eax
+ 313 032b 83F819   		cmpl	$25, %eax
+ 314 032e 7707     		ja	L46
+ 315 0330 80EA20   		subb	$32, %dl
+ 316 0333 885429D8 		movb	%dl, -40(%ecx,%ebp)
+ 317              	L46:
+ 318 0337 41       		incl	%ecx
+ 319 0338 83F90A   		cmpl	$10, %ecx
+ 320 033b 7EE3     		jle	L48
+ 321 033d C745D400 		movl	$0, -44(%ebp)
+ 321      000000
+ 322 0344 8B4510   		movl	16(%ebp), %eax
+ 323 0347 3945D4   		cmpl	%eax, -44(%ebp)
+ 324 034a 7D1F     		jge	L61
+ 325 034c FC       		cld
+GAS LISTING fs/fat12.gas 			page 8
+
+
+ 326 034d 89F3     		movl	%esi, %ebx
+ 327              	L53:
+ 328 034f B90B0000 		movl	$11, %ecx
+ 328      00
+ 329 0354 89DE     		movl	%ebx, %esi
+ 330 0356 8D7DD8   		leal	-40(%ebp), %edi
+ 331 0359 F3       		repe
+ 332 035a A6       		cmpsb
+ 333 035b 7418     		je	L62
+ 334 035d FF45D4   		incl	-44(%ebp)
+ 335 0360 83C320   		addl	$32, %ebx
+ 336 0363 8B4510   		movl	16(%ebp), %eax
+ 337 0366 3945D4   		cmpl	%eax, -44(%ebp)
+ 338 0369 7CE4     		jl	L53
+ 339              	L61:
+ 340 036b 83C42C   		addl	$44, %esp
+ 341 036e 31C0     		xorl	%eax, %eax
+ 342 0370 5B       		popl	%ebx
+ 343 0371 5E       		popl	%esi
+ 344 0372 5F       		popl	%edi
+ 345 0373 5D       		popl	%ebp
+ 346 0374 C3       		ret
+ 347              	L62:
+ 348 0375 83C42C   		addl	$44, %esp
+ 349 0378 89D8     		movl	%ebx, %eax
+ 350 037a 5B       		popl	%ebx
+ 351 037b 5E       		popl	%esi
+ 352 037c 5F       		popl	%edi
+ 353 037d 5D       		popl	%ebp
+ 354 037e C3       		ret
+ 355 037f 90       		.align 2
+ 356              		.p2align 4,,15
+ 357              	.globl __ZNK2fs10FAT12Image4nextEi
+ 358              		.def	__ZNK2fs10FAT12Image4nextEi;	.scl	2;	.type	32;	.endef
+ 359              	__ZNK2fs10FAT12Image4nextEi:
+ 360 0380 55       		pushl	%ebp
+ 361 0381 B9FDFFFF 		movl	$-3, %ecx
+ 361      FF
+ 362 0386 89E5     		movl	%esp, %ebp
+ 363 0388 8B550C   		movl	12(%ebp), %edx
+ 364 038b 83FA01   		cmpl	$1, %edx
+ 365 038e 7E35     		jle	L63
+ 366 0390 81FA3F0B 		cmpl	$2879, %edx
+ 366      0000
+ 367 0396 7F2D     		jg	L63
+ 368 0398 8B4508   		movl	8(%ebp), %eax
+ 369 039b 8B1490   		movl	(%eax,%edx,4), %edx
+ 370 039e 8D42FE   		leal	-2(%edx), %eax
+ 371 03a1 3DF40F00 		cmpl	$4084, %eax
+ 371      00
+ 372 03a6 89D1     		movl	%edx, %ecx
+ 373 03a8 761B     		jbe	L63
+ 374 03aa 81FAF70F 		cmpl	$4087, %edx
+ 374      0000
+ 375 03b0 B9FEFFFF 		movl	$-2, %ecx
+ 375      FF
+ 376 03b5 740E     		je	L63
+GAS LISTING fs/fat12.gas 			page 9
+
+
+ 377 03b7 8D8208F0 		leal	-4088(%edx), %eax
+ 377      FFFF
+ 378 03bd 83F808   		cmpl	$8, %eax
+ 379 03c0 19C9     		sbbl	%ecx, %ecx
+ 380 03c2 83C9FC   		orl	$-4, %ecx
+ 381              	L63:
+ 382 03c5 5D       		popl	%ebp
+ 383 03c6 89C8     		movl	%ecx, %eax
+ 384 03c8 C3       		ret
+ 385 03c9 90       		.align 2
+ 386 03ca 8DB60000 		.p2align 4,,15
+ 386      0000
+ 387              	.globl __ZN2fs10FAT12Image5lreadEiPc
+ 388              		.def	__ZN2fs10FAT12Image5lreadEiPc;	.scl	2;	.type	32;	.endef
+ 389              	__ZN2fs10FAT12Image5lreadEiPc:
+ 390 03d0 55       		pushl	%ebp
+ 391 03d1 B8FFFFFF 		movl	$-1, %eax
+ 391      FF
+ 392 03d6 89E5     		movl	%esp, %ebp
+ 393 03d8 83EC28   		subl	$40, %esp
+ 394 03db 895DF4   		movl	%ebx, -12(%ebp)
+ 395 03de 8B5D0C   		movl	12(%ebp), %ebx
+ 396 03e1 897DFC   		movl	%edi, -4(%ebp)
+ 397 03e4 8B7D08   		movl	8(%ebp), %edi
+ 398 03e7 81FB3F0B 		cmpl	$2879, %ebx
+ 398      0000
+ 399 03ed 8975F8   		movl	%esi, -8(%ebp)
+ 400 03f0 7716     		ja	L69
+ 401 03f2 8B87045A 		movl	23044(%edi), %eax
+ 401      0000
+ 402 03f8 83F801   		cmpl	$1, %eax
+ 403 03fb 0F843F01 		je	L72
+ 403      0000
+ 404 0401 83F802   		cmpl	$2, %eax
+ 405 0404 740F     		je	L73
+ 406              	L71:
+ 407 0406 31C0     		xorl	%eax, %eax
+ 408              	L69:
+ 409 0408 8B5DF4   		movl	-12(%ebp), %ebx
+ 410 040b 8B75F8   		movl	-8(%ebp), %esi
+ 411 040e 8B7DFC   		movl	-4(%ebp), %edi
+ 412 0411 89EC     		movl	%ebp, %esp
+ 413 0413 5D       		popl	%ebp
+ 414 0414 C3       		ret
+ 415              		.p2align 4,,7
+ 416              	L73:
+ 417 0415 B8398EE3 		movl	$954437177, %eax
+ 417      38
+ 418 041a F7EB     		imull	%ebx
+ 419 041c 89D8     		movl	%ebx, %eax
+ 420 041e C1F81F   		sarl	$31, %eax
+ 421 0421 89D6     		movl	%edx, %esi
+ 422 0423 C1FE03   		sarl	$3, %esi
+ 423 0426 29C6     		subl	%eax, %esi
+ 424 0428 39B70CEF 		cmpl	%esi, 126732(%edi)
+ 424      0100
+ 425 042e 0F84CE00 		je	L81
+GAS LISTING fs/fat12.gas 			page 10
+
+
+ 425      0000
+ 426 0434 E8000000 		call	__ZN6device6floppy11start_motorEv
+ 426      00
+ 427 0439 80BF10EF 		cmpb	$0, 126736(%edi)
+ 427      010000
+ 428 0440 8D970C5A 		leal	23052(%edi), %edx
+ 428      0000
+ 429 0446 8D870C7E 		leal	32268(%edi), %eax
+ 429      0000
+ 430 044c 8955EC   		movl	%edx, -20(%ebp)
+ 431 044f 8945F0   		movl	%eax, -16(%ebp)
+ 432 0452 0F85FB00 		jne	L82
+ 432      0000
+ 433              	L76:
+ 434 0458 89742404 		movl	%esi, 4(%esp)
+ 435 045c 31C0     		xorl	%eax, %eax
+ 436 045e 89442408 		movl	%eax, 8(%esp)
+ 437 0462 C7042400 		movl	$2544640, (%esp)
+ 437      D42600
+ 438 0469 E8000000 		call	__ZN6device6floppy9disk_readEiii
+ 438      00
+ 439 046e 8B55EC   		movl	-20(%ebp), %edx
+ 440 0471 B8002400 		movl	$9216, %eax
+ 440      00
+ 441 0476 89442408 		movl	%eax, 8(%esp)
+ 442 047a B800D426 		movl	$2544640, %eax
+ 442      00
+ 443 047f 891424   		movl	%edx, (%esp)
+ 444 0482 89442404 		movl	%eax, 4(%esp)
+ 445 0486 E8000000 		call	_memcpy
+ 445      00
+ 446 048b 89742404 		movl	%esi, 4(%esp)
+ 447 048f B8010000 		movl	$1, %eax
+ 447      00
+ 448 0494 89442408 		movl	%eax, 8(%esp)
+ 449 0498 C7042400 		movl	$2544640, (%esp)
+ 449      D42600
+ 450 049f E8000000 		call	__ZN6device6floppy9disk_readEiii
+ 450      00
+ 451 04a4 B8002400 		movl	$9216, %eax
+ 451      00
+ 452 04a9 B900D426 		movl	$2544640, %ecx
+ 452      00
+ 453 04ae 89442408 		movl	%eax, 8(%esp)
+ 454 04b2 8B45F0   		movl	-16(%ebp), %eax
+ 455 04b5 894C2404 		movl	%ecx, 4(%esp)
+ 456 04b9 890424   		movl	%eax, (%esp)
+ 457 04bc E8000000 		call	_memcpy
+ 457      00
+ 458 04c1 89B70CEF 		movl	%esi, 126732(%edi)
+ 458      0100
+ 459 04c7 C68710EF 		movb	$0, 126736(%edi)
+ 459      010000
+ 460 04ce E8000000 		call	__ZN6device6floppy10stop_motorEv
+ 460      00
+ 461 04d3 8D04F6   		leal	(%esi,%esi,8), %eax
+ 462 04d6 BA000200 		movl	$512, %edx
+GAS LISTING fs/fat12.gas 			page 11
+
+
+ 462      00
+ 463 04db C1E002   		sall	$2, %eax
+ 464 04de 89542408 		movl	%edx, 8(%esp)
+ 465 04e2 29C3     		subl	%eax, %ebx
+ 466 04e4 8B5510   		movl	16(%ebp), %edx
+ 467 04e7 C1E309   		sall	$9, %ebx
+ 468 04ea 8D843B0C 		leal	23052(%ebx,%edi), %eax
+ 468      5A0000
+ 469 04f1 89442404 		movl	%eax, 4(%esp)
+ 470 04f5 891424   		movl	%edx, (%esp)
+ 471 04f8 E8000000 		call	_memcpy
+ 471      00
+ 472 04fd E904FFFF 		jmp	L71
+ 472      FF
+ 473              	L81:
+ 474 0502 8D04F6   		leal	(%esi,%esi,8), %eax
+ 475 0505 C1E002   		sall	$2, %eax
+ 476 0508 29C3     		subl	%eax, %ebx
+ 477 050a C1E309   		sall	$9, %ebx
+ 478 050d 8D843B0C 		leal	23052(%ebx,%edi), %eax
+ 478      5A0000
+ 479 0514 8DB60000 		.p2align 4,,15
+ 479      00008DBF 
+ 479      00000000 
+ 480              	L80:
+ 481 0520 89442404 		movl	%eax, 4(%esp)
+ 482 0524 8B4510   		movl	16(%ebp), %eax
+ 483 0527 BA000200 		movl	$512, %edx
+ 483      00
+ 484 052c 89542408 		movl	%edx, 8(%esp)
+ 485 0530 890424   		movl	%eax, (%esp)
+ 486 0533 E8000000 		call	_memcpy
+ 486      00
+ 487 0538 E9C9FEFF 		jmp	L71
+ 487      FF
+ 488 053d 8D7600   		.p2align 4,,7
+ 489              	L72:
+ 490 0540 8B8F085A 		movl	23048(%edi), %ecx
+ 490      0000
+ 491 0546 C1E309   		sall	$9, %ebx
+ 492 0549 01CB     		addl	%ecx, %ebx
+ 493 054b 8D83003E 		leal	15872(%ebx), %eax
+ 493      0000
+ 494 0551 EBCD     		jmp	L80
+ 495              	L82:
+ 496 0553 89542404 		movl	%edx, 4(%esp)
+ 497 0557 B8002400 		movl	$9216, %eax
+ 497      00
+ 498 055c 89442408 		movl	%eax, 8(%esp)
+ 499 0560 C7042400 		movl	$2544640, (%esp)
+ 499      D42600
+ 500 0567 E8000000 		call	_memcpy
+ 500      00
+ 501 056c 31C9     		xorl	%ecx, %ecx
+ 502 056e 894C2408 		movl	%ecx, 8(%esp)
+ 503 0572 8B870CEF 		movl	126732(%edi), %eax
+ 503      0100
+GAS LISTING fs/fat12.gas 			page 12
+
+
+ 504 0578 C7042400 		movl	$2544640, (%esp)
+ 504      D42600
+ 505 057f 89442404 		movl	%eax, 4(%esp)
+ 506 0583 E8000000 		call	__ZN6device6floppy10disk_writeEiii
+ 506      00
+ 507 0588 C7042400 		movl	$2544640, (%esp)
+ 507      D42600
+ 508 058f 8D870C7E 		leal	32268(%edi), %eax
+ 508      0000
+ 509 0595 BA002400 		movl	$9216, %edx
+ 509      00
+ 510 059a 8945F0   		movl	%eax, -16(%ebp)
+ 511 059d 89542408 		movl	%edx, 8(%esp)
+ 512 05a1 89442404 		movl	%eax, 4(%esp)
+ 513 05a5 E8000000 		call	_memcpy
+ 513      00
+ 514 05aa B8010000 		movl	$1, %eax
+ 514      00
+ 515 05af 89442408 		movl	%eax, 8(%esp)
+ 516 05b3 8B870CEF 		movl	126732(%edi), %eax
+ 516      0100
+ 517 05b9 C7042400 		movl	$2544640, (%esp)
+ 517      D42600
+ 518 05c0 89442404 		movl	%eax, 4(%esp)
+ 519 05c4 E8000000 		call	__ZN6device6floppy10disk_writeEiii
+ 519      00
+ 520 05c9 E98AFEFF 		jmp	L76
+ 520      FF
+ 521              		.def	_memset;	.scl	2;	.type	32;	.endef
+ 522              		.def	_memcpy;	.scl	2;	.type	32;	.endef
+ 523              		.def	__ZN6device6floppy10stop_motorEv;	.scl	3;	.type	32;	.endef
+ 524              		.def	__ZN6device6floppy9disk_readEiii;	.scl	3;	.type	32;	.endef
+ 525              		.def	__ZN6device6floppy10disk_writeEiii;	.scl	3;	.type	32;	.endef
+ 526              		.def	__ZN6device6floppy11start_motorEv;	.scl	3;	.type	32;	.endef
+ 527              		.def	__ZN2fs10FAT12Image9checkDualEv;	.scl	3;	.type	32;	.endef
+ 528              		.def	__Z11layer_printP8LayerCtl5uid_tPc;	.scl	3;	.type	32;	.endef
+ 529              		.def	_sprintf;	.scl	2;	.type	32;	.endef
+ 530 05ce 9090     		.def	_strlen;	.scl	2;	.type	32;	.endef
+GAS LISTING fs/fat12.gas 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 fat12.cpp
+        fs/fat12.gas:7      .text:00000000 __ZN2fs5fat129nameParseEPKcPcS3_
+        fs/fat12.gas:90     .text:000000e0 __ZN2fs13fat12_readfatEPiPKh
+        fs/fat12.gas:131    .text:00000150 __ZN2fs10FAT12ImageC2Ev
+        fs/fat12.gas:140    .text:00000160 __ZN2fs10FAT12ImageC1Ev
+        fs/fat12.gas:149    .text:00000170 __ZN2fs10FAT12Image5chmodENS0_12reading_modeE
+        fs/fat12.gas:207    .text:000001f0 __ZN2fs10FAT12Image4ctorEPh
+        fs/fat12.gas:266    .text:000002c0 __ZN2fs10FAT12Image7getInfoEiiPKcS2_
+        fs/fat12.gas:359    .text:00000380 __ZNK2fs10FAT12Image4nextEi
+        fs/fat12.gas:389    .text:000003d0 __ZN2fs10FAT12Image5lreadEiPc
+        fs/fat12.gas:161    .text:00000190 __ZN2fs10FAT12Image9checkDualEv
+
+UNDEFINED SYMBOLS
+_l_console
+_layerctl
+_memset
+_memcpy
+__ZN6device6floppy10stop_motorEv
+__ZN6device6floppy9disk_readEiii
+__ZN6device6floppy10disk_writeEiii
+__ZN6device6floppy11start_motorEv
+__Z11layer_printP8LayerCtl5uid_tPc
+_sprintf
+_strlen

@@ -1,0 +1,603 @@
+	.file	"proc.cpp"
+	.text
+	.align 2
+	.p2align 4,,15
+.globl __ZN4proc7ProcCtlC2Ev
+	.def	__ZN4proc7ProcCtlC2Ev;	.scl	2;	.type	32;	.endef
+__ZN4proc7ProcCtlC2Ev:
+	pushl	%ebp
+	movl	%esp, %ebp
+	popl	%ebp
+	ret
+	.align 2
+	.p2align 4,,15
+.globl __ZN4proc7ProcCtlC1Ev
+	.def	__ZN4proc7ProcCtlC1Ev;	.scl	2;	.type	32;	.endef
+__ZN4proc7ProcCtlC1Ev:
+	pushl	%ebp
+	movl	%esp, %ebp
+	popl	%ebp
+	ret
+	.section .rdata,"dr"
+LC0:
+	.ascii "ProcCtl::ctor\12\0"
+	.text
+	.align 2
+	.p2align 4,,15
+.globl __ZN4proc7ProcCtl4ctorEv
+	.def	__ZN4proc7ProcCtl4ctorEv;	.scl	2;	.type	32;	.endef
+__ZN4proc7ProcCtl4ctorEv:
+	pushl	%ebp
+	movl	$LC0, %eax
+	movl	%esp, %ebp
+	pushl	%esi
+	pushl	%ebx
+	subl	$32, %esp
+	movl	8(%ebp), %ebx
+	movl	%eax, 8(%esp)
+	movl	_l_console, %eax
+	movl	%eax, 4(%esp)
+	movl	_layerctl, %eax
+	movl	%eax, (%esp)
+	call	__Z11layer_printP8LayerCtl5uid_tPc
+	xorl	%eax, %eax
+	movl	$500, %edx
+	.p2align 4,,15
+L8:
+	movl	$-1, (%ebx,%eax,4)
+	incl	%eax
+	cmpl	%eax, %edx
+	jg	L8
+	movl	$-1, -16(%ebp)
+	xorl	%ecx, %ecx
+	movl	$100, %esi
+	movl	$0, -12(%ebp)
+	.p2align 4,,15
+L13:
+	movl	-16(%ebp), %eax
+	movl	-12(%ebp), %edx
+	movl	%eax, 2000(%ebx,%ecx,8)
+	movl	%edx, 2004(%ebx,%ecx,8)
+	incl	%ecx
+	cmpl	%ecx, %esi
+	jg	L13
+	addl	$32, %esp
+	popl	%ebx
+	popl	%esi
+	popl	%ebp
+	ret
+	.align 2
+	.p2align 4,,15
+.globl __ZN4proc7ProcCtl6createEiPi
+	.def	__ZN4proc7ProcCtl6createEiPi;	.scl	2;	.type	32;	.endef
+__ZN4proc7ProcCtl6createEiPi:
+	pushl	%ebp
+	xorl	%eax, %eax
+	movl	%esp, %ebp
+	pushl	%edi
+	movl	$100, %edx
+	pushl	%esi
+	pushl	%ebx
+	subl	$12, %esp
+	movl	8(%ebp), %ebx
+	movl	16(%ebp), %edi
+	jmp	L25
+L45:
+	incl	%eax
+	cmpl	%eax, %edx
+	jle	L44
+L25:
+	cmpl	$-1, 2000(%ebx,%eax,8)
+	jne	L45
+	cmpl	$-1, %eax
+	movl	%eax, %esi
+	je	L44
+	movl	_timerctl, %eax
+	cmpl	$-1, %eax
+	je	L46
+L27:
+	movl	%eax, 2000(%ebx,%esi,8)
+	movl	$8208, (%esp)
+	call	__Z15memmng_alloc_4ki
+	movl	%eax, 2004(%ebx,%esi,8)
+	movl	%eax, %edx
+	xorl	%ecx, %ecx
+L32:
+	movl	(%edi,%ecx,4), %eax
+	movl	%eax, (%edx,%ecx,4)
+	incl	%ecx
+	cmpl	$2, %ecx
+	jle	L32
+	movl	$3, %eax
+	movl	$1024, %ecx
+	.p2align 4,,15
+L37:
+	movl	$-1, (%edx,%eax,4)
+	incl	%eax
+	cmpl	%eax, %ecx
+	jg	L37
+	movl	12(%ebp), %eax
+	movl	%esi, (%ebx,%eax,4)
+	addl	$12, %esp
+	movl	%esi, %eax
+	popl	%ebx
+	popl	%esi
+	popl	%edi
+	popl	%ebp
+	ret
+L46:
+	movl	$-2, %eax
+	jmp	L27
+L44:
+	addl	$12, %esp
+	movl	$-1, %eax
+	popl	%ebx
+	popl	%esi
+	popl	%edi
+	popl	%ebp
+	ret
+	.align 2
+	.p2align 4,,15
+.globl __ZN4proc8ProcData4initEiPviS1_
+	.def	__ZN4proc8ProcData4initEiPviS1_;	.scl	2;	.type	32;	.endef
+__ZN4proc8ProcData4initEiPviS1_:
+	pushl	%ebp
+	movl	%esp, %ebp
+	movl	8(%ebp), %edx
+	movl	12(%ebp), %eax
+	movl	%eax, 8192(%edx)
+	movl	16(%ebp), %eax
+	movl	%eax, 8196(%edx)
+	movl	24(%ebp), %eax
+	movl	%eax, 8204(%edx)
+	popl	%ebp
+	ret
+	.section .rdata,"dr"
+	.align 4
+LC1:
+	.ascii "init:procctl=%08x,sizeof(ProcCtl)=%08x\12\0"
+	.text
+	.align 2
+	.p2align 4,,15
+.globl __ZN4proc7ProcCtl4initEv
+	.def	__ZN4proc7ProcCtl4initEv;	.scl	2;	.type	32;	.endef
+__ZN4proc7ProcCtl4initEv:
+	pushl	%ebp
+	movl	%esp, %ebp
+	pushl	%ebx
+	subl	$276, %esp
+	leal	-264(%ebp), %ebx
+	movl	$2800, (%esp)
+	call	__Z15memmng_alloc_4ki
+	movl	%eax, 8(%esp)
+	movl	$2800, %ecx
+	movl	$LC1, %edx
+	movl	%ecx, 12(%esp)
+	movl	%edx, 4(%esp)
+	movl	%ebx, (%esp)
+	movl	%eax, __ZN4proc7procctlE
+	call	_sprintf
+	movl	%ebx, 8(%esp)
+	movl	_l_console, %eax
+	movl	%eax, 4(%esp)
+	movl	_layerctl, %eax
+	movl	%eax, (%esp)
+	call	__Z11layer_printP8LayerCtl5uid_tPc
+	movl	__ZN4proc7procctlE, %eax
+	movl	%eax, (%esp)
+	call	__ZN4proc7ProcCtl4ctorEv
+	addl	$276, %esp
+	popl	%ebx
+	popl	%ebp
+	ret
+	.section .rdata,"dr"
+	.align 4
+LC2:
+	.ascii "ProcCtl::current pid_tbl=%08x,pd=%08x,prid=%d\12\0"
+	.text
+	.align 2
+	.p2align 4,,15
+.globl __ZNK4proc7ProcCtl7currentEv
+	.def	__ZNK4proc7ProcCtl7currentEv;	.scl	2;	.type	32;	.endef
+__ZNK4proc7ProcCtl7currentEv:
+	pushl	%ebp
+	movl	%esp, %ebp
+	subl	$296, %esp
+	movl	%ebx, -8(%ebp)
+	movl	8(%ebp), %ebx
+	movl	%esi, -4(%ebp)
+	call	__Z14thread_currentv
+	movl	(%ebx,%eax,4), %eax
+	movl	2004(%ebx,%eax,8), %esi
+	movl	%ebx, 8(%esp)
+	movl	$LC2, %ebx
+	movl	%ebx, 4(%esp)
+	leal	-264(%ebp), %ebx
+	movl	%esi, 12(%esp)
+	movl	%ebx, (%esp)
+	movl	%eax, 16(%esp)
+	call	_sprintf
+	movl	%ebx, 8(%esp)
+	movl	_l_console, %eax
+	movl	%eax, 4(%esp)
+	movl	_layerctl, %eax
+	movl	%eax, (%esp)
+	call	__Z11layer_printP8LayerCtl5uid_tPc
+	movl	%esi, %eax
+	movl	-8(%ebp), %ebx
+	movl	-4(%ebp), %esi
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.section .rdata,"dr"
+LC3:
+	.ascii "ProcData::open(%s,%x)\12\0"
+	.text
+	.align 2
+	.p2align 4,,15
+.globl __ZN4proc8ProcData4openEPKci
+	.def	__ZN4proc8ProcData4openEPKci;	.scl	2;	.type	32;	.endef
+__ZN4proc8ProcData4openEPKci:
+	pushl	%ebp
+	movl	%esp, %ebp
+	pushl	%esi
+	pushl	%ebx
+	subl	$304, %esp
+	leal	-264(%ebp), %ebx
+	movl	%ebx, (%esp)
+	movl	16(%ebp), %eax
+	movl	12(%ebp), %esi
+	movl	%eax, 12(%esp)
+	movl	$LC3, %eax
+	movl	%esi, 8(%esp)
+	movl	%eax, 4(%esp)
+	call	_sprintf
+	movl	%ebx, 8(%esp)
+	movl	_l_console, %eax
+	movl	%eax, 4(%esp)
+	movl	_layerctl, %eax
+	movl	%eax, (%esp)
+	call	__Z11layer_printP8LayerCtl5uid_tPc
+	movl	%esi, (%esp)
+	leal	-284(%ebp), %eax
+	movl	%eax, 8(%esp)
+	leal	-280(%ebp), %eax
+	movl	%eax, 4(%esp)
+	call	__ZN2fs5fat129nameParseEPKcPcS3_
+	addl	$304, %esp
+	movl	$-1, %eax
+	popl	%ebx
+	popl	%esi
+	popl	%ebp
+	ret
+	.section .rdata,"dr"
+	.align 4
+LC4:
+	.ascii "ProcData::write this=%08x,fd_tbl=%08x,fd=%d,length=%x,dev_id=%x\12\0"
+	.text
+	.align 2
+	.p2align 4,,15
+.globl __ZN4proc8ProcData5writeEiPvi
+	.def	__ZN4proc8ProcData5writeEiPvi;	.scl	2;	.type	32;	.endef
+__ZN4proc8ProcData5writeEiPvi:
+	pushl	%ebp
+	movl	%esp, %ebp
+	subl	$328, %esp
+	movl	%ebx, -12(%ebp)
+	movl	8(%ebp), %eax
+	leal	-280(%ebp), %ebx
+	movl	%esi, -8(%ebp)
+	movl	12(%ebp), %edx
+	movl	20(%ebp), %esi
+	movl	%edi, -4(%ebp)
+	movl	(%eax,%edx,4), %edi
+	movl	%eax, 12(%esp)
+	movl	%eax, 8(%esp)
+	movl	$LC4, %eax
+	movl	%edx, 16(%esp)
+	movl	%edi, 24(%esp)
+	movl	%esi, 20(%esp)
+	movl	%ebx, (%esp)
+	movl	%eax, 4(%esp)
+	call	_sprintf
+	movl	%ebx, 8(%esp)
+	movl	_l_console, %eax
+	movl	%eax, 4(%esp)
+	movl	_layerctl, %eax
+	movl	%eax, (%esp)
+	call	__Z11layer_printP8LayerCtl5uid_tPc
+	movl	%esi, -288(%ebp)
+	movl	16(%ebp), %eax
+	movl	%edi, 4(%esp)
+	movl	%eax, -284(%ebp)
+	leal	-288(%ebp), %eax
+	movl	%eax, 12(%esp)
+	movl	$2, %eax
+	movl	%eax, 8(%esp)
+	movl	__ZN2io5iomng5iomngE, %eax
+	movl	%eax, (%esp)
+	call	__ZN2io5iomng9IOManager6accessEiiPv
+	movl	-12(%ebp), %ebx
+	movl	-8(%ebp), %esi
+	movl	-4(%ebp), %edi
+	movl	%ebp, %esp
+	popl	%ebp
+	ret
+	.section .rdata,"dr"
+LC5:
+	.ascii "app:name=%s,name=%s,\0"
+LC6:
+	.ascii "size=%x\12\0"
+LC7:
+	.ascii "app.entry=%08x\12\0"
+LC9:
+	.ascii "Application : app_thid=%d\12\0"
+LC10:
+	.ascii "start_app:screen=%d\12\0"
+	.text
+	.align 2
+	.p2align 4,,15
+.globl __ZN4proc7ProcCtl9start_appEPKc
+	.def	__ZN4proc7ProcCtl9start_appEPKc;	.scl	2;	.type	32;	.endef
+__ZN4proc7ProcCtl9start_appEPKc:
+	pushl	%ebp
+	cld
+	movl	%esp, %ebp
+	pushl	%edi
+	movl	$2, %ecx
+	pushl	%esi
+	leal	-40(%ebp), %edi
+	pushl	%ebx
+	subl	$364, %esp
+	leal	-316(%ebp), %esi
+	movl	8(%ebp), %eax
+	leal	-40(%ebp), %ebx
+	movl	%eax, -320(%ebp)
+	xorl	%eax, %eax
+	rep
+	stosl
+	movb	$0, (%edi)
+	xorl	%eax, %eax
+	movl	$9728, %edi
+	movl	%eax, -316(%ebp)
+	movl	12(%ebp), %eax
+	movl	%esi, 8(%esp)
+	movl	%ebx, 4(%esp)
+	movl	%eax, (%esp)
+	call	__ZN2fs5fat129nameParseEPKcPcS3_
+	movl	%esi, 16(%esp)
+	movl	$224, %eax
+	movl	%eax, 8(%esp)
+	movl	_fat12img, %eax
+	movl	%ebx, 12(%esp)
+	movl	%edi, 4(%esp)
+	movl	%eax, (%esp)
+	call	__ZN2fs10FAT12Image7getInfoEiiPKcS2_
+	movl	%esi, 12(%esp)
+	leal	-296(%ebp), %edx
+	movl	$LC5, %esi
+	movl	%ebx, 8(%esp)
+	movl	%edx, (%esp)
+	movl	%eax, -324(%ebp)
+	movl	%esi, 4(%esp)
+	call	_sprintf
+	leal	-296(%ebp), %eax
+	movl	%eax, 8(%esp)
+	movl	_l_console, %eax
+	movl	%eax, 4(%esp)
+	movl	_layerctl, %eax
+	movl	%eax, (%esp)
+	call	__Z11layer_printP8LayerCtl5uid_tPc
+	movl	-324(%ebp), %ebx
+	movl	$-1, %eax
+	testl	%ebx, %ebx
+	je	L53
+	movl	-324(%ebp), %edx
+	movl	$LC6, %ecx
+	leal	-296(%ebp), %eax
+	movl	28(%edx), %edx
+	movl	%ecx, 4(%esp)
+	movl	%eax, (%esp)
+	movl	%edx, -328(%ebp)
+	movl	%edx, 8(%esp)
+	call	_sprintf
+	movl	_l_console, %eax
+	leal	-296(%ebp), %edx
+	movl	%edx, 8(%esp)
+	movl	%eax, 4(%esp)
+	movl	_layerctl, %eax
+	movl	%eax, (%esp)
+	call	__Z11layer_printP8LayerCtl5uid_tPc
+	movl	-328(%ebp), %eax
+	movl	%eax, (%esp)
+	call	__Z15memmng_alloc_4ki
+	movl	%eax, 8(%esp)
+	movl	%eax, %edi
+	movl	-328(%ebp), %edx
+	movl	-324(%ebp), %eax
+	movl	%edx, 4(%esp)
+	movl	%eax, (%esp)
+	call	__ZN7tmpCode11readFileAllEPN2fs9FAT12InfoEiPc
+	movl	(%edi), %edx
+	movl	%edx, -332(%ebp)
+	movl	%edx, (%esp)
+	call	__Z15memmng_alloc_4ki
+	movl	%eax, -336(%ebp)
+	movl	-332(%ebp), %eax
+	movl	%eax, (%esp)
+	call	__Z15memmng_alloc_4ki
+	movl	%eax, -340(%ebp)
+	movl	12(%edi), %edx
+	movl	20(%edi), %ebx
+	movl	-336(%ebp), %eax
+	movl	16(%edi), %esi
+	movl	%edx, -344(%ebp)
+	movl	%ebx, 8(%esp)
+	addl	%edi, %ebx
+	movl	%edi, 4(%esp)
+	movl	%eax, (%esp)
+	call	_memcpy
+	movl	%esi, 8(%esp)
+	movl	-340(%ebp), %edx
+	movl	-344(%ebp), %eax
+	movl	%ebx, 4(%esp)
+	xorl	%ebx, %ebx
+	addl	%edx, %eax
+	movl	%eax, (%esp)
+	call	_memcpy
+	movl	$27, %eax
+	leal	-296(%ebp), %edx
+	movl	%eax, 8(%esp)
+	movl	$LC7, %eax
+	movl	%edx, (%esp)
+	movl	%eax, 4(%esp)
+	call	_sprintf
+	leal	-296(%ebp), %eax
+	movl	%eax, 8(%esp)
+	movl	_l_console, %eax
+	movl	%eax, 4(%esp)
+	movl	_layerctl, %eax
+	movl	%eax, (%esp)
+	call	__Z11layer_printP8LayerCtl5uid_tPc
+	call	__Z12thread_allocv
+	movl	_ptr_thctl, %edx
+	movl	%eax, %esi
+	addl	$8, %edx
+	cmpl	$499, %eax
+	jbe	L60
+L57:
+	movl	$514, 36(%ebx)
+	movl	-344(%ebp), %edx
+	leal	4024(,%esi,8), %eax
+	movl	%eax, 96(%ebx)
+	xorl	%eax, %eax
+	movl	%eax, 128(%ebx)
+	movl	$16538, %eax
+	movl	%edx, 56(%ebx)
+	movl	$27, 32(%ebx)
+	movl	$1073741824, 100(%ebx)
+	movl	$12, 72(%ebx)
+	movl	$4, 76(%ebx)
+	movl	$12, 80(%ebx)
+	movl	$12, 84(%ebx)
+	movl	$12, 88(%ebx)
+	movl	$12, 92(%ebx)
+	movl	$2, 104(%ebx)
+	movl	$0, 124(%ebx)
+	movl	%eax, 12(%esp)
+	movl	-336(%ebp), %eax
+	movl	%eax, 8(%esp)
+	movl	$65535, %eax
+	movl	%eax, 4(%esp)
+	leal	108(%ebx), %eax
+	movl	%eax, (%esp)
+	call	__Z12set_segmdescP18segment_descriptorjii
+	movl	-340(%ebp), %edx
+	movl	$16530, %ecx
+	leal	116(%ebx), %eax
+	movl	%ecx, 12(%esp)
+	movl	%eax, (%esp)
+	movl	%edx, 8(%esp)
+	movl	$65535, %edx
+	movl	%edx, 4(%esp)
+	call	__Z12set_segmdescP18segment_descriptorjii
+	movl	%esi, (%esp)
+	call	__Z10thread_addi
+	movl	%esi, (%esp)
+	call	__Z14thread_suspendi
+	movl	%esi, 8(%esp)
+	movl	$LC9, %eax
+	movl	%eax, 4(%esp)
+	leal	-296(%ebp), %eax
+	movl	%eax, (%esp)
+	call	_sprintf
+	movl	_l_console, %eax
+	leal	-296(%ebp), %edx
+	movl	%edx, 8(%esp)
+	movl	%eax, 4(%esp)
+	movl	_layerctl, %eax
+	movl	%eax, (%esp)
+	call	__Z11layer_printP8LayerCtl5uid_tPc
+	movl	%edi, (%esp)
+	movl	-328(%ebp), %eax
+	movl	%eax, 4(%esp)
+	call	__Z14memmng_free_4kPvi
+	movl	__ZN2io5iomng6screenE, %eax
+	leal	-296(%ebp), %edx
+	movl	%edx, (%esp)
+	movl	%eax, 8(%esp)
+	movl	$LC10, %eax
+	movl	%eax, 4(%esp)
+	call	_sprintf
+	leal	-296(%ebp), %eax
+	movl	%eax, 8(%esp)
+	movl	_l_console, %eax
+	movl	%eax, 4(%esp)
+	movl	_layerctl, %eax
+	movl	%eax, (%esp)
+	call	__Z11layer_printP8LayerCtl5uid_tPc
+	movl	%esi, 4(%esp)
+	movl	$-1, %eax
+	movl	-320(%ebp), %edx
+	movl	%eax, -312(%ebp)
+	movl	__ZN2io5iomng6screenE, %eax
+	movl	%edx, (%esp)
+	movl	%eax, -308(%ebp)
+	movl	%eax, -304(%ebp)
+	leal	-312(%ebp), %eax
+	movl	%eax, 8(%esp)
+	call	__ZN4proc7ProcCtl6createEiPi
+	movl	-340(%ebp), %edx
+	movl	%edx, 16(%esp)
+	movl	-332(%ebp), %edx
+	movl	%edx, 12(%esp)
+	movl	-336(%ebp), %edx
+	movl	%edx, 8(%esp)
+	movl	-332(%ebp), %edx
+	movl	%edx, 4(%esp)
+	movl	-320(%ebp), %edx
+	movl	2004(%edx,%eax,8), %eax
+	movl	%eax, (%esp)
+	call	__ZN4proc8ProcData4initEiPviS1_
+	call	_load_eflags
+	movl	%eax, %ebx
+	call	_io_cli
+	movl	%esi, (%esp)
+	call	__Z13thread_resumei
+	call	__Z15dump_threadlistv
+	movl	%ebx, (%esp)
+	call	_store_eflags
+	xorl	%eax, %eax
+L53:
+	addl	$364, %esp
+	popl	%ebx
+	popl	%esi
+	popl	%edi
+	popl	%ebp
+	ret
+	.p2align 4,,7
+L60:
+	sall	$5, %eax
+	addl	%esi, %eax
+	leal	(%edx,%eax,4), %ebx
+	jmp	L57
+	.def	_memcpy;	.scl	2;	.type	32;	.endef
+	.def	__ZN2io5iomng9IOManager6accessEiiPv;	.scl	3;	.type	32;	.endef
+	.def	__Z14thread_currentv;	.scl	3;	.type	32;	.endef
+	.def	_store_eflags;	.scl	3;	.type	32;	.endef
+	.def	__Z15dump_threadlistv;	.scl	3;	.type	32;	.endef
+	.def	__Z13thread_resumei;	.scl	3;	.type	32;	.endef
+	.def	_io_cli;	.scl	3;	.type	32;	.endef
+	.def	_load_eflags;	.scl	3;	.type	32;	.endef
+	.def	__ZN4proc8ProcData4initEiPviS1_;	.scl	3;	.type	32;	.endef
+	.def	__Z14memmng_free_4kPvi;	.scl	3;	.type	32;	.endef
+	.def	__Z14thread_suspendi;	.scl	3;	.type	32;	.endef
+	.def	__Z10thread_addi;	.scl	3;	.type	32;	.endef
+	.def	__Z12set_segmdescP18segment_descriptorjii;	.scl	3;	.type	32;	.endef
+	.def	__Z12thread_allocv;	.scl	3;	.type	32;	.endef
+	.def	__ZN7tmpCode11readFileAllEPN2fs9FAT12InfoEiPc;	.scl	3;	.type	32;	.endef
+	.def	__Z15memmng_alloc_4ki;	.scl	3;	.type	32;	.endef
+	.def	_sprintf;	.scl	2;	.type	32;	.endef
+	.def	__ZN2fs10FAT12Image7getInfoEiiPKcS2_;	.scl	3;	.type	32;	.endef
+	.def	__ZN2fs5fat129nameParseEPKcPcS3_;	.scl	3;	.type	32;	.endef
+	.def	__Z11layer_printP8LayerCtl5uid_tPc;	.scl	3;	.type	32;	.endef

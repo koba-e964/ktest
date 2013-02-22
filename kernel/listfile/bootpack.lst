@@ -1,0 +1,1554 @@
+GAS LISTING bootpack.gas 			page 1
+
+
+   1              		.file	"bootpack.cpp"
+   2              	.globl _closing
+   3              		.data
+   4              		.align 32
+   5              	_closing:
+   6 0000 2E2E2E2E 		.ascii ".................*............*...*..........*.....*........*.......*......*.........*....
+   6      2E2E2E2E 
+   6      2E2E2E2E 
+   6      2E2E2E2E 
+   6      2E2A2E2E 
+   7 0101 00000000 		.section .rdata,"dr"
+   7      00000000 
+   7      00000000 
+   7      00000000 
+   7      00000000 
+   8              	LC0:
+   9 0000 25782C63 		.ascii "%x,cur=%d\12\0"
+   9      75723D25 
+   9      640A00
+  10              		.text
+  11              		.align 2
+  12              		.p2align 4,,15
+  13              	.globl __Z8inf_loopPv
+  14              		.def	__Z8inf_loopPv;	.scl	2;	.type	32;	.endef
+  15              	__Z8inf_loopPv:
+  16 0000 55       		pushl	%ebp
+  17 0001 89E5     		movl	%esp, %ebp
+  18 0003 56       		pushl	%esi
+  19 0004 8DB5F8FE 		leal	-264(%ebp), %esi
+  19      FFFF
+  20 000a 53       		pushl	%ebx
+  21 000b 81EC1001 		subl	$272, %esp
+  21      0000
+  22 0011 31DB     		xorl	%ebx, %ebx
+  23 0013 8DB60000 		.p2align 4,,15
+  23      00008DBC 
+  23      27000000 
+  23      00
+  24              	L2:
+  25 0020 E8000000 		call	__Z14thread_currentv
+  25      00
+  26 0025 8944240C 		movl	%eax, 12(%esp)
+  27 0029 43       		incl	%ebx
+  28 002a B8000000 		movl	$LC0, %eax
+  28      00
+  29 002f 895C2408 		movl	%ebx, 8(%esp)
+  30 0033 89442404 		movl	%eax, 4(%esp)
+  31 0037 893424   		movl	%esi, (%esp)
+  32 003a E8000000 		call	_sprintf
+  32      00
+  33 003f C7042464 		movl	$100, (%esp)
+  33      000000
+  34 0046 E8000000 		call	__Z6uSleepj
+  34      00
+  35 004b EBD3     		jmp	L2
+  36              		.section .rdata,"dr"
+  37              	LC1:
+GAS LISTING bootpack.gas 			page 2
+
+
+  38 000b 636C00   		.ascii "cl\0"
+  39              	LC2:
+  40 000e 0D0A6368 		.ascii "\15\12child-destroyed\15\12\0"
+  40      696C642D 
+  40      64657374 
+  40      726F7965 
+  40      640D0A00 
+  41              		.text
+  42 004d 90       		.align 2
+  43 004e 89F6     		.p2align 4,,15
+  44              	.globl __Z20closingButtonHandleriiii
+  45              		.def	__Z20closingButtonHandleriiii;	.scl	2;	.type	32;	.endef
+  46              	__Z20closingButtonHandleriiii:
+  47 0050 55       		pushl	%ebp
+  48 0051 89E5     		movl	%esp, %ebp
+  49 0053 83EC38   		subl	$56, %esp
+  50 0056 8B450C   		movl	12(%ebp), %eax
+  51 0059 3D010100 		cmpl	$257, %eax
+  51      00
+  52 005e 7450     		je	L9
+  53 0060 3D030100 		cmpl	$259, %eax
+  53      00
+  54 0065 7409     		je	L10
+  55 0067 C9       		leave
+  56 0068 31C0     		xorl	%eax, %eax
+  57 006a C3       		ret
+  58 006b 908D7426 		.p2align 4,,7
+  58      00
+  59              	L10:
+  60 0070 B90B0000 		movl	$LC1, %ecx
+  60      00
+  61 0075 894C2408 		movl	%ecx, 8(%esp)
+  62 0079 A1000000 		movl	_l_console, %eax
+  62      00
+  63 007e 89442404 		movl	%eax, 4(%esp)
+  64 0082 A1000000 		movl	_layerctl, %eax
+  64      00
+  65 0087 890424   		movl	%eax, (%esp)
+  66 008a E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+  66      00
+  67 008f 8D45D8   		leal	-40(%ebp), %eax
+  68 0092 89442404 		movl	%eax, 4(%esp)
+  69 0096 8B4508   		movl	8(%ebp), %eax
+  70 0099 890424   		movl	%eax, (%esp)
+  71 009c E8000000 		call	__Z13getWindowInfoiP10WindowInfo
+  71      00
+  72 00a1 8B45EC   		movl	-20(%ebp), %eax
+  73 00a4 890424   		movl	%eax, (%esp)
+  74 00a7 E8000000 		call	__Z15t_DestroyWindowi
+  74      00
+  75 00ac C9       		leave
+  76 00ad 31C0     		xorl	%eax, %eax
+  77 00af C3       		ret
+  78              		.p2align 4,,7
+  79              	L9:
+  80 00b0 BA0E0000 		movl	$LC2, %edx
+  80      00
+GAS LISTING bootpack.gas 			page 3
+
+
+  81 00b5 89542408 		movl	%edx, 8(%esp)
+  82 00b9 A1000000 		movl	_l_console, %eax
+  82      00
+  83 00be 89442404 		movl	%eax, 4(%esp)
+  84 00c2 A1000000 		movl	_layerctl, %eax
+  84      00
+  85 00c7 890424   		movl	%eax, (%esp)
+  86 00ca E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+  86      00
+  87 00cf C9       		leave
+  88 00d0 31C0     		xorl	%eax, %eax
+  89 00d2 C3       		ret
+  90              		.section .rdata,"dr"
+  91 0022 0000     		.align 4
+  92              	LC7:
+  93 0024 72657020 		.ascii "rep handle=%d,x=%d,y=%d,width=%d,height=%d\12\0"
+  93      68616E64 
+  93      6C653D25 
+  93      642C783D 
+  93      25642C79 
+  94              	LC4:
+  95 0050 4C00     		.ascii "L\0"
+  96              	LC6:
+  97 0052 64657374 		.ascii "destroyed\12\0"
+  97      726F7965 
+  97      640A00
+  98              	LC5:
+  99 005d 7200     		.ascii "r\0"
+ 100 005f 00       		.align 4
+ 101              	LC3:
+ 102 0060 63726561 		.ascii "create handle=%d,x=%d,y=%d,width=%d,height=%d\12\0"
+ 102      74652068 
+ 102      616E646C 
+ 102      653D2564 
+ 102      2C783D25 
+ 103              		.text
+ 104 00d3 90       		.align 2
+ 105 00d4 8DB60000 		.p2align 4,,15
+ 105      00008DBF 
+ 105      00000000 
+ 106              	.globl __Z8sampleWHiiii
+ 107              		.def	__Z8sampleWHiiii;	.scl	2;	.type	32;	.endef
+ 108              	__Z8sampleWHiiii:
+ 109 00e0 55       		pushl	%ebp
+ 110 00e1 89E5     		movl	%esp, %ebp
+ 111 00e3 57       		pushl	%edi
+ 112 00e4 56       		pushl	%esi
+ 113 00e5 53       		pushl	%ebx
+ 114 00e6 81ECDC03 		subl	$988, %esp
+ 114      0000
+ 115 00ec 8B450C   		movl	12(%ebp), %eax
+ 116 00ef 8B5D10   		movl	16(%ebp), %ebx
+ 117 00f2 3D020100 		cmpl	$258, %eax
+ 117      00
+ 118 00f7 7413     		je	L11
+ 119 00f9 7F1E     		jg	L28
+ 120 00fb 3D000100 		cmpl	$256, %eax
+GAS LISTING bootpack.gas 			page 4
+
+
+ 120      00
+ 121 0100 0F846F01 		je	L14
+ 121      0000
+ 122 0106 0F8F5101 		jg	L25
+ 122      0000
+ 123              	L11:
+ 124 010c 81C4DC03 		addl	$988, %esp
+ 124      0000
+ 125 0112 31C0     		xorl	%eax, %eax
+ 126 0114 5B       		popl	%ebx
+ 127 0115 5E       		popl	%esi
+ 128 0116 5F       		popl	%edi
+ 129 0117 5D       		popl	%ebp
+ 130 0118 C3       		ret
+ 131              	L28:
+ 132 0119 3D040100 		cmpl	$260, %eax
+ 132      00
+ 133 011e 0F844301 		je	L24
+ 133      0000
+ 134 0124 7C6D     		jl	L22
+ 135 0126 3D080100 		cmpl	$264, %eax
+ 135      00
+ 136 012b 75DF     		jne	L11
+ 137 012d 0FB74514 		movzwl	20(%ebp),%eax
+ 138 0131 0FB7D3   		movzwl	%bx,%edx
+ 139 0134 C1FB10   		sarl	$16, %ebx
+ 140 0137 C17D1410 		sarl	$16, 20(%ebp)
+ 141 013b 8DB598FC 		leal	-872(%ebp), %esi
+ 141      FFFF
+ 142 0141 8B4D14   		movl	20(%ebp), %ecx
+ 143 0144 895C2410 		movl	%ebx, 16(%esp)
+ 144 0148 BB240000 		movl	$LC7, %ebx
+ 144      00
+ 145 014d 894C2418 		movl	%ecx, 24(%esp)
+ 146 0151 89442414 		movl	%eax, 20(%esp)
+ 147 0155 8954240C 		movl	%edx, 12(%esp)
+ 148 0159 8B4508   		movl	8(%ebp), %eax
+ 149 015c 895C2404 		movl	%ebx, 4(%esp)
+ 150 0160 893424   		movl	%esi, (%esp)
+ 151 0163 89442408 		movl	%eax, 8(%esp)
+ 152 0167 E8000000 		call	_sprintf
+ 152      00
+ 153              	L32:
+ 154 016c 89742408 		movl	%esi, 8(%esp)
+ 155              	L31:
+ 156 0170 A1000000 		movl	_l_console, %eax
+ 156      00
+ 157 0175 89442404 		movl	%eax, 4(%esp)
+ 158 0179 A1000000 		movl	_layerctl, %eax
+ 158      00
+ 159 017e 890424   		movl	%eax, (%esp)
+ 160 0181 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 160      00
+ 161 0186 81C4DC03 		addl	$988, %esp
+ 161      0000
+ 162 018c 31C0     		xorl	%eax, %eax
+ 163 018e 5B       		popl	%ebx
+GAS LISTING bootpack.gas 			page 5
+
+
+ 164 018f 5E       		popl	%esi
+ 165 0190 5F       		popl	%edi
+ 166 0191 5D       		popl	%ebp
+ 167 0192 C3       		ret
+ 168              	L22:
+ 169 0193 A1000000 		movl	_l_console, %eax
+ 169      00
+ 170 0198 BE500000 		movl	$LC4, %esi
+ 170      00
+ 171 019d 8D7BFF   		leal	-1(%ebx), %edi
+ 172 01a0 89742408 		movl	%esi, 8(%esp)
+ 173 01a4 89442404 		movl	%eax, 4(%esp)
+ 174 01a8 A1000000 		movl	_layerctl, %eax
+ 174      00
+ 175 01ad 890424   		movl	%eax, (%esp)
+ 176 01b0 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 176      00
+ 177 01b5 8D8568FC 		leal	-920(%ebp), %eax
+ 177      FFFF
+ 178 01bb 89442404 		movl	%eax, 4(%esp)
+ 179 01bf 8B4D08   		movl	8(%ebp), %ecx
+ 180 01c2 890C24   		movl	%ecx, (%esp)
+ 181 01c5 E8000000 		call	__Z13getWindowInfoiP10WindowInfo
+ 181      00
+ 182 01ca 8B8D68FC 		movl	-920(%ebp), %ecx
+ 182      FFFF
+ 183 01d0 8B8570FC 		movl	-912(%ebp), %eax
+ 183      FFFF
+ 184 01d6 8B956CFC 		movl	-916(%ebp), %edx
+ 184      FFFF
+ 185 01dc 01C8     		addl	%ecx, %eax
+ 186 01de 8D48EC   		leal	-20(%eax), %ecx
+ 187 01e1 83E804   		subl	$4, %eax
+ 188 01e4 894C2410 		movl	%ecx, 16(%esp)
+ 189 01e8 8D7203   		leal	3(%edx), %esi
+ 190 01eb 83C212   		addl	$18, %edx
+ 191 01ee 898D88FC 		movl	%ecx, -888(%ebp)
+ 191      FFFF
+ 192 01f4 8B4D14   		movl	20(%ebp), %ecx
+ 193 01f7 89B58CFC 		movl	%esi, -884(%ebp)
+ 193      FFFF
+ 194 01fd 89442418 		movl	%eax, 24(%esp)
+ 195 0201 49       		decl	%ecx
+ 196 0202 898590FC 		movl	%eax, -880(%ebp)
+ 196      FFFF
+ 197 0208 8B4514   		movl	20(%ebp), %eax
+ 198 020b 899594FC 		movl	%edx, -876(%ebp)
+ 198      FFFF
+ 199 0211 89BD98FD 		movl	%edi, -616(%ebp)
+ 199      FFFF
+ 200 0217 898D9CFD 		movl	%ecx, -612(%ebp)
+ 200      FFFF
+ 201 021d 899DA0FD 		movl	%ebx, -608(%ebp)
+ 201      FFFF
+ 202 0223 8985A4FD 		movl	%eax, -604(%ebp)
+ 202      FFFF
+ 203 0229 89742414 		movl	%esi, 20(%esp)
+GAS LISTING bootpack.gas 			page 6
+
+
+ 204 022d 8954241C 		movl	%edx, 28(%esp)
+ 205 0231 893C24   		movl	%edi, (%esp)
+ 206 0234 894C2404 		movl	%ecx, 4(%esp)
+ 207 0238 895C2408 		movl	%ebx, 8(%esp)
+ 208 023c 8944240C 		movl	%eax, 12(%esp)
+ 209 0240 E8000000 		call	__Z16rect_checkbounds4RectS_
+ 209      00
+ 210 0245 85C0     		testl	%eax, %eax
+ 211 0247 0F85BFFE 		jne	L11
+ 211      FFFF
+ 212 024d 8B5508   		movl	8(%ebp), %edx
+ 213 0250 891424   		movl	%edx, (%esp)
+ 214 0253 E8000000 		call	__Z15t_DestroyWindowi
+ 214      00
+ 215 0258 E9AFFEFF 		jmp	L11
+ 215      FF
+ 216              	L25:
+ 217 025d BE520000 		movl	$LC6, %esi
+ 217      00
+ 218 0262 E905FFFF 		jmp	L32
+ 218      FF
+ 219              	L24:
+ 220 0267 BF5D0000 		movl	$LC5, %edi
+ 220      00
+ 221 026c 897C2408 		movl	%edi, 8(%esp)
+ 222 0270 E9FBFEFF 		jmp	L31
+ 222      FF
+ 223              	L14:
+ 224 0275 A1000000 		movl	_winctl, %eax
+ 224      00
+ 225 027a 0FB7D3   		movzwl	%bx,%edx
+ 226 027d C1FB10   		sarl	$16, %ebx
+ 227 0280 899560FC 		movl	%edx, -928(%ebp)
+ 227      FFFF
+ 228 0286 0FB75514 		movzwl	20(%ebp),%edx
+ 229 028a BF600000 		movl	$LC3, %edi
+ 229      00
+ 230 028f 8B8D60FC 		movl	-928(%ebp), %ecx
+ 230      FFFF
+ 231 0295 898564FC 		movl	%eax, -924(%ebp)
+ 231      FFFF
+ 232 029b 8B4514   		movl	20(%ebp), %eax
+ 233 029e BE010000 		movl	$1, %esi
+ 233      00
+ 234 02a3 899D5CFC 		movl	%ebx, -932(%ebp)
+ 234      FFFF
+ 235 02a9 01D1     		addl	%edx, %ecx
+ 236 02ab C1F810   		sarl	$16, %eax
+ 237 02ae 898D58FC 		movl	%ecx, -936(%ebp)
+ 237      FFFF
+ 238 02b4 89D9     		movl	%ebx, %ecx
+ 239 02b6 01C1     		addl	%eax, %ecx
+ 240 02b8 898D54FC 		movl	%ecx, -940(%ebp)
+ 240      FFFF
+ 241 02be 89442418 		movl	%eax, 24(%esp)
+ 242 02c2 8D85E8FD 		leal	-536(%ebp), %eax
+ 242      FFFF
+GAS LISTING bootpack.gas 			page 7
+
+
+ 243 02c8 895C2410 		movl	%ebx, 16(%esp)
+ 244 02cc 89542414 		movl	%edx, 20(%esp)
+ 245 02d0 8B9560FC 		movl	-928(%ebp), %edx
+ 245      FFFF
+ 246 02d6 8954240C 		movl	%edx, 12(%esp)
+ 247 02da 8B4D08   		movl	8(%ebp), %ecx
+ 248 02dd 897C2404 		movl	%edi, 4(%esp)
+ 249 02e1 890424   		movl	%eax, (%esp)
+ 250 02e4 894C2408 		movl	%ecx, 8(%esp)
+ 251 02e8 E8000000 		call	_sprintf
+ 251      00
+ 252 02ed A1000000 		movl	_l_console, %eax
+ 252      00
+ 253 02f2 8D95E8FD 		leal	-536(%ebp), %edx
+ 253      FFFF
+ 254 02f8 89542408 		movl	%edx, 8(%esp)
+ 255 02fc 89442404 		movl	%eax, 4(%esp)
+ 256 0300 A1000000 		movl	_layerctl, %eax
+ 256      00
+ 257 0305 890424   		movl	%eax, (%esp)
+ 258 0308 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 258      00
+ 259 030d 8B855CFC 		movl	-932(%ebp), %eax
+ 259      FFFF
+ 260 0313 8B8D60FC 		movl	-928(%ebp), %ecx
+ 260      FFFF
+ 261 0319 8B9558FC 		movl	-936(%ebp), %edx
+ 261      FFFF
+ 262 031f 8985DCFD 		movl	%eax, -548(%ebp)
+ 262      FFFF
+ 263 0325 89C3     		movl	%eax, %ebx
+ 264 0327 8B8554FC 		movl	-940(%ebp), %eax
+ 264      FFFF
+ 265 032d 898DD8FD 		movl	%ecx, -552(%ebp)
+ 265      FFFF
+ 266 0333 8B8D58FC 		movl	-936(%ebp), %ecx
+ 266      FFFF
+ 267 0339 83C314   		addl	$20, %ebx
+ 268 033c 8995E0FD 		movl	%edx, -544(%ebp)
+ 268      FFFF
+ 269 0342 83EA03   		subl	$3, %edx
+ 270 0345 899550FC 		movl	%edx, -944(%ebp)
+ 270      FFFF
+ 271 034b 8995C8FD 		movl	%edx, -568(%ebp)
+ 271      FFFF
+ 272 0351 8B9560FC 		movl	-928(%ebp), %edx
+ 272      FFFF
+ 273 0357 898DD0FD 		movl	%ecx, -560(%ebp)
+ 273      FFFF
+ 274 035d 8B8D50FC 		movl	-944(%ebp), %ecx
+ 274      FFFF
+ 275 0363 8985D4FD 		movl	%eax, -556(%ebp)
+ 275      FFFF
+ 276 0369 8985C4FD 		movl	%eax, -572(%ebp)
+ 276      FFFF
+ 277 036f 83E803   		subl	$3, %eax
+ 278 0372 89854CFC 		movl	%eax, -948(%ebp)
+GAS LISTING bootpack.gas 			page 8
+
+
+ 278      FFFF
+ 279 0378 8985ACFD 		movl	%eax, -596(%ebp)
+ 279      FFFF
+ 280 037e 8B8554FC 		movl	-940(%ebp), %eax
+ 280      FFFF
+ 281 0384 8995B8FD 		movl	%edx, -584(%ebp)
+ 281      FFFF
+ 282 038a 83C203   		addl	$3, %edx
+ 283 038d 898DB0FD 		movl	%ecx, -592(%ebp)
+ 283      FFFF
+ 284 0393 B9040000 		movl	$4, %ecx
+ 284      00
+ 285 0398 899548FC 		movl	%edx, -952(%ebp)
+ 285      FFFF
+ 286 039e 8995C0FD 		movl	%edx, -576(%ebp)
+ 286      FFFF
+ 287 03a4 8995A8FD 		movl	%edx, -600(%ebp)
+ 287      FFFF
+ 288 03aa 8985B4FD 		movl	%eax, -588(%ebp)
+ 288      FFFF
+ 289 03b0 899DE4FD 		movl	%ebx, -540(%ebp)
+ 289      FFFF
+ 290 03b6 899DCCFD 		movl	%ebx, -564(%ebp)
+ 290      FFFF
+ 291 03bc 899DBCFD 		movl	%ebx, -580(%ebp)
+ 291      FFFF
+ 292 03c2 8974241C 		movl	%esi, 28(%esp)
+ 293 03c6 894C2418 		movl	%ecx, 24(%esp)
+ 294 03ca 8B9560FC 		movl	-928(%ebp), %edx
+ 294      FFFF
+ 295 03d0 89542408 		movl	%edx, 8(%esp)
+ 296 03d4 8B8D5CFC 		movl	-932(%ebp), %ecx
+ 296      FFFF
+ 297 03da 894C240C 		movl	%ecx, 12(%esp)
+ 298 03de 8B8558FC 		movl	-936(%ebp), %eax
+ 298      FFFF
+ 299 03e4 89442410 		movl	%eax, 16(%esp)
+ 300 03e8 A1000000 		movl	_layerctl, %eax
+ 300      00
+ 301 03ed 895C2414 		movl	%ebx, 20(%esp)
+ 302 03f1 8B9564FC 		movl	-924(%ebp), %edx
+ 302      FFFF
+ 303 03f7 890424   		movl	%eax, (%esp)
+ 304 03fa 89542404 		movl	%edx, 4(%esp)
+ 305 03fe E8000000 		call	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+ 305      00
+ 306 0403 BA010000 		movl	$1, %edx
+ 306      00
+ 307 0408 B8040000 		movl	$4, %eax
+ 307      00
+ 308 040d 8954241C 		movl	%edx, 28(%esp)
+ 309 0411 89442418 		movl	%eax, 24(%esp)
+ 310 0415 8B85C8FD 		movl	-568(%ebp), %eax
+ 310      FFFF
+ 311 041b 89442408 		movl	%eax, 8(%esp)
+ 312 041f 8B85CCFD 		movl	-564(%ebp), %eax
+ 312      FFFF
+GAS LISTING bootpack.gas 			page 9
+
+
+ 313 0425 8944240C 		movl	%eax, 12(%esp)
+ 314 0429 8B85D0FD 		movl	-560(%ebp), %eax
+ 314      FFFF
+ 315 042f 89442410 		movl	%eax, 16(%esp)
+ 316 0433 8B85D4FD 		movl	-556(%ebp), %eax
+ 316      FFFF
+ 317 0439 89442414 		movl	%eax, 20(%esp)
+ 318 043d 8B8D64FC 		movl	-924(%ebp), %ecx
+ 318      FFFF
+ 319 0443 A1000000 		movl	_layerctl, %eax
+ 319      00
+ 320 0448 894C2404 		movl	%ecx, 4(%esp)
+ 321 044c 890424   		movl	%eax, (%esp)
+ 322 044f E8000000 		call	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+ 322      00
+ 323 0454 B8010000 		movl	$1, %eax
+ 323      00
+ 324 0459 8944241C 		movl	%eax, 28(%esp)
+ 325 045d B8040000 		movl	$4, %eax
+ 325      00
+ 326 0462 89442418 		movl	%eax, 24(%esp)
+ 327 0466 8B85B8FD 		movl	-584(%ebp), %eax
+ 327      FFFF
+ 328 046c 89442408 		movl	%eax, 8(%esp)
+ 329 0470 8B85BCFD 		movl	-580(%ebp), %eax
+ 329      FFFF
+ 330 0476 8944240C 		movl	%eax, 12(%esp)
+ 331 047a 8B85C0FD 		movl	-576(%ebp), %eax
+ 331      FFFF
+ 332 0480 89442410 		movl	%eax, 16(%esp)
+ 333 0484 8B85C4FD 		movl	-572(%ebp), %eax
+ 333      FFFF
+ 334 048a 89442414 		movl	%eax, 20(%esp)
+ 335 048e 8B8564FC 		movl	-924(%ebp), %eax
+ 335      FFFF
+ 336 0494 89442404 		movl	%eax, 4(%esp)
+ 337 0498 A1000000 		movl	_layerctl, %eax
+ 337      00
+ 338 049d 890424   		movl	%eax, (%esp)
+ 339 04a0 E8000000 		call	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+ 339      00
+ 340 04a5 B8010000 		movl	$1, %eax
+ 340      00
+ 341 04aa 8944241C 		movl	%eax, 28(%esp)
+ 342 04ae B8040000 		movl	$4, %eax
+ 342      00
+ 343 04b3 89442418 		movl	%eax, 24(%esp)
+ 344 04b7 8B85A8FD 		movl	-600(%ebp), %eax
+ 344      FFFF
+ 345 04bd 89442408 		movl	%eax, 8(%esp)
+ 346 04c1 8B85ACFD 		movl	-596(%ebp), %eax
+ 346      FFFF
+ 347 04c7 8944240C 		movl	%eax, 12(%esp)
+ 348 04cb 8B85B0FD 		movl	-592(%ebp), %eax
+ 348      FFFF
+ 349 04d1 89442410 		movl	%eax, 16(%esp)
+ 350 04d5 8B85B4FD 		movl	-588(%ebp), %eax
+GAS LISTING bootpack.gas 			page 10
+
+
+ 350      FFFF
+ 351 04db 89442414 		movl	%eax, 20(%esp)
+ 352 04df 8B9564FC 		movl	-924(%ebp), %edx
+ 352      FFFF
+ 353 04e5 A1000000 		movl	_layerctl, %eax
+ 353      00
+ 354 04ea 89542404 		movl	%edx, 4(%esp)
+ 355 04ee 890424   		movl	%eax, (%esp)
+ 356 04f1 E8000000 		call	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+ 356      00
+ 357 04f6 8B8558FC 		movl	-936(%ebp), %eax
+ 357      FFFF
+ 358 04fc 31D2     		xorl	%edx, %edx
+ 359 04fe 8BB558FC 		movl	-936(%ebp), %esi
+ 359      FFFF
+ 360 0504 8B8D5CFC 		movl	-932(%ebp), %ecx
+ 360      FFFF
+ 361 050a 83E804   		subl	$4, %eax
+ 362 050d 83EE14   		subl	$20, %esi
+ 363 0510 8985A0FD 		movl	%eax, -608(%ebp)
+ 363      FFFF
+ 364 0516 8B855CFC 		movl	-932(%ebp), %eax
+ 364      FFFF
+ 365 051c 83C103   		addl	$3, %ecx
+ 366 051f 89B598FD 		movl	%esi, -616(%ebp)
+ 366      FFFF
+ 367 0525 83C012   		addl	$18, %eax
+ 368 0528 898D44FC 		movl	%ecx, -956(%ebp)
+ 368      FFFF
+ 369 052e 898D9CFD 		movl	%ecx, -612(%ebp)
+ 369      FFFF
+ 370 0534 8985A4FD 		movl	%eax, -604(%ebp)
+ 370      FFFF
+ 371 053a 8DB60000 		.p2align 4,,15
+ 371      0000
+ 372              	L20:
+ 373 0540 80BA0000 		cmpb	$42, _closing(%edx)
+ 373      00002A
+ 374 0547 0F94C0   		sete	%al
+ 375 054a FEC8     		decb	%al
+ 376 054c 2407     		andb	$7, %al
+ 377 054e 88842A98 		movb	%al, -872(%edx,%ebp)
+ 377      FCFFFF
+ 378 0555 42       		incl	%edx
+ 379 0556 81FAFF00 		cmpl	$255, %edx
+ 379      0000
+ 380 055c 7EE2     		jle	L20
+ 381 055e B8010000 		movl	$1, %eax
+ 381      00
+ 382 0563 BF010000 		movl	$1, %edi
+ 382      00
+ 383 0568 8944241C 		movl	%eax, 28(%esp)
+ 384 056c 8B8598FD 		movl	-616(%ebp), %eax
+ 384      FFFF
+ 385 0572 8944240C 		movl	%eax, 12(%esp)
+ 386 0576 8B859CFD 		movl	-612(%ebp), %eax
+ 386      FFFF
+GAS LISTING bootpack.gas 			page 11
+
+
+ 387 057c 89442410 		movl	%eax, 16(%esp)
+ 388 0580 8B85A0FD 		movl	-608(%ebp), %eax
+ 388      FFFF
+ 389 0586 89442414 		movl	%eax, 20(%esp)
+ 390 058a 8B85A4FD 		movl	-604(%ebp), %eax
+ 390      FFFF
+ 391 0590 89442418 		movl	%eax, 24(%esp)
+ 392 0594 8D8598FC 		leal	-872(%ebp), %eax
+ 392      FFFF
+ 393 059a 89442408 		movl	%eax, 8(%esp)
+ 394 059e 8B9564FC 		movl	-924(%ebp), %edx
+ 394      FFFF
+ 395 05a4 A1000000 		movl	_layerctl, %eax
+ 395      00
+ 396 05a9 89542404 		movl	%edx, 4(%esp)
+ 397 05ad 890424   		movl	%eax, (%esp)
+ 398 05b0 E8000000 		call	__Z10layer_drawP8LayerCtl5uid_tPc4Rectj
+ 398      00
+ 399 05b5 899D8CFC 		movl	%ebx, -884(%ebp)
+ 399      FFFF
+ 400 05bb 8B8D48FC 		movl	-952(%ebp), %ecx
+ 400      FFFF
+ 401 05c1 8B8550FC 		movl	-944(%ebp), %eax
+ 401      FFFF
+ 402 05c7 8B954CFC 		movl	-948(%ebp), %edx
+ 402      FFFF
+ 403 05cd 898D88FC 		movl	%ecx, -888(%ebp)
+ 403      FFFF
+ 404 05d3 898590FC 		movl	%eax, -880(%ebp)
+ 404      FFFF
+ 405 05d9 899594FC 		movl	%edx, -876(%ebp)
+ 405      FFFF
+ 406 05df 897C241C 		movl	%edi, 28(%esp)
+ 407 05e3 BF080000 		movl	$8, %edi
+ 407      00
+ 408 05e8 897C2418 		movl	%edi, 24(%esp)
+ 409 05ec BF500000 		movl	$__Z20closingButtonHandleriiii, %edi
+ 409      00
+ 410 05f1 89442410 		movl	%eax, 16(%esp)
+ 411 05f5 A1000000 		movl	_layerctl, %eax
+ 411      00
+ 412 05fa 89542414 		movl	%edx, 20(%esp)
+ 413 05fe 894C2408 		movl	%ecx, 8(%esp)
+ 414 0602 895C240C 		movl	%ebx, 12(%esp)
+ 415 0606 8B8D64FC 		movl	-924(%ebp), %ecx
+ 415      FFFF
+ 416 060c 890424   		movl	%eax, (%esp)
+ 417 060f 894C2404 		movl	%ecx, 4(%esp)
+ 418 0613 E8000000 		call	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+ 418      00
+ 419 0618 89B568FC 		movl	%esi, -920(%ebp)
+ 419      FFFF
+ 420 061e 8B8544FC 		movl	-956(%ebp), %eax
+ 420      FFFF
+ 421 0624 8B5508   		movl	8(%ebp), %edx
+ 422 0627 89BD78FC 		movl	%edi, -904(%ebp)
+ 422      FFFF
+GAS LISTING bootpack.gas 			page 12
+
+
+ 423 062d 89856CFC 		movl	%eax, -916(%ebp)
+ 423      FFFF
+ 424 0633 B8100000 		movl	$16, %eax
+ 424      00
+ 425 0638 898570FC 		movl	%eax, -912(%ebp)
+ 425      FFFF
+ 426 063e B80F0000 		movl	$15, %eax
+ 426      00
+ 427 0643 898574FC 		movl	%eax, -908(%ebp)
+ 427      FFFF
+ 428 0649 8D8568FC 		leal	-920(%ebp), %eax
+ 428      FFFF
+ 429 064f 89957CFC 		movl	%edx, -900(%ebp)
+ 429      FFFF
+ 430 0655 89442404 		movl	%eax, 4(%esp)
+ 431 0659 C7042410 		movl	$16, (%esp)
+ 431      000000
+ 432 0660 E8000000 		call	__Z15createComponentiPK10WindowInfo
+ 432      00
+ 433 0665 E9A2FAFF 		jmp	L11
+ 433      FF
+ 434              		.align 2
+ 435 066a 8DB60000 		.p2align 4,,15
+ 435      0000
+ 436              	.globl __Z11get_requestv
+ 437              		.def	__Z11get_requestv;	.scl	2;	.type	32;	.endef
+ 438              	__Z11get_requestv:
+ 439 0670 55       		pushl	%ebp
+ 440 0671 89E5     		movl	%esp, %ebp
+ 441 0673 53       		pushl	%ebx
+ 442 0674 83EC04   		subl	$4, %esp
+ 443 0677 31DB     		xorl	%ebx, %ebx
+ 444 0679 C7042408 		movl	$_timerctl+8, (%esp)
+ 444      000000
+ 445 0680 E8000000 		call	__Z13status_fifo32P6Fifo32
+ 445      00
+ 446 0685 85C0     		testl	%eax, %eax
+ 447 0687 7E05     		jle	L34
+ 448 0689 BB010000 		movl	$1, %ebx
+ 448      00
+ 449              	L34:
+ 450 068e C7042400 		movl	$_key_fifo, (%esp)
+ 450      000000
+ 451 0695 E8000000 		call	__Z12status_fifo8P5Fifo8
+ 451      00
+ 452 069a 85C0     		testl	%eax, %eax
+ 453 069c 7E03     		jle	L35
+ 454 069e 83CB02   		orl	$2, %ebx
+ 455              	L35:
+ 456 06a1 C7042400 		movl	$_mouse_fifo, (%esp)
+ 456      000000
+ 457 06a8 E8000000 		call	__Z12status_fifo8P5Fifo8
+ 457      00
+ 458 06ad 85C0     		testl	%eax, %eax
+ 459 06af 7E03     		jle	L36
+ 460 06b1 83CB04   		orl	$4, %ebx
+ 461              	L36:
+GAS LISTING bootpack.gas 			page 13
+
+
+ 462 06b4 5A       		popl	%edx
+ 463 06b5 89D8     		movl	%ebx, %eax
+ 464 06b7 5B       		popl	%ebx
+ 465 06b8 5D       		popl	%ebp
+ 466 06b9 C3       		ret
+ 467              		.section .rdata,"dr"
+ 468              	LC8:
+ 469 008f 636C7573 		.ascii "clust_no=%x\12\0"
+ 469      745F6E6F 
+ 469      3D25780A 
+ 469      00
+ 470              		.align 4
+ 471              	LC9:
+ 472 009c 6572726F 		.ascii "error: invalid clustor number\12\0"
+ 472      723A2069 
+ 472      6E76616C 
+ 472      69642063 
+ 472      6C757374 
+ 473 00bb 00       		.align 4
+ 474              	LC10:
+ 475 00bc 496E7661 		.ascii "Invalid next clustor@ tmpCode::readFile\12\0"
+ 475      6C696420 
+ 475      6E657874 
+ 475      20636C75 
+ 475      73746F72 
+ 476              		.text
+ 477              		.align 2
+ 478 06ba 8DB60000 		.p2align 4,,15
+ 478      0000
+ 479              	.globl __ZN7tmpCode11readFileAllEPN2fs9FAT12InfoEiPc
+ 480              		.def	__ZN7tmpCode11readFileAllEPN2fs9FAT12InfoEiPc;	.scl	2;	.type	32;	.endef
+ 481              	__ZN7tmpCode11readFileAllEPN2fs9FAT12InfoEiPc:
+ 482 06c0 55       		pushl	%ebp
+ 483 06c1 89E5     		movl	%esp, %ebp
+ 484 06c3 57       		pushl	%edi
+ 485 06c4 31FF     		xorl	%edi, %edi
+ 486 06c6 56       		pushl	%esi
+ 487 06c7 53       		pushl	%ebx
+ 488 06c8 81EC2C03 		subl	$812, %esp
+ 488      0000
+ 489 06ce 8B4508   		movl	8(%ebp), %eax
+ 490 06d1 89BDE4FC 		movl	%edi, -796(%ebp)
+ 490      FFFF
+ 491 06d7 31FF     		xorl	%edi, %edi
+ 492 06d9 0FBF581A 		movswl	26(%eax),%ebx
+ 493 06dd 8B450C   		movl	12(%ebp), %eax
+ 494 06e0 39C7     		cmpl	%eax, %edi
+ 495 06e2 0F8DCC00 		jge	L39
+ 495      0000
+ 496 06e8 908DB426 		.p2align 4,,15
+ 496      00000000 
+ 497              	L55:
+ 498 06f0 895C2408 		movl	%ebx, 8(%esp)
+ 499 06f4 8D95E8FE 		leal	-280(%ebp), %edx
+ 499      FFFF
+ 500 06fa BE8F0000 		movl	$LC8, %esi
+ 500      00
+GAS LISTING bootpack.gas 			page 14
+
+
+ 501 06ff 891424   		movl	%edx, (%esp)
+ 502 0702 89742404 		movl	%esi, 4(%esp)
+ 503 0706 E8000000 		call	_sprintf
+ 503      00
+ 504 070b 8D85E8FE 		leal	-280(%ebp), %eax
+ 504      FFFF
+ 505 0711 89442408 		movl	%eax, 8(%esp)
+ 506 0715 A1000000 		movl	_l_console, %eax
+ 506      00
+ 507 071a 89442404 		movl	%eax, 4(%esp)
+ 508 071e A1000000 		movl	_layerctl, %eax
+ 508      00
+ 509 0723 890424   		movl	%eax, (%esp)
+ 510 0726 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 510      00
+ 511 072b 83FB01   		cmpl	$1, %ebx
+ 512 072e 0F9EC2   		setle	%dl
+ 513 0731 81FBF70F 		cmpl	$4087, %ebx
+ 513      0000
+ 514 0737 0F94C0   		sete	%al
+ 515 073a 08C2     		orb	%al, %dl
+ 516 073c 0F858300 		jne	L52
+ 516      0000
+ 517 0742 8D43FE   		leal	-2(%ebx), %eax
+ 518 0745 3DF40F00 		cmpl	$4084, %eax
+ 518      00
+ 519 074a 7768     		ja	L39
+ 520 074c 8B750C   		movl	12(%ebp), %esi
+ 521 074f 29FE     		subl	%edi, %esi
+ 522 0751 81FEFF01 		cmpl	$511, %esi
+ 522      0000
+ 523 0757 0F8E9700 		jle	L53
+ 523      0000
+ 524 075d 8B4510   		movl	16(%ebp), %eax
+ 525 0760 01F8     		addl	%edi, %eax
+ 526 0762 89442408 		movl	%eax, 8(%esp)
+ 527 0766 8D431F   		leal	31(%ebx), %eax
+ 528 0769 89442404 		movl	%eax, 4(%esp)
+ 529 076d A1000000 		movl	_fat12img, %eax
+ 529      00
+ 530 0772 890424   		movl	%eax, (%esp)
+ 531 0775 E8000000 		call	__ZN2fs10FAT12Image5lreadEiPc
+ 531      00
+ 532 077a 8185E4FC 		addl	$512, -796(%ebp)
+ 532      FFFF0002 
+ 532      0000
+ 533 0784 A1000000 		movl	_fat12img, %eax
+ 533      00
+ 534 0789 895C2404 		movl	%ebx, 4(%esp)
+ 535 078d 890424   		movl	%eax, (%esp)
+ 536 0790 E8000000 		call	__ZNK2fs10FAT12Image4nextEi
+ 536      00
+ 537 0795 83F8FE   		cmpl	$-2, %eax
+ 538 0798 89C3     		movl	%eax, %ebx
+ 539 079a 0F8E9900 		jle	L54
+ 539      0000
+ 540 07a0 83F8FF   		cmpl	$-1, %eax
+GAS LISTING bootpack.gas 			page 15
+
+
+ 541 07a3 740F     		je	L39
+ 542 07a5 81C70002 		addl	$512, %edi
+ 542      0000
+ 543 07ab 3B7D0C   		cmpl	12(%ebp), %edi
+ 544 07ae 0F8C3CFF 		jl	L55
+ 544      FFFF
+ 545              	L39:
+ 546 07b4 8B85E4FC 		movl	-796(%ebp), %eax
+ 546      FFFF
+ 547 07ba 81C42C03 		addl	$812, %esp
+ 547      0000
+ 548 07c0 5B       		popl	%ebx
+ 549 07c1 5E       		popl	%esi
+ 550 07c2 5F       		popl	%edi
+ 551 07c3 5D       		popl	%ebp
+ 552 07c4 C3       		ret
+ 553              	L52:
+ 554 07c5 BB9C0000 		movl	$LC9, %ebx
+ 554      00
+ 555 07ca 895C2408 		movl	%ebx, 8(%esp)
+ 556              	L51:
+ 557 07ce A1000000 		movl	_l_console, %eax
+ 557      00
+ 558 07d3 89442404 		movl	%eax, 4(%esp)
+ 559 07d7 A1000000 		movl	_layerctl, %eax
+ 559      00
+ 560 07dc 890424   		movl	%eax, (%esp)
+ 561 07df E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 561      00
+ 562 07e4 81C42C03 		addl	$812, %esp
+ 562      0000
+ 563 07ea B8FFFFFF 		movl	$-1, %eax
+ 563      FF
+ 564 07ef 5B       		popl	%ebx
+ 565 07f0 5E       		popl	%esi
+ 566 07f1 5F       		popl	%edi
+ 567 07f2 5D       		popl	%ebp
+ 568 07f3 C3       		ret
+ 569              	L53:
+ 570 07f4 8D431F   		leal	31(%ebx), %eax
+ 571 07f7 8D95E8FC 		leal	-792(%ebp), %edx
+ 571      FFFF
+ 572 07fd 89442404 		movl	%eax, 4(%esp)
+ 573 0801 A1000000 		movl	_fat12img, %eax
+ 573      00
+ 574 0806 89542408 		movl	%edx, 8(%esp)
+ 575 080a 890424   		movl	%eax, (%esp)
+ 576 080d E8000000 		call	__ZN2fs10FAT12Image5lreadEiPc
+ 576      00
+ 577 0812 8B5510   		movl	16(%ebp), %edx
+ 578 0815 89742408 		movl	%esi, 8(%esp)
+ 579 0819 8D0417   		leal	(%edi,%edx), %eax
+ 580 081c 8D95E8FC 		leal	-792(%ebp), %edx
+ 580      FFFF
+ 581 0822 89542404 		movl	%edx, 4(%esp)
+ 582 0826 890424   		movl	%eax, (%esp)
+ 583 0829 E8000000 		call	_memcpy
+GAS LISTING bootpack.gas 			page 16
+
+
+ 583      00
+ 584 082e 01B5E4FC 		addl	%esi, -796(%ebp)
+ 584      FFFF
+ 585 0834 E97BFFFF 		jmp	L39
+ 585      FF
+ 586              	L54:
+ 587 0839 B9BC0000 		movl	$LC10, %ecx
+ 587      00
+ 588 083e 894C2408 		movl	%ecx, 8(%esp)
+ 589 0842 EB8A     		jmp	L51
+ 590              		.section .rdata,"dr"
+ 591              	LC11:
+ 592 00e5 74657374 		.ascii "test1\0"
+ 592      3100
+ 593              	LC12:
+ 594 00eb 77696E49 		.ascii "winID=%d\0"
+ 594      443D2564 
+ 594      00
+ 595              		.text
+ 596              		.align 2
+ 597 0844 8DB60000 		.p2align 4,,15
+ 597      00008DBF 
+ 597      00000000 
+ 598              	.globl __ZN7tmpCode15createOneWindowEv
+ 599              		.def	__ZN7tmpCode15createOneWindowEv;	.scl	2;	.type	32;	.endef
+ 600              	__ZN7tmpCode15createOneWindowEv:
+ 601 0850 55       		pushl	%ebp
+ 602 0851 89E5     		movl	%esp, %ebp
+ 603 0853 8D45D8   		leal	-40(%ebp), %eax
+ 604 0856 53       		pushl	%ebx
+ 605 0857 81EC3401 		subl	$308, %esp
+ 605      0000
+ 606 085d C745D896 		movl	$150, -40(%ebp)
+ 606      000000
+ 607 0864 8D9DD8FE 		leal	-296(%ebp), %ebx
+ 607      FFFF
+ 608 086a C745DC54 		movl	$340, -36(%ebp)
+ 608      010000
+ 609 0871 C745E0F4 		movl	$500, -32(%ebp)
+ 609      010000
+ 610 0878 C745E42C 		movl	$300, -28(%ebp)
+ 610      010000
+ 611 087f C745E8E0 		movl	$__Z8sampleWHiiii, -24(%ebp)
+ 611      000000
+ 612 0886 C745ECFF 		movl	$-1, -20(%ebp)
+ 612      FFFFFF
+ 613 088d 89442404 		movl	%eax, 4(%esp)
+ 614 0891 C70424E5 		movl	$LC11, (%esp)
+ 614      000000
+ 615 0898 E8000000 		call	__Z14t_CreateWindowPKcPK10WindowInfo
+ 615      00
+ 616 089d 89442408 		movl	%eax, 8(%esp)
+ 617 08a1 B8EB0000 		movl	$LC12, %eax
+ 617      00
+ 618 08a6 891C24   		movl	%ebx, (%esp)
+ 619 08a9 89442404 		movl	%eax, 4(%esp)
+ 620 08ad E8000000 		call	_sprintf
+GAS LISTING bootpack.gas 			page 17
+
+
+ 620      00
+ 621 08b2 895C2408 		movl	%ebx, 8(%esp)
+ 622 08b6 A1000000 		movl	_l_console, %eax
+ 622      00
+ 623 08bb 89442404 		movl	%eax, 4(%esp)
+ 624 08bf A1000000 		movl	_layerctl, %eax
+ 624      00
+ 625 08c4 890424   		movl	%eax, (%esp)
+ 626 08c7 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 626      00
+ 627 08cc 81C43401 		addl	$308, %esp
+ 627      0000
+ 628 08d2 31C0     		xorl	%eax, %eax
+ 629 08d4 5B       		popl	%ebx
+ 630 08d5 5D       		popl	%ebp
+ 631 08d6 C3       		ret
+ 632 08d7 90       		.align 2
+ 633 08d8 908DB426 		.p2align 4,,15
+ 633      00000000 
+ 634              	.globl __Z11req_handlerj
+ 635              		.def	__Z11req_handlerj;	.scl	2;	.type	32;	.endef
+ 636              	__Z11req_handlerj:
+ 637 08e0 55       		pushl	%ebp
+ 638 08e1 89E5     		movl	%esp, %ebp
+ 639 08e3 83EC18   		subl	$24, %esp
+ 640 08e6 895DF8   		movl	%ebx, -8(%ebp)
+ 641 08e9 8B5D08   		movl	8(%ebp), %ebx
+ 642 08ec 8975FC   		movl	%esi, -4(%ebp)
+ 643 08ef E8000000 		call	_load_eflags
+ 643      00
+ 644 08f4 89C6     		movl	%eax, %esi
+ 645 08f6 E8000000 		call	_io_cli
+ 645      00
+ 646 08fb 85DB     		testl	%ebx, %ebx
+ 647 08fd 7421     		je	L62
+ 648 08ff F6C301   		testb	$1, %bl
+ 649 0902 752C     		jne	L63
+ 650 0904 F6C302   		testb	$2, %bl
+ 651 0907 7547     		jne	L64
+ 652              	L60:
+ 653 0909 F6C304   		testb	$4, %bl
+ 654 090c 7552     		jne	L65
+ 655              	L61:
+ 656 090e 897508   		movl	%esi, 8(%ebp)
+ 657 0911 8B5DF8   		movl	-8(%ebp), %ebx
+ 658 0914 8B75FC   		movl	-4(%ebp), %esi
+ 659 0917 89EC     		movl	%ebp, %esp
+ 660 0919 5D       		popl	%ebp
+ 661 091a E9000000 		jmp	_store_eflags
+ 661      00
+ 662 091f 90       		.p2align 4,,7
+ 663              	L62:
+ 664 0920 8B5DF8   		movl	-8(%ebp), %ebx
+ 665 0923 8B75FC   		movl	-4(%ebp), %esi
+ 666 0926 89EC     		movl	%ebp, %esp
+ 667 0928 5D       		popl	%ebp
+ 668 0929 E9000000 		jmp	_io_stihlt
+GAS LISTING bootpack.gas 			page 18
+
+
+ 668      00
+ 669 092e 89F6     		.p2align 4,,7
+ 670              	L63:
+ 671 0930 C7042408 		movl	$_timerctl+8, (%esp)
+ 671      000000
+ 672 0937 E8000000 		call	__Z10get_fifo32P6Fifo32
+ 672      00
+ 673 093c E8000000 		call	_io_sti
+ 673      00
+ 674 0941 F6C302   		testb	$2, %bl
+ 675 0944 74C3     		je	L60
+ 676 0946 8D76008D 		.p2align 4,,15
+ 676      BC270000 
+ 676      0000
+ 677              	L64:
+ 678 0950 E8000000 		call	__Z8kb_eventv
+ 678      00
+ 679 0955 F6C304   		testb	$4, %bl
+ 680 0958 74B4     		je	L61
+ 681 095a 8DB60000 		.p2align 4,,15
+ 681      0000
+ 682              	L65:
+ 683 0960 E8000000 		call	__Z11mouse_eventv
+ 683      00
+ 684 0965 897508   		movl	%esi, 8(%ebp)
+ 685 0968 8B5DF8   		movl	-8(%ebp), %ebx
+ 686 096b 8B75FC   		movl	-4(%ebp), %esi
+ 687 096e 89EC     		movl	%ebp, %esp
+ 688 0970 5D       		popl	%ebp
+ 689 0971 E9000000 		jmp	_store_eflags
+ 689      00
+ 690              		.section .rdata,"dr"
+ 691              	LC13:
+ 692 00f4 6D656D66 		.ascii "memfree:0x00400000-0x%08x\15\12\0"
+ 692      7265653A 
+ 692      30783030 
+ 692      34303030 
+ 692      30302D30 
+ 693              	LC14:
+ 694 0110 74657374 		.ascii "test0\0"
+ 694      3000
+ 695              	LC15:
+ 696 0116 74686964 		.ascii "thid=%d\12\0"
+ 696      3D25640A 
+ 696      00
+ 697              	LC16:
+ 698 011f 63686563 		.ascii "checksum2 := %08x\12\0"
+ 698      6B73756D 
+ 698      32203A3D 
+ 698      20253038 
+ 698      780A00
+ 699              	LC17:
+ 700 0132 73756D2E 		.ascii "sum.hrb\0"
+ 700      68726200 
+ 701 013a 00000000 		.text
+ 701      0000
+ 702              		.align 2
+GAS LISTING bootpack.gas 			page 19
+
+
+ 703 0976 8D76008D 		.p2align 4,,15
+ 703      BC270000 
+ 703      0000
+ 704              	.globl _HariMain
+ 705              		.def	_HariMain;	.scl	2;	.type	32;	.endef
+ 706              	_HariMain:
+ 707 0980 55       		pushl	%ebp
+ 708 0981 89E5     		movl	%esp, %ebp
+ 709 0983 57       		pushl	%edi
+ 710 0984 BF0F0000 		movl	$15, %edi
+ 710      00
+ 711 0989 56       		pushl	%esi
+ 712 098a BEFFFFFF 		movl	$-1073741825, %esi
+ 712      BF
+ 713 098f 53       		pushl	%ebx
+ 714 0990 81EC3C04 		subl	$1084, %esp
+ 714      0000
+ 715 0996 BB000050 		movl	$5242880, %ebx
+ 715      00
+ 716 099b E8000000 		call	__Z11init_gdtidtv
+ 716      00
+ 717 09a0 E8000000 		call	__Z8init_picv
+ 717      00
+ 718 09a5 E8000000 		call	_io_sti
+ 718      00
+ 719 09aa C7042421 		movl	$33, (%esp)
+ 719      000000
+ 720 09b1 31C0     		xorl	%eax, %eax
+ 721 09b3 89442404 		movl	%eax, 4(%esp)
+ 722 09b7 E8000000 		call	_io_out8
+ 722      00
+ 723 09bc C70424A1 		movl	$161, (%esp)
+ 723      000000
+ 724 09c3 31C0     		xorl	%eax, %eax
+ 725 09c5 89442404 		movl	%eax, 4(%esp)
+ 726 09c9 E8000000 		call	_io_out8
+ 726      00
+ 727 09ce E8000000 		call	__Z12init_palettev
+ 727      00
+ 728 09d3 89442408 		movl	%eax, 8(%esp)
+ 729 09d7 897C2404 		movl	%edi, 4(%esp)
+ 730 09db C7042400 		movl	$0, (%esp)
+ 730      000000
+ 731 09e2 E8000000 		call	__Z11set_paletteiiPKh
+ 731      00
+ 732 09e7 89742404 		movl	%esi, 4(%esp)
+ 733 09eb C7042400 		movl	$4194304, (%esp)
+ 733      004000
+ 734 09f2 E8000000 		call	__Z7memtestjj
+ 734      00
+ 735 09f7 C7042400 		movl	$3932160, (%esp)
+ 735      003C00
+ 736 09fe 89C7     		movl	%eax, %edi
+ 737 0a00 E8000000 		call	__Z11memmng_initP13MemoryManager
+ 737      00
+ 738 0a05 895C2404 		movl	%ebx, 4(%esp)
+ 739 0a09 8D870000 		leal	-5242880(%edi), %eax
+GAS LISTING bootpack.gas 			page 20
+
+
+ 739      B0FF
+ 740 0a0f 89442408 		movl	%eax, 8(%esp)
+ 741 0a13 C7042400 		movl	$3932160, (%esp)
+ 741      003C00
+ 742 0a1a E8000000 		call	__Z11memmng_freeP13MemoryManagerPvi
+ 742      00
+ 743 0a1f C7042444 		movl	$6980, (%esp)
+ 743      1B0000
+ 744 0a26 E8000000 		call	__Z15memmng_alloc_4ki
+ 744      00
+ 745 0a2b A3000000 		movl	%eax, _layerctl
+ 745      00
+ 746 0a30 89C3     		movl	%eax, %ebx
+ 747 0a32 0FBF05F6 		movswl	4086,%eax
+ 747      0F0000
+ 748 0a39 89442408 		movl	%eax, 8(%esp)
+ 749 0a3d 0FBF05F4 		movswl	4084,%eax
+ 749      0F0000
+ 750 0a44 891C24   		movl	%ebx, (%esp)
+ 751 0a47 89442404 		movl	%eax, 4(%esp)
+ 752 0a4b E8000000 		call	__Z13layerctl_initP8LayerCtlii
+ 752      00
+ 753 0a50 891C24   		movl	%ebx, (%esp)
+ 754 0a53 E8000000 		call	__Z11layer_allocP8LayerCtl
+ 754      00
+ 755 0a58 89442404 		movl	%eax, 4(%esp)
+ 756 0a5c BA020000 		movl	$2, %edx
+ 756      00
+ 757 0a61 B9010000 		movl	$1, %ecx
+ 757      00
+ 758 0a66 89542408 		movl	%edx, 8(%esp)
+ 759 0a6a 894C240C 		movl	%ecx, 12(%esp)
+ 760 0a6e 891C24   		movl	%ebx, (%esp)
+ 761 0a71 E8000000 		call	__Z11layer_fill8P8LayerCtl5uid_tcj
+ 761      00
+ 762 0a76 891C24   		movl	%ebx, (%esp)
+ 763 0a79 E8000000 		call	__Z11layer_allocP8LayerCtl
+ 763      00
+ 764 0a7e A3000000 		movl	%eax, _l_console
+ 764      00
+ 765 0a83 89C6     		movl	%eax, %esi
+ 766 0a85 E8000000 		call	__Z14mouse_initdrawv
+ 766      00
+ 767 0a8a E8000000 		call	__Z13init_keyboardv
+ 767      00
+ 768 0a8f E8000000 		call	__Z12enable_mousev
+ 768      00
+ 769 0a94 897C2408 		movl	%edi, 8(%esp)
+ 770 0a98 8D85E8FD 		leal	-536(%ebp), %eax
+ 770      FFFF
+ 771 0a9e BFF40000 		movl	$LC13, %edi
+ 771      00
+ 772 0aa3 897C2404 		movl	%edi, 4(%esp)
+ 773 0aa7 31FF     		xorl	%edi, %edi
+ 774 0aa9 890424   		movl	%eax, (%esp)
+ 775 0aac E8000000 		call	_sprintf
+ 775      00
+GAS LISTING bootpack.gas 			page 21
+
+
+ 776 0ab1 89742404 		movl	%esi, 4(%esp)
+ 777 0ab5 8D85E8FD 		leal	-536(%ebp), %eax
+ 777      FFFF
+ 778 0abb 31F6     		xorl	%esi, %esi
+ 779 0abd 891C24   		movl	%ebx, (%esp)
+ 780 0ac0 89442408 		movl	%eax, 8(%esp)
+ 781 0ac4 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 781      00
+ 782 0ac9 E8000000 		call	__Z8init_pitv
+ 782      00
+ 783 0ace C7042464 		movl	$100, (%esp)
+ 783      000000
+ 784 0ad5 B9010000 		movl	$1, %ecx
+ 784      00
+ 785 0ada 894C2404 		movl	%ecx, 4(%esp)
+ 786 0ade E8000000 		call	__Z9set_timerjj
+ 786      00
+ 787 0ae3 E8000000 		call	__Z11window_initv
+ 787      00
+ 788 0ae8 C7042410 		movl	$LC14, (%esp)
+ 788      010000
+ 789 0aef B88C0000 		movl	$140, %eax
+ 789      00
+ 790 0af4 BAC20100 		movl	$450, %edx
+ 790      00
+ 791 0af9 8985CCFD 		movl	%eax, -564(%ebp)
+ 791      FFFF
+ 792 0aff B8F40100 		movl	$500, %eax
+ 792      00
+ 793 0b04 8985D0FD 		movl	%eax, -560(%ebp)
+ 793      FFFF
+ 794 0b0a B8580200 		movl	$600, %eax
+ 794      00
+ 795 0b0f 8985D4FD 		movl	%eax, -556(%ebp)
+ 795      FFFF
+ 796 0b15 B8E00000 		movl	$__Z8sampleWHiiii, %eax
+ 796      00
+ 797 0b1a 8985D8FD 		movl	%eax, -552(%ebp)
+ 797      FFFF
+ 798 0b20 B8FFFFFF 		movl	$-1, %eax
+ 798      FF
+ 799 0b25 8985DCFD 		movl	%eax, -548(%ebp)
+ 799      FFFF
+ 800 0b2b 8D85C8FD 		leal	-568(%ebp), %eax
+ 800      FFFF
+ 801 0b31 8995C8FD 		movl	%edx, -568(%ebp)
+ 801      FFFF
+ 802 0b37 89442404 		movl	%eax, 4(%esp)
+ 803 0b3b E8000000 		call	__Z14t_CreateWindowPKcPK10WindowInfo
+ 803      00
+ 804 0b40 89442408 		movl	%eax, 8(%esp)
+ 805 0b44 89C3     		movl	%eax, %ebx
+ 806 0b46 B8EB0000 		movl	$LC12, %eax
+ 806      00
+ 807 0b4b 89442404 		movl	%eax, 4(%esp)
+ 808 0b4f 8D85E8FD 		leal	-536(%ebp), %eax
+ 808      FFFF
+GAS LISTING bootpack.gas 			page 22
+
+
+ 809 0b55 890424   		movl	%eax, (%esp)
+ 810 0b58 E8000000 		call	_sprintf
+ 810      00
+ 811 0b5d E8EEFCFF 		call	__ZN7tmpCode15createOneWindowEv
+ 811      FF
+ 812 0b62 8D85E8FD 		leal	-536(%ebp), %eax
+ 812      FFFF
+ 813 0b68 89442408 		movl	%eax, 8(%esp)
+ 814 0b6c A1000000 		movl	_l_console, %eax
+ 814      00
+ 815 0b71 89442404 		movl	%eax, 4(%esp)
+ 816 0b75 A1000000 		movl	_layerctl, %eax
+ 816      00
+ 817 0b7a 890424   		movl	%eax, (%esp)
+ 818 0b7d E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 818      00
+ 819 0b82 E8000000 		call	__Z14threadctl_initv
+ 819      00
+ 820 0b87 897C240C 		movl	%edi, 12(%esp)
+ 821 0b8b 89742408 		movl	%esi, 8(%esp)
+ 822 0b8f 895C2404 		movl	%ebx, 4(%esp)
+ 823 0b93 C7042400 		movl	$__Z8inf_loopPv, (%esp)
+ 823      000000
+ 824 0b9a E8000000 		call	__Z13thread_createPFiPvES_ij
+ 824      00
+ 825 0b9f 89442408 		movl	%eax, 8(%esp)
+ 826 0ba3 B9160100 		movl	$LC15, %ecx
+ 826      00
+ 827 0ba8 89C3     		movl	%eax, %ebx
+ 828 0baa 894C2404 		movl	%ecx, 4(%esp)
+ 829 0bae 8D85E8FD 		leal	-536(%ebp), %eax
+ 829      FFFF
+ 830 0bb4 31F6     		xorl	%esi, %esi
+ 831 0bb6 890424   		movl	%eax, (%esp)
+ 832 0bb9 E8000000 		call	_sprintf
+ 832      00
+ 833 0bbe 8D85E8FD 		leal	-536(%ebp), %eax
+ 833      FFFF
+ 834 0bc4 31FF     		xorl	%edi, %edi
+ 835 0bc6 89442408 		movl	%eax, 8(%esp)
+ 836 0bca A1000000 		movl	_l_console, %eax
+ 836      00
+ 837 0bcf 89442404 		movl	%eax, 4(%esp)
+ 838 0bd3 A1000000 		movl	_layerctl, %eax
+ 838      00
+ 839 0bd8 890424   		movl	%eax, (%esp)
+ 840 0bdb E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 840      00
+ 841 0be0 C7042418 		movl	$24, (%esp)
+ 841      000000
+ 842 0be7 E8000000 		call	_load_tr
+ 842      00
+ 843 0bec E8000000 		call	__Z15dump_threadlistv
+ 843      00
+ 844 0bf1 891C24   		movl	%ebx, (%esp)
+ 845 0bf4 E8000000 		call	__Z16thread_terminatei
+ 845      00
+GAS LISTING bootpack.gas 			page 23
+
+
+ 846 0bf9 E8000000 		call	__ZN4proc7ProcCtl4initEv
+ 846      00
+ 847 0bfe E8000000 		call	__ZN6device6floppy12disk_readallEv
+ 847      00
+ 848 0c03 C7042414 		movl	$126740, (%esp)
+ 848      EF0100
+ 849 0c0a E8000000 		call	__Z15memmng_alloc_4ki
+ 849      00
+ 850 0c0f A3000000 		movl	%eax, _fat12img
+ 850      00
+ 851 0c14 BA000010 		movl	$1048576, %edx
+ 851      00
+ 852 0c19 89542404 		movl	%edx, 4(%esp)
+ 853 0c1d 890424   		movl	%eax, (%esp)
+ 854 0c20 E8000000 		call	__ZN2fs10FAT12Image4ctorEPh
+ 854      00
+ 855 0c25 B8020000 		movl	$2, %eax
+ 855      00
+ 856 0c2a 89442404 		movl	%eax, 4(%esp)
+ 857 0c2e A1000000 		movl	_fat12img, %eax
+ 857      00
+ 858 0c33 890424   		movl	%eax, (%esp)
+ 859 0c36 E8000000 		call	__ZN2fs10FAT12Image5chmodENS0_12reading_modeE
+ 859      00
+ 860              	L75:
+ 861 0c3b 897C2404 		movl	%edi, 4(%esp)
+ 862 0c3f 8D85C8FB 		leal	-1080(%ebp), %eax
+ 862      FFFF
+ 863 0c45 89FB     		movl	%edi, %ebx
+ 864 0c47 89442408 		movl	%eax, 8(%esp)
+ 865 0c4b A1000000 		movl	_fat12img, %eax
+ 865      00
+ 866 0c50 C1E309   		sall	$9, %ebx
+ 867 0c53 890424   		movl	%eax, (%esp)
+ 868 0c56 E8000000 		call	__ZN2fs10FAT12Image5lreadEiPc
+ 868      00
+ 869 0c5b 31C9     		xorl	%ecx, %ecx
+ 870 0c5d 8D7600   		.p2align 4,,15
+ 871              	L74:
+ 872 0c60 0FB68429 		movzbl	-1080(%ecx,%ebp), %eax
+ 872      C8FBFFFF 
+ 873 0c68 8D140B   		leal	(%ebx,%ecx), %edx
+ 874 0c6b 41       		incl	%ecx
+ 875 0c6c 0FAFC2   		imull	%edx, %eax
+ 876 0c6f 01C6     		addl	%eax, %esi
+ 877 0c71 81F9FF01 		cmpl	$511, %ecx
+ 877      0000
+ 878 0c77 7EE7     		jle	L74
+ 879 0c79 47       		incl	%edi
+ 880 0c7a 81FF3F0B 		cmpl	$2879, %edi
+ 880      0000
+ 881 0c80 7EB9     		jle	L75
+ 882 0c82 89742408 		movl	%esi, 8(%esp)
+ 883 0c86 B81F0100 		movl	$LC16, %eax
+ 883      00
+ 884 0c8b 89442404 		movl	%eax, 4(%esp)
+ 885 0c8f 8D85E8FD 		leal	-536(%ebp), %eax
+GAS LISTING bootpack.gas 			page 24
+
+
+ 885      FFFF
+ 886 0c95 890424   		movl	%eax, (%esp)
+ 887 0c98 E8000000 		call	_sprintf
+ 887      00
+ 888 0c9d 8D85E8FD 		leal	-536(%ebp), %eax
+ 888      FFFF
+ 889 0ca3 89442408 		movl	%eax, 8(%esp)
+ 890 0ca7 A1000000 		movl	_l_console, %eax
+ 890      00
+ 891 0cac 89442404 		movl	%eax, 4(%esp)
+ 892 0cb0 A1000000 		movl	_layerctl, %eax
+ 892      00
+ 893 0cb5 890424   		movl	%eax, (%esp)
+ 894 0cb8 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 894      00
+ 895 0cbd E8000000 		call	__ZN2io5iomng9IOManager4initEv
+ 895      00
+ 896 0cc2 B8320100 		movl	$LC17, %eax
+ 896      00
+ 897 0cc7 89442404 		movl	%eax, 4(%esp)
+ 898 0ccb A1000000 		movl	__ZN4proc7procctlE, %eax
+ 898      00
+ 899 0cd0 890424   		movl	%eax, (%esp)
+ 900 0cd3 E8000000 		call	__ZN4proc7ProcCtl9start_appEPKc
+ 900      00
+ 901              	L76:
+ 902 0cd8 E893F9FF 		call	__Z11get_requestv
+ 902      FF
+ 903 0cdd 890424   		movl	%eax, (%esp)
+ 904 0ce0 E8FBFBFF 		call	__Z11req_handlerj
+ 904      FF
+ 905 0ce5 EBF1     		jmp	L76
+ 906              		.def	_memcpy;	.scl	2;	.type	32;	.endef
+ 907              		.def	_store_eflags;	.scl	3;	.type	32;	.endef
+ 908              		.def	__Z11mouse_eventv;	.scl	3;	.type	32;	.endef
+ 909              		.def	__Z8kb_eventv;	.scl	3;	.type	32;	.endef
+ 910              		.def	__Z10get_fifo32P6Fifo32;	.scl	3;	.type	32;	.endef
+ 911              		.def	_io_stihlt;	.scl	3;	.type	32;	.endef
+ 912              		.def	_io_cli;	.scl	3;	.type	32;	.endef
+ 913              		.def	_load_eflags;	.scl	3;	.type	32;	.endef
+ 914              		.def	__Z11req_handlerj;	.scl	3;	.type	32;	.endef
+ 915              		.def	__ZN4proc7ProcCtl9start_appEPKc;	.scl	3;	.type	32;	.endef
+ 916              		.def	__ZN2io5iomng9IOManager4initEv;	.scl	3;	.type	32;	.endef
+ 917              		.def	__ZN2fs10FAT12Image5chmodENS0_12reading_modeE;	.scl	3;	.type	32;	.endef
+ 918              		.def	__ZN2fs10FAT12Image4ctorEPh;	.scl	3;	.type	32;	.endef
+ 919              		.def	__ZN6device6floppy12disk_readallEv;	.scl	3;	.type	32;	.endef
+ 920              		.def	__ZN4proc7ProcCtl4initEv;	.scl	3;	.type	32;	.endef
+ 921              		.def	__Z16thread_terminatei;	.scl	3;	.type	32;	.endef
+ 922              		.def	__Z15dump_threadlistv;	.scl	3;	.type	32;	.endef
+ 923              		.def	_load_tr;	.scl	3;	.type	32;	.endef
+ 924              		.def	__Z13thread_createPFiPvES_ij;	.scl	3;	.type	32;	.endef
+ 925              		.def	__Z14threadctl_initv;	.scl	3;	.type	32;	.endef
+ 926              		.def	__Z11window_initv;	.scl	3;	.type	32;	.endef
+ 927              		.def	__Z9set_timerjj;	.scl	3;	.type	32;	.endef
+ 928              		.def	__Z8init_pitv;	.scl	3;	.type	32;	.endef
+ 929              		.def	__Z12enable_mousev;	.scl	3;	.type	32;	.endef
+ 930              		.def	__Z13init_keyboardv;	.scl	3;	.type	32;	.endef
+GAS LISTING bootpack.gas 			page 25
+
+
+ 931              		.def	__Z14mouse_initdrawv;	.scl	3;	.type	32;	.endef
+ 932              		.def	__Z11layer_fill8P8LayerCtl5uid_tcj;	.scl	3;	.type	32;	.endef
+ 933              		.def	__Z11layer_allocP8LayerCtl;	.scl	3;	.type	32;	.endef
+ 934              		.def	__Z13layerctl_initP8LayerCtlii;	.scl	3;	.type	32;	.endef
+ 935              		.def	__Z15memmng_alloc_4ki;	.scl	3;	.type	32;	.endef
+ 936              		.def	__Z11memmng_freeP13MemoryManagerPvi;	.scl	3;	.type	32;	.endef
+ 937              		.def	__Z11memmng_initP13MemoryManager;	.scl	3;	.type	32;	.endef
+ 938              		.def	__Z7memtestjj;	.scl	3;	.type	32;	.endef
+ 939              		.def	__Z12init_palettev;	.scl	3;	.type	32;	.endef
+ 940              		.def	__Z11set_paletteiiPKh;	.scl	3;	.type	32;	.endef
+ 941              		.def	_io_out8;	.scl	3;	.type	32;	.endef
+ 942              		.def	_io_sti;	.scl	3;	.type	32;	.endef
+ 943              		.def	__Z8init_picv;	.scl	3;	.type	32;	.endef
+ 944              		.def	__Z11init_gdtidtv;	.scl	3;	.type	32;	.endef
+ 945              		.def	__Z14t_CreateWindowPKcPK10WindowInfo;	.scl	3;	.type	32;	.endef
+ 946              		.def	__ZNK2fs10FAT12Image4nextEi;	.scl	3;	.type	32;	.endef
+ 947              		.def	__ZN2fs10FAT12Image5lreadEiPc;	.scl	3;	.type	32;	.endef
+ 948              		.def	__Z12status_fifo8P5Fifo8;	.scl	3;	.type	32;	.endef
+ 949              		.def	__Z13status_fifo32P6Fifo32;	.scl	3;	.type	32;	.endef
+ 950              		.def	__Z16rect_checkbounds4RectS_;	.scl	3;	.type	32;	.endef
+ 951              		.def	__Z15createComponentiPK10WindowInfo;	.scl	3;	.type	32;	.endef
+ 952              		.def	__Z10layer_drawP8LayerCtl5uid_tPc4Rectj;	.scl	3;	.type	32;	.endef
+ 953              		.def	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj;	.scl	3;	.type	32;	.endef
+ 954              		.def	__Z15t_DestroyWindowi;	.scl	3;	.type	32;	.endef
+ 955              		.def	__Z13getWindowInfoiP10WindowInfo;	.scl	3;	.type	32;	.endef
+ 956              		.def	__Z11layer_printP8LayerCtl5uid_tPc;	.scl	3;	.type	32;	.endef
+ 957              		.def	__Z6uSleepj;	.scl	3;	.type	32;	.endef
+ 958              		.def	__Z14thread_currentv;	.scl	3;	.type	32;	.endef
+ 959 0ce7 90909090 		.def	_sprintf;	.scl	2;	.type	32;	.endef
+ 959      90909090 
+ 959      90
+GAS LISTING bootpack.gas 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 bootpack.cpp
+        bootpack.gas:5      .data:00000000 _closing
+        bootpack.gas:15     .text:00000000 __Z8inf_loopPv
+        bootpack.gas:46     .text:00000050 __Z20closingButtonHandleriiii
+        bootpack.gas:108    .text:000000e0 __Z8sampleWHiiii
+        bootpack.gas:438    .text:00000670 __Z11get_requestv
+        bootpack.gas:481    .text:000006c0 __ZN7tmpCode11readFileAllEPN2fs9FAT12InfoEiPc
+        bootpack.gas:600    .text:00000850 __ZN7tmpCode15createOneWindowEv
+        bootpack.gas:706    .text:00000980 _HariMain
+        bootpack.gas:636    .text:000008e0 __Z11req_handlerj
+
+UNDEFINED SYMBOLS
+_l_console
+_layerctl
+_winctl
+_timerctl
+_key_fifo
+_mouse_fifo
+_fat12img
+__ZN4proc7procctlE
+_memcpy
+_store_eflags
+__Z11mouse_eventv
+__Z8kb_eventv
+__Z10get_fifo32P6Fifo32
+_io_stihlt
+_io_cli
+_load_eflags
+__ZN4proc7ProcCtl9start_appEPKc
+__ZN2io5iomng9IOManager4initEv
+__ZN2fs10FAT12Image5chmodENS0_12reading_modeE
+__ZN2fs10FAT12Image4ctorEPh
+__ZN6device6floppy12disk_readallEv
+__ZN4proc7ProcCtl4initEv
+__Z16thread_terminatei
+__Z15dump_threadlistv
+_load_tr
+__Z13thread_createPFiPvES_ij
+__Z14threadctl_initv
+__Z11window_initv
+__Z9set_timerjj
+__Z8init_pitv
+__Z12enable_mousev
+__Z13init_keyboardv
+__Z14mouse_initdrawv
+__Z11layer_fill8P8LayerCtl5uid_tcj
+__Z11layer_allocP8LayerCtl
+__Z13layerctl_initP8LayerCtlii
+__Z15memmng_alloc_4ki
+__Z11memmng_freeP13MemoryManagerPvi
+__Z11memmng_initP13MemoryManager
+__Z7memtestjj
+__Z12init_palettev
+__Z11set_paletteiiPKh
+_io_out8
+_io_sti
+GAS LISTING bootpack.gas 			page 27
+
+
+__Z8init_picv
+__Z11init_gdtidtv
+__Z14t_CreateWindowPKcPK10WindowInfo
+__ZNK2fs10FAT12Image4nextEi
+__ZN2fs10FAT12Image5lreadEiPc
+__Z12status_fifo8P5Fifo8
+__Z13status_fifo32P6Fifo32
+__Z16rect_checkbounds4RectS_
+__Z15createComponentiPK10WindowInfo
+__Z10layer_drawP8LayerCtl5uid_tPc4Rectj
+__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+__Z15t_DestroyWindowi
+__Z13getWindowInfoiP10WindowInfo
+__Z11layer_printP8LayerCtl5uid_tPc
+__Z6uSleepj
+__Z14thread_currentv
+_sprintf

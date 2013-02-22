@@ -1,0 +1,31 @@
+Memory:
+0000_0ff0     10   bootinfo
+0000_8000   cyls*0x2400 Disk Cache (Real Mode)
+;cyls=10    cyls*0x2400=0x16800
+0010_0000   cyls*0x2400 Disk Cache (Protected Mode)
+;cyls=0xa0ÇÊÇËÅAcyls*0x2400=0x168000
+
+0026_8000   3000   reserved for _inthandler_40
+0026_b000   2400   free
+0026_d400   2400   (9 KiB)reserved for fdc
+0026_f800    800   idt(gate descriptor)
+0027_0000  10000   gdt(segment descriptor)
+0028_0000  ?????   bootpack
+0031_0000  -????   stack
+003c_0000   8000   memory manager
+0040_0000   ????   free 
+
+
+Floppy Image:
+
+0000_0000 Header
+
+0000_0200   1200 FAT
+0000_1400   1200 FAT(duplicate)
+0000_2600   1c00 Root Directory
+0000_4200   ???? Contents
+
+0000_4200 <-> cluster 002
+
+0016_8000 <-> cluster b21 (end,it does not exist)
+

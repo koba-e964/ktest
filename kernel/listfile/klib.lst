@@ -1,0 +1,32 @@
+     1 00000000                                 [format "WCOFF"]
+     2 00000000                                 [instrset "i486p"]
+     3 00000000                                 [bits 32]
+     4 00000000                                 [file "klib.nas"]
+     5 00000000                                 
+     6 00000000                                 global __alloca
+     7 00000000                                 global _memcpy
+     8 00000000                                 
+     9                                          [section .text]
+    10 00000000                                 
+    11 00000000                                 __alloca:
+    12 00000000 83 E8 04                        	sub eax,4
+    13 00000003 29 C4                           	sub esp,eax
+    14 00000005 FF 24 04                        	jmp [esp+eax]
+    15 00000008                                 
+    16 00000008                                 _memcpy: ;void *memcpy( void *str1 , const void *str2 , size_t len );
+    17 00000008 53                              	push ebx
+    18 00000009 8B 44 24 08                     	mov eax,[esp+8]
+    19 0000000D 8B 4C 24 0C                     	mov ecx,[esp+0x0c]
+    20 00000011 8B 54 24 10                     	mov edx,[esp+0x10]
+    21 00000015 F7 C2 80000000                  L1:	test edx,0x80000000
+    22 0000001B 75 09                           	jne L2
+    23 0000001D 8A 19                           	mov BL, BYTE [ECX]
+    24 0000001F 88 18                           	mov byte [eax], bl
+    25 00000021 4A                              	dec edx
+    26 00000022 40                              	inc eax
+    27 00000023 41                              	inc ecx
+    28 00000024 EB EF                           	jmp L1
+    29 00000026 8B 44 24 08                     L2:	mov eax,[esp+8]
+    30 0000002A 5B                              	pop ebx
+    31 0000002B C3                              	ret
+    32 0000002C                                 

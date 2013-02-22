@@ -1,0 +1,66 @@
+GAS LISTING util/mem_op.gas 			page 1
+
+
+   1              		.file	"mem_op.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __Z8k_memmovPKvPvj
+   6              		.def	__Z8k_memmovPKvPvj;	.scl	2;	.type	32;	.endef
+   7              	__Z8k_memmovPKvPvj:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 56       		pushl	%esi
+  11 0004 53       		pushl	%ebx
+  12 0005 8B7508   		movl	8(%ebp), %esi
+  13 0008 8B5D0C   		movl	12(%ebp), %ebx
+  14 000b 8B4D10   		movl	16(%ebp), %ecx
+  15 000e 39DE     		cmpl	%ebx, %esi
+  16 0010 7419     		je	L1
+  17 0012 39F3     		cmpl	%esi, %ebx
+  18 0014 721B     		jb	L4
+  19 0016 8D040E   		leal	(%esi,%ecx), %eax
+  20 0019 89CA     		movl	%ecx, %edx
+  21 001b 39D8     		cmpl	%ebx, %eax
+  22 001d 7709     		ja	L18
+  23 001f EB10     		jmp	L4
+  24              		.p2align 4,,7
+  25              	L21:
+  26 0021 0FB60432 		movzbl	(%edx,%esi), %eax
+  27 0025 88041A   		movb	%al, (%edx,%ebx)
+  28              	L18:
+  29 0028 4A       		decl	%edx
+  30 0029 79F6     		jns	L21
+  31              	L1:
+  32 002b 5B       		popl	%ebx
+  33 002c 89C8     		movl	%ecx, %eax
+  34 002e 5E       		popl	%esi
+  35 002f 5D       		popl	%ebp
+  36 0030 C3       		ret
+  37              		.p2align 4,,7
+  38              	L4:
+  39 0031 31D2     		xorl	%edx, %edx
+  40 0033 83F900   		cmpl	$0, %ecx
+  41 0036 EB0A     		jmp	L17
+  42              		.p2align 4,,7
+  43              	L22:
+  44 0038 0FB60432 		movzbl	(%edx,%esi), %eax
+  45 003c 88041A   		movb	%al, (%edx,%ebx)
+  46 003f 42       		incl	%edx
+  47 0040 39D1     		cmpl	%edx, %ecx
+  48              	L17:
+  49 0042 7FF4     		jg	L22
+  50 0044 5B       		popl	%ebx
+  51 0045 89C8     		movl	%ecx, %eax
+  52 0047 5E       		popl	%esi
+  53 0048 5D       		popl	%ebp
+  54 0049 C3909090 		ret
+  54      909090
+GAS LISTING util/mem_op.gas 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 mem_op.cpp
+     util/mem_op.gas:7      .text:00000000 __Z8k_memmovPKvPvj
+
+NO UNDEFINED SYMBOLS

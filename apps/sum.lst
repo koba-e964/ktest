@@ -1,0 +1,64 @@
+GAS LISTING sum.gas 			page 1
+
+
+   1              		.file	"sum.c"
+   2              		.data
+   3              	LC1:
+   4 0000 74657374 		.ascii "teststr@sum.hrb\12\0"
+   4      73747240 
+   4      73756D2E 
+   4      6872620A 
+   4      00
+   5              	LC0:
+   6 0011 74657374 		.ascii "test.bin\0"
+   6      2E62696E 
+   6      00
+   7 001a 00000000 		.text
+   7      0000
+   8              		.balign 2
+   9              	.globl _KMain
+  10              		.def	_KMain;	.scl	2;	.type	32;	.endef
+  11              	_KMain:
+  12 0000 55       		pushl	%ebp
+  13 0001 89E5     		movl	%esp, %ebp
+  14 0003 57       		pushl	%edi
+  15 0004 56       		pushl	%esi
+  16 0005 BE000000 		movl	$LC1, %esi
+  16      00
+  17 000a 83EC20   		subl	$32, %esp
+  18 000d 8D7DD8   		leal	-40(%ebp), %edi
+  19 0010 6A01     		pushl	$1
+  20 0012 68110000 		pushl	$LC0
+  20      00
+  21 0017 E8000000 		call	_kos_open
+  21      00
+  22 001c 8D45D8   		leal	-40(%ebp), %eax
+  23 001f FC       		cld
+  24 0020 B9110000 		movl	$17, %ecx
+  24      00
+  25 0025 F3       		rep
+  26 0026 A4       		movsb
+  27 0027 6A11     		pushl	$17
+  28 0029 50       		pushl	%eax
+  29 002a 6A01     		pushl	$1
+  30 002c E8000000 		call	_kos_write
+  30      00
+  31 0031 31C0     		xorl	%eax, %eax
+  32 0033 8D65F8   		leal	-8(%ebp), %esp
+  33 0036 5E       		popl	%esi
+  34 0037 5F       		popl	%edi
+  35 0038 5D       		popl	%ebp
+  36 0039 C3       		ret
+  37              		.def	_kos_write;	.scl	2;	.type	32;	.endef
+  38 003a 90909090 		.def	_kos_open;	.scl	2;	.type	32;	.endef
+  38      9090
+GAS LISTING sum.gas 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 sum.c
+             sum.gas:11     .text:00000000 _KMain
+
+UNDEFINED SYMBOLS
+_kos_write
+_kos_open

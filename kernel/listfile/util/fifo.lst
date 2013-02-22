@@ -1,0 +1,293 @@
+GAS LISTING util/fifo.gas 			page 1
+
+
+   1              		.file	"fifo.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __Z10init_fifo8P5Fifo8Pci
+   6              		.def	__Z10init_fifo8P5Fifo8Pci;	.scl	2;	.type	32;	.endef
+   7              	__Z10init_fifo8P5Fifo8Pci:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 8B4D10   		movl	16(%ebp), %ecx
+  11 0006 8B5508   		movl	8(%ebp), %edx
+  12 0009 85C9     		testl	%ecx, %ecx
+  13 000b 7E16     		jle	L1
+  14 000d 894A0C   		movl	%ecx, 12(%edx)
+  15 0010 8B450C   		movl	12(%ebp), %eax
+  16 0013 C7420400 		movl	$0, 4(%edx)
+  16      000000
+  17 001a C7420800 		movl	$0, 8(%edx)
+  17      000000
+  18 0021 8902     		movl	%eax, (%edx)
+  19              	L1:
+  20 0023 5D       		popl	%ebp
+  21 0024 C3       		ret
+  22 0025 90       		.align 2
+  23 0026 8D76008D 		.p2align 4,,15
+  23      BC270000 
+  23      0000
+  24              	.globl __Z9put_fifo8P5Fifo8c
+  25              		.def	__Z9put_fifo8P5Fifo8c;	.scl	2;	.type	32;	.endef
+  26              	__Z9put_fifo8P5Fifo8c:
+  27 0030 55       		pushl	%ebp
+  28 0031 89E5     		movl	%esp, %ebp
+  29 0033 56       		pushl	%esi
+  30 0034 8B750C   		movl	12(%ebp), %esi
+  31 0037 53       		pushl	%ebx
+  32 0038 8B5D08   		movl	8(%ebp), %ebx
+  33 003b 8B5304   		movl	4(%ebx), %edx
+  34 003e 8B4308   		movl	8(%ebx), %eax
+  35 0041 29D0     		subl	%edx, %eax
+  36 0043 8B530C   		movl	12(%ebx), %edx
+  37 0046 01D0     		addl	%edx, %eax
+  38 0048 89D1     		movl	%edx, %ecx
+  39 004a 99       		cltd
+  40 004b F7F9     		idivl	%ecx
+  41 004d B8FFFFFF 		movl	$-1, %eax
+  41      FF
+  42 0052 4A       		decl	%edx
+  43 0053 7422     		je	L4
+  44 0055 E8000000 		call	_io_cli
+  44      00
+  45 005a 8B03     		movl	(%ebx), %eax
+  46 005c 89F1     		movl	%esi, %ecx
+  47 005e 8B5304   		movl	4(%ebx), %edx
+  48 0061 880C02   		movb	%cl, (%edx,%eax)
+  49 0064 8B4304   		movl	4(%ebx), %eax
+  50 0067 40       		incl	%eax
+  51 0068 3B430C   		cmpl	12(%ebx), %eax
+GAS LISTING util/fifo.gas 			page 2
+
+
+  52 006b 7D13     		jge	L8
+  53 006d 894304   		movl	%eax, 4(%ebx)
+  54              	L6:
+  55 0070 E8000000 		call	_io_sti
+  55      00
+  56 0075 31C0     		xorl	%eax, %eax
+  57              	L4:
+  58 0077 5B       		popl	%ebx
+  59 0078 5E       		popl	%esi
+  60 0079 5D       		popl	%ebp
+  61 007a C3       		ret
+  62 007b 908D7426 		.p2align 4,,7
+  62      00
+  63              	L8:
+  64 0080 C7430400 		movl	$0, 4(%ebx)
+  64      000000
+  65 0087 EBE7     		jmp	L6
+  66 0089 90       		.align 2
+  67 008a 8DB60000 		.p2align 4,,15
+  67      0000
+  68              	.globl __Z9get_fifo8P5Fifo8
+  69              		.def	__Z9get_fifo8P5Fifo8;	.scl	2;	.type	32;	.endef
+  70              	__Z9get_fifo8P5Fifo8:
+  71 0090 55       		pushl	%ebp
+  72 0091 B8FFFFFF 		movl	$-1, %eax
+  72      FF
+  73 0096 89E5     		movl	%esp, %ebp
+  74 0098 8B4D08   		movl	8(%ebp), %ecx
+  75 009b 8B5108   		movl	8(%ecx), %edx
+  76 009e 3B5104   		cmpl	4(%ecx), %edx
+  77 00a1 7416     		je	L9
+  78 00a3 8B01     		movl	(%ecx), %eax
+  79 00a5 0FB60402 		movzbl	(%edx,%eax), %eax
+  80 00a9 42       		incl	%edx
+  81 00aa 3B510C   		cmpl	12(%ecx), %edx
+  82 00ad 7C11     		jl	L12
+  83 00af C7410800 		movl	$0, 8(%ecx)
+  83      000000
+  84 00b6 0FB6C0   		movzbl	%al, %eax
+  85              	L9:
+  86 00b9 5D       		popl	%ebp
+  87 00ba C3       		ret
+  88 00bb 908D7426 		.p2align 4,,7
+  88      00
+  89              	L12:
+  90 00c0 895108   		movl	%edx, 8(%ecx)
+  91 00c3 0FB6C0   		movzbl	%al, %eax
+  92 00c6 EBF1     		jmp	L9
+  93              		.align 2
+  94 00c8 908DB426 		.p2align 4,,15
+  94      00000000 
+  95              	.globl __Z12status_fifo8P5Fifo8
+  96              		.def	__Z12status_fifo8P5Fifo8;	.scl	2;	.type	32;	.endef
+  97              	__Z12status_fifo8P5Fifo8:
+  98 00d0 55       		pushl	%ebp
+  99 00d1 89E5     		movl	%esp, %ebp
+ 100 00d3 8B5508   		movl	8(%ebp), %edx
+GAS LISTING util/fifo.gas 			page 3
+
+
+ 101 00d6 5D       		popl	%ebp
+ 102 00d7 8B4A08   		movl	8(%edx), %ecx
+ 103 00da 8B4204   		movl	4(%edx), %eax
+ 104 00dd 8B520C   		movl	12(%edx), %edx
+ 105 00e0 29C8     		subl	%ecx, %eax
+ 106 00e2 01D0     		addl	%edx, %eax
+ 107 00e4 89D1     		movl	%edx, %ecx
+ 108 00e6 99       		cltd
+ 109 00e7 F7F9     		idivl	%ecx
+ 110 00e9 89D0     		movl	%edx, %eax
+ 111 00eb C3       		ret
+ 112              		.align 2
+ 113 00ec 8D742600 		.p2align 4,,15
+ 114              	.globl __Z11init_fifo32P6Fifo32Pii
+ 115              		.def	__Z11init_fifo32P6Fifo32Pii;	.scl	2;	.type	32;	.endef
+ 116              	__Z11init_fifo32P6Fifo32Pii:
+ 117 00f0 55       		pushl	%ebp
+ 118 00f1 89E5     		movl	%esp, %ebp
+ 119 00f3 8B4D10   		movl	16(%ebp), %ecx
+ 120 00f6 8B5508   		movl	8(%ebp), %edx
+ 121 00f9 85C9     		testl	%ecx, %ecx
+ 122 00fb 7E16     		jle	L14
+ 123 00fd 894A0C   		movl	%ecx, 12(%edx)
+ 124 0100 8B450C   		movl	12(%ebp), %eax
+ 125 0103 C7420400 		movl	$0, 4(%edx)
+ 125      000000
+ 126 010a C7420800 		movl	$0, 8(%edx)
+ 126      000000
+ 127 0111 8902     		movl	%eax, (%edx)
+ 128              	L14:
+ 129 0113 5D       		popl	%ebp
+ 130 0114 C3       		ret
+ 131 0115 90       		.align 2
+ 132 0116 8D76008D 		.p2align 4,,15
+ 132      BC270000 
+ 132      0000
+ 133              	.globl __Z10put_fifo32P6Fifo32i
+ 134              		.def	__Z10put_fifo32P6Fifo32i;	.scl	2;	.type	32;	.endef
+ 135              	__Z10put_fifo32P6Fifo32i:
+ 136 0120 55       		pushl	%ebp
+ 137 0121 89E5     		movl	%esp, %ebp
+ 138 0123 53       		pushl	%ebx
+ 139 0124 83EC04   		subl	$4, %esp
+ 140 0127 8B5D08   		movl	8(%ebp), %ebx
+ 141 012a 8B5304   		movl	4(%ebx), %edx
+ 142 012d 8B4308   		movl	8(%ebx), %eax
+ 143 0130 29D0     		subl	%edx, %eax
+ 144 0132 8B530C   		movl	12(%ebx), %edx
+ 145 0135 01D0     		addl	%edx, %eax
+ 146 0137 89D1     		movl	%edx, %ecx
+ 147 0139 99       		cltd
+ 148 013a F7F9     		idivl	%ecx
+ 149 013c B8FFFFFF 		movl	$-1, %eax
+ 149      FF
+ 150 0141 4A       		decl	%edx
+ 151 0142 7423     		je	L16
+ 152 0144 E8000000 		call	_io_cli
+GAS LISTING util/fifo.gas 			page 4
+
+
+ 152      00
+ 153 0149 8B450C   		movl	12(%ebp), %eax
+ 154 014c 8B4B04   		movl	4(%ebx), %ecx
+ 155 014f 8B13     		movl	(%ebx), %edx
+ 156 0151 89048A   		movl	%eax, (%edx,%ecx,4)
+ 157 0154 8B4304   		movl	4(%ebx), %eax
+ 158 0157 40       		incl	%eax
+ 159 0158 3B430C   		cmpl	12(%ebx), %eax
+ 160 015b 7D13     		jge	L20
+ 161 015d 894304   		movl	%eax, 4(%ebx)
+ 162              	L18:
+ 163 0160 E8000000 		call	_io_sti
+ 163      00
+ 164 0165 31C0     		xorl	%eax, %eax
+ 165              	L16:
+ 166 0167 5B       		popl	%ebx
+ 167 0168 5B       		popl	%ebx
+ 168 0169 5D       		popl	%ebp
+ 169 016a C3       		ret
+ 170 016b 908D7426 		.p2align 4,,7
+ 170      00
+ 171              	L20:
+ 172 0170 C7430400 		movl	$0, 4(%ebx)
+ 172      000000
+ 173 0177 EBE7     		jmp	L18
+ 174 0179 90       		.align 2
+ 175 017a 8DB60000 		.p2align 4,,15
+ 175      0000
+ 176              	.globl __Z10get_fifo32P6Fifo32
+ 177              		.def	__Z10get_fifo32P6Fifo32;	.scl	2;	.type	32;	.endef
+ 178              	__Z10get_fifo32P6Fifo32:
+ 179 0180 55       		pushl	%ebp
+ 180 0181 BAFFFFFF 		movl	$-1, %edx
+ 180      FF
+ 181 0186 89E5     		movl	%esp, %ebp
+ 182 0188 83EC08   		subl	$8, %esp
+ 183 018b 891C24   		movl	%ebx, (%esp)
+ 184 018e 8B5D08   		movl	8(%ebp), %ebx
+ 185 0191 89742404 		movl	%esi, 4(%esp)
+ 186 0195 8B4304   		movl	4(%ebx), %eax
+ 187 0198 394308   		cmpl	%eax, 8(%ebx)
+ 188 019b 741F     		je	L21
+ 189 019d E8000000 		call	_io_cli
+ 189      00
+ 190 01a2 8B5308   		movl	8(%ebx), %edx
+ 191 01a5 8B03     		movl	(%ebx), %eax
+ 192 01a7 8B3490   		movl	(%eax,%edx,4), %esi
+ 193 01aa 8D4201   		leal	1(%edx), %eax
+ 194 01ad 3B430C   		cmpl	12(%ebx), %eax
+ 195 01b0 7D1E     		jge	L25
+ 196 01b2 894308   		movl	%eax, 8(%ebx)
+ 197              	L23:
+ 198 01b5 E8000000 		call	_io_sti
+ 198      00
+ 199 01ba 89F2     		movl	%esi, %edx
+ 200              	L21:
+ 201 01bc 8B1C24   		movl	(%esp), %ebx
+GAS LISTING util/fifo.gas 			page 5
+
+
+ 202 01bf 89D0     		movl	%edx, %eax
+ 203 01c1 8B742404 		movl	4(%esp), %esi
+ 204 01c5 89EC     		movl	%ebp, %esp
+ 205 01c7 5D       		popl	%ebp
+ 206 01c8 C3       		ret
+ 207 01c9 8DB42600 		.p2align 4,,7
+ 207      000000
+ 208              	L25:
+ 209 01d0 C7430800 		movl	$0, 8(%ebx)
+ 209      000000
+ 210 01d7 EBDC     		jmp	L23
+ 211 01d9 90       		.align 2
+ 212 01da 8DB60000 		.p2align 4,,15
+ 212      0000
+ 213              	.globl __Z13status_fifo32P6Fifo32
+ 214              		.def	__Z13status_fifo32P6Fifo32;	.scl	2;	.type	32;	.endef
+ 215              	__Z13status_fifo32P6Fifo32:
+ 216 01e0 55       		pushl	%ebp
+ 217 01e1 89E5     		movl	%esp, %ebp
+ 218 01e3 8B5508   		movl	8(%ebp), %edx
+ 219 01e6 5D       		popl	%ebp
+ 220 01e7 8B4A08   		movl	8(%edx), %ecx
+ 221 01ea 8B4204   		movl	4(%edx), %eax
+ 222 01ed 8B520C   		movl	12(%edx), %edx
+ 223 01f0 29C8     		subl	%ecx, %eax
+ 224 01f2 01D0     		addl	%edx, %eax
+ 225 01f4 89D1     		movl	%edx, %ecx
+ 226 01f6 99       		cltd
+ 227 01f7 F7F9     		idivl	%ecx
+ 228 01f9 89D0     		movl	%edx, %eax
+ 229 01fb C3       		ret
+ 230              		.def	_io_sti;	.scl	3;	.type	32;	.endef
+ 231 01fc 90909090 		.def	_io_cli;	.scl	3;	.type	32;	.endef
+GAS LISTING util/fifo.gas 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 fifo.cpp
+       util/fifo.gas:7      .text:00000000 __Z10init_fifo8P5Fifo8Pci
+       util/fifo.gas:26     .text:00000030 __Z9put_fifo8P5Fifo8c
+       util/fifo.gas:70     .text:00000090 __Z9get_fifo8P5Fifo8
+       util/fifo.gas:97     .text:000000d0 __Z12status_fifo8P5Fifo8
+       util/fifo.gas:116    .text:000000f0 __Z11init_fifo32P6Fifo32Pii
+       util/fifo.gas:135    .text:00000120 __Z10put_fifo32P6Fifo32i
+       util/fifo.gas:178    .text:00000180 __Z10get_fifo32P6Fifo32
+       util/fifo.gas:215    .text:000001e0 __Z13status_fifo32P6Fifo32
+
+UNDEFINED SYMBOLS
+_io_sti
+_io_cli

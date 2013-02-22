@@ -1,0 +1,38 @@
+GAS LISTING entry.gas 			page 1
+
+
+   1              		.file	"entry.c"
+   2              		.text
+   3              		.balign 2
+   4              		.p2align 4,,15
+   5              	.globl _KStartup
+   6              		.def	_KStartup;	.scl	2;	.type	32;	.endef
+   7              	_KStartup:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 51       		pushl	%ecx
+  11 0004 51       		pushl	%ecx
+  12 0005 E8000000 		call	_KMain
+  12      00
+  13 000a 52       		pushl	%edx
+  14 000b 52       		pushl	%edx
+  15 000c 6A00     		pushl	$0
+  16 000e 50       		pushl	%eax
+  17 000f E8000000 		call	_sys_exit
+  17      00
+  18 0014 89EC     		movl	%ebp, %esp
+  19 0016 5D       		popl	%ebp
+  20 0017 C3       		ret
+  21              		.def	_sys_exit;	.scl	2;	.type	32;	.endef
+  22 0018 90909090 		.def	_KMain;	.scl	2;	.type	32;	.endef
+  22      90909090 
+GAS LISTING entry.gas 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 entry.c
+           entry.gas:7      .text:00000000 _KStartup
+
+UNDEFINED SYMBOLS
+_sys_exit
+_KMain

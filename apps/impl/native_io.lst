@@ -1,0 +1,41 @@
+     1 00000000                                 [format "WCOFF"]
+     2 00000000                                 [instrset "i486p"]
+     3 00000000                                 [bits 32]
+     4 00000000                                 [file "native_io.nas"]
+     5 00000000                                 
+     6 00000000                                 GLOBAL  _nio_open,_kos_write, _kos_read, _nio_seek, _nio_tell,_nio_size, _nio_seteof , _kos_close
+     7 00000000                                 
+     8 00000000                                 
+     9                                          [section .text}
+    10 00000000                                 _nio_open: ;native int nio_open(int namelen,const char *filename,int attr);
+    11 00000000 B8 00020000                     	mov eax,0x20000
+    12 00000005 EB 31                           	jmp common_nio_syscall
+    13 00000007                                 _kos_read: ; native int kos_fread(int fd,char *buf,int len);
+    14 00000007 B8 00020001                     	mov eax,0x20001
+    15 0000000C EB 2A                           	jmp common_nio_syscall
+    16 0000000E                                 _kos_write: ;native int kos_write(int fd,const char *buf,int len);
+    17 0000000E B8 00020002                     	mov eax,0x20002
+    18 00000013 EB 23                           	jmp common_nio_syscall
+    19 00000015                                 _nio_seek: ;native int nio_seek(int fd,int *posLow,int *posHigh);
+    20 00000015 B8 00020003                     	mov eax,0x20003
+    21 0000001A EB 1C                           	jmp common_nio_syscall
+    22 0000001C                                 _nio_tell: ;native int nio_tell(int fd,int *fsizeLow,int *fsizHigh);
+    23 0000001C B8 00020004                     	mov eax,0x20004
+    24 00000021 EB 15                           	jmp common_nio_syscall
+    25 00000023                                 _nio_size: 
+    26 00000023 B8 00020005                     	mov eax,0x20005
+    27 00000028 EB 0E                           	jmp common_nio_syscall
+    28 0000002A                                 _nio_seteof:
+    29 0000002A B8 00020006                     	mov eax,0x20006
+    30 0000002F EB 07                           	jmp common_nio_syscall
+    31 00000031                                 _kos_close:
+    32 00000031 B8 00020007                     	mov eax,0x20007
+    33 00000036 EB 00                           	jmp common_nio_syscall
+    34 00000038                                 
+    35 00000038                                 common_nio_syscall:
+    36 00000038 8B 4C 24 04                     	mov ecx,[esp+4]
+    37 0000003C 8B 54 24 08                     	mov edx,[esp+8]
+    38 00000040 8B 5C 24 0C                     	mov ebx,[esp+0x0c]
+    39 00000044 CD 40                           	int 0x40
+    40 00000046 C3                              	ret
+    41 00000047                                 

@@ -1,0 +1,742 @@
+GAS LISTING twindow.gas 			page 1
+
+
+   1              		.file	"twindow.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __Z11window_initv
+   6              		.def	__Z11window_initv;	.scl	2;	.type	32;	.endef
+   7              	__Z11window_initv:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 83EC18   		subl	$24, %esp
+  11 0006 A1000000 		movl	_layerctl, %eax
+  11      00
+  12 000b 890424   		movl	%eax, (%esp)
+  13 000e E8000000 		call	__Z11layer_allocP8LayerCtl
+  13      00
+  14 0013 A3000000 		movl	%eax, _winctl
+  14      00
+  15 0018 31C9     		xorl	%ecx, %ecx
+  16 001a BA00C001 		movl	$114688, %edx
+  16      00
+  17 001f 89542408 		movl	%edx, 8(%esp)
+  18 0023 31C0     		xorl	%eax, %eax
+  19 0025 890D0400 		movl	%ecx, _winctl+4
+  19      0000
+  20 002b 89442404 		movl	%eax, 4(%esp)
+  21 002f C7042408 		movl	$_winctl+8, (%esp)
+  21      000000
+  22 0036 E8000000 		call	_memset
+  22      00
+  23 003b 8B150000 		movl	_layerctl, %edx
+  23      0000
+  24 0041 8B820818 		movl	6152(%edx), %eax
+  24      0000
+  25 0047 891424   		movl	%edx, (%esp)
+  26 004a 83E802   		subl	$2, %eax
+  27 004d 89442408 		movl	%eax, 8(%esp)
+  28 0051 A1000000 		movl	_winctl, %eax
+  28      00
+  29 0056 89442404 		movl	%eax, 4(%esp)
+  30 005a E8000000 		call	__Z12layer_updownP8LayerCtl5uid_ti
+  30      00
+  31 005f C9       		leave
+  32 0060 C3       		ret
+  33 0061 90       		.align 2
+  34 0062 8DB42600 		.p2align 4,,15
+  34      0000008D 
+  34      BC270000 
+  34      0000
+  35              	.globl __Z14t_CreateWindowPKcPK10WindowInfo
+  36              		.def	__Z14t_CreateWindowPKcPK10WindowInfo;	.scl	2;	.type	32;	.endef
+  37              	__Z14t_CreateWindowPKcPK10WindowInfo:
+  38 0070 55       		pushl	%ebp
+  39 0071 B8FFFFFF 		movl	$-1, %eax
+  39      FF
+  40 0076 89E5     		movl	%esp, %ebp
+  41 0078 57       		pushl	%edi
+  42 0079 56       		pushl	%esi
+GAS LISTING twindow.gas 			page 2
+
+
+  43 007a 53       		pushl	%ebx
+  44 007b 81ECFC01 		subl	$508, %esp
+  44      0000
+  45 0081 8B7D0C   		movl	12(%ebp), %edi
+  46 0084 813D0400 		cmpl	$255, _winctl+4
+  46      0000FF00 
+  46      0000
+  47 008e 0F8F6A01 		jg	L2
+  47      0000
+  48 0094 8B4508   		movl	8(%ebp), %eax
+  49 0097 890424   		movl	%eax, (%esp)
+  50 009a E8000000 		call	_strlen
+  50      00
+  51 009f 83F863   		cmpl	$99, %eax
+  52 00a2 89C6     		movl	%eax, %esi
+  53 00a4 0F875F01 		ja	L19
+  53      0000
+  54 00aa 89442408 		movl	%eax, 8(%esp)
+  55 00ae 8B4508   		movl	8(%ebp), %eax
+  56 00b1 8D9D3CFE 		leal	-452(%ebp), %ebx
+  56      FFFF
+  57 00b7 895C2404 		movl	%ebx, 4(%esp)
+  58 00bb 01F3     		addl	%esi, %ebx
+  59 00bd 890424   		movl	%eax, (%esp)
+  60 00c0 E8000000 		call	__Z8k_memmovPKvPvj
+  60      00
+  61 00c5 891C24   		movl	%ebx, (%esp)
+  62 00c8 B8640000 		movl	$100, %eax
+  62      00
+  63 00cd 29F0     		subl	%esi, %eax
+  64 00cf 89442408 		movl	%eax, 8(%esp)
+  65 00d3 31C0     		xorl	%eax, %eax
+  66 00d5 89442404 		movl	%eax, 4(%esp)
+  67 00d9 E8000000 		call	_memset
+  67      00
+  68              	L5:
+  69 00de 8B07     		movl	(%edi), %eax
+  70 00e0 898528FE 		movl	%eax, -472(%ebp)
+  70      FFFF
+  71 00e6 8B4704   		movl	4(%edi), %eax
+  72 00e9 89852CFE 		movl	%eax, -468(%ebp)
+  72      FFFF
+  73 00ef 8B4708   		movl	8(%edi), %eax
+  74 00f2 83F81D   		cmpl	$29, %eax
+  75 00f5 7F05     		jg	L16
+  76 00f7 B81E0000 		movl	$30, %eax
+  76      00
+  77              	L16:
+  78 00fc 898530FE 		movl	%eax, -464(%ebp)
+  78      FFFF
+  79 0102 8B470C   		movl	12(%edi), %eax
+  80 0105 83F81D   		cmpl	$29, %eax
+  81 0108 7F05     		jg	L17
+  82 010a B81E0000 		movl	$30, %eax
+  82      00
+  83              	L17:
+  84 010f 898534FE 		movl	%eax, -460(%ebp)
+GAS LISTING twindow.gas 			page 3
+
+
+  84      FFFF
+  85 0115 8B4710   		movl	16(%edi), %eax
+  86 0118 31F6     		xorl	%esi, %esi
+  87 011a 89B538FE 		movl	%esi, -456(%ebp)
+  87      FFFF
+  88 0120 8985A0FE 		movl	%eax, -352(%ebp)
+  88      FFFF
+  89 0126 8B4714   		movl	20(%edi), %eax
+  90 0129 8985A4FE 		movl	%eax, -348(%ebp)
+  90      FFFF
+  91 012f 31C0     		xorl	%eax, %eax
+  92 0131 EB0D9090 		.p2align 4,,15
+  92      90909090 
+  92      90909090 
+  92      909090
+  93              	L13:
+  94 0140 31DB     		xorl	%ebx, %ebx
+  95 0142 899C85A8 		movl	%ebx, -344(%ebp,%eax,4)
+  95      FEFFFF
+  96 0149 40       		incl	%eax
+  97 014a 83F84F   		cmpl	$79, %eax
+  98 014d 7EF1     		jle	L13
+  99 014f 8B1D0400 		movl	_winctl+4, %ebx
+  99      0000
+ 100 0155 B9C00100 		movl	$448, %ecx
+ 100      00
+ 101 015a 8D9528FE 		leal	-472(%ebp), %edx
+ 101      FFFF
+ 102 0160 894C2408 		movl	%ecx, 8(%esp)
+ 103 0164 31F6     		xorl	%esi, %esi
+ 104 0166 89542404 		movl	%edx, 4(%esp)
+ 105 016a 8D04DD00 		leal	0(,%ebx,8), %eax
+ 105      000000
+ 106 0171 29D8     		subl	%ebx, %eax
+ 107 0173 C1E006   		sall	$6, %eax
+ 108 0176 05080000 		addl	$_winctl+8, %eax
+ 108      00
+ 109 017b 890424   		movl	%eax, (%esp)
+ 110 017e E8000000 		call	_memcpy
+ 110      00
+ 111 0183 89742404 		movl	%esi, 4(%esp)
+ 112 0187 A1040000 		movl	_winctl+4, %eax
+ 112      00
+ 113 018c BE000100 		movl	$256, %esi
+ 113      00
+ 114 0191 C7042408 		movl	$_winctl+114696, (%esp)
+ 114      C00100
+ 115 0198 8D5001   		leal	1(%eax), %edx
+ 116 019b 898524FE 		movl	%eax, -476(%ebp)
+ 116      FFFF
+ 117 01a1 B8040000 		movl	$4, %eax
+ 117      00
+ 118 01a6 89442418 		movl	%eax, 24(%esp)
+ 119 01aa B8000100 		movl	$256, %eax
+ 119      00
+ 120 01af 89442414 		movl	%eax, 20(%esp)
+ 121 01b3 B8010000 		movl	$1, %eax
+GAS LISTING twindow.gas 			page 4
+
+
+ 121      00
+ 122 01b8 8944240C 		movl	%eax, 12(%esp)
+ 123 01bc 8D8524FE 		leal	-476(%ebp), %eax
+ 123      FFFF
+ 124 01c2 89150400 		movl	%edx, _winctl+4
+ 124      0000
+ 125 01c8 89542410 		movl	%edx, 16(%esp)
+ 126 01cc 89442408 		movl	%eax, 8(%esp)
+ 127 01d0 E8000000 		call	__Z12insert_arrayPviS_iiij
+ 127      00
+ 128 01d5 8B470C   		movl	12(%edi), %eax
+ 129 01d8 8B4F08   		movl	8(%edi), %ecx
+ 130 01db C1E010   		sall	$16, %eax
+ 131 01de 09C8     		orl	%ecx, %eax
+ 132 01e0 8944240C 		movl	%eax, 12(%esp)
+ 133 01e4 8B4704   		movl	4(%edi), %eax
+ 134 01e7 8B17     		movl	(%edi), %edx
+ 135 01e9 89742404 		movl	%esi, 4(%esp)
+ 136 01ed C1E010   		sall	$16, %eax
+ 137 01f0 09D0     		orl	%edx, %eax
+ 138 01f2 89442408 		movl	%eax, 8(%esp)
+ 139 01f6 891C24   		movl	%ebx, (%esp)
+ 140 01f9 FF5710   		call	*16(%edi)
+ 141 01fc 89D8     		movl	%ebx, %eax
+ 142              	L2:
+ 143 01fe 81C4FC01 		addl	$508, %esp
+ 143      0000
+ 144 0204 5B       		popl	%ebx
+ 145 0205 5E       		popl	%esi
+ 146 0206 5F       		popl	%edi
+ 147 0207 5D       		popl	%ebp
+ 148 0208 C3       		ret
+ 149              	L19:
+ 150 0209 B8640000 		movl	$100, %eax
+ 150      00
+ 151 020e 89442408 		movl	%eax, 8(%esp)
+ 152 0212 8D853CFE 		leal	-452(%ebp), %eax
+ 152      FFFF
+ 153 0218 89442404 		movl	%eax, 4(%esp)
+ 154 021c 8B4508   		movl	8(%ebp), %eax
+ 155 021f 890424   		movl	%eax, (%esp)
+ 156 0222 E8000000 		call	__Z8k_memmovPKvPvj
+ 156      00
+ 157 0227 E9B2FEFF 		jmp	L5
+ 157      FF
+ 158              		.section .rdata,"dr"
+ 159              	LC0:
+ 160 0000 00       		.ascii "\0"
+ 161 0001 00000000 		.text
+ 161      00000000 
+ 161      00000000 
+ 161      000000
+ 162              		.align 2
+ 163 022c 8D742600 		.p2align 4,,15
+ 164              	.globl __Z15createComponentiPK10WindowInfo
+ 165              		.def	__Z15createComponentiPK10WindowInfo;	.scl	2;	.type	32;	.endef
+ 166              	__Z15createComponentiPK10WindowInfo:
+GAS LISTING twindow.gas 			page 5
+
+
+ 167 0230 55       		pushl	%ebp
+ 168 0231 89E5     		movl	%esp, %ebp
+ 169 0233 56       		pushl	%esi
+ 170 0234 53       		pushl	%ebx
+ 171 0235 83EC10   		subl	$16, %esp
+ 172 0238 8B450C   		movl	12(%ebp), %eax
+ 173 023b 8B5814   		movl	20(%eax), %ebx
+ 174 023e 89442404 		movl	%eax, 4(%esp)
+ 175 0242 C7042400 		movl	$LC0, (%esp)
+ 175      000000
+ 176 0249 E822FEFF 		call	__Z14t_CreateWindowPKcPK10WindowInfo
+ 176      FF
+ 177 024e 89C6     		movl	%eax, %esi
+ 178 0250 8D04C500 		leal	0(,%eax,8), %eax
+ 178      000000
+ 179 0257 29F0     		subl	%esi, %eax
+ 180 0259 C1E006   		sall	$6, %eax
+ 181 025c 8B5508   		movl	8(%ebp), %edx
+ 182 025f 89988400 		movl	%ebx, _winctl+132(%eax)
+ 182      0000
+ 183 0265 8D04DD00 		leal	0(,%ebx,8), %eax
+ 183      000000
+ 184 026c 29D8     		subl	%ebx, %eax
+ 185 026e C1E006   		sall	$6, %eax
+ 186 0271 8D880800 		leal	_winctl+8(%eax), %ecx
+ 186      0000
+ 187 0277 31C0     		xorl	%eax, %eax
+ 188 0279 EB14     		jmp	L26
+ 189 027b 908D7426 		.p2align 4,,7
+ 189      00
+ 190              	L28:
+ 191 0280 42       		incl	%edx
+ 192 0281 83FA4F   		cmpl	$79, %edx
+ 193 0284 7E03     		jle	L23
+ 194 0286 83EA50   		subl	$80, %edx
+ 195              	L23:
+ 196 0289 40       		incl	%eax
+ 197 028a 83F84F   		cmpl	$79, %eax
+ 198 028d 7F0B     		jg	L22
+ 199              	L26:
+ 200 028f 8B9C9180 		movl	128(%ecx,%edx,4), %ebx
+ 200      000000
+ 201 0296 85DB     		testl	%ebx, %ebx
+ 202 0298 75E6     		jne	L28
+ 203              	L22:
+ 204 029a 8D04F500 		leal	0(,%esi,8), %eax
+ 204      000000
+ 205 02a1 29F0     		subl	%esi, %eax
+ 206 02a3 C1E006   		sall	$6, %eax
+ 207 02a6 05080000 		addl	$_winctl+8, %eax
+ 207      00
+ 208 02ab 89849180 		movl	%eax, 128(%ecx,%edx,4)
+ 208      000000
+ 209 02b2 83C410   		addl	$16, %esp
+ 210 02b5 89D0     		movl	%edx, %eax
+ 211 02b7 5B       		popl	%ebx
+ 212 02b8 5E       		popl	%esi
+GAS LISTING twindow.gas 			page 6
+
+
+ 213 02b9 5D       		popl	%ebp
+ 214 02ba C3       		ret
+ 215 02bb 90       		.align 2
+ 216 02bc 8D742600 		.p2align 4,,15
+ 217              	.globl __Z13t_SendMessageiiii
+ 218              		.def	__Z13t_SendMessageiiii;	.scl	2;	.type	32;	.endef
+ 219              	__Z13t_SendMessageiiii:
+ 220 02c0 55       		pushl	%ebp
+ 221 02c1 89E5     		movl	%esp, %ebp
+ 222 02c3 8B5508   		movl	8(%ebp), %edx
+ 223 02c6 5D       		popl	%ebp
+ 224 02c7 8D04D500 		leal	0(,%edx,8), %eax
+ 224      000000
+ 225 02ce 29D0     		subl	%edx, %eax
+ 226 02d0 C1E006   		sall	$6, %eax
+ 227 02d3 8B888000 		movl	_winctl+128(%eax), %ecx
+ 227      0000
+ 228 02d9 FFE1     		jmp	*%ecx
+ 229 02db 90       		.align 2
+ 230 02dc 8D742600 		.p2align 4,,15
+ 231              	.globl __Z15t_DestroyWindowi
+ 232              		.def	__Z15t_DestroyWindowi;	.scl	2;	.type	32;	.endef
+ 233              	__Z15t_DestroyWindowi:
+ 234 02e0 55       		pushl	%ebp
+ 235 02e1 89E5     		movl	%esp, %ebp
+ 236 02e3 57       		pushl	%edi
+ 237 02e4 56       		pushl	%esi
+ 238 02e5 53       		pushl	%ebx
+ 239 02e6 83EC6C   		subl	$108, %esp
+ 240 02e9 8B4508   		movl	8(%ebp), %eax
+ 241 02ec 85C0     		testl	%eax, %eax
+ 242 02ee 780B     		js	L32
+ 243 02f0 8B4508   		movl	8(%ebp), %eax
+ 244 02f3 39050400 		cmpl	%eax, _winctl+4
+ 244      0000
+ 245 02f9 7F0F     		jg	L31
+ 246              	L32:
+ 247 02fb BAFFFFFF 		movl	$-1, %edx
+ 247      FF
+ 248              	L30:
+ 249 0300 83C46C   		addl	$108, %esp
+ 250 0303 89D0     		movl	%edx, %eax
+ 251 0305 5B       		popl	%ebx
+ 252 0306 5E       		popl	%esi
+ 253 0307 5F       		popl	%edi
+ 254 0308 5D       		popl	%ebp
+ 255 0309 C3       		ret
+ 256              	L31:
+ 257 030a 31C0     		xorl	%eax, %eax
+ 258 030c 8944240C 		movl	%eax, 12(%esp)
+ 259 0310 31C0     		xorl	%eax, %eax
+ 260 0312 89442408 		movl	%eax, 8(%esp)
+ 261 0316 B8010100 		movl	$257, %eax
+ 261      00
+ 262 031b 89442404 		movl	%eax, 4(%esp)
+ 263 031f 8B5508   		movl	8(%ebp), %edx
+ 264 0322 891424   		movl	%edx, (%esp)
+GAS LISTING twindow.gas 			page 7
+
+
+ 265 0325 E896FFFF 		call	__Z13t_SendMessageiiii
+ 265      FF
+ 266 032a 85C0     		testl	%eax, %eax
+ 267 032c BAFEFFFF 		movl	$-2, %edx
+ 267      FF
+ 268 0331 75CD     		jne	L30
+ 269 0333 8B7508   		movl	8(%ebp), %esi
+ 270 0336 BF000000 		movl	$_winctl, %edi
+ 270      00
+ 271 033b 31DB     		xorl	%ebx, %ebx
+ 272 033d 8B4508   		movl	8(%ebp), %eax
+ 273 0340 F7DF     		negl	%edi
+ 274 0342 C1E603   		sall	$3, %esi
+ 275 0345 29C6     		subl	%eax, %esi
+ 276 0347 C1E604   		sall	$4, %esi
+ 277 034a EB0A     		jmp	L40
+ 278 034c 8D742600 		.p2align 4,,7
+ 279              	L36:
+ 280 0350 43       		incl	%ebx
+ 281 0351 83FB4F   		cmpl	$79, %ebx
+ 282 0354 7F36     		jg	L50
+ 283              	L40:
+ 284 0356 8D041E   		leal	(%esi,%ebx), %eax
+ 285 0359 8B048588 		movl	_winctl+136(,%eax,4), %eax
+ 285      000000
+ 286 0360 85C0     		testl	%eax, %eax
+ 287 0362 74EC     		je	L36
+ 288 0364 8D4407F8 		leal	-8(%edi,%eax), %eax
+ 289 0368 C1F806   		sarl	$6, %eax
+ 290 036b 69C0B76D 		imull	$-1227133513, %eax, %eax
+ 290      DBB6
+ 291 0371 890424   		movl	%eax, (%esp)
+ 292 0374 E867FFFF 		call	__Z15t_DestroyWindowi
+ 292      FF
+ 293 0379 85C0     		testl	%eax, %eax
+ 294 037b 79D3     		jns	L36
+ 295 037d 83C46C   		addl	$108, %esp
+ 296 0380 BAFDFFFF 		movl	$-3, %edx
+ 296      FF
+ 297 0385 89D0     		movl	%edx, %eax
+ 298 0387 5B       		popl	%ebx
+ 299 0388 5E       		popl	%esi
+ 300 0389 5F       		popl	%edi
+ 301 038a 5D       		popl	%ebp
+ 302 038b C3       		ret
+ 303              	L50:
+ 304 038c 8B4508   		movl	8(%ebp), %eax
+ 305 038f 8B7D08   		movl	8(%ebp), %edi
+ 306 0392 C1E003   		sall	$3, %eax
+ 307 0395 29F8     		subl	%edi, %eax
+ 308 0397 C1E006   		sall	$6, %eax
+ 309 039a BF010000 		movl	$1, %edi
+ 309      00
+ 310 039f 8B880800 		movl	_winctl+8(%eax), %ecx
+ 310      0000
+ 311 03a5 8D900800 		leal	_winctl+8(%eax), %edx
+ 311      0000
+GAS LISTING twindow.gas 			page 8
+
+
+ 312 03ab 89CB     		movl	%ecx, %ebx
+ 313 03ad 894DC8   		movl	%ecx, -56(%ebp)
+ 314 03b0 8B4204   		movl	4(%edx), %eax
+ 315 03b3 8945CC   		movl	%eax, -52(%ebp)
+ 316 03b6 8B7208   		movl	8(%edx), %esi
+ 317 03b9 01F3     		addl	%esi, %ebx
+ 318 03bb 895DD0   		movl	%ebx, -48(%ebp)
+ 319 03be 8B720C   		movl	12(%edx), %esi
+ 320 03c1 8945DC   		movl	%eax, -36(%ebp)
+ 321 03c4 894DD8   		movl	%ecx, -40(%ebp)
+ 322 03c7 8D1430   		leal	(%eax,%esi), %edx
+ 323 03ca B8C00100 		movl	$448, %eax
+ 323      00
+ 324 03cf 8955D4   		movl	%edx, -44(%ebp)
+ 325 03d2 BE7F0000 		movl	$127, %esi
+ 325      00
+ 326 03d7 895DE0   		movl	%ebx, -32(%ebp)
+ 327 03da 8955E4   		movl	%edx, -28(%ebp)
+ 328 03dd 89442410 		movl	%eax, 16(%esp)
+ 329 03e1 A1040000 		movl	_winctl+4, %eax
+ 329      00
+ 330 03e6 8944240C 		movl	%eax, 12(%esp)
+ 331 03ea 8B4508   		movl	8(%ebp), %eax
+ 332 03ed 40       		incl	%eax
+ 333 03ee 89442408 		movl	%eax, 8(%esp)
+ 334 03f2 8B4508   		movl	8(%ebp), %eax
+ 335 03f5 C7042408 		movl	$_winctl+8, (%esp)
+ 335      000000
+ 336 03fc 89442404 		movl	%eax, 4(%esp)
+ 337 0400 E8000000 		call	__Z11erase_arrayPviiij
+ 337      00
+ 338 0405 897C241C 		movl	%edi, 28(%esp)
+ 339 0409 89742418 		movl	%esi, 24(%esp)
+ 340 040d 8B45D8   		movl	-40(%ebp), %eax
+ 341 0410 FF0D0400 		decl	_winctl+4
+ 341      0000
+ 342 0416 89442408 		movl	%eax, 8(%esp)
+ 343 041a 8B45DC   		movl	-36(%ebp), %eax
+ 344 041d 8944240C 		movl	%eax, 12(%esp)
+ 345 0421 8B45E0   		movl	-32(%ebp), %eax
+ 346 0424 89442410 		movl	%eax, 16(%esp)
+ 347 0428 8B45E4   		movl	-28(%ebp), %eax
+ 348 042b 89442414 		movl	%eax, 20(%esp)
+ 349 042f A1000000 		movl	_winctl, %eax
+ 349      00
+ 350 0434 89442404 		movl	%eax, 4(%esp)
+ 351 0438 A1000000 		movl	_layerctl, %eax
+ 351      00
+ 352 043d 890424   		movl	%eax, (%esp)
+ 353 0440 E8000000 		call	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+ 353      00
+ 354 0445 C745B400 		movl	$0, -76(%ebp)
+ 354      000000
+ 355 044c 8B1D0400 		movl	_winctl+4, %ebx
+ 355      0000
+ 356 0452 85DB     		testl	%ebx, %ebx
+ 357 0454 0F8ECC00 		jle	L48
+GAS LISTING twindow.gas 			page 9
+
+
+ 357      0000
+ 358              	L44:
+ 359 045a 8B55B4   		movl	-76(%ebp), %edx
+ 360 045d 8B049508 		movl	_winctl+114696(,%edx,4), %eax
+ 360      C00100
+ 361 0464 8D34C500 		leal	0(,%eax,8), %esi
+ 361      000000
+ 362 046b 29C6     		subl	%eax, %esi
+ 363 046d C1E606   		sall	$6, %esi
+ 364 0470 8B960800 		movl	_winctl+8(%esi), %edx
+ 364      0000
+ 365 0476 8DBE0800 		leal	_winctl+8(%esi), %edi
+ 365      0000
+ 366 047c 89D3     		movl	%edx, %ebx
+ 367 047e 8955B8   		movl	%edx, -72(%ebp)
+ 368 0481 8B4704   		movl	4(%edi), %eax
+ 369 0484 8945BC   		movl	%eax, -68(%ebp)
+ 370 0487 8B4F08   		movl	8(%edi), %ecx
+ 371 048a 01CB     		addl	%ecx, %ebx
+ 372 048c 895DC0   		movl	%ebx, -64(%ebp)
+ 373 048f 89C1     		movl	%eax, %ecx
+ 374 0491 034F0C   		addl	12(%edi), %ecx
+ 375 0494 8945CC   		movl	%eax, -52(%ebp)
+ 376 0497 8B45D8   		movl	-40(%ebp), %eax
+ 377 049a 8955C8   		movl	%edx, -56(%ebp)
+ 378 049d 894DC4   		movl	%ecx, -60(%ebp)
+ 379 04a0 895DD0   		movl	%ebx, -48(%ebp)
+ 380 04a3 894DD4   		movl	%ecx, -44(%ebp)
+ 381 04a6 89442404 		movl	%eax, 4(%esp)
+ 382 04aa 8B45DC   		movl	-36(%ebp), %eax
+ 383 04ad 89442408 		movl	%eax, 8(%esp)
+ 384 04b1 8B45E0   		movl	-32(%ebp), %eax
+ 385 04b4 8944240C 		movl	%eax, 12(%esp)
+ 386 04b8 8B45E4   		movl	-28(%ebp), %eax
+ 387 04bb 89442410 		movl	%eax, 16(%esp)
+ 388 04bf 8D45C8   		leal	-56(%ebp), %eax
+ 389 04c2 890424   		movl	%eax, (%esp)
+ 390 04c5 E8000000 		call	__Z8rect_andP4RectS_
+ 390      00
+ 391 04ca 8B55CC   		movl	-52(%ebp), %edx
+ 392 04cd 8B45D4   		movl	-44(%ebp), %eax
+ 393 04d0 8B5DC8   		movl	-56(%ebp), %ebx
+ 394 04d3 8B4DD0   		movl	-48(%ebp), %ecx
+ 395 04d6 29D0     		subl	%edx, %eax
+ 396 04d8 C1E010   		sall	$16, %eax
+ 397 04db 29D9     		subl	%ebx, %ecx
+ 398 04dd 09C1     		orl	%eax, %ecx
+ 399 04df 8B860800 		movl	_winctl+8(%esi), %eax
+ 399      0000
+ 400 04e5 894C240C 		movl	%ecx, 12(%esp)
+ 401 04e9 BE080100 		movl	$264, %esi
+ 401      00
+ 402 04ee 29C3     		subl	%eax, %ebx
+ 403 04f0 8B4704   		movl	4(%edi), %eax
+ 404 04f3 89742404 		movl	%esi, 4(%esp)
+ 405 04f7 29C2     		subl	%eax, %edx
+ 406 04f9 C1E210   		sall	$16, %edx
+GAS LISTING twindow.gas 			page 10
+
+
+ 407 04fc 09D3     		orl	%edx, %ebx
+ 408 04fe 895C2408 		movl	%ebx, 8(%esp)
+ 409 0502 8B55B4   		movl	-76(%ebp), %edx
+ 410 0505 8B049508 		movl	_winctl+114696(,%edx,4), %eax
+ 410      C00100
+ 411 050c 890424   		movl	%eax, (%esp)
+ 412 050f E8ACFDFF 		call	__Z13t_SendMessageiiii
+ 412      FF
+ 413 0514 FF45B4   		incl	-76(%ebp)
+ 414 0517 8B75B4   		movl	-76(%ebp), %esi
+ 415 051a 39350400 		cmpl	%esi, _winctl+4
+ 415      0000
+ 416 0520 0F8F34FF 		jg	L44
+ 416      FFFF
+ 417              	L48:
+ 418 0526 31D2     		xorl	%edx, %edx
+ 419 0528 E9D3FDFF 		jmp	L30
+ 419      FF
+ 420 052d 90       		.align 2
+ 421 052e 89F6     		.p2align 4,,15
+ 422              	.globl __Z9getWindowii
+ 423              		.def	__Z9getWindowii;	.scl	2;	.type	32;	.endef
+ 424              	__Z9getWindowii:
+ 425 0530 55       		pushl	%ebp
+ 426 0531 89E5     		movl	%esp, %ebp
+ 427 0533 57       		pushl	%edi
+ 428 0534 31FF     		xorl	%edi, %edi
+ 429 0536 56       		pushl	%esi
+ 430 0537 53       		pushl	%ebx
+ 431 0538 83EC5C   		subl	$92, %esp
+ 432 053b A1040000 		movl	_winctl+4, %eax
+ 432      00
+ 433 0540 85C0     		testl	%eax, %eax
+ 434 0542 0F8EAE00 		jle	L58
+ 434      0000
+ 435 0548 8B4508   		movl	8(%ebp), %eax
+ 436 054b 8B5D0C   		movl	12(%ebp), %ebx
+ 437 054e 40       		incl	%eax
+ 438 054f 8945C4   		movl	%eax, -60(%ebp)
+ 439 0552 43       		incl	%ebx
+ 440 0553 895DC0   		movl	%ebx, -64(%ebp)
+ 441 0556 8D76008D 		.p2align 4,,15
+ 441      BC270000 
+ 441      0000
+ 442              	L56:
+ 443 0560 8B34BD08 		movl	_winctl+114696(,%edi,4), %esi
+ 443      C00100
+ 444 0567 8D04F500 		leal	0(,%esi,8), %eax
+ 444      000000
+ 445 056e 29F0     		subl	%esi, %eax
+ 446 0570 C1E006   		sall	$6, %eax
+ 447 0573 8D900800 		leal	_winctl+8(%eax), %edx
+ 447      0000
+ 448 0579 8B5A08   		movl	8(%edx), %ebx
+ 449 057c 8B800800 		movl	_winctl+8(%eax), %eax
+ 449      0000
+ 450 0582 8B4A04   		movl	4(%edx), %ecx
+GAS LISTING twindow.gas 			page 11
+
+
+ 451 0585 01C3     		addl	%eax, %ebx
+ 452 0587 895C2418 		movl	%ebx, 24(%esp)
+ 453 058b 8B5A0C   		movl	12(%edx), %ebx
+ 454 058e 8945D8   		movl	%eax, -40(%ebp)
+ 455 0591 894DDC   		movl	%ecx, -36(%ebp)
+ 456 0594 8D1419   		leal	(%ecx,%ebx), %edx
+ 457 0597 8B5C2418 		movl	24(%esp), %ebx
+ 458 059b 8955E4   		movl	%edx, -28(%ebp)
+ 459 059e 895DE0   		movl	%ebx, -32(%ebp)
+ 460 05a1 8B5D08   		movl	8(%ebp), %ebx
+ 461 05a4 895DC8   		movl	%ebx, -56(%ebp)
+ 462 05a7 8B5D0C   		movl	12(%ebp), %ebx
+ 463 05aa 895DCC   		movl	%ebx, -52(%ebp)
+ 464 05ad 8B5DC4   		movl	-60(%ebp), %ebx
+ 465 05b0 895DD0   		movl	%ebx, -48(%ebp)
+ 466 05b3 8B5DC0   		movl	-64(%ebp), %ebx
+ 467 05b6 895DD4   		movl	%ebx, -44(%ebp)
+ 468 05b9 8B5D0C   		movl	12(%ebp), %ebx
+ 469 05bc 89442410 		movl	%eax, 16(%esp)
+ 470 05c0 8B4508   		movl	8(%ebp), %eax
+ 471 05c3 894C2414 		movl	%ecx, 20(%esp)
+ 472 05c7 8954241C 		movl	%edx, 28(%esp)
+ 473 05cb 890424   		movl	%eax, (%esp)
+ 474 05ce 895C2404 		movl	%ebx, 4(%esp)
+ 475 05d2 8B45C4   		movl	-60(%ebp), %eax
+ 476 05d5 89442408 		movl	%eax, 8(%esp)
+ 477 05d9 8B5DC0   		movl	-64(%ebp), %ebx
+ 478 05dc 895C240C 		movl	%ebx, 12(%esp)
+ 479 05e0 E8000000 		call	__Z16rect_checkbounds4RectS_
+ 479      00
+ 480 05e5 85C0     		testl	%eax, %eax
+ 481 05e7 741A     		je	L59
+ 482 05e9 47       		incl	%edi
+ 483 05ea 393D0400 		cmpl	%edi, _winctl+4
+ 483      0000
+ 484 05f0 0F8F6AFF 		jg	L56
+ 484      FFFF
+ 485              	L58:
+ 486 05f6 83C45C   		addl	$92, %esp
+ 487 05f9 B8FFFFFF 		movl	$-1, %eax
+ 487      FF
+ 488 05fe 5B       		popl	%ebx
+ 489 05ff 5E       		popl	%esi
+ 490 0600 5F       		popl	%edi
+ 491 0601 5D       		popl	%ebp
+ 492 0602 C3       		ret
+ 493              	L59:
+ 494 0603 83C45C   		addl	$92, %esp
+ 495 0606 89F0     		movl	%esi, %eax
+ 496 0608 5B       		popl	%ebx
+ 497 0609 5E       		popl	%esi
+ 498 060a 5F       		popl	%edi
+ 499 060b 5D       		popl	%ebp
+ 500 060c C3       		ret
+ 501 060d 90       		.align 2
+ 502 060e 89F6     		.p2align 4,,15
+ 503              	.globl __Z13getWindowInfoiP10WindowInfo
+GAS LISTING twindow.gas 			page 12
+
+
+ 504              		.def	__Z13getWindowInfoiP10WindowInfo;	.scl	2;	.type	32;	.endef
+ 505              	__Z13getWindowInfoiP10WindowInfo:
+ 506 0610 55       		pushl	%ebp
+ 507 0611 89E5     		movl	%esp, %ebp
+ 508 0613 8B5508   		movl	8(%ebp), %edx
+ 509 0616 8B4D0C   		movl	12(%ebp), %ecx
+ 510 0619 85D2     		testl	%edx, %edx
+ 511 061b 7808     		js	L62
+ 512 061d 39150400 		cmpl	%edx, _winctl+4
+ 512      0000
+ 513 0623 7F0B     		jg	L61
+ 514              	L62:
+ 515 0625 5D       		popl	%ebp
+ 516 0626 B8FFFFFF 		movl	$-1, %eax
+ 516      FF
+ 517 062b C3       		ret
+ 518 062c 8D742600 		.p2align 4,,7
+ 519              	L61:
+ 520 0630 8D04D500 		leal	0(,%edx,8), %eax
+ 520      000000
+ 521 0637 29D0     		subl	%edx, %eax
+ 522 0639 C1E006   		sall	$6, %eax
+ 523 063c 8D900800 		leal	_winctl+8(%eax), %edx
+ 523      0000
+ 524 0642 8B800800 		movl	_winctl+8(%eax), %eax
+ 524      0000
+ 525 0648 8901     		movl	%eax, (%ecx)
+ 526 064a 8B4204   		movl	4(%edx), %eax
+ 527 064d 894104   		movl	%eax, 4(%ecx)
+ 528 0650 8B4208   		movl	8(%edx), %eax
+ 529 0653 894108   		movl	%eax, 8(%ecx)
+ 530 0656 8B420C   		movl	12(%edx), %eax
+ 531 0659 89410C   		movl	%eax, 12(%ecx)
+ 532 065c 8B4278   		movl	120(%edx), %eax
+ 533 065f 894110   		movl	%eax, 16(%ecx)
+ 534 0662 8B427C   		movl	124(%edx), %eax
+ 535 0665 894114   		movl	%eax, 20(%ecx)
+ 536 0668 31C0     		xorl	%eax, %eax
+ 537 066a 5D       		popl	%ebp
+ 538 066b C3       		ret
+ 539              		.def	_memcpy;	.scl	2;	.type	32;	.endef
+ 540              		.def	_memset;	.scl	2;	.type	32;	.endef
+ 541              		.def	__Z16rect_checkbounds4RectS_;	.scl	3;	.type	32;	.endef
+ 542              		.def	__Z8rect_andP4RectS_;	.scl	3;	.type	32;	.endef
+ 543              		.def	__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj;	.scl	3;	.type	32;	.endef
+ 544              		.def	__Z11erase_arrayPviiij;	.scl	3;	.type	32;	.endef
+ 545              		.def	__Z13t_SendMessageiiii;	.scl	3;	.type	32;	.endef
+ 546              		.def	__Z12insert_arrayPviS_iiij;	.scl	3;	.type	32;	.endef
+ 547              		.def	__Z8k_memmovPKvPvj;	.scl	3;	.type	32;	.endef
+ 548              		.def	_strlen;	.scl	2;	.type	32;	.endef
+ 549              		.def	__Z12layer_updownP8LayerCtl5uid_ti;	.scl	3;	.type	32;	.endef
+ 550 066c 90909090 		.def	__Z11layer_allocP8LayerCtl;	.scl	3;	.type	32;	.endef
+GAS LISTING twindow.gas 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 twindow.cpp
+         twindow.gas:7      .text:00000000 __Z11window_initv
+         twindow.gas:37     .text:00000070 __Z14t_CreateWindowPKcPK10WindowInfo
+         twindow.gas:166    .text:00000230 __Z15createComponentiPK10WindowInfo
+         twindow.gas:233    .text:000002e0 __Z15t_DestroyWindowi
+         twindow.gas:424    .text:00000530 __Z9getWindowii
+         twindow.gas:505    .text:00000610 __Z13getWindowInfoiP10WindowInfo
+         twindow.gas:219    .text:000002c0 __Z13t_SendMessageiiii
+
+UNDEFINED SYMBOLS
+_layerctl
+_winctl
+_memcpy
+_memset
+__Z16rect_checkbounds4RectS_
+__Z8rect_andP4RectS_
+__Z14layer_boxfill8P8LayerCtl5uid_t4Rectcj
+__Z11erase_arrayPviiij
+__Z12insert_arrayPviS_iiij
+__Z8k_memmovPKvPvj
+_strlen
+__Z12layer_updownP8LayerCtl5uid_ti
+__Z11layer_allocP8LayerCtl

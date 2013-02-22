@@ -1,0 +1,613 @@
+GAS LISTING device/keyboard.gas 			page 1
+
+
+   1              		.file	"keyboard.cpp"
+   2              	.lcomm _keybuf,256
+   3              		.text
+   4              		.align 2
+   5              		.p2align 4,,15
+   6              	.globl __Z18wait_kbc_sendreadyv
+   7              		.def	__Z18wait_kbc_sendreadyv;	.scl	2;	.type	32;	.endef
+   8              	__Z18wait_kbc_sendreadyv:
+   9 0000 55       		pushl	%ebp
+  10 0001 89E5     		movl	%esp, %ebp
+  11 0003 83EC08   		subl	$8, %esp
+  12 0006 8D76008D 		.p2align 4,,15
+  12      BC270000 
+  12      0000
+  13              	L2:
+  14 0010 C7042464 		movl	$100, (%esp)
+  14      000000
+  15 0017 E8000000 		call	_io_in8
+  15      00
+  16 001c A802     		testb	$2, %al
+  17 001e 75F0     		jne	L2
+  18 0020 C9       		leave
+  19 0021 C3       		ret
+  20              		.align 2
+  21 0022 8DB42600 		.p2align 4,,15
+  21      0000008D 
+  21      BC270000 
+  21      0000
+  22              	.globl __Z13init_keyboardv
+  23              		.def	__Z13init_keyboardv;	.scl	2;	.type	32;	.endef
+  24              	__Z13init_keyboardv:
+  25 0030 55       		pushl	%ebp
+  26 0031 89E5     		movl	%esp, %ebp
+  27 0033 83EC18   		subl	$24, %esp
+  28 0036 E8C5FFFF 		call	__Z18wait_kbc_sendreadyv
+  28      FF
+  29 003b C7042464 		movl	$100, (%esp)
+  29      000000
+  30 0042 B8600000 		movl	$96, %eax
+  30      00
+  31 0047 89442404 		movl	%eax, 4(%esp)
+  32 004b E8000000 		call	_io_out8
+  32      00
+  33 0050 E8ABFFFF 		call	__Z18wait_kbc_sendreadyv
+  33      FF
+  34 0055 C7042460 		movl	$96, (%esp)
+  34      000000
+  35 005c B9470000 		movl	$71, %ecx
+  35      00
+  36 0061 894C2404 		movl	%ecx, 4(%esp)
+  37 0065 E8000000 		call	_io_out8
+  37      00
+  38 006a C7042400 		movl	$_key_fifo, (%esp)
+  38      000000
+  39 0071 BA000100 		movl	$256, %edx
+  39      00
+  40 0076 B8000000 		movl	$_keybuf, %eax
+GAS LISTING device/keyboard.gas 			page 2
+
+
+  40      00
+  41 007b 89542408 		movl	%edx, 8(%esp)
+  42 007f 89442404 		movl	%eax, 4(%esp)
+  43 0083 E8000000 		call	__Z10init_fifo8P5Fifo8Pci
+  43      00
+  44 0088 C9       		leave
+  45 0089 C3       		ret
+  46              		.align 2
+  47 008a 8DB60000 		.p2align 4,,15
+  47      0000
+  48              	.globl _inthandler21
+  49              		.def	_inthandler21;	.scl	2;	.type	32;	.endef
+  50              	_inthandler21:
+  51 0090 55       		pushl	%ebp
+  52 0091 B8610000 		movl	$97, %eax
+  52      00
+  53 0096 89E5     		movl	%esp, %ebp
+  54 0098 83EC08   		subl	$8, %esp
+  55 009b 89442404 		movl	%eax, 4(%esp)
+  56 009f C7042420 		movl	$32, (%esp)
+  56      000000
+  57 00a6 E8000000 		call	_io_out8
+  57      00
+  58 00ab C7042460 		movl	$96, (%esp)
+  58      000000
+  59 00b2 E8000000 		call	_io_in8
+  59      00
+  60 00b7 C7042400 		movl	$_key_fifo, (%esp)
+  60      000000
+  61 00be 0FBEC0   		movsbl	%al,%eax
+  62 00c1 89442404 		movl	%eax, 4(%esp)
+  63 00c5 E8000000 		call	__Z9put_fifo8P5Fifo8c
+  63      00
+  64 00ca C9       		leave
+  65 00cb C3       		ret
+  66              		.data
+  67              		.align 32
+  68              	_ZZ16kb_getmappedchariiE3tbl:
+  69 0000 00000000 		.long	0
+  70 0004 01800000 		.long	32769
+  71 0008 31000000 		.long	49
+  72 000c 32000000 		.long	50
+  73 0010 33000000 		.long	51
+  74 0014 34000000 		.long	52
+  75 0018 35000000 		.long	53
+  76 001c 36000000 		.long	54
+  77 0020 37000000 		.long	55
+  78 0024 38000000 		.long	56
+  79 0028 39000000 		.long	57
+  80 002c 30000000 		.long	48
+  81 0030 2D000000 		.long	45
+  82 0034 5E000000 		.long	94
+  83 0038 81880000 		.long	34945
+  84 003c 0F800000 		.long	32783
+  85 0040 71000000 		.long	113
+  86 0044 77000000 		.long	119
+  87 0048 65000000 		.long	101
+GAS LISTING device/keyboard.gas 			page 3
+
+
+  88 004c 72000000 		.long	114
+  89 0050 74000000 		.long	116
+  90 0054 79000000 		.long	121
+  91 0058 75000000 		.long	117
+  92 005c 69000000 		.long	105
+  93 0060 6F000000 		.long	111
+  94 0064 70000000 		.long	112
+  95 0068 60000000 		.long	96
+  96 006c 5B000000 		.long	91
+  97 0070 0A000000 		.long	10
+  98 0074 1D800000 		.long	32797
+  99 0078 61000000 		.long	97
+ 100 007c 73000000 		.long	115
+ 101 0080 64000000 		.long	100
+ 102 0084 66000000 		.long	102
+ 103 0088 67000000 		.long	103
+ 104 008c 68000000 		.long	104
+ 105 0090 6A000000 		.long	106
+ 106 0094 6B000000 		.long	107
+ 107 0098 6C000000 		.long	108
+ 108 009c 3B000000 		.long	59
+ 109 00a0 3A000000 		.long	58
+ 110 00a4 00000000 		.long	0
+ 111 00a8 2A800000 		.long	32810
+ 112 00ac 5D000000 		.long	93
+ 113 00b0 7A000000 		.long	122
+ 114 00b4 78000000 		.long	120
+ 115 00b8 63000000 		.long	99
+ 116 00bc 76000000 		.long	118
+ 117 00c0 62000000 		.long	98
+ 118 00c4 6E000000 		.long	110
+ 119 00c8 6D000000 		.long	109
+ 120 00cc 2C000000 		.long	44
+ 121 00d0 2E000000 		.long	46
+ 122 00d4 2F000000 		.long	47
+ 123 00d8 36800000 		.long	32822
+ 124 00dc 2A000000 		.long	42
+ 125 00e0 38800000 		.long	32824
+ 126 00e4 20000000 		.long	32
+ 127 00e8 00000000 		.long	0
+ 128 00ec 3B800000 		.long	32827
+ 129 00f0 3C800000 		.long	32828
+ 130 00f4 3D800000 		.long	32829
+ 131 00f8 3E800000 		.long	32830
+ 132 00fc 3F800000 		.long	32831
+ 133 0100 40800000 		.long	32832
+ 134 0104 41800000 		.long	32833
+ 135 0108 42800000 		.long	32834
+ 136 010c 43800000 		.long	32835
+ 137 0110 44800000 		.long	32836
+ 138 0114 00000000 		.long	0
+ 139 0118 00000000 		.long	0
+ 140 011c 37600000 		.long	24631
+ 141 0120 38600000 		.long	24632
+ 142 0124 39600000 		.long	24633
+ 143 0128 2D600000 		.long	24621
+ 144 012c 34600000 		.long	24628
+GAS LISTING device/keyboard.gas 			page 4
+
+
+ 145 0130 35600000 		.long	24629
+ 146 0134 36600000 		.long	24630
+ 147 0138 2B600000 		.long	24619
+ 148 013c 31600000 		.long	24625
+ 149 0140 32600000 		.long	24626
+ 150 0144 33600000 		.long	24627
+ 151 0148 30600000 		.long	24624
+ 152 014c 2E600000 		.long	24622
+ 153 0150 00000000 		.long	0
+ 154 0154 00000000 		.long	0
+ 155 0158 00000000 		.long	0
+ 156 015c 57800000 		.long	32855
+ 157 0160 58800000 		.long	32856
+ 158 0164 00000000 		.long	0
+ 159 0168 00000000 		.long	0
+ 160 016c 00000000 		.long	0
+ 161 0170 00000000 		.long	0
+ 162 0174 00000000 		.long	0
+ 163 0178 00000000 		.long	0
+ 164 017c 00000000 		.long	0
+ 165 0180 00000000 		.long	0
+ 166 0184 00000000 		.long	0
+ 167 0188 00000000 		.long	0
+ 168 018c 00000000 		.long	0
+ 169 0190 00000000 		.long	0
+ 170 0194 00000000 		.long	0
+ 171 0198 00000000 		.long	0
+ 172 019c 00000000 		.long	0
+ 173 01a0 00000000 		.long	0
+ 174 01a4 00000000 		.long	0
+ 175 01a8 00000000 		.long	0
+ 176 01ac 00000000 		.long	0
+ 177 01b0 00000000 		.long	0
+ 178 01b4 00000000 		.long	0
+ 179 01b8 00000000 		.long	0
+ 180 01bc 00000000 		.long	0
+ 181 01c0 00000000 		.long	0
+ 182 01c4 00000000 		.long	0
+ 183 01c8 00000000 		.long	0
+ 184 01cc 5C000000 		.long	92
+ 185 01d0 00000000 		.long	0
+ 186 01d4 00000000 		.long	0
+ 187 01d8 00000000 		.long	0
+ 188 01dc 00000000 		.long	0
+ 189 01e0 00000000 		.long	0
+ 190 01e4 00000000 		.long	0
+ 191 01e8 00000000 		.long	0
+ 192 01ec 00000000 		.long	0
+ 193 01f0 00000000 		.long	0
+ 194 01f4 5C000000 		.long	92
+ 195 01f8 00000000 		.long	0
+ 196 01fc 00000000 		.long	0
+ 197              		.align 32
+ 198              	_ZZ16kb_getmappedchariiE5shtbl:
+ 199 0200 00000000 		.long	0
+ 200 0204 01800000 		.long	32769
+ 201 0208 21000000 		.long	33
+GAS LISTING device/keyboard.gas 			page 5
+
+
+ 202 020c 22000000 		.long	34
+ 203 0210 23000000 		.long	35
+ 204 0214 24000000 		.long	36
+ 205 0218 25000000 		.long	37
+ 206 021c 26000000 		.long	38
+ 207 0220 27000000 		.long	39
+ 208 0224 28000000 		.long	40
+ 209 0228 29000000 		.long	41
+ 210 022c 00000000 		.long	0
+ 211 0230 3D000000 		.long	61
+ 212 0234 7E000000 		.long	126
+ 213 0238 81880000 		.long	34945
+ 214 023c 0F800000 		.long	32783
+ 215 0240 51000000 		.long	81
+ 216 0244 57000000 		.long	87
+ 217 0248 45000000 		.long	69
+ 218 024c 52000000 		.long	82
+ 219 0250 54000000 		.long	84
+ 220 0254 59000000 		.long	89
+ 221 0258 55000000 		.long	85
+ 222 025c 49000000 		.long	73
+ 223 0260 4F000000 		.long	79
+ 224 0264 50000000 		.long	80
+ 225 0268 60000000 		.long	96
+ 226 026c 7B000000 		.long	123
+ 227 0270 0A000000 		.long	10
+ 228 0274 1D800000 		.long	32797
+ 229 0278 41000000 		.long	65
+ 230 027c 53000000 		.long	83
+ 231 0280 00000000 		.space 384
+ 231      00000000 
+ 231      00000000 
+ 231      00000000 
+ 231      00000000 
+ 232              		.text
+ 233              		.align 2
+ 234 00cc 8D742600 		.p2align 4,,15
+ 235              	.globl __Z16kb_getmappedcharii
+ 236              		.def	__Z16kb_getmappedcharii;	.scl	2;	.type	32;	.endef
+ 237              	__Z16kb_getmappedcharii:
+ 238 00d0 55       		pushl	%ebp
+ 239 00d1 31C9     		xorl	%ecx, %ecx
+ 240 00d3 89E5     		movl	%esp, %ebp
+ 241 00d5 0FB65508 		movzbl	8(%ebp), %edx
+ 242 00d9 89D0     		movl	%edx, %eax
+ 243 00db C1E807   		shrl	$7, %eax
+ 244 00de 84C0     		testb	%al, %al
+ 245 00e0 750E     		jne	L8
+ 246 00e2 8B450C   		movl	12(%ebp), %eax
+ 247 00e5 85C0     		testl	%eax, %eax
+ 248 00e7 750B     		jne	L10
+ 249 00e9 8B0C9500 		movl	_ZZ16kb_getmappedchariiE3tbl(,%edx,4), %ecx
+ 249      000000
+ 250              	L8:
+ 251 00f0 5D       		popl	%ebp
+ 252 00f1 89C8     		movl	%ecx, %eax
+ 253 00f3 C3       		ret
+GAS LISTING device/keyboard.gas 			page 6
+
+
+ 254              		.p2align 4,,7
+ 255              	L10:
+ 256 00f4 5D       		popl	%ebp
+ 257 00f5 8B0C9500 		movl	_ZZ16kb_getmappedchariiE5shtbl(,%edx,4), %ecx
+ 257      020000
+ 258 00fc 89C8     		movl	%ecx, %eax
+ 259 00fe C3       		ret
+ 260              		.data
+ 261              		.align 32
+ 262              	_ZZ15kb_getmappedsysiiE5syse0:
+ 263 0400 00000000 		.long	0
+ 264 0404 00000000 		.long	0
+ 265 0408 00000000 		.long	0
+ 266 040c 00000000 		.long	0
+ 267 0410 00000000 		.long	0
+ 268 0414 00000000 		.long	0
+ 269 0418 00000000 		.long	0
+ 270 041c 00000000 		.long	0
+ 271 0420 00000000 		.long	0
+ 272 0424 00000000 		.long	0
+ 273 0428 00000000 		.long	0
+ 274 042c 00000000 		.long	0
+ 275 0430 00000000 		.long	0
+ 276 0434 00000000 		.long	0
+ 277 0438 00000000 		.long	0
+ 278 043c 00000000 		.long	0
+ 279 0440 00000000 		.long	0
+ 280 0444 00000000 		.long	0
+ 281 0448 00000000 		.long	0
+ 282 044c 00000000 		.long	0
+ 283 0450 00000000 		.long	0
+ 284 0454 00000000 		.long	0
+ 285 0458 00000000 		.long	0
+ 286 045c 00000000 		.long	0
+ 287 0460 00000000 		.long	0
+ 288 0464 00000000 		.long	0
+ 289 0468 00000000 		.long	0
+ 290 046c 00000000 		.long	0
+ 291 0470 1C900000 		.long	36892
+ 292 0474 1D900000 		.long	36893
+ 293 0478 00000000 		.long	0
+ 294 047c 00000000 		.long	0
+ 295 0480 00000000 		.long	0
+ 296 0484 00000000 		.long	0
+ 297 0488 00000000 		.long	0
+ 298 048c 00000000 		.long	0
+ 299 0490 00000000 		.long	0
+ 300 0494 00000000 		.long	0
+ 301 0498 00000000 		.long	0
+ 302 049c 00000000 		.long	0
+ 303 04a0 00000000 		.long	0
+ 304 04a4 00000000 		.long	0
+ 305 04a8 00000000 		.long	0
+ 306 04ac 00000000 		.long	0
+ 307 04b0 00000000 		.long	0
+ 308 04b4 00000000 		.long	0
+ 309 04b8 00000000 		.long	0
+GAS LISTING device/keyboard.gas 			page 7
+
+
+ 310 04bc 00000000 		.long	0
+ 311 04c0 00000000 		.long	0
+ 312 04c4 00000000 		.long	0
+ 313 04c8 00000000 		.long	0
+ 314 04cc 00000000 		.long	0
+ 315 04d0 00000000 		.long	0
+ 316 04d4 00000000 		.long	0
+ 317 04d8 00000000 		.long	0
+ 318 04dc 00000000 		.long	0
+ 319 04e0 38900000 		.long	36920
+ 320 04e4 00000000 		.long	0
+ 321 04e8 00000000 		.long	0
+ 322 04ec 00000000 		.long	0
+ 323 04f0 00000000 		.long	0
+ 324 04f4 00000000 		.long	0
+ 325 04f8 00000000 		.long	0
+ 326 04fc 00000000 		.long	0
+ 327 0500 00000000 		.long	0
+ 328 0504 00000000 		.long	0
+ 329 0508 00000000 		.long	0
+ 330 050c 00000000 		.long	0
+ 331 0510 00000000 		.long	0
+ 332 0514 00000000 		.long	0
+ 333 0518 00000000 		.long	0
+ 334 051c 00000000 		.long	0
+ 335 0520 48900000 		.long	36936
+ 336 0524 00000000 		.long	0
+ 337 0528 00000000 		.long	0
+ 338 052c 4B900000 		.long	36939
+ 339 0530 00000000 		.long	0
+ 340 0534 4D900000 		.long	36941
+ 341 0538 00000000 		.long	0
+ 342 053c 00000000 		.long	0
+ 343 0540 50900000 		.long	36944
+ 344 0544 00000000 		.space 700
+ 344      00000000 
+ 344      00000000 
+ 344      00000000 
+ 344      00000000 
+ 345              		.text
+ 346 00ff 90       		.align 2
+ 347              		.p2align 4,,15
+ 348              	.globl __Z15kb_getmappedsysii
+ 349              		.def	__Z15kb_getmappedsysii;	.scl	2;	.type	32;	.endef
+ 350              	__Z15kb_getmappedsysii:
+ 351 0100 55       		pushl	%ebp
+ 352 0101 31C0     		xorl	%eax, %eax
+ 353 0103 89E5     		movl	%esp, %ebp
+ 354 0105 807D08E0 		cmpb	$-32, 8(%ebp)
+ 355 0109 7405     		je	L18
+ 356 010b 5D       		popl	%ebp
+ 357 010c C3       		ret
+ 358 010d 8D7600   		.p2align 4,,7
+ 359              	L18:
+ 360 0110 8B450C   		movl	12(%ebp), %eax
+ 361 0113 5D       		popl	%ebp
+ 362 0114 8B048500 		movl	_ZZ15kb_getmappedsysiiE5syse0(,%eax,4), %eax
+GAS LISTING device/keyboard.gas 			page 8
+
+
+ 362      040000
+ 363 011b C3       		ret
+ 364              		.section .rdata,"dr"
+ 365              	LC1:
+ 366 0000 5C6B2530 		.ascii "\\k%04x\0"
+ 366      347800
+ 367              	LC0:
+ 368 0007 5C732530 		.ascii "\\s%02x\0"
+ 368      327800
+ 369 000e 0000     		.text
+ 370              		.align 2
+ 371 011c 8D742600 		.p2align 4,,15
+ 372              	.globl __Z8kb_eventv
+ 373              		.def	__Z8kb_eventv;	.scl	2;	.type	32;	.endef
+ 374              	__Z8kb_eventv:
+ 375 0120 55       		pushl	%ebp
+ 376 0121 89E5     		movl	%esp, %ebp
+ 377 0123 53       		pushl	%ebx
+ 378 0124 83EC34   		subl	$52, %esp
+ 379 0127 C7042400 		movl	$_key_fifo, (%esp)
+ 379      000000
+ 380 012e E8000000 		call	__Z9get_fifo8P5Fifo8
+ 380      00
+ 381 0133 88C3     		movb	%al, %bl
+ 382 0135 E8000000 		call	_io_sti
+ 382      00
+ 383 013a 80FBE0   		cmpb	$-32, %bl
+ 384 013d 0F84FD00 		je	L29
+ 384      0000
+ 385 0143 31D2     		xorl	%edx, %edx
+ 386 0145 0FBEC3   		movsbl	%bl,%eax
+ 387 0148 89542404 		movl	%edx, 4(%esp)
+ 388 014c 890424   		movl	%eax, (%esp)
+ 389 014f E87CFFFF 		call	__Z16kb_getmappedcharii
+ 389      FF
+ 390 0154 89C2     		movl	%eax, %edx
+ 391 0156 8D40FF   		leal	-1(%eax), %eax
+ 392 0159 3DFE0000 		cmpl	$254, %eax
+ 392      00
+ 393 015e 7640     		jbe	L30
+ 394 0160 8D8200A0 		leal	-24576(%edx), %eax
+ 394      FFFF
+ 395 0166 3DFF0000 		cmpl	$255, %eax
+ 395      00
+ 396 016b 7763     		ja	L24
+ 397 016d C645E06B 		movb	$107, -32(%ebp)
+ 398 0171 8D5DE0   		leal	-32(%ebp), %ebx
+ 399 0174 8855E1   		movb	%dl, -31(%ebp)
+ 400 0177 C645E200 		movb	$0, -30(%ebp)
+ 401 017b A1000000 		movl	_l_console, %eax
+ 401      00
+ 402 0180 895C2408 		movl	%ebx, 8(%esp)
+ 403 0184 89442404 		movl	%eax, 4(%esp)
+ 404 0188 A1000000 		movl	_layerctl, %eax
+ 404      00
+ 405 018d 890424   		movl	%eax, (%esp)
+ 406 0190 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+GAS LISTING device/keyboard.gas 			page 9
+
+
+ 406      00
+ 407 0195 83C434   		addl	$52, %esp
+ 408 0198 31C0     		xorl	%eax, %eax
+ 409 019a 5B       		popl	%ebx
+ 410 019b 5D       		popl	%ebp
+ 411 019c C3       		ret
+ 412 019d 8D7600   		.p2align 4,,7
+ 413              	L30:
+ 414 01a0 8855E0   		movb	%dl, -32(%ebp)
+ 415 01a3 8D5DE0   		leal	-32(%ebp), %ebx
+ 416 01a6 C645E100 		movb	$0, -31(%ebp)
+ 417 01aa A1000000 		movl	_l_console, %eax
+ 417      00
+ 418 01af 895C2408 		movl	%ebx, 8(%esp)
+ 419 01b3 89442404 		movl	%eax, 4(%esp)
+ 420 01b7 A1000000 		movl	_layerctl, %eax
+ 420      00
+ 421 01bc 890424   		movl	%eax, (%esp)
+ 422 01bf E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 422      00
+ 423 01c4 83C434   		addl	$52, %esp
+ 424 01c7 31C0     		xorl	%eax, %eax
+ 425 01c9 5B       		popl	%ebx
+ 426 01ca 5D       		popl	%ebp
+ 427 01cb C3       		ret
+ 428 01cc 8D742600 		.p2align 4,,7
+ 429              	L24:
+ 430 01d0 85D2     		testl	%edx, %edx
+ 431 01d2 7529     		jne	L26
+ 432 01d4 C645E000 		movb	$0, -32(%ebp)
+ 433 01d8 8D5DE0   		leal	-32(%ebp), %ebx
+ 434 01db A1000000 		movl	_l_console, %eax
+ 434      00
+ 435 01e0 895C2408 		movl	%ebx, 8(%esp)
+ 436 01e4 89442404 		movl	%eax, 4(%esp)
+ 437 01e8 A1000000 		movl	_layerctl, %eax
+ 437      00
+ 438 01ed 890424   		movl	%eax, (%esp)
+ 439 01f0 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 439      00
+ 440 01f5 83C434   		addl	$52, %esp
+ 441 01f8 31C0     		xorl	%eax, %eax
+ 442 01fa 5B       		popl	%ebx
+ 443 01fb 5D       		popl	%ebp
+ 444 01fc C3       		ret
+ 445              	L26:
+ 446 01fd 89542408 		movl	%edx, 8(%esp)
+ 447 0201 B8000000 		movl	$LC1, %eax
+ 447      00
+ 448 0206 8D5DE0   		leal	-32(%ebp), %ebx
+ 449 0209 89442404 		movl	%eax, 4(%esp)
+ 450 020d 8D7600   		.p2align 4,,15
+ 451              	L28:
+ 452 0210 891C24   		movl	%ebx, (%esp)
+ 453 0213 E8000000 		call	_sprintf
+ 453      00
+ 454 0218 895C2408 		movl	%ebx, 8(%esp)
+GAS LISTING device/keyboard.gas 			page 10
+
+
+ 455 021c A1000000 		movl	_l_console, %eax
+ 455      00
+ 456 0221 89442404 		movl	%eax, 4(%esp)
+ 457 0225 A1000000 		movl	_layerctl, %eax
+ 457      00
+ 458 022a 890424   		movl	%eax, (%esp)
+ 459 022d E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 459      00
+ 460 0232 83C434   		addl	$52, %esp
+ 461 0235 31C0     		xorl	%eax, %eax
+ 462 0237 5B       		popl	%ebx
+ 463 0238 5D       		popl	%ebp
+ 464 0239 C3       		ret
+ 465 023a 8DB60000 		.p2align 4,,7
+ 465      0000
+ 466              	L29:
+ 467 0240 E8000000 		call	_io_cli
+ 467      00
+ 468 0245 C7042400 		movl	$_key_fifo, (%esp)
+ 468      000000
+ 469 024c E8000000 		call	__Z9get_fifo8P5Fifo8
+ 469      00
+ 470 0251 89C3     		movl	%eax, %ebx
+ 471 0253 E8000000 		call	_io_sti
+ 471      00
+ 472 0258 895C2408 		movl	%ebx, 8(%esp)
+ 473 025c B9070000 		movl	$LC0, %ecx
+ 473      00
+ 474 0261 8D5DE8   		leal	-24(%ebp), %ebx
+ 475 0264 894C2404 		movl	%ecx, 4(%esp)
+ 476 0268 EBA6     		jmp	L28
+ 477              		.def	__Z11layer_printP8LayerCtl5uid_tPc;	.scl	3;	.type	32;	.endef
+ 478              		.def	_sprintf;	.scl	2;	.type	32;	.endef
+ 479              		.def	_io_cli;	.scl	3;	.type	32;	.endef
+ 480              		.def	_io_sti;	.scl	3;	.type	32;	.endef
+ 481              		.def	__Z9get_fifo8P5Fifo8;	.scl	3;	.type	32;	.endef
+ 482              		.def	__Z9put_fifo8P5Fifo8c;	.scl	3;	.type	32;	.endef
+ 483              		.def	__Z10init_fifo8P5Fifo8Pci;	.scl	3;	.type	32;	.endef
+ 484              		.def	_io_out8;	.scl	3;	.type	32;	.endef
+ 485 026a 90909090 		.def	_io_in8;	.scl	3;	.type	32;	.endef
+ 485      9090
+GAS LISTING device/keyboard.gas 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 keyboard.cpp
+ device/keyboard.gas:2      .bss:00000000 _keybuf
+ device/keyboard.gas:8      .text:00000000 __Z18wait_kbc_sendreadyv
+ device/keyboard.gas:24     .text:00000030 __Z13init_keyboardv
+ device/keyboard.gas:50     .text:00000090 _inthandler21
+ device/keyboard.gas:68     .data:00000000 _ZZ16kb_getmappedchariiE3tbl
+ device/keyboard.gas:198    .data:00000200 _ZZ16kb_getmappedchariiE5shtbl
+ device/keyboard.gas:237    .text:000000d0 __Z16kb_getmappedcharii
+ device/keyboard.gas:262    .data:00000400 _ZZ15kb_getmappedsysiiE5syse0
+ device/keyboard.gas:350    .text:00000100 __Z15kb_getmappedsysii
+ device/keyboard.gas:374    .text:00000120 __Z8kb_eventv
+
+UNDEFINED SYMBOLS
+_key_fifo
+_l_console
+_layerctl
+__Z11layer_printP8LayerCtl5uid_tPc
+_sprintf
+_io_cli
+_io_sti
+__Z9get_fifo8P5Fifo8
+__Z9put_fifo8P5Fifo8c
+__Z10init_fifo8P5Fifo8Pci
+_io_out8
+_io_in8

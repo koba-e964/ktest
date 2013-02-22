@@ -1,0 +1,4 @@
+<window name="testwin">//namehash:6de4e9aa
+	<int name="width">200</int>
+	<int name="height">300</int>
+</window>

@@ -1,0 +1,34 @@
+GAS LISTING stdc/strlen.gas 			page 1
+
+
+   1              		.file	"strlen.c"
+   2              		.text
+   3              		.balign 2
+   4              		.p2align 4,,15
+   5              	.globl _strlen
+   6              		.def	_strlen;	.scl	2;	.type	32;	.endef
+   7              	_strlen:
+   8 0000 55       		pushl	%ebp
+   9 0001 31C0     		xorl	%eax, %eax
+  10 0003 89E5     		movl	%esp, %ebp
+  11 0005 8B5508   		movl	8(%ebp), %edx
+  12 0008 803A00   		cmpb	$0, (%edx)
+  13 000b 740A     		je	L7
+  14 000d 8D7600   		.p2align 4,,7
+  15              	L5:
+  16 0010 42       		incl	%edx
+  17 0011 40       		incl	%eax
+  18 0012 803A00   		cmpb	$0, (%edx)
+  19 0015 75F9     		jne	L5
+  20              	L7:
+  21 0017 5D       		popl	%ebp
+  22 0018 C3909090 		ret
+  22      90909090 
+GAS LISTING stdc/strlen.gas 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 strlen.c
+     stdc/strlen.gas:7      .text:00000000 _strlen
+
+NO UNDEFINED SYMBOLS

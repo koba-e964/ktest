@@ -1,0 +1,282 @@
+GAS LISTING util/bilist_op.gas 			page 1
+
+
+   1              		.file	"bilist_op.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __Z10bilist_endP6BiList
+   6              		.def	__Z10bilist_endP6BiList;	.scl	2;	.type	32;	.endef
+   7              	__Z10bilist_endP6BiList:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 8B4D08   		movl	8(%ebp), %ecx
+  11 0006 89C8     		movl	%ecx, %eax
+  12 0008 908DB426 		.p2align 4,,15
+  12      00000000 
+  13              	L2:
+  14 0010 8B5008   		movl	8(%eax), %edx
+  15 0013 85D2     		testl	%edx, %edx
+  16 0015 7408     		je	L1
+  17 0017 39CA     		cmpl	%ecx, %edx
+  18 0019 89D0     		movl	%edx, %eax
+  19 001b 75F3     		jne	L2
+  20 001d 31C0     		xorl	%eax, %eax
+  21              	L1:
+  22 001f 5D       		popl	%ebp
+  23 0020 C3       		ret
+  24 0021 90       		.align 2
+  25 0022 8DB42600 		.p2align 4,,15
+  25      0000008D 
+  25      BC270000 
+  25      0000
+  26              	.globl __Z10bilist_addP6BiListS0_
+  27              		.def	__Z10bilist_addP6BiListS0_;	.scl	2;	.type	32;	.endef
+  28              	__Z10bilist_addP6BiListS0_:
+  29 0030 55       		pushl	%ebp
+  30 0031 89E5     		movl	%esp, %ebp
+  31 0033 83EC10   		subl	$16, %esp
+  32 0036 8975F8   		movl	%esi, -8(%ebp)
+  33 0039 8B750C   		movl	12(%ebp), %esi
+  34 003c 897DFC   		movl	%edi, -4(%ebp)
+  35 003f 8B7D08   		movl	8(%ebp), %edi
+  36 0042 895DF4   		movl	%ebx, -12(%ebp)
+  37 0045 8B5F08   		movl	8(%edi), %ebx
+  38 0048 893424   		movl	%esi, (%esp)
+  39 004b E8B0FFFF 		call	__Z10bilist_endP6BiList
+  39      FF
+  40 0050 85C0     		testl	%eax, %eax
+  41 0052 BAFFFFFF 		movl	$-1, %edx
+  41      FF
+  42 0057 7412     		je	L7
+  43 0059 897708   		movl	%esi, 8(%edi)
+  44 005c 85DB     		testl	%ebx, %ebx
+  45 005e 897E04   		movl	%edi, 4(%esi)
+  46 0061 895808   		movl	%ebx, 8(%eax)
+  47 0064 7403     		je	L9
+  48 0066 894304   		movl	%eax, 4(%ebx)
+  49              	L9:
+  50 0069 31D2     		xorl	%edx, %edx
+  51              	L7:
+GAS LISTING util/bilist_op.gas 			page 2
+
+
+  52 006b 8B5DF4   		movl	-12(%ebp), %ebx
+  53 006e 89D0     		movl	%edx, %eax
+  54 0070 8B75F8   		movl	-8(%ebp), %esi
+  55 0073 8B7DFC   		movl	-4(%ebp), %edi
+  56 0076 89EC     		movl	%ebp, %esp
+  57 0078 5D       		popl	%ebp
+  58 0079 C3       		ret
+  59              		.align 2
+  60 007a 8DB60000 		.p2align 4,,15
+  60      0000
+  61              	.globl __Z13bilist_insertP6BiListS0_S0_S0_
+  62              		.def	__Z13bilist_insertP6BiListS0_S0_S0_;	.scl	2;	.type	32;	.endef
+  63              	__Z13bilist_insertP6BiListS0_S0_S0_:
+  64 0080 55       		pushl	%ebp
+  65 0081 89E5     		movl	%esp, %ebp
+  66 0083 8B4508   		movl	8(%ebp), %eax
+  67 0086 53       		pushl	%ebx
+  68 0087 8B550C   		movl	12(%ebp), %edx
+  69 008a 8B4D10   		movl	16(%ebp), %ecx
+  70 008d 85C0     		testl	%eax, %eax
+  71 008f 8B5D14   		movl	20(%ebp), %ebx
+  72 0092 7403     		je	L11
+  73 0094 894808   		movl	%ecx, 8(%eax)
+  74              	L11:
+  75 0097 894104   		movl	%eax, 4(%ecx)
+  76 009a 85D2     		testl	%edx, %edx
+  77 009c 895308   		movl	%edx, 8(%ebx)
+  78 009f 7403     		je	L12
+  79 00a1 895A04   		movl	%ebx, 4(%edx)
+  80              	L12:
+  81 00a4 5B       		popl	%ebx
+  82 00a5 31C0     		xorl	%eax, %eax
+  83 00a7 5D       		popl	%ebp
+  84 00a8 C3       		ret
+  85 00a9 90       		.align 2
+  86 00aa 8DB60000 		.p2align 4,,15
+  86      0000
+  87              	.globl __Z14bilist_forwardP6BiListi
+  88              		.def	__Z14bilist_forwardP6BiListi;	.scl	2;	.type	32;	.endef
+  89              	__Z14bilist_forwardP6BiListi:
+  90 00b0 55       		pushl	%ebp
+  91 00b1 89E5     		movl	%esp, %ebp
+  92 00b3 53       		pushl	%ebx
+  93 00b4 8B4D08   		movl	8(%ebp), %ecx
+  94 00b7 31DB     		xorl	%ebx, %ebx
+  95 00b9 8B550C   		movl	12(%ebp), %edx
+  96 00bc 85C9     		testl	%ecx, %ecx
+  97 00be 89C8     		movl	%ecx, %eax
+  98 00c0 741C     		je	L13
+  99 00c2 85D2     		testl	%edx, %edx
+ 100 00c4 7E24     		jle	L15
+ 101 00c6 8D76008D 		.p2align 4,,15
+ 101      BC270000 
+ 101      0000
+ 102              	L20:
+ 103 00d0 8B4008   		movl	8(%eax), %eax
+ 104 00d3 85C0     		testl	%eax, %eax
+GAS LISTING util/bilist_op.gas 			page 3
+
+
+ 105 00d5 740C     		je	L32
+ 106 00d7 4A       		decl	%edx
+ 107 00d8 85D2     		testl	%edx, %edx
+ 108 00da 7FF4     		jg	L20
+ 109 00dc 89C3     		movl	%eax, %ebx
+ 110              	L13:
+ 111 00de 89D8     		movl	%ebx, %eax
+ 112 00e0 5B       		popl	%ebx
+ 113 00e1 5D       		popl	%ebp
+ 114 00e2 C3       		ret
+ 115              	L32:
+ 116 00e3 31DB     		xorl	%ebx, %ebx
+ 117 00e5 89D8     		movl	%ebx, %eax
+ 118 00e7 5B       		popl	%ebx
+ 119 00e8 5D       		popl	%ebp
+ 120 00e9 C3       		ret
+ 121              	L15:
+ 122 00ea 7C07     		jl	L26
+ 123 00ec 89CB     		movl	%ecx, %ebx
+ 124 00ee 89D8     		movl	%ebx, %eax
+ 125 00f0 5B       		popl	%ebx
+ 126 00f1 5D       		popl	%ebp
+ 127 00f2 C3       		ret
+ 128              	L26:
+ 129 00f3 8B4004   		movl	4(%eax), %eax
+ 130 00f6 85C0     		testl	%eax, %eax
+ 131 00f8 74E9     		je	L32
+ 132 00fa 42       		incl	%edx
+ 133 00fb 78F6     		js	L26
+ 134 00fd 89C3     		movl	%eax, %ebx
+ 135 00ff EBDD     		jmp	L13
+ 136 0101 90       		.align 2
+ 137 0102 8DB42600 		.p2align 4,,15
+ 137      0000008D 
+ 137      BC270000 
+ 137      0000
+ 138              	.globl __Z14bilist_is_loopP6BiList
+ 139              		.def	__Z14bilist_is_loopP6BiList;	.scl	2;	.type	32;	.endef
+ 140              	__Z14bilist_is_loopP6BiList:
+ 141 0110 55       		pushl	%ebp
+ 142 0111 89E5     		movl	%esp, %ebp
+ 143 0113 83EC04   		subl	$4, %esp
+ 144 0116 8B4508   		movl	8(%ebp), %eax
+ 145 0119 890424   		movl	%eax, (%esp)
+ 146 011c E8DFFEFF 		call	__Z10bilist_endP6BiList
+ 146      FF
+ 147 0121 C9       		leave
+ 148 0122 85C0     		testl	%eax, %eax
+ 149 0124 0F94C0   		sete	%al
+ 150 0127 0FB6C0   		movzbl	%al, %eax
+ 151 012a C3       		ret
+ 152 012b 90       		.align 2
+ 153 012c 8D742600 		.p2align 4,,15
+ 154              	.globl __Z16bilist_make_loopP6BiList
+ 155              		.def	__Z16bilist_make_loopP6BiList;	.scl	2;	.type	32;	.endef
+ 156              	__Z16bilist_make_loopP6BiList:
+ 157 0130 55       		pushl	%ebp
+GAS LISTING util/bilist_op.gas 			page 4
+
+
+ 158 0131 89E5     		movl	%esp, %ebp
+ 159 0133 53       		pushl	%ebx
+ 160 0134 83EC04   		subl	$4, %esp
+ 161 0137 8B5D08   		movl	8(%ebp), %ebx
+ 162 013a 891C24   		movl	%ebx, (%esp)
+ 163 013d E8BEFEFF 		call	__Z10bilist_endP6BiList
+ 163      FF
+ 164 0142 85C0     		testl	%eax, %eax
+ 165 0144 BAFFFFFF 		movl	$-1, %edx
+ 165      FF
+ 166 0149 7408     		je	L35
+ 167 014b 895808   		movl	%ebx, 8(%eax)
+ 168 014e 31D2     		xorl	%edx, %edx
+ 169 0150 894304   		movl	%eax, 4(%ebx)
+ 170              	L35:
+ 171 0153 89D0     		movl	%edx, %eax
+ 172 0155 5A       		popl	%edx
+ 173 0156 5B       		popl	%ebx
+ 174 0157 5D       		popl	%ebp
+ 175 0158 C3       		ret
+ 176 0159 90       		.align 2
+ 177 015a 8DB60000 		.p2align 4,,15
+ 177      0000
+ 178              	.globl __Z12looplist_addP6BiListS0_
+ 179              		.def	__Z12looplist_addP6BiListS0_;	.scl	2;	.type	32;	.endef
+ 180              	__Z12looplist_addP6BiListS0_:
+ 181 0160 55       		pushl	%ebp
+ 182 0161 89E5     		movl	%esp, %ebp
+ 183 0163 53       		pushl	%ebx
+ 184 0164 83EC10   		subl	$16, %esp
+ 185 0167 8B5D08   		movl	8(%ebp), %ebx
+ 186 016a 8B450C   		movl	12(%ebp), %eax
+ 187 016d 85DB     		testl	%ebx, %ebx
+ 188 016f 741F     		je	L39
+ 189 0171 895C2404 		movl	%ebx, 4(%esp)
+ 190 0175 8944240C 		movl	%eax, 12(%esp)
+ 191 0179 89442408 		movl	%eax, 8(%esp)
+ 192 017d 8B4304   		movl	4(%ebx), %eax
+ 193 0180 890424   		movl	%eax, (%esp)
+ 194 0183 E8F8FEFF 		call	__Z13bilist_insertP6BiListS0_S0_S0_
+ 194      FF
+ 195 0188 83C410   		addl	$16, %esp
+ 196 018b 89D8     		movl	%ebx, %eax
+ 197 018d 5B       		popl	%ebx
+ 198 018e 5D       		popl	%ebp
+ 199 018f C3       		ret
+ 200              		.p2align 4,,7
+ 201              	L39:
+ 202 0190 894004   		movl	%eax, 4(%eax)
+ 203 0193 894008   		movl	%eax, 8(%eax)
+ 204 0196 83C410   		addl	$16, %esp
+ 205 0199 5B       		popl	%ebx
+ 206 019a 5D       		popl	%ebp
+ 207 019b C3       		ret
+ 208              		.align 2
+ 209 019c 8D742600 		.p2align 4,,15
+ 210              	.globl __Z15looplist_removeP6BiListS0_
+GAS LISTING util/bilist_op.gas 			page 5
+
+
+ 211              		.def	__Z15looplist_removeP6BiListS0_;	.scl	2;	.type	32;	.endef
+ 212              	__Z15looplist_removeP6BiListS0_:
+ 213 01a0 55       		pushl	%ebp
+ 214 01a1 31C0     		xorl	%eax, %eax
+ 215 01a3 89E5     		movl	%esp, %ebp
+ 216 01a5 53       		pushl	%ebx
+ 217 01a6 8B4D0C   		movl	12(%ebp), %ecx
+ 218 01a9 8B5D08   		movl	8(%ebp), %ebx
+ 219 01ac 8B5108   		movl	8(%ecx), %edx
+ 220 01af 39CA     		cmpl	%ecx, %edx
+ 221 01b1 7411     		je	L40
+ 222 01b3 8B4104   		movl	4(%ecx), %eax
+ 223 01b6 39CB     		cmpl	%ecx, %ebx
+ 224 01b8 895008   		movl	%edx, 8(%eax)
+ 225 01bb 894204   		movl	%eax, 4(%edx)
+ 226 01be 89D0     		movl	%edx, %eax
+ 227 01c0 7402     		je	L40
+ 228 01c2 89D8     		movl	%ebx, %eax
+ 229              	L40:
+ 230 01c4 5B       		popl	%ebx
+ 231 01c5 5D       		popl	%ebp
+ 232 01c6 C3909090 		ret
+ 232      90909090 
+ 232      9090
+GAS LISTING util/bilist_op.gas 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 bilist_op.cpp
+  util/bilist_op.gas:7      .text:00000000 __Z10bilist_endP6BiList
+  util/bilist_op.gas:28     .text:00000030 __Z10bilist_addP6BiListS0_
+  util/bilist_op.gas:63     .text:00000080 __Z13bilist_insertP6BiListS0_S0_S0_
+  util/bilist_op.gas:89     .text:000000b0 __Z14bilist_forwardP6BiListi
+  util/bilist_op.gas:140    .text:00000110 __Z14bilist_is_loopP6BiList
+  util/bilist_op.gas:156    .text:00000130 __Z16bilist_make_loopP6BiList
+  util/bilist_op.gas:180    .text:00000160 __Z12looplist_addP6BiListS0_
+  util/bilist_op.gas:212    .text:000001a0 __Z15looplist_removeP6BiListS0_
+
+NO UNDEFINED SYMBOLS

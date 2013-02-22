@@ -1,0 +1,43 @@
+権限を抑えたプロセス
+プロセス間通信
+
+consoleに大量の文字を入れると表示が遅くなる問題を解決する。
+これは、interval=1.0/60 sec等とし、
+consoleに文字を出力するたびflagを立て、
+interval毎にflagをチェックし、
+立っていたらコンソールの内容を変え、flag=0;を行うことで実現できる。
+
+
+kernel/disk.cppで、ディスクの読み取りを実現する。
+そのためには、io_in8/io_out8を駆使して、fdcを操作する必要がある。
+これには、いろいろな応用がありそうである。
+
+
+仮想ファイルシステムを実装する。
+実際のdeviceに関係なく、
+boot floppy -> /bootdisk/* (id=00)
+temporary file storage -> /tmp/* (id=01)
+/proc/*
+/win/*
+/dev/*
+
+ファイルをbyte列としてだけではなく、int列としても扱えるようにする。
+例：md5hash test.x -o test.x.hash
+test.x.hashは、16bytesのファイルだが、int32 * 4としても扱える。
+また、コマンドラインの引数を型付きの値として扱ってみる。
+例：md5hash test.x -o test.x.hash (cd="/home/koba/")
+PATHの中からmd5hashを探す。("/bin/md5hash")
+引数として渡されたファイル("/bin/md5hash","/home/koba/test.x","/home/koba/test.x.hash")のidを得ようと試みる。
+(0xe6ec,0xf1e,0xd1e72)
+"/home/koba/test.x.hash"は当然見つからないので、未使用のidのうち適当なものを１つ取る。
+結局以下が実行される:
+(ExecFile)e6ec (File)0f1e -o (File)000d_1e72
+実行ファイル側からも名前はわかる。
+また、このほかにも環境として、cd=0xcd00("/home/koba/")などが、与えられる。
+
+
+起動後、root=00(bootdisk);
+boot終了後、root=03(virtual_root);
+
+script fileも文字列ではなく、int列として格納することも考える。
+(特別な数字に意味を持たせ、解釈できるようにする。)

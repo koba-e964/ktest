@@ -1,0 +1,28 @@
+OBJS_BOOTPACK = bootpack.obj \
+	dsctbl.obj \
+	klib.obj global.obj graphic.obj \
+	\
+	hack.obj hankaku.obj int.obj mem.obj mem_asm.obj layer.obj \
+	task.obj timer.obj  twindow.obj utimer.obj\
+	device/floppy.obj device/keyboard.obj device/mouse.obj \
+	\
+	util/array_op.obj util/bilist_op.obj util/find.obj util/fifo.obj \
+	util/mem_op.obj util/naskfunc.obj \
+	fs/fat12.obj\
+	proc/proc.obj proc/sys.obj\
+	io/iomng.obj io/scr_cons.obj
+
+
+HEADERS=all.h bootpack.h \
+	data.h dsctbl.h \
+	global.h graphic.h \
+	\
+	hack.h int.h mem.h layer.h \
+	task.h timer.h twindow.h types.h utimer.h\
+	device/floppy.h device/keyboard.h device/mouse.h \
+	\
+	util/array.h util/array_op.h util/bilist.h util/bilist_cpp.h util/bilist_op.h \
+	util/fifo.h util/find.h util/looplist.h util/macros.h util/mem_op.h util/naskfunc.h \
+	fs/fat12.h\
+	proc/proc.h proc/sys.h\
+	io/iomng.h io/scr_cons.h

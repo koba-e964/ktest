@@ -1,0 +1,2134 @@
+GAS LISTING task.gas 			page 1
+
+
+   1              		.file	"task.cpp"
+   2              	.globl _mt_tr
+   3              		.bss
+   4              		.align 4
+   5              	_mt_tr:
+   6 0000 00000000 		.space 4
+   7              	.globl _ptr_thctl
+   8              		.align 4
+   9              	_ptr_thctl:
+  10 0004 00000000 		.space 4
+  11 0008 00000000 		.text
+  11      00000000 
+  12              		.align 2
+  13              		.p2align 4,,15
+  14              	.globl __Z10thread_addi
+  15              		.def	__Z10thread_addi;	.scl	2;	.type	32;	.endef
+  16              	__Z10thread_addi:
+  17 0000 55       		pushl	%ebp
+  18 0001 89E5     		movl	%esp, %ebp
+  19 0003 83EC08   		subl	$8, %esp
+  20 0006 891C24   		movl	%ebx, (%esp)
+  21 0009 89742404 		movl	%esi, 4(%esp)
+  22 000d 8B4508   		movl	8(%ebp), %eax
+  23 0010 8B0D0400 		movl	_ptr_thctl, %ecx
+  23      0000
+  24 0016 85C0     		testl	%eax, %eax
+  25 0018 8D99DC01 		leal	66012(%ecx), %ebx
+  25      0100
+  26 001e 7844     		js	L8
+  27 0020 3DF30100 		cmpl	$499, %eax
+  27      00
+  28 0025 7E19     		jle	L4
+  29 0027 BBFDFFFF 		movl	$-3, %ebx
+  29      FF
+  30 002c 8999DC01 		movl	%ebx, 66012(%ecx)
+  30      0100
+  31              	L3:
+  32 0032 FF4104   		incl	4(%ecx)
+  33 0035 8B1C24   		movl	(%esp), %ebx
+  34 0038 8B742404 		movl	4(%esp), %esi
+  35 003c 89EC     		movl	%ebp, %esp
+  36 003e 5D       		popl	%ebp
+  37 003f C3       		ret
+  38              		.p2align 4,,7
+  39              	L4:
+  40 0040 8BB37417 		movl	6004(%ebx), %esi
+  40      0000
+  41 0046 85F6     		testl	%esi, %esi
+  42 0048 7436     		je	L9
+  43 004a 8D0440   		leal	(%eax,%eax,2), %eax
+  44 004d 8D0483   		leal	(%ebx,%eax,4), %eax
+  45 0050 8B5008   		movl	8(%eax), %edx
+  46 0053 85D2     		testl	%edx, %edx
+  47 0055 7450     		je	L6
+  48 0057 B8FCFFFF 		movl	$-4, %eax
+  48      FF
+  49 005c 8981DC01 		movl	%eax, 66012(%ecx)
+GAS LISTING task.gas 			page 2
+
+
+  49      0100
+  50 0062 EBCE     		jmp	L3
+  51              		.p2align 4,,7
+  52              	L8:
+  53 0064 FF4104   		incl	4(%ecx)
+  54 0067 BEFEFFFF 		movl	$-2, %esi
+  54      FF
+  55 006c 89B1DC01 		movl	%esi, 66012(%ecx)
+  55      0100
+  56 0072 8B1C24   		movl	(%esp), %ebx
+  57 0075 8B742404 		movl	4(%esp), %esi
+  58 0079 89EC     		movl	%ebp, %esp
+  59 007b 5D       		popl	%ebp
+  60 007c C3       		ret
+  61 007d 8D7600   		.p2align 4,,7
+  62              	L9:
+  63 0080 FF4104   		incl	4(%ecx)
+  64 0083 8D0440   		leal	(%eax,%eax,2), %eax
+  65 0086 8D448304 		leal	4(%ebx,%eax,4), %eax
+  66 008a 89837417 		movl	%eax, 6004(%ebx)
+  66      0000
+  67 0090 894004   		movl	%eax, 4(%eax)
+  68 0093 8B837417 		movl	6004(%ebx), %eax
+  68      0000
+  69 0099 894008   		movl	%eax, 8(%eax)
+  70 009c 8B1C24   		movl	(%esp), %ebx
+  71 009f 8B742404 		movl	4(%esp), %esi
+  72 00a3 89EC     		movl	%ebp, %esp
+  73 00a5 5D       		popl	%ebp
+  74 00a6 C3       		ret
+  75              	L6:
+  76 00a7 8B5608   		movl	8(%esi), %edx
+  77 00aa 83C004   		addl	$4, %eax
+  78 00ad 897004   		movl	%esi, 4(%eax)
+  79 00b0 895008   		movl	%edx, 8(%eax)
+  80 00b3 894204   		movl	%eax, 4(%edx)
+  81 00b6 8B937417 		movl	6004(%ebx), %edx
+  81      0000
+  82 00bc 894208   		movl	%eax, 8(%edx)
+  83 00bf E96EFFFF 		jmp	L3
+  83      FF
+  84              		.align 2
+  85 00c4 8DB60000 		.p2align 4,,15
+  85      00008DBF 
+  85      00000000 
+  86              	.globl __Z12thread_allocv
+  87              		.def	__Z12thread_allocv;	.scl	2;	.type	32;	.endef
+  88              	__Z12thread_allocv:
+  89 00d0 55       		pushl	%ebp
+  90 00d1 B8F40100 		movl	$500, %eax
+  90      00
+  91 00d6 89E5     		movl	%esp, %ebp
+  92 00d8 56       		pushl	%esi
+  93 00d9 53       		pushl	%ebx
+  94 00da 83EC10   		subl	$16, %esp
+  95 00dd 89442408 		movl	%eax, 8(%esp)
+  96 00e1 31C0     		xorl	%eax, %eax
+GAS LISTING task.gas 			page 3
+
+
+  97 00e3 89442404 		movl	%eax, 4(%esp)
+  98 00e7 A1040000 		movl	_ptr_thctl, %eax
+  98      00
+  99 00ec 05541901 		addl	$72020, %eax
+  99      00
+ 100 00f1 890424   		movl	%eax, (%esp)
+ 101 00f4 E8000000 		call	__Z17find_bit_in_arrayPKcii
+ 101      00
+ 102 00f9 89C3     		movl	%eax, %ebx
+ 103 00fb 83FBFF   		cmpl	$-1, %ebx
+ 104 00fe B8FFFFFF 		movl	$-1, %eax
+ 104      FF
+ 105 0103 7424     		je	L10
+ 106 0105 85DB     		testl	%ebx, %ebx
+ 107 0107 8B350400 		movl	_ptr_thctl, %esi
+ 107      0000
+ 108 010d 89DA     		movl	%ebx, %edx
+ 109 010f 781F     		js	L13
+ 110              	L12:
+ 111 0111 89D9     		movl	%ebx, %ecx
+ 112 0113 B8010000 		movl	$1, %eax
+ 112      00
+ 113 0118 83E107   		andl	$7, %ecx
+ 114 011b D3E0     		sall	%cl, %eax
+ 115 011d C1FA03   		sarl	$3, %edx
+ 116 0120 08841654 		orb	%al, 72020(%esi,%edx)
+ 116      190100
+ 117 0127 89D8     		movl	%ebx, %eax
+ 118              	L10:
+ 119 0129 83C410   		addl	$16, %esp
+ 120 012c 5B       		popl	%ebx
+ 121 012d 5E       		popl	%esi
+ 122 012e 5D       		popl	%ebp
+ 123 012f C3       		ret
+ 124              		.p2align 4,,7
+ 125              	L13:
+ 126 0130 8D5307   		leal	7(%ebx), %edx
+ 127 0133 EBDC     		jmp	L12
+ 128 0135 90       		.align 2
+ 129 0136 8D76008D 		.p2align 4,,15
+ 129      BC270000 
+ 129      0000
+ 130              	.globl __Z13thread_existsi
+ 131              		.def	__Z13thread_existsi;	.scl	2;	.type	32;	.endef
+ 132              	__Z13thread_existsi:
+ 133 0140 55       		pushl	%ebp
+ 134 0141 89E5     		movl	%esp, %ebp
+ 135 0143 53       		pushl	%ebx
+ 136 0144 8B4D08   		movl	8(%ebp), %ecx
+ 137 0147 8B1D0400 		movl	_ptr_thctl, %ebx
+ 137      0000
+ 138 014d 85C9     		testl	%ecx, %ecx
+ 139 014f 89C8     		movl	%ecx, %eax
+ 140 0151 781D     		js	L17
+ 141 0153 89C2     		movl	%eax, %edx
+ 142 0155 C1FA03   		sarl	$3, %edx
+ 143 0158 0FBE8413 		movsbl	72020(%ebx,%edx),%eax
+GAS LISTING task.gas 			page 4
+
+
+ 143      54190100 
+ 144 0160 C1E203   		sall	$3, %edx
+ 145 0163 29D1     		subl	%edx, %ecx
+ 146 0165 5B       		popl	%ebx
+ 147 0166 D3F8     		sarl	%cl, %eax
+ 148 0168 83E001   		andl	$1, %eax
+ 149 016b 5D       		popl	%ebp
+ 150 016c C3       		ret
+ 151 016d 8D7600   		.p2align 4,,7
+ 152              	L17:
+ 153 0170 8D4107   		leal	7(%ecx), %eax
+ 154 0173 89C2     		movl	%eax, %edx
+ 155 0175 C1FA03   		sarl	$3, %edx
+ 156 0178 0FBE8413 		movsbl	72020(%ebx,%edx),%eax
+ 156      54190100 
+ 157 0180 C1E203   		sall	$3, %edx
+ 158 0183 29D1     		subl	%edx, %ecx
+ 159 0185 5B       		popl	%ebx
+ 160 0186 D3F8     		sarl	%cl, %eax
+ 161 0188 83E001   		andl	$1, %eax
+ 162 018b 5D       		popl	%ebp
+ 163 018c C3       		ret
+ 164              		.section .rdata,"dr"
+ 165              	LC0:
+ 166 0000 206D745F 		.ascii " mt_tr=%08x\12\0"
+ 166      74723D25 
+ 166      3038780A 
+ 166      00
+ 167              		.text
+ 168 018d 90       		.align 2
+ 169 018e 89F6     		.p2align 4,,15
+ 170              	.globl __Z18thread_switch_byidi
+ 171              		.def	__Z18thread_switch_byidi;	.scl	2;	.type	32;	.endef
+ 172              	__Z18thread_switch_byidi:
+ 173 0190 55       		pushl	%ebp
+ 174 0191 B8000000 		movl	$LC0, %eax
+ 174      00
+ 175 0196 89E5     		movl	%esp, %ebp
+ 176 0198 53       		pushl	%ebx
+ 177 0199 81EC1401 		subl	$276, %esp
+ 177      0000
+ 178 019f 8B5D08   		movl	8(%ebp), %ebx
+ 179 01a2 89442404 		movl	%eax, 4(%esp)
+ 180 01a6 8D85F8FE 		leal	-264(%ebp), %eax
+ 180      FFFF
+ 181 01ac 83C303   		addl	$3, %ebx
+ 182 01af 895C2408 		movl	%ebx, 8(%esp)
+ 183 01b3 C1E303   		sall	$3, %ebx
+ 184 01b6 890424   		movl	%eax, (%esp)
+ 185 01b9 E8000000 		call	_sprintf
+ 185      00
+ 186 01be 891C24   		movl	%ebx, (%esp)
+ 187 01c1 E8000000 		call	_task_change
+ 187      00
+ 188 01c6 81C41401 		addl	$276, %esp
+ 188      0000
+ 189 01cc 31C0     		xorl	%eax, %eax
+GAS LISTING task.gas 			page 5
+
+
+ 190 01ce 5B       		popl	%ebx
+ 191 01cf 5D       		popl	%ebp
+ 192 01d0 C3       		ret
+ 193 01d1 90       		.align 2
+ 194 01d2 8DB42600 		.p2align 4,,15
+ 194      0000008D 
+ 194      BC270000 
+ 194      0000
+ 195              	.globl __Z14thread_currentv
+ 196              		.def	__Z14thread_currentv;	.scl	2;	.type	32;	.endef
+ 197              	__Z14thread_currentv:
+ 198 01e0 55       		pushl	%ebp
+ 199 01e1 8B150400 		movl	_ptr_thctl, %edx
+ 199      0000
+ 200 01e7 B9FFFFFF 		movl	$-1, %ecx
+ 200      FF
+ 201 01ec 89E5     		movl	%esp, %ebp
+ 202 01ee 81C2DC01 		addl	$66012, %edx
+ 202      0100
+ 203 01f4 8B827417 		movl	6004(%edx), %eax
+ 203      0000
+ 204 01fa 85C0     		testl	%eax, %eax
+ 205 01fc 740E     		je	L21
+ 206 01fe 29D0     		subl	%edx, %eax
+ 207 0200 83E804   		subl	$4, %eax
+ 208 0203 C1F802   		sarl	$2, %eax
+ 209 0206 69C8ABAA 		imull	$-1431655765, %eax, %ecx
+ 209      AAAA
+ 210              	L21:
+ 211 020c 5D       		popl	%ebp
+ 212 020d 89C8     		movl	%ecx, %eax
+ 213 020f C3       		ret
+ 214              		.section .rdata,"dr"
+ 215 000d 000000   		.align 4
+ 216              	LC1:
+ 217 0010 74687265 		.ascii "thread_switch(void):cur=%d,after=%d\12\0"
+ 217      61645F73 
+ 217      77697463 
+ 217      6828766F 
+ 217      6964293A 
+ 218              		.text
+ 219              		.align 2
+ 220              		.p2align 4,,15
+ 221              	.globl __Z13thread_switchv
+ 222              		.def	__Z13thread_switchv;	.scl	2;	.type	32;	.endef
+ 223              	__Z13thread_switchv:
+ 224 0210 55       		pushl	%ebp
+ 225 0211 89E5     		movl	%esp, %ebp
+ 226 0213 56       		pushl	%esi
+ 227 0214 BEFFFFFF 		movl	$-1, %esi
+ 227      FF
+ 228 0219 53       		pushl	%ebx
+ 229 021a 81EC1001 		subl	$272, %esp
+ 229      0000
+ 230 0220 8B0D0400 		movl	_ptr_thctl, %ecx
+ 230      0000
+ 231 0226 8D91DC01 		leal	66012(%ecx), %edx
+GAS LISTING task.gas 			page 6
+
+
+ 231      0100
+ 232 022c 8B827417 		movl	6004(%edx), %eax
+ 232      0000
+ 233 0232 85C0     		testl	%eax, %eax
+ 234 0234 740E     		je	L24
+ 235 0236 29D0     		subl	%edx, %eax
+ 236 0238 83E804   		subl	$4, %eax
+ 237 023b C1F802   		sarl	$2, %eax
+ 238 023e 69F0ABAA 		imull	$-1431655765, %eax, %esi
+ 238      AAAA
+ 239              	L24:
+ 240 0244 8D91DC01 		leal	66012(%ecx), %edx
+ 240      0100
+ 241 024a 8B827417 		movl	6004(%edx), %eax
+ 241      0000
+ 242 0250 85C0     		testl	%eax, %eax
+ 243 0252 7409     		je	L26
+ 244 0254 8B4004   		movl	4(%eax), %eax
+ 245 0257 89827417 		movl	%eax, 6004(%edx)
+ 245      0000
+ 246              	L26:
+ 247 025d 8B827417 		movl	6004(%edx), %eax
+ 247      0000
+ 248 0263 BBFFFFFF 		movl	$-1, %ebx
+ 248      FF
+ 249 0268 85C0     		testl	%eax, %eax
+ 250 026a 740E     		je	L28
+ 251 026c 29D0     		subl	%edx, %eax
+ 252 026e 83E804   		subl	$4, %eax
+ 253 0271 C1F802   		sarl	$2, %eax
+ 254 0274 69D8ABAA 		imull	$-1431655765, %eax, %ebx
+ 254      AAAA
+ 255              	L28:
+ 256 027a 895C240C 		movl	%ebx, 12(%esp)
+ 257 027e B8100000 		movl	$LC1, %eax
+ 257      00
+ 258 0283 89442404 		movl	%eax, 4(%esp)
+ 259 0287 8D85F8FE 		leal	-264(%ebp), %eax
+ 259      FFFF
+ 260 028d 89742408 		movl	%esi, 8(%esp)
+ 261 0291 890424   		movl	%eax, (%esp)
+ 262 0294 E8000000 		call	_sprintf
+ 262      00
+ 263 0299 39F3     		cmpl	%esi, %ebx
+ 264 029b B8FFFFFF 		movl	$-1, %eax
+ 264      FF
+ 265 02a0 740A     		je	L22
+ 266 02a2 891C24   		movl	%ebx, (%esp)
+ 267 02a5 E8E6FEFF 		call	__Z18thread_switch_byidi
+ 267      FF
+ 268 02aa 31C0     		xorl	%eax, %eax
+ 269              	L22:
+ 270 02ac 81C41001 		addl	$272, %esp
+ 270      0000
+ 271 02b2 5B       		popl	%ebx
+ 272 02b3 5E       		popl	%esi
+ 273 02b4 5D       		popl	%ebp
+GAS LISTING task.gas 			page 7
+
+
+ 274 02b5 C3       		ret
+ 275              		.align 2
+ 276 02b6 8D76008D 		.p2align 4,,15
+ 276      BC270000 
+ 276      0000
+ 277              	.globl __Z11reg_dump_00PKci
+ 278              		.def	__Z11reg_dump_00PKci;	.scl	2;	.type	32;	.endef
+ 279              	__Z11reg_dump_00PKci:
+ 280 02c0 55       		pushl	%ebp
+ 281 02c1 89E5     		movl	%esp, %ebp
+ 282 02c3 53       		pushl	%ebx
+ 283 02c4 81EC1401 		subl	$276, %esp
+ 283      0000
+ 284 02ca 8D9DF8FE 		leal	-264(%ebp), %ebx
+ 284      FFFF
+ 285 02d0 891C24   		movl	%ebx, (%esp)
+ 286 02d3 8B450C   		movl	12(%ebp), %eax
+ 287 02d6 89442408 		movl	%eax, 8(%esp)
+ 288 02da 8B4508   		movl	8(%ebp), %eax
+ 289 02dd 89442404 		movl	%eax, 4(%esp)
+ 290 02e1 E8000000 		call	_sprintf
+ 290      00
+ 291 02e6 895C2408 		movl	%ebx, 8(%esp)
+ 292 02ea A1000000 		movl	_l_console, %eax
+ 292      00
+ 293 02ef 89442404 		movl	%eax, 4(%esp)
+ 294 02f3 A1000000 		movl	_layerctl, %eax
+ 294      00
+ 295 02f8 890424   		movl	%eax, (%esp)
+ 296 02fb E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 296      00
+ 297 0300 81C41401 		addl	$276, %esp
+ 297      0000
+ 298 0306 5B       		popl	%ebx
+ 299 0307 5D       		popl	%ebp
+ 300 0308 C3       		ret
+ 301              		.section .rdata,"dr"
+ 302              	LC2:
+ 303 0035 7461736B 		.ascii "tasks:\0"
+ 303      733A00
+ 304              	LC3:
+ 305 003c 25642074 		.ascii "%d threads:\0"
+ 305      68726561 
+ 305      64733A00 
+ 306              	LC4:
+ 307 0048 00       		.ascii "\0"
+ 308              	LC5:
+ 309 0049 2D3E00   		.ascii "->\0"
+ 310              	LC6:
+ 311 004c 25642573 		.ascii "%d%s\0"
+ 311      00
+ 312              	LC7:
+ 313 0051 0A00     		.ascii "\12\0"
+ 314              		.text
+ 315 0309 90       		.align 2
+ 316 030a 8DB60000 		.p2align 4,,15
+ 316      0000
+GAS LISTING task.gas 			page 8
+
+
+ 317              	.globl __Z15dump_threadlistv
+ 318              		.def	__Z15dump_threadlistv;	.scl	2;	.type	32;	.endef
+ 319              	__Z15dump_threadlistv:
+ 320 0310 55       		pushl	%ebp
+ 321 0311 89E5     		movl	%esp, %ebp
+ 322 0313 57       		pushl	%edi
+ 323 0314 56       		pushl	%esi
+ 324 0315 BE350000 		movl	$LC2, %esi
+ 324      00
+ 325 031a 53       		pushl	%ebx
+ 326 031b 81EC2C01 		subl	$300, %esp
+ 326      0000
+ 327 0321 A1000000 		movl	_l_console, %eax
+ 327      00
+ 328 0326 89742408 		movl	%esi, 8(%esp)
+ 329 032a 8B1D0400 		movl	_ptr_thctl, %ebx
+ 329      0000
+ 330 0330 89442404 		movl	%eax, 4(%esp)
+ 331 0334 A1000000 		movl	_layerctl, %eax
+ 331      00
+ 332 0339 81C3DC01 		addl	$66012, %ebx
+ 332      0100
+ 333 033f 890424   		movl	%eax, (%esp)
+ 334 0342 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 334      00
+ 335 0347 8B8B7417 		movl	6004(%ebx), %ecx
+ 335      0000
+ 336 034d 31DB     		xorl	%ebx, %ebx
+ 337 034f 899DE4FE 		movl	%ebx, -284(%ebp)
+ 337      FFFF
+ 338 0355 85C9     		testl	%ecx, %ecx
+ 339 0357 7415     		je	L33
+ 340 0359 89C8     		movl	%ecx, %eax
+ 341 035b 31D2     		xorl	%edx, %edx
+ 342 035d 8D7600   		.p2align 4,,15
+ 343              	L34:
+ 344 0360 8B4004   		movl	4(%eax), %eax
+ 345 0363 42       		incl	%edx
+ 346 0364 39C1     		cmpl	%eax, %ecx
+ 347 0366 75F8     		jne	L34
+ 348 0368 8995E4FE 		movl	%edx, -284(%ebp)
+ 348      FFFF
+ 349              	L33:
+ 350 036e 8B85E4FE 		movl	-284(%ebp), %eax
+ 350      FFFF
+ 351 0374 BA3C0000 		movl	$LC3, %edx
+ 351      00
+ 352 0379 8DB5E8FE 		leal	-280(%ebp), %esi
+ 352      FFFF
+ 353 037f 89542404 		movl	%edx, 4(%esp)
+ 354 0383 31DB     		xorl	%ebx, %ebx
+ 355 0385 893424   		movl	%esi, (%esp)
+ 356 0388 89442408 		movl	%eax, 8(%esp)
+ 357 038c E8000000 		call	_sprintf
+ 357      00
+ 358 0391 89742408 		movl	%esi, 8(%esp)
+ 359 0395 A1000000 		movl	_l_console, %eax
+GAS LISTING task.gas 			page 9
+
+
+ 359      00
+ 360 039a 89442404 		movl	%eax, 4(%esp)
+ 361 039e A1000000 		movl	_layerctl, %eax
+ 361      00
+ 362 03a3 890424   		movl	%eax, (%esp)
+ 363 03a6 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 363      00
+ 364 03ab 3B9DE4FE 		cmpl	-284(%ebp), %ebx
+ 364      FFFF
+ 365 03b1 7D57     		jge	L46
+ 366 03b3 8B85E4FE 		movl	-284(%ebp), %eax
+ 366      FFFF
+ 367 03b9 8D78FF   		leal	-1(%eax), %edi
+ 368 03bc 8D742600 		.p2align 4,,15
+ 369              	L44:
+ 370 03c0 39DF     		cmpl	%ebx, %edi
+ 371 03c2 B8480000 		movl	$LC4, %eax
+ 371      00
+ 372 03c7 7405     		je	L43
+ 373 03c9 B8490000 		movl	$LC5, %eax
+ 373      00
+ 374              	L43:
+ 375 03ce 8944240C 		movl	%eax, 12(%esp)
+ 376 03d2 B84C0000 		movl	$LC6, %eax
+ 376      00
+ 377 03d7 895C2408 		movl	%ebx, 8(%esp)
+ 378 03db 43       		incl	%ebx
+ 379 03dc 89442404 		movl	%eax, 4(%esp)
+ 380 03e0 893424   		movl	%esi, (%esp)
+ 381 03e3 E8000000 		call	_sprintf
+ 381      00
+ 382 03e8 89742408 		movl	%esi, 8(%esp)
+ 383 03ec A1000000 		movl	_l_console, %eax
+ 383      00
+ 384 03f1 89442404 		movl	%eax, 4(%esp)
+ 385 03f5 A1000000 		movl	_layerctl, %eax
+ 385      00
+ 386 03fa 890424   		movl	%eax, (%esp)
+ 387 03fd E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 387      00
+ 388 0402 3B9DE4FE 		cmpl	-284(%ebp), %ebx
+ 388      FFFF
+ 389 0408 7CB6     		jl	L44
+ 390              	L46:
+ 391 040a B8510000 		movl	$LC7, %eax
+ 391      00
+ 392 040f 89442408 		movl	%eax, 8(%esp)
+ 393 0413 A1000000 		movl	_l_console, %eax
+ 393      00
+ 394 0418 89442404 		movl	%eax, 4(%esp)
+ 395 041c A1000000 		movl	_layerctl, %eax
+ 395      00
+ 396 0421 890424   		movl	%eax, (%esp)
+ 397 0424 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 397      00
+ 398 0429 81C42C01 		addl	$300, %esp
+ 398      0000
+GAS LISTING task.gas 			page 10
+
+
+ 399 042f 5B       		popl	%ebx
+ 400 0430 5E       		popl	%esi
+ 401 0431 5F       		popl	%edi
+ 402 0432 5D       		popl	%ebp
+ 403 0433 C3       		ret
+ 404              		.section .rdata,"dr"
+ 405 0053 00       		.align 4
+ 406              	LC8:
+ 407 0054 74686374 		.ascii "thctl:\12  interval:%d\12  nThread:%d\12\0"
+ 407      6C3A0A20 
+ 407      20696E74 
+ 407      65727661 
+ 407      6C3A2564 
+ 408              	LC9:
+ 409 0077 74687265 		.ascii "thread[%d]:\12\0"
+ 409      61645B25 
+ 409      645D3A0A 
+ 409      00
+ 410              	LC10:
+ 411 0084 20207473 		.ascii "  tss:\12\0"
+ 411      733A0A00 
+ 412              	LC12:
+ 413 008c 6561783D 		.ascii "eax=%08x\12\0"
+ 413      25303878 
+ 413      0A00
+ 414              	LC13:
+ 415 0096 6563783D 		.ascii "ecx=%08x\12\0"
+ 415      25303878 
+ 415      0A00
+ 416              	LC14:
+ 417 00a0 6564783D 		.ascii "edx=%08x\12\0"
+ 417      25303878 
+ 417      0A00
+ 418              	LC15:
+ 419 00aa 6562783D 		.ascii "ebx=%08x\12\0"
+ 419      25303878 
+ 419      0A00
+ 420              	LC16:
+ 421 00b4 6573703D 		.ascii "esp=%08x\12\0"
+ 421      25303878 
+ 421      0A00
+ 422              	LC17:
+ 423 00be 6562703D 		.ascii "ebp=%08x\12\0"
+ 423      25303878 
+ 423      0A00
+ 424              	LC18:
+ 425 00c8 6573693D 		.ascii "esi=%08x\12\0"
+ 425      25303878 
+ 425      0A00
+ 426              	LC19:
+ 427 00d2 6564693D 		.ascii "edi=%08x\12\0"
+ 427      25303878 
+ 427      0A00
+ 428              	LC20:
+ 429 00dc 6569703D 		.ascii "eip=%08x\12\0"
+ 429      25303878 
+ 429      0A00
+GAS LISTING task.gas 			page 11
+
+
+ 430              	LC21:
+ 431 00e6 6573203D 		.ascii "es =%08x\12\0"
+ 431      25303878 
+ 431      0A00
+ 432              	LC22:
+ 433 00f0 6373203D 		.ascii "cs =%08x\12\0"
+ 433      25303878 
+ 433      0A00
+ 434              	LC23:
+ 435 00fa 7373203D 		.ascii "ss =%08x\12\0"
+ 435      25303878 
+ 435      0A00
+ 436              	LC24:
+ 437 0104 6473203D 		.ascii "ds =%08x\12\0"
+ 437      25303878 
+ 437      0A00
+ 438              	LC25:
+ 439 010e 6673203D 		.ascii "fs =%08x\12\0"
+ 439      25303878 
+ 439      0A00
+ 440              	LC26:
+ 441 0118 6773203D 		.ascii "gs =%08x\12\0"
+ 441      25303878 
+ 441      0A00
+ 442              		.text
+ 443              		.align 2
+ 444 0434 8DB60000 		.p2align 4,,15
+ 444      00008DBF 
+ 444      00000000 
+ 445              	.globl __Z10dump_thctlv
+ 446              		.def	__Z10dump_thctlv;	.scl	2;	.type	32;	.endef
+ 447              	__Z10dump_thctlv:
+ 448 0440 55       		pushl	%ebp
+ 449 0441 B9540000 		movl	$LC8, %ecx
+ 449      00
+ 450 0446 89E5     		movl	%esp, %ebp
+ 451 0448 57       		pushl	%edi
+ 452 0449 31FF     		xorl	%edi, %edi
+ 453 044b 56       		pushl	%esi
+ 454 044c 8DB5E8FE 		leal	-280(%ebp), %esi
+ 454      FFFF
+ 455 0452 53       		pushl	%ebx
+ 456 0453 81EC5C01 		subl	$348, %esp
+ 456      0000
+ 457 0459 31DB     		xorl	%ebx, %ebx
+ 458 045b 8B150400 		movl	_ptr_thctl, %edx
+ 458      0000
+ 459 0461 8B4204   		movl	4(%edx), %eax
+ 460 0464 8944240C 		movl	%eax, 12(%esp)
+ 461 0468 8B02     		movl	(%edx), %eax
+ 462 046a 894C2404 		movl	%ecx, 4(%esp)
+ 463 046e 893424   		movl	%esi, (%esp)
+ 464 0471 89442408 		movl	%eax, 8(%esp)
+ 465 0475 E8000000 		call	_sprintf
+ 465      00
+ 466 047a 89742408 		movl	%esi, 8(%esp)
+ 467 047e A1000000 		movl	_l_console, %eax
+GAS LISTING task.gas 			page 12
+
+
+ 467      00
+ 468 0483 89442404 		movl	%eax, 4(%esp)
+ 469 0487 A1000000 		movl	_layerctl, %eax
+ 469      00
+ 470 048c 890424   		movl	%eax, (%esp)
+ 471 048f E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 471      00
+ 472 0494 89BDC8FE 		movl	%edi, -312(%ebp)
+ 472      FFFF
+ 473 049a 31C0     		xorl	%eax, %eax
+ 474 049c 31D2     		xorl	%edx, %edx
+ 475 049e 8985E0FE 		movl	%eax, -288(%ebp)
+ 475      FFFF
+ 476 04a4 31C0     		xorl	%eax, %eax
+ 477 04a6 31C9     		xorl	%ecx, %ecx
+ 478 04a8 8985DCFE 		movl	%eax, -292(%ebp)
+ 478      FFFF
+ 479 04ae 31C0     		xorl	%eax, %eax
+ 480 04b0 31FF     		xorl	%edi, %edi
+ 481 04b2 8985D8FE 		movl	%eax, -296(%ebp)
+ 481      FFFF
+ 482 04b8 31C0     		xorl	%eax, %eax
+ 483 04ba 8985D4FE 		movl	%eax, -300(%ebp)
+ 483      FFFF
+ 484 04c0 31C0     		xorl	%eax, %eax
+ 485 04c2 8985D0FE 		movl	%eax, -304(%ebp)
+ 485      FFFF
+ 486 04c8 31C0     		xorl	%eax, %eax
+ 487 04ca 8985CCFE 		movl	%eax, -308(%ebp)
+ 487      FFFF
+ 488 04d0 31C0     		xorl	%eax, %eax
+ 489 04d2 8985BCFE 		movl	%eax, -324(%ebp)
+ 489      FFFF
+ 490 04d8 31C0     		xorl	%eax, %eax
+ 491 04da 8985B8FE 		movl	%eax, -328(%ebp)
+ 491      FFFF
+ 492 04e0 31C0     		xorl	%eax, %eax
+ 493 04e2 8995E4FE 		movl	%edx, -284(%ebp)
+ 493      FFFF
+ 494 04e8 31D2     		xorl	%edx, %edx
+ 495 04ea 8985B4FE 		movl	%eax, -332(%ebp)
+ 495      FFFF
+ 496 04f0 31C0     		xorl	%eax, %eax
+ 497 04f2 898DC4FE 		movl	%ecx, -316(%ebp)
+ 497      FFFF
+ 498 04f8 8995C0FE 		movl	%edx, -320(%ebp)
+ 498      FFFF
+ 499 04fe 8985B0FE 		movl	%eax, -336(%ebp)
+ 499      FFFF
+ 500              	L111:
+ 501 0504 895C2408 		movl	%ebx, 8(%esp)
+ 502 0508 B8770000 		movl	$LC9, %eax
+ 502      00
+ 503 050d 89442404 		movl	%eax, 4(%esp)
+ 504 0511 893424   		movl	%esi, (%esp)
+ 505 0514 E8000000 		call	_sprintf
+ 505      00
+GAS LISTING task.gas 			page 13
+
+
+ 506 0519 89742408 		movl	%esi, 8(%esp)
+ 507 051d A1000000 		movl	_l_console, %eax
+ 507      00
+ 508 0522 89442404 		movl	%eax, 4(%esp)
+ 509 0526 A1000000 		movl	_layerctl, %eax
+ 509      00
+ 510 052b 890424   		movl	%eax, (%esp)
+ 511 052e E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 511      00
+ 512 0533 B8840000 		movl	$LC10, %eax
+ 512      00
+ 513 0538 89442408 		movl	%eax, 8(%esp)
+ 514 053c A1000000 		movl	_l_console, %eax
+ 514      00
+ 515 0541 89442404 		movl	%eax, 4(%esp)
+ 516 0545 A1000000 		movl	_layerctl, %eax
+ 516      00
+ 517 054a 890424   		movl	%eax, (%esp)
+ 518 054d E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 518      00
+ 519 0552 A1040000 		movl	_ptr_thctl, %eax
+ 519      00
+ 520 0557 31D2     		xorl	%edx, %edx
+ 521 0559 83C008   		addl	$8, %eax
+ 522 055c 81FBF301 		cmpl	$499, %ebx
+ 522      0000
+ 523 0562 7703     		ja	L53
+ 524 0564 8D1407   		leal	(%edi,%eax), %edx
+ 525              	L53:
+ 526 0567 8B4228   		movl	40(%edx), %eax
+ 527 056a C704248C 		movl	$LC12, (%esp)
+ 527      000000
+ 528 0571 89442404 		movl	%eax, 4(%esp)
+ 529 0575 E846FDFF 		call	__Z11reg_dump_00PKci
+ 529      FF
+ 530 057a A1040000 		movl	_ptr_thctl, %eax
+ 530      00
+ 531 057f 31D2     		xorl	%edx, %edx
+ 532 0581 83C008   		addl	$8, %eax
+ 533 0584 81FBF301 		cmpl	$499, %ebx
+ 533      0000
+ 534 058a 7708     		ja	L57
+ 535 058c 8B95B0FE 		movl	-336(%ebp), %edx
+ 535      FFFF
+ 536 0592 01C2     		addl	%eax, %edx
+ 537              	L57:
+ 538 0594 8B422C   		movl	44(%edx), %eax
+ 539 0597 C7042496 		movl	$LC13, (%esp)
+ 539      000000
+ 540 059e 89442404 		movl	%eax, 4(%esp)
+ 541 05a2 E819FDFF 		call	__Z11reg_dump_00PKci
+ 541      FF
+ 542 05a7 A1040000 		movl	_ptr_thctl, %eax
+ 542      00
+ 543 05ac 31D2     		xorl	%edx, %edx
+ 544 05ae 83C008   		addl	$8, %eax
+ 545 05b1 81FBF301 		cmpl	$499, %ebx
+GAS LISTING task.gas 			page 14
+
+
+ 545      0000
+ 546 05b7 7708     		ja	L61
+ 547 05b9 8B95B4FE 		movl	-332(%ebp), %edx
+ 547      FFFF
+ 548 05bf 01C2     		addl	%eax, %edx
+ 549              	L61:
+ 550 05c1 8B4230   		movl	48(%edx), %eax
+ 551 05c4 C70424A0 		movl	$LC14, (%esp)
+ 551      000000
+ 552 05cb 89442404 		movl	%eax, 4(%esp)
+ 553 05cf E8ECFCFF 		call	__Z11reg_dump_00PKci
+ 553      FF
+ 554 05d4 A1040000 		movl	_ptr_thctl, %eax
+ 554      00
+ 555 05d9 31D2     		xorl	%edx, %edx
+ 556 05db 83C008   		addl	$8, %eax
+ 557 05de 81FBF301 		cmpl	$499, %ebx
+ 557      0000
+ 558 05e4 7708     		ja	L65
+ 559 05e6 8B95B8FE 		movl	-328(%ebp), %edx
+ 559      FFFF
+ 560 05ec 01C2     		addl	%eax, %edx
+ 561              	L65:
+ 562 05ee 8B4234   		movl	52(%edx), %eax
+ 563 05f1 C70424AA 		movl	$LC15, (%esp)
+ 563      000000
+ 564 05f8 89442404 		movl	%eax, 4(%esp)
+ 565 05fc E8BFFCFF 		call	__Z11reg_dump_00PKci
+ 565      FF
+ 566 0601 A1040000 		movl	_ptr_thctl, %eax
+ 566      00
+ 567 0606 31D2     		xorl	%edx, %edx
+ 568 0608 83C008   		addl	$8, %eax
+ 569 060b 81FBF301 		cmpl	$499, %ebx
+ 569      0000
+ 570 0611 7708     		ja	L69
+ 571 0613 8B95BCFE 		movl	-324(%ebp), %edx
+ 571      FFFF
+ 572 0619 01C2     		addl	%eax, %edx
+ 573              	L69:
+ 574 061b 8B4238   		movl	56(%edx), %eax
+ 575 061e C70424B4 		movl	$LC16, (%esp)
+ 575      000000
+ 576 0625 89442404 		movl	%eax, 4(%esp)
+ 577 0629 E892FCFF 		call	__Z11reg_dump_00PKci
+ 577      FF
+ 578 062e A1040000 		movl	_ptr_thctl, %eax
+ 578      00
+ 579 0633 31D2     		xorl	%edx, %edx
+ 580 0635 83C008   		addl	$8, %eax
+ 581 0638 81FBF301 		cmpl	$499, %ebx
+ 581      0000
+ 582 063e 7708     		ja	L73
+ 583 0640 8B95C0FE 		movl	-320(%ebp), %edx
+ 583      FFFF
+ 584 0646 01C2     		addl	%eax, %edx
+ 585              	L73:
+GAS LISTING task.gas 			page 15
+
+
+ 586 0648 8B423C   		movl	60(%edx), %eax
+ 587 064b C70424BE 		movl	$LC17, (%esp)
+ 587      000000
+ 588 0652 89442404 		movl	%eax, 4(%esp)
+ 589 0656 E865FCFF 		call	__Z11reg_dump_00PKci
+ 589      FF
+ 590 065b A1040000 		movl	_ptr_thctl, %eax
+ 590      00
+ 591 0660 31D2     		xorl	%edx, %edx
+ 592 0662 83C008   		addl	$8, %eax
+ 593 0665 81FBF301 		cmpl	$499, %ebx
+ 593      0000
+ 594 066b 7708     		ja	L77
+ 595 066d 8B95C4FE 		movl	-316(%ebp), %edx
+ 595      FFFF
+ 596 0673 01C2     		addl	%eax, %edx
+ 597              	L77:
+ 598 0675 8B4240   		movl	64(%edx), %eax
+ 599 0678 C70424C8 		movl	$LC18, (%esp)
+ 599      000000
+ 600 067f 89442404 		movl	%eax, 4(%esp)
+ 601 0683 E838FCFF 		call	__Z11reg_dump_00PKci
+ 601      FF
+ 602 0688 A1040000 		movl	_ptr_thctl, %eax
+ 602      00
+ 603 068d 31D2     		xorl	%edx, %edx
+ 604 068f 83C008   		addl	$8, %eax
+ 605 0692 81FBF301 		cmpl	$499, %ebx
+ 605      0000
+ 606 0698 7708     		ja	L81
+ 607 069a 8B95C8FE 		movl	-312(%ebp), %edx
+ 607      FFFF
+ 608 06a0 01C2     		addl	%eax, %edx
+ 609              	L81:
+ 610 06a2 8B4244   		movl	68(%edx), %eax
+ 611 06a5 C70424D2 		movl	$LC19, (%esp)
+ 611      000000
+ 612 06ac 89442404 		movl	%eax, 4(%esp)
+ 613 06b0 E80BFCFF 		call	__Z11reg_dump_00PKci
+ 613      FF
+ 614 06b5 A1040000 		movl	_ptr_thctl, %eax
+ 614      00
+ 615 06ba 31D2     		xorl	%edx, %edx
+ 616 06bc 83C008   		addl	$8, %eax
+ 617 06bf 81FBF301 		cmpl	$499, %ebx
+ 617      0000
+ 618 06c5 7708     		ja	L85
+ 619 06c7 8B95CCFE 		movl	-308(%ebp), %edx
+ 619      FFFF
+ 620 06cd 01C2     		addl	%eax, %edx
+ 621              	L85:
+ 622 06cf 8B4220   		movl	32(%edx), %eax
+ 623 06d2 C70424DC 		movl	$LC20, (%esp)
+ 623      000000
+ 624 06d9 89442404 		movl	%eax, 4(%esp)
+ 625 06dd E8DEFBFF 		call	__Z11reg_dump_00PKci
+ 625      FF
+GAS LISTING task.gas 			page 16
+
+
+ 626 06e2 A1040000 		movl	_ptr_thctl, %eax
+ 626      00
+ 627 06e7 31D2     		xorl	%edx, %edx
+ 628 06e9 83C008   		addl	$8, %eax
+ 629 06ec 81FBF301 		cmpl	$499, %ebx
+ 629      0000
+ 630 06f2 7708     		ja	L89
+ 631 06f4 8B95D0FE 		movl	-304(%ebp), %edx
+ 631      FFFF
+ 632 06fa 01C2     		addl	%eax, %edx
+ 633              	L89:
+ 634 06fc 8B4248   		movl	72(%edx), %eax
+ 635 06ff C70424E6 		movl	$LC21, (%esp)
+ 635      000000
+ 636 0706 89442404 		movl	%eax, 4(%esp)
+ 637 070a E8B1FBFF 		call	__Z11reg_dump_00PKci
+ 637      FF
+ 638 070f A1040000 		movl	_ptr_thctl, %eax
+ 638      00
+ 639 0714 31D2     		xorl	%edx, %edx
+ 640 0716 83C008   		addl	$8, %eax
+ 641 0719 81FBF301 		cmpl	$499, %ebx
+ 641      0000
+ 642 071f 7708     		ja	L93
+ 643 0721 8B95D4FE 		movl	-300(%ebp), %edx
+ 643      FFFF
+ 644 0727 01C2     		addl	%eax, %edx
+ 645              	L93:
+ 646 0729 8B424C   		movl	76(%edx), %eax
+ 647 072c C70424F0 		movl	$LC22, (%esp)
+ 647      000000
+ 648 0733 89442404 		movl	%eax, 4(%esp)
+ 649 0737 E884FBFF 		call	__Z11reg_dump_00PKci
+ 649      FF
+ 650 073c A1040000 		movl	_ptr_thctl, %eax
+ 650      00
+ 651 0741 31D2     		xorl	%edx, %edx
+ 652 0743 83C008   		addl	$8, %eax
+ 653 0746 81FBF301 		cmpl	$499, %ebx
+ 653      0000
+ 654 074c 7708     		ja	L97
+ 655 074e 8B95D8FE 		movl	-296(%ebp), %edx
+ 655      FFFF
+ 656 0754 01C2     		addl	%eax, %edx
+ 657              	L97:
+ 658 0756 8B4250   		movl	80(%edx), %eax
+ 659 0759 C70424FA 		movl	$LC23, (%esp)
+ 659      000000
+ 660 0760 89442404 		movl	%eax, 4(%esp)
+ 661 0764 E857FBFF 		call	__Z11reg_dump_00PKci
+ 661      FF
+ 662 0769 A1040000 		movl	_ptr_thctl, %eax
+ 662      00
+ 663 076e 31D2     		xorl	%edx, %edx
+ 664 0770 83C008   		addl	$8, %eax
+ 665 0773 81FBF301 		cmpl	$499, %ebx
+ 665      0000
+GAS LISTING task.gas 			page 17
+
+
+ 666 0779 7708     		ja	L101
+ 667 077b 8B95DCFE 		movl	-292(%ebp), %edx
+ 667      FFFF
+ 668 0781 01C2     		addl	%eax, %edx
+ 669              	L101:
+ 670 0783 8B4254   		movl	84(%edx), %eax
+ 671 0786 C7042404 		movl	$LC24, (%esp)
+ 671      010000
+ 672 078d 89442404 		movl	%eax, 4(%esp)
+ 673 0791 E82AFBFF 		call	__Z11reg_dump_00PKci
+ 673      FF
+ 674 0796 A1040000 		movl	_ptr_thctl, %eax
+ 674      00
+ 675 079b 31D2     		xorl	%edx, %edx
+ 676 079d 83C008   		addl	$8, %eax
+ 677 07a0 81FBF301 		cmpl	$499, %ebx
+ 677      0000
+ 678 07a6 7708     		ja	L105
+ 679 07a8 8B95E0FE 		movl	-288(%ebp), %edx
+ 679      FFFF
+ 680 07ae 01C2     		addl	%eax, %edx
+ 681              	L105:
+ 682 07b0 8B4258   		movl	88(%edx), %eax
+ 683 07b3 C704240E 		movl	$LC25, (%esp)
+ 683      010000
+ 684 07ba 89442404 		movl	%eax, 4(%esp)
+ 685 07be E8FDFAFF 		call	__Z11reg_dump_00PKci
+ 685      FF
+ 686 07c3 A1040000 		movl	_ptr_thctl, %eax
+ 686      00
+ 687 07c8 31D2     		xorl	%edx, %edx
+ 688 07ca 83C008   		addl	$8, %eax
+ 689 07cd 81FBF301 		cmpl	$499, %ebx
+ 689      0000
+ 690 07d3 7708     		ja	L109
+ 691 07d5 8B95E4FE 		movl	-284(%ebp), %edx
+ 691      FFFF
+ 692 07db 01C2     		addl	%eax, %edx
+ 693              	L109:
+ 694 07dd 8B425C   		movl	92(%edx), %eax
+ 695 07e0 43       		incl	%ebx
+ 696 07e1 C7042418 		movl	$LC26, (%esp)
+ 696      010000
+ 697 07e8 81C78400 		addl	$132, %edi
+ 697      0000
+ 698 07ee 89442404 		movl	%eax, 4(%esp)
+ 699 07f2 E8C9FAFF 		call	__Z11reg_dump_00PKci
+ 699      FF
+ 700 07f7 8185B0FE 		addl	$132, -336(%ebp)
+ 700      FFFF8400 
+ 700      0000
+ 701 0801 8185B4FE 		addl	$132, -332(%ebp)
+ 701      FFFF8400 
+ 701      0000
+ 702 080b 8185B8FE 		addl	$132, -328(%ebp)
+ 702      FFFF8400 
+ 702      0000
+GAS LISTING task.gas 			page 18
+
+
+ 703 0815 8185BCFE 		addl	$132, -324(%ebp)
+ 703      FFFF8400 
+ 703      0000
+ 704 081f 8185C0FE 		addl	$132, -320(%ebp)
+ 704      FFFF8400 
+ 704      0000
+ 705 0829 8185C4FE 		addl	$132, -316(%ebp)
+ 705      FFFF8400 
+ 705      0000
+ 706 0833 8185C8FE 		addl	$132, -312(%ebp)
+ 706      FFFF8400 
+ 706      0000
+ 707 083d 8185CCFE 		addl	$132, -308(%ebp)
+ 707      FFFF8400 
+ 707      0000
+ 708 0847 8185D0FE 		addl	$132, -304(%ebp)
+ 708      FFFF8400 
+ 708      0000
+ 709 0851 8185D4FE 		addl	$132, -300(%ebp)
+ 709      FFFF8400 
+ 709      0000
+ 710 085b 8185D8FE 		addl	$132, -296(%ebp)
+ 710      FFFF8400 
+ 710      0000
+ 711 0865 8185DCFE 		addl	$132, -292(%ebp)
+ 711      FFFF8400 
+ 711      0000
+ 712 086f 8185E0FE 		addl	$132, -288(%ebp)
+ 712      FFFF8400 
+ 712      0000
+ 713 0879 8185E4FE 		addl	$132, -284(%ebp)
+ 713      FFFF8400 
+ 713      0000
+ 714 0883 83FB01   		cmpl	$1, %ebx
+ 715 0886 0F8E78FC 		jle	L111
+ 715      FFFF
+ 716 088c 81C45C01 		addl	$348, %esp
+ 716      0000
+ 717 0892 31C0     		xorl	%eax, %eax
+ 718 0894 5B       		popl	%ebx
+ 719 0895 5E       		popl	%esi
+ 720 0896 5F       		popl	%edi
+ 721 0897 5D       		popl	%ebp
+ 722 0898 C3       		ret
+ 723 0899 90       		.align 2
+ 724 089a 8DB60000 		.p2align 4,,15
+ 724      0000
+ 725              	.globl __ZN4task18loadThreadToKernelEiijiPv
+ 726              		.def	__ZN4task18loadThreadToKernelEiijiPv;	.scl	2;	.type	32;	.endef
+ 727              	__ZN4task18loadThreadToKernelEiijiPv:
+ 728 08a0 55       		pushl	%ebp
+ 729 08a1 31C0     		xorl	%eax, %eax
+ 730 08a3 89E5     		movl	%esp, %ebp
+ 731 08a5 83EC18   		subl	$24, %esp
+ 732 08a8 8B5508   		movl	8(%ebp), %edx
+ 733 08ab 897DFC   		movl	%edi, -4(%ebp)
+ 734 08ae 8B7D10   		movl	16(%ebp), %edi
+GAS LISTING task.gas 			page 19
+
+
+ 735 08b1 895DF4   		movl	%ebx, -12(%ebp)
+ 736 08b4 8975F8   		movl	%esi, -8(%ebp)
+ 737 08b7 8B0D0400 		movl	_ptr_thctl, %ecx
+ 737      0000
+ 738 08bd 83C108   		addl	$8, %ecx
+ 739 08c0 81FAF301 		cmpl	$499, %edx
+ 739      0000
+ 740 08c6 770A     		ja	L118
+ 741 08c8 89D0     		movl	%edx, %eax
+ 742 08ca C1E005   		sall	$5, %eax
+ 743 08cd 01D0     		addl	%edx, %eax
+ 744 08cf 8D0481   		leal	(%ecx,%eax,4), %eax
+ 745              	L118:
+ 746 08d2 8B5D0C   		movl	12(%ebp), %ebx
+ 747 08d5 897C2404 		movl	%edi, 4(%esp)
+ 748 08d9 8D5CD86C 		leal	108(%eax,%ebx,8), %ebx
+ 749 08dd 891C24   		movl	%ebx, (%esp)
+ 750 08e0 E8000000 		call	__ZN6dsctbl11getPhysAddrEP18segment_descriptorj
+ 750      00
+ 751 08e5 8B5514   		movl	20(%ebp), %edx
+ 752 08e8 89C6     		movl	%eax, %esi
+ 753 08ea 891C24   		movl	%ebx, (%esp)
+ 754 08ed 8D4417FF 		leal	-1(%edi,%edx), %eax
+ 755 08f1 89442404 		movl	%eax, 4(%esp)
+ 756 08f5 E8000000 		call	__ZN6dsctbl11getPhysAddrEP18segment_descriptorj
+ 756      00
+ 757 08fa 85F6     		testl	%esi, %esi
+ 758 08fc B901DDDA 		movl	$-1160061695, %ecx
+ 758      BA
+ 759 0901 0F94C2   		sete	%dl
+ 760 0904 85C0     		testl	%eax, %eax
+ 761 0906 0F94C0   		sete	%al
+ 762 0909 08C2     		orb	%al, %dl
+ 763 090b 7413     		je	L121
+ 764 090d 8B5DF4   		movl	-12(%ebp), %ebx
+ 765 0910 89C8     		movl	%ecx, %eax
+ 766 0912 8B75F8   		movl	-8(%ebp), %esi
+ 767 0915 8B7DFC   		movl	-4(%ebp), %edi
+ 768 0918 89EC     		movl	%ebp, %esp
+ 769 091a 5D       		popl	%ebp
+ 770 091b C3       		ret
+ 771 091c 8D742600 		.p2align 4,,7
+ 772              	L121:
+ 773 0920 8B4514   		movl	20(%ebp), %eax
+ 774 0923 89742404 		movl	%esi, 4(%esp)
+ 775 0927 89442408 		movl	%eax, 8(%esp)
+ 776 092b 8B4518   		movl	24(%ebp), %eax
+ 777 092e 890424   		movl	%eax, (%esp)
+ 778 0931 E8000000 		call	_memcpy
+ 778      00
+ 779 0936 8B5DF4   		movl	-12(%ebp), %ebx
+ 780 0939 31C9     		xorl	%ecx, %ecx
+ 781 093b 8B75F8   		movl	-8(%ebp), %esi
+ 782 093e 8B7DFC   		movl	-4(%ebp), %edi
+ 783 0941 89EC     		movl	%ebp, %esp
+ 784 0943 89C8     		movl	%ecx, %eax
+ 785 0945 5D       		popl	%ebp
+GAS LISTING task.gas 			page 20
+
+
+ 786 0946 C3       		ret
+ 787 0947 90       		.align 2
+ 788 0948 908DB426 		.p2align 4,,15
+ 788      00000000 
+ 789              	.globl __ZN4task19loadCurrentToKernelEijiPv
+ 790              		.def	__ZN4task19loadCurrentToKernelEijiPv;	.scl	2;	.type	32;	.endef
+ 791              	__ZN4task19loadCurrentToKernelEijiPv:
+ 792 0950 55       		pushl	%ebp
+ 793 0951 89E5     		movl	%esp, %ebp
+ 794 0953 83EC18   		subl	$24, %esp
+ 795 0956 E885F8FF 		call	__Z14thread_currentv
+ 795      FF
+ 796 095b 890424   		movl	%eax, (%esp)
+ 797 095e 8B5514   		movl	20(%ebp), %edx
+ 798 0961 89542410 		movl	%edx, 16(%esp)
+ 799 0965 8B5510   		movl	16(%ebp), %edx
+ 800 0968 8954240C 		movl	%edx, 12(%esp)
+ 801 096c 8B550C   		movl	12(%ebp), %edx
+ 802 096f 89542408 		movl	%edx, 8(%esp)
+ 803 0973 8B5508   		movl	8(%ebp), %edx
+ 804 0976 89542404 		movl	%edx, 4(%esp)
+ 805 097a E821FFFF 		call	__ZN4task18loadThreadToKernelEiijiPv
+ 805      FF
+ 806 097f C9       		leave
+ 807 0980 C3       		ret
+ 808 0981 90       		.align 2
+ 809 0982 8DB42600 		.p2align 4,,15
+ 809      0000008D 
+ 809      BC270000 
+ 809      0000
+ 810              	.globl __Z13thread_createPFiPvES_ij
+ 811              		.def	__Z13thread_createPFiPvES_ij;	.scl	2;	.type	32;	.endef
+ 812              	__Z13thread_createPFiPvES_ij:
+ 813 0990 55       		pushl	%ebp
+ 814 0991 89E5     		movl	%esp, %ebp
+ 815 0993 83EC18   		subl	$24, %esp
+ 816 0996 895DF4   		movl	%ebx, -12(%ebp)
+ 817 0999 31DB     		xorl	%ebx, %ebx
+ 818 099b 8975F8   		movl	%esi, -8(%ebp)
+ 819 099e 897DFC   		movl	%edi, -4(%ebp)
+ 820 09a1 8B7D0C   		movl	12(%ebp), %edi
+ 821 09a4 E827F7FF 		call	__Z12thread_allocv
+ 821      FF
+ 822 09a9 8B150400 		movl	_ptr_thctl, %edx
+ 822      0000
+ 823 09af 89C6     		movl	%eax, %esi
+ 824 09b1 83C208   		addl	$8, %edx
+ 825 09b4 3DF30100 		cmpl	$499, %eax
+ 825      00
+ 826 09b9 7708     		ja	L126
+ 827 09bb C1E005   		sall	$5, %eax
+ 828 09be 01F0     		addl	%esi, %eax
+ 829 09c0 8D1C82   		leal	(%edx,%eax,4), %ebx
+ 830              	L126:
+ 831 09c3 C7432402 		movl	$514, 36(%ebx)
+ 831      020000
+ 832 09ca 8B4508   		movl	8(%ebp), %eax
+GAS LISTING task.gas 			page 21
+
+
+ 833 09cd C7436000 		movl	$0, 96(%ebx)
+ 833      000000
+ 834 09d4 C7436400 		movl	$1073741824, 100(%ebx)
+ 834      000040
+ 835 09db 894320   		movl	%eax, 32(%ebx)
+ 836 09de C7042400 		movl	$65536, (%esp)
+ 836      000100
+ 837 09e5 E8000000 		call	__Z15memmng_alloc_4ki
+ 837      00
+ 838 09ea C7436C00 		movl	$0, 108(%ebx)
+ 838      000000
+ 839 09f1 05F8FF00 		addl	$65528, %eax
+ 839      00
+ 840 09f6 C7437000 		movl	$0, 112(%ebx)
+ 840      000000
+ 841 09fd C7437400 		movl	$0, 116(%ebx)
+ 841      000000
+ 842 0a04 C7437800 		movl	$0, 120(%ebx)
+ 842      000000
+ 843 0a0b 897B7C   		movl	%edi, 124(%ebx)
+ 844 0a0e 894338   		movl	%eax, 56(%ebx)
+ 845 0a11 897804   		movl	%edi, 4(%eax)
+ 846 0a14 8B4510   		movl	16(%ebp), %eax
+ 847 0a17 C7434808 		movl	$8, 72(%ebx)
+ 847      000000
+ 848 0a1e C7434C10 		movl	$16, 76(%ebx)
+ 848      000000
+ 849 0a25 89838000 		movl	%eax, 128(%ebx)
+ 849      0000
+ 850 0a2b C7435008 		movl	$8, 80(%ebx)
+ 850      000000
+ 851 0a32 C7435408 		movl	$8, 84(%ebx)
+ 851      000000
+ 852 0a39 C7435808 		movl	$8, 88(%ebx)
+ 852      000000
+ 853 0a40 C7435C08 		movl	$8, 92(%ebx)
+ 853      000000
+ 854 0a47 C7436802 		movl	$2, 104(%ebx)
+ 854      000000
+ 855 0a4e 893424   		movl	%esi, (%esp)
+ 856 0a51 E8AAF5FF 		call	__Z10thread_addi
+ 856      FF
+ 857 0a56 89F0     		movl	%esi, %eax
+ 858 0a58 8B5DF4   		movl	-12(%ebp), %ebx
+ 859 0a5b 8B75F8   		movl	-8(%ebp), %esi
+ 860 0a5e 8B7DFC   		movl	-4(%ebp), %edi
+ 861 0a61 89EC     		movl	%ebp, %esp
+ 862 0a63 5D       		popl	%ebp
+ 863 0a64 C3       		ret
+ 864 0a65 90       		.align 2
+ 865 0a66 8D76008D 		.p2align 4,,15
+ 865      BC270000 
+ 865      0000
+ 866              	.globl __Z14threadctl_initv
+ 867              		.def	__Z14threadctl_initv;	.scl	2;	.type	32;	.endef
+ 868              	__Z14threadctl_initv:
+ 869 0a70 55       		pushl	%ebp
+GAS LISTING task.gas 			page 22
+
+
+ 870 0a71 B8010000 		movl	$1, %eax
+ 870      00
+ 871 0a76 89E5     		movl	%esp, %ebp
+ 872 0a78 57       		pushl	%edi
+ 873 0a79 8DBD58FF 		leal	-168(%ebp), %edi
+ 873      FFFF
+ 874 0a7f 56       		pushl	%esi
+ 875 0a80 BEF30100 		movl	$499, %esi
+ 875      00
+ 876 0a85 53       		pushl	%ebx
+ 877 0a86 81ECBC00 		subl	$188, %esp
+ 877      0000
+ 878 0a8c 89442404 		movl	%eax, 4(%esp)
+ 879 0a90 C7042403 		movl	$3, (%esp)
+ 879      000000
+ 880 0a97 E8000000 		call	__Z9set_timerjj
+ 880      00
+ 881 0a9c 898554FF 		movl	%eax, -172(%ebp)
+ 881      FFFF
+ 882 0aa2 C7042498 		movl	$72600, (%esp)
+ 882      1B0100
+ 883 0aa9 E8000000 		call	__Z15memmng_alloc_4ki
+ 883      00
+ 884 0aae C7000300 		movl	$3, (%eax)
+ 884      0000
+ 885 0ab4 8D5808   		leal	8(%eax), %ebx
+ 886 0ab7 A3040000 		movl	%eax, _ptr_thctl
+ 886      00
+ 887 0abc B8840000 		movl	$132, %eax
+ 887      00
+ 888 0ac1 89442408 		movl	%eax, 8(%esp)
+ 889 0ac5 31C0     		xorl	%eax, %eax
+ 890 0ac7 89442404 		movl	%eax, 4(%esp)
+ 891 0acb 893C24   		movl	%edi, (%esp)
+ 892 0ace E8000000 		call	_memset
+ 892      00
+ 893 0ad3 8DB60000 		.p2align 4,,15
+ 893      00008DBC 
+ 893      27000000 
+ 893      00
+ 894              	L145:
+ 895 0ae0 891C24   		movl	%ebx, (%esp)
+ 896 0ae3 B8840000 		movl	$132, %eax
+ 896      00
+ 897 0ae8 81C38400 		addl	$132, %ebx
+ 897      0000
+ 898 0aee 89442408 		movl	%eax, 8(%esp)
+ 899 0af2 897C2404 		movl	%edi, 4(%esp)
+ 900 0af6 E8000000 		call	_memcpy
+ 900      00
+ 901 0afb 4E       		decl	%esi
+ 902 0afc 79E2     		jns	L145
+ 903 0afe A1040000 		movl	_ptr_thctl, %eax
+ 903      00
+ 904 0b03 31C9     		xorl	%ecx, %ecx
+ 905 0b05 31FF     		xorl	%edi, %edi
+ 906 0b07 8988DC01 		movl	%ecx, 66012(%eax)
+GAS LISTING task.gas 			page 23
+
+
+ 906      0100
+ 907 0b0d 8D90DC01 		leal	66012(%eax), %edx
+ 907      0100
+ 908 0b13 B9F30100 		movl	$499, %ecx
+ 908      00
+ 909 0b18 89BA7417 		movl	%edi, 6004(%edx)
+ 909      0000
+ 910 0b1e 31C0     		xorl	%eax, %eax
+ 911              		.p2align 4,,15
+ 912              	L150:
+ 913 0b20 C6441004 		movb	$0, 4(%eax,%edx)
+ 913      00
+ 914 0b25 31F6     		xorl	%esi, %esi
+ 915 0b27 31DB     		xorl	%ebx, %ebx
+ 916 0b29 89741008 		movl	%esi, 8(%eax,%edx)
+ 917 0b2d 895C100C 		movl	%ebx, 12(%eax,%edx)
+ 918 0b31 83C00C   		addl	$12, %eax
+ 919 0b34 49       		decl	%ecx
+ 920 0b35 79E9     		jns	L150
+ 921 0b37 A1040000 		movl	_ptr_thctl, %eax
+ 921      00
+ 922 0b3c 31D2     		xorl	%edx, %edx
+ 923 0b3e 8D889419 		leal	72084(%eax), %ecx
+ 923      0100
+ 924 0b44 8DB60000 		.p2align 4,,15
+ 924      00008DBF 
+ 924      00000000 
+ 925              	L157:
+ 926 0b50 C6040A00 		movb	$0, (%edx,%ecx)
+ 927 0b54 42       		incl	%edx
+ 928 0b55 81FAF301 		cmpl	$499, %edx
+ 928      0000
+ 929 0b5b 7EF3     		jle	L157
+ 930 0b5d 31F6     		xorl	%esi, %esi
+ 931 0b5f EB05     		jmp	L168
+ 932              		.p2align 4,,7
+ 933              	L198:
+ 934 0b61 A1040000 		movl	_ptr_thctl, %eax
+ 934      00
+ 935              	L168:
+ 936 0b66 31FF     		xorl	%edi, %edi
+ 937 0b68 81FEF301 		cmpl	$499, %esi
+ 937      0000
+ 938 0b6e 8D5008   		leal	8(%eax), %edx
+ 939 0b71 770A     		ja	L164
+ 940 0b73 89F0     		movl	%esi, %eax
+ 941 0b75 C1E005   		sall	$5, %eax
+ 942 0b78 01F0     		addl	%esi, %eax
+ 943 0b7a 8D3C82   		leal	(%edx,%eax,4), %edi
+ 944              	L164:
+ 945 0b7d 8D1CF5B8 		leal	4024(,%esi,8), %ebx
+ 945      0F0000
+ 946 0b84 B8890000 		movl	$137, %eax
+ 946      00
+ 947 0b89 895F60   		movl	%ebx, 96(%edi)
+ 948 0b8c 81C30000 		addl	$2555904, %ebx
+ 948      2700
+GAS LISTING task.gas 			page 24
+
+
+ 949 0b92 8944240C 		movl	%eax, 12(%esp)
+ 950 0b96 B8670000 		movl	$103, %eax
+ 950      00
+ 951 0b9b 89442404 		movl	%eax, 4(%esp)
+ 952 0b9f 8D04F518 		leal	2555928(,%esi,8), %eax
+ 952      002700
+ 953 0ba6 46       		incl	%esi
+ 954 0ba7 890424   		movl	%eax, (%esp)
+ 955 0baa 897C2408 		movl	%edi, 8(%esp)
+ 956 0bae E8000000 		call	__Z12set_segmdescP18segment_descriptorjii
+ 956      00
+ 957 0bb3 891C24   		movl	%ebx, (%esp)
+ 958 0bb6 B8820000 		movl	$130, %eax
+ 958      00
+ 959 0bbb B90F0000 		movl	$15, %ecx
+ 959      00
+ 960 0bc0 8944240C 		movl	%eax, 12(%esp)
+ 961 0bc4 8D476C   		leal	108(%edi), %eax
+ 962 0bc7 89442408 		movl	%eax, 8(%esp)
+ 963 0bcb 894C2404 		movl	%ecx, 4(%esp)
+ 964 0bcf E8000000 		call	__Z12set_segmdescP18segment_descriptorjii
+ 964      00
+ 965 0bd4 81FEF301 		cmpl	$499, %esi
+ 965      0000
+ 966 0bda 7E85     		jle	L198
+ 967 0bdc A1040000 		movl	_ptr_thctl, %eax
+ 967      00
+ 968 0be1 BE010000 		movl	$1, %esi
+ 968      00
+ 969 0be6 C6805419 		movb	$1, 72020(%eax)
+ 969      010001
+ 970 0bed 8D7600   		.p2align 4,,15
+ 971              	L172:
+ 972 0bf0 A1040000 		movl	_ptr_thctl, %eax
+ 972      00
+ 973 0bf5 31D2     		xorl	%edx, %edx
+ 974 0bf7 88943054 		movb	%dl, 72020(%eax,%esi)
+ 974      190100
+ 975 0bfe 46       		incl	%esi
+ 976 0bff 83FE3E   		cmpl	$62, %esi
+ 977 0c02 76EC     		jbe	L172
+ 978 0c04 A1040000 		movl	_ptr_thctl, %eax
+ 978      00
+ 979 0c09 BA010000 		movl	$1, %edx
+ 979      00
+ 980 0c0e BB840000 		movl	$132, %ebx
+ 980      00
+ 981 0c13 8D7008   		leal	8(%eax), %esi
+ 982 0c16 8D76008D 		.p2align 4,,15
+ 982      BC270000 
+ 982      0000
+ 983              	L180:
+ 984 0c20 31C9     		xorl	%ecx, %ecx
+ 985 0c22 81FAF301 		cmpl	$499, %edx
+ 985      0000
+ 986 0c28 7703     		ja	L178
+ 987 0c2a 8D0C33   		leal	(%ebx,%esi), %ecx
+GAS LISTING task.gas 			page 25
+
+
+ 988              	L178:
+ 989 0c2d C7416803 		movl	$3, 104(%ecx)
+ 989      000000
+ 990 0c34 42       		incl	%edx
+ 991 0c35 81C38400 		addl	$132, %ebx
+ 991      0000
+ 992 0c3b 81FAF301 		cmpl	$499, %edx
+ 992      0000
+ 993 0c41 7EDD     		jle	L180
+ 994 0c43 8D98DC01 		leal	66012(%eax), %ebx
+ 994      0100
+ 995 0c49 8B9554FF 		movl	-172(%ebp), %edx
+ 995      FFFF
+ 996 0c4f BF030000 		movl	$3, %edi
+ 996      00
+ 997 0c54 893D0000 		movl	%edi, _mt_tr
+ 997      0000
+ 998 0c5a 8B8B7417 		movl	6004(%ebx), %ecx
+ 998      0000
+ 999 0c60 89150000 		movl	%edx, _thctl_timer
+ 999      0000
+ 1000 0c66 85C9     		testl	%ecx, %ecx
+ 1001 0c68 7528     		jne	L184
+ 1002 0c6a 05E00101 		addl	$66016, %eax
+ 1002      00
+ 1003 0c6f 89837417 		movl	%eax, 6004(%ebx)
+ 1003      0000
+ 1004 0c75 894004   		movl	%eax, 4(%eax)
+ 1005 0c78 8B837417 		movl	6004(%ebx), %eax
+ 1005      0000
+ 1006 0c7e 894008   		movl	%eax, 8(%eax)
+ 1007 0c81 8B8554FF 		movl	-172(%ebp), %eax
+ 1007      FFFF
+ 1008 0c87 81C4BC00 		addl	$188, %esp
+ 1008      0000
+ 1009 0c8d 5B       		popl	%ebx
+ 1010 0c8e 5E       		popl	%esi
+ 1011 0c8f 5F       		popl	%edi
+ 1012 0c90 5D       		popl	%ebp
+ 1013 0c91 C3       		ret
+ 1014              	L184:
+ 1015 0c92 8BB0E401 		movl	66020(%eax), %esi
+ 1015      0100
+ 1016 0c98 85F6     		testl	%esi, %esi
+ 1017 0c9a 741C     		je	L185
+ 1018 0c9c BBFCFFFF 		movl	$-4, %ebx
+ 1018      FF
+ 1019 0ca1 8998DC01 		movl	%ebx, 66012(%eax)
+ 1019      0100
+ 1020 0ca7 8B8554FF 		movl	-172(%ebp), %eax
+ 1020      FFFF
+ 1021 0cad 81C4BC00 		addl	$188, %esp
+ 1021      0000
+ 1022 0cb3 5B       		popl	%ebx
+ 1023 0cb4 5E       		popl	%esi
+ 1024 0cb5 5F       		popl	%edi
+ 1025 0cb6 5D       		popl	%ebp
+GAS LISTING task.gas 			page 26
+
+
+ 1026 0cb7 C3       		ret
+ 1027              	L185:
+ 1028 0cb8 8B5108   		movl	8(%ecx), %edx
+ 1029 0cbb 05E00101 		addl	$66016, %eax
+ 1029      00
+ 1030 0cc0 894804   		movl	%ecx, 4(%eax)
+ 1031 0cc3 895008   		movl	%edx, 8(%eax)
+ 1032 0cc6 894204   		movl	%eax, 4(%edx)
+ 1033 0cc9 8B937417 		movl	6004(%ebx), %edx
+ 1033      0000
+ 1034 0ccf 894208   		movl	%eax, 8(%edx)
+ 1035 0cd2 8B8554FF 		movl	-172(%ebp), %eax
+ 1035      FFFF
+ 1036 0cd8 81C4BC00 		addl	$188, %esp
+ 1036      0000
+ 1037 0cde 5B       		popl	%ebx
+ 1038 0cdf 5E       		popl	%esi
+ 1039 0ce0 5F       		popl	%edi
+ 1040 0ce1 5D       		popl	%ebp
+ 1041 0ce2 C3       		ret
+ 1042              		.section .rdata,"dr"
+ 1043              	LC27:
+ 1044 0122 74687265 		.ascii "thread_terminate:\12\0"
+ 1044      61645F74 
+ 1044      65726D69 
+ 1044      6E617465 
+ 1044      3A0A00
+ 1045 0135 00000000 		.text
+ 1045      00000000 
+ 1045      000000
+ 1046 0ce3 90       		.align 2
+ 1047 0ce4 8DB60000 		.p2align 4,,15
+ 1047      00008DBF 
+ 1047      00000000 
+ 1048              	.globl __Z16thread_terminatei
+ 1049              		.def	__Z16thread_terminatei;	.scl	2;	.type	32;	.endef
+ 1050              	__Z16thread_terminatei:
+ 1051 0cf0 55       		pushl	%ebp
+ 1052 0cf1 BA220100 		movl	$LC27, %edx
+ 1052      00
+ 1053 0cf6 89E5     		movl	%esp, %ebp
+ 1054 0cf8 57       		pushl	%edi
+ 1055 0cf9 56       		pushl	%esi
+ 1056 0cfa 53       		pushl	%ebx
+ 1057 0cfb 83EC1C   		subl	$28, %esp
+ 1058 0cfe A1000000 		movl	_l_console, %eax
+ 1058      00
+ 1059 0d03 89542408 		movl	%edx, 8(%esp)
+ 1060 0d07 8B7508   		movl	8(%ebp), %esi
+ 1061 0d0a 89442404 		movl	%eax, 4(%esp)
+ 1062 0d0e A1000000 		movl	_layerctl, %eax
+ 1062      00
+ 1063 0d13 890424   		movl	%eax, (%esp)
+ 1064 0d16 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 1064      00
+ 1065 0d1b E8C0F4FF 		call	__Z14thread_currentv
+ 1065      FF
+GAS LISTING task.gas 			page 27
+
+
+ 1066 0d20 893424   		movl	%esi, (%esp)
+ 1067 0d23 39F0     		cmpl	%esi, %eax
+ 1068 0d25 0F9445F3 		sete	-13(%ebp)
+ 1069 0d29 E812F4FF 		call	__Z13thread_existsi
+ 1069      FF
+ 1070 0d2e 84C0     		testb	%al, %al
+ 1071 0d30 BAFFFFFF 		movl	$-1, %edx
+ 1071      FF
+ 1072 0d35 0F84E200 		je	L199
+ 1072      0000
+ 1073 0d3b 8B1D0400 		movl	_ptr_thctl, %ebx
+ 1073      0000
+ 1074 0d41 8B935019 		movl	72016(%ebx), %edx
+ 1074      0100
+ 1075 0d47 85D2     		testl	%edx, %edx
+ 1076 0d49 0F85D800 		jne	L238
+ 1076      0000
+ 1077              	L236:
+ 1078 0d4f 807DF300 		cmpb	$0, -13(%ebp)
+ 1079 0d53 BAFDFFFF 		movl	$-3, %edx
+ 1079      FF
+ 1080 0d58 0F85BF00 		jne	L199
+ 1080      0000
+ 1081              	L201:
+ 1082 0d5e 31C0     		xorl	%eax, %eax
+ 1083 0d60 81FEF301 		cmpl	$499, %esi
+ 1083      0000
+ 1084 0d66 8D5308   		leal	8(%ebx), %edx
+ 1085 0d69 770A     		ja	L210
+ 1086 0d6b 89F0     		movl	%esi, %eax
+ 1087 0d6d C1E005   		sall	$5, %eax
+ 1088 0d70 01F0     		addl	%esi, %eax
+ 1089 0d72 8D0482   		leal	(%edx,%eax,4), %eax
+ 1090              	L210:
+ 1091 0d75 83786802 		cmpl	$2, 104(%eax)
+ 1092 0d79 0F84ED00 		je	L239
+ 1092      0000
+ 1093              	L207:
+ 1094 0d7f 31C0     		xorl	%eax, %eax
+ 1095 0d81 81FEF301 		cmpl	$499, %esi
+ 1095      0000
+ 1096 0d87 8D5308   		leal	8(%ebx), %edx
+ 1097 0d8a 770A     		ja	L221
+ 1098 0d8c 89F0     		movl	%esi, %eax
+ 1099 0d8e C1E005   		sall	$5, %eax
+ 1100 0d91 01F0     		addl	%esi, %eax
+ 1101 0d93 8D0482   		leal	(%edx,%eax,4), %eax
+ 1102              	L221:
+ 1103 0d96 83786801 		cmpl	$1, 104(%eax)
+ 1104 0d9a 0F84A400 		je	L240
+ 1104      0000
+ 1105 0da0 85F6     		testl	%esi, %esi
+ 1106 0da2 89F0     		movl	%esi, %eax
+ 1107 0da4 0F88BA00 		js	L241
+ 1107      0000
+ 1108              	L227:
+ 1109 0daa 89C2     		movl	%eax, %edx
+GAS LISTING task.gas 			page 28
+
+
+ 1110 0dac 89F1     		movl	%esi, %ecx
+ 1111 0dae C1FA03   		sarl	$3, %edx
+ 1112 0db1 8D04D500 		leal	0(,%edx,8), %eax
+ 1112      000000
+ 1113 0db8 29C1     		subl	%eax, %ecx
+ 1114 0dba B8FEFFFF 		movl	$-2, %eax
+ 1114      FF
+ 1115 0dbf D3C0     		roll	%cl, %eax
+ 1116 0dc1 20841354 		andb	%al, 72020(%ebx,%edx)
+ 1116      190100
+ 1117 0dc8 31C0     		xorl	%eax, %eax
+ 1118 0dca 81FEF301 		cmpl	$499, %esi
+ 1118      0000
+ 1119 0dd0 8B1D0400 		movl	_ptr_thctl, %ebx
+ 1119      0000
+ 1120 0dd6 8D5308   		leal	8(%ebx), %edx
+ 1121 0dd9 770A     		ja	L231
+ 1122 0ddb 89F0     		movl	%esi, %eax
+ 1123 0ddd C1E005   		sall	$5, %eax
+ 1124 0de0 01F0     		addl	%esi, %eax
+ 1125 0de2 8D0482   		leal	(%edx,%eax,4), %eax
+ 1126              	L231:
+ 1127 0de5 807DF300 		cmpb	$0, -13(%ebp)
+ 1128 0de9 C7406803 		movl	$3, 104(%eax)
+ 1128      000000
+ 1129 0df0 742B     		je	L199
+ 1130 0df2 8D93DC01 		leal	66012(%ebx), %edx
+ 1130      0100
+ 1131 0df8 B9FFFFFF 		movl	$-1, %ecx
+ 1131      FF
+ 1132 0dfd 8B827417 		movl	6004(%edx), %eax
+ 1132      0000
+ 1133 0e03 85C0     		testl	%eax, %eax
+ 1134 0e05 740E     		je	L235
+ 1135 0e07 29D0     		subl	%edx, %eax
+ 1136 0e09 83E804   		subl	$4, %eax
+ 1137 0e0c C1F802   		sarl	$2, %eax
+ 1138 0e0f 69C8ABAA 		imull	$-1431655765, %eax, %ecx
+ 1138      AAAA
+ 1139              	L235:
+ 1140 0e15 890C24   		movl	%ecx, (%esp)
+ 1141 0e18 E873F3FF 		call	__Z18thread_switch_byidi
+ 1141      FF
+ 1142              	L199:
+ 1143 0e1d 83C41C   		addl	$28, %esp
+ 1144 0e20 89D0     		movl	%edx, %eax
+ 1145 0e22 5B       		popl	%ebx
+ 1146 0e23 5E       		popl	%esi
+ 1147 0e24 5F       		popl	%edi
+ 1148 0e25 5D       		popl	%ebp
+ 1149 0e26 C3       		ret
+ 1150              		.p2align 4,,7
+ 1151              	L238:
+ 1152 0e27 89D0     		movl	%edx, %eax
+ 1153 0e29 31C9     		xorl	%ecx, %ecx
+ 1154 0e2b 908D7426 		.p2align 4,,15
+ 1154      00
+GAS LISTING task.gas 			page 29
+
+
+ 1155              	L204:
+ 1156 0e30 8B4004   		movl	4(%eax), %eax
+ 1157 0e33 41       		incl	%ecx
+ 1158 0e34 39C2     		cmpl	%eax, %edx
+ 1159 0e36 75F8     		jne	L204
+ 1160 0e38 49       		decl	%ecx
+ 1161 0e39 0F8F1FFF 		jg	L201
+ 1161      FFFF
+ 1162 0e3f E90BFFFF 		jmp	L236
+ 1162      FF
+ 1163              	L240:
+ 1164 0e44 31D2     		xorl	%edx, %edx
+ 1165 0e46 81FEF301 		cmpl	$499, %esi
+ 1165      0000
+ 1166 0e4c 8D839419 		leal	72084(%ebx), %eax
+ 1166      0100
+ 1167 0e52 7703     		ja	L225
+ 1168 0e54 8D1430   		leal	(%eax,%esi), %edx
+ 1169              	L225:
+ 1170 0e57 C60200   		movb	$0, (%edx)
+ 1171 0e5a 85F6     		testl	%esi, %esi
+ 1172 0e5c 89F0     		movl	%esi, %eax
+ 1173 0e5e 0F8946FF 		jns	L227
+ 1173      FFFF
+ 1174              	L241:
+ 1175 0e64 8D4607   		leal	7(%esi), %eax
+ 1176 0e67 E93EFFFF 		jmp	L227
+ 1176      FF
+ 1177              	L239:
+ 1178 0e6c 85F6     		testl	%esi, %esi
+ 1179 0e6e 8DBBDC01 		leal	66012(%ebx), %edi
+ 1179      0100
+ 1180 0e74 B8FFFFFF 		movl	$-1, %eax
+ 1180      FF
+ 1181 0e79 780D     		js	L237
+ 1182 0e7b 81FEF301 		cmpl	$499, %esi
+ 1182      0000
+ 1183 0e81 7E10     		jle	L214
+ 1184 0e83 B8FBFFFF 		movl	$-5, %eax
+ 1184      FF
+ 1185              	L237:
+ 1186 0e88 8983DC01 		movl	%eax, 66012(%ebx)
+ 1186      0100
+ 1187 0e8e E9ECFEFF 		jmp	L207
+ 1187      FF
+ 1188              	L214:
+ 1189 0e93 8D0476   		leal	(%esi,%esi,2), %eax
+ 1190 0e96 8D548704 		leal	4(%edi,%eax,4), %edx
+ 1191 0e9a 8B4A04   		movl	4(%edx), %ecx
+ 1192 0e9d 85C9     		testl	%ecx, %ecx
+ 1193 0e9f 0F84DAFE 		je	L207
+ 1193      FFFF
+ 1194 0ea5 8B4208   		movl	8(%edx), %eax
+ 1195 0ea8 894108   		movl	%eax, 8(%ecx)
+ 1196 0eab 894804   		movl	%ecx, 4(%eax)
+ 1197 0eae C7420800 		movl	$0, 8(%edx)
+ 1197      000000
+GAS LISTING task.gas 			page 30
+
+
+ 1198 0eb5 C7420400 		movl	$0, 4(%edx)
+ 1198      000000
+ 1199 0ebc 39977417 		cmpl	%edx, 6004(%edi)
+ 1199      0000
+ 1200 0ec2 0F85B7FE 		jne	L207
+ 1200      FFFF
+ 1201 0ec8 898F7417 		movl	%ecx, 6004(%edi)
+ 1201      0000
+ 1202 0ece E9ACFEFF 		jmp	L207
+ 1202      FF
+ 1203 0ed3 90       		.align 2
+ 1204 0ed4 8DB60000 		.p2align 4,,15
+ 1204      00008DBF 
+ 1204      00000000 
+ 1205              	.globl __Z13thread_resumei
+ 1206              		.def	__Z13thread_resumei;	.scl	2;	.type	32;	.endef
+ 1207              	__Z13thread_resumei:
+ 1208 0ee0 55       		pushl	%ebp
+ 1209 0ee1 89E5     		movl	%esp, %ebp
+ 1210 0ee3 83EC18   		subl	$24, %esp
+ 1211 0ee6 895DF4   		movl	%ebx, -12(%ebp)
+ 1212 0ee9 8B5D08   		movl	8(%ebp), %ebx
+ 1213 0eec 8975F8   		movl	%esi, -8(%ebp)
+ 1214 0eef 897DFC   		movl	%edi, -4(%ebp)
+ 1215 0ef2 E8000000 		call	_io_cli
+ 1215      00
+ 1216 0ef7 891C24   		movl	%ebx, (%esp)
+ 1217 0efa E841F2FF 		call	__Z13thread_existsi
+ 1217      FF
+ 1218 0eff 84C0     		testb	%al, %al
+ 1219 0f01 0F84F500 		je	L263
+ 1219      0000
+ 1220 0f07 8B0D0400 		movl	_ptr_thctl, %ecx
+ 1220      0000
+ 1221 0f0d 85DB     		testl	%ebx, %ebx
+ 1222 0f0f 8DB1DC01 		leal	66012(%ecx), %esi
+ 1222      0100
+ 1223 0f15 0F889600 		js	L264
+ 1223      0000
+ 1224 0f1b 81FBF301 		cmpl	$499, %ebx
+ 1224      0000
+ 1225 0f21 7E6D     		jle	L246
+ 1226 0f23 BEFDFFFF 		movl	$-3, %esi
+ 1226      FF
+ 1227              	L262:
+ 1228 0f28 89B1DC01 		movl	%esi, 66012(%ecx)
+ 1228      0100
+ 1229              	L245:
+ 1230 0f2e 31D2     		xorl	%edx, %edx
+ 1231 0f30 81FBF301 		cmpl	$499, %ebx
+ 1231      0000
+ 1232 0f36 8D819419 		leal	72084(%ecx), %eax
+ 1232      0100
+ 1233 0f3c 7703     		ja	L252
+ 1234 0f3e 8D1418   		leal	(%eax,%ebx), %edx
+ 1235              	L252:
+ 1236 0f41 803A00   		cmpb	$0, (%edx)
+GAS LISTING task.gas 			page 31
+
+
+ 1237 0f44 7416     		je	L249
+ 1238 0f46 31D2     		xorl	%edx, %edx
+ 1239 0f48 81FBF301 		cmpl	$499, %ebx
+ 1239      0000
+ 1240 0f4e 8D819419 		leal	72084(%ecx), %eax
+ 1240      0100
+ 1241 0f54 7703     		ja	L256
+ 1242 0f56 8D1418   		leal	(%eax,%ebx), %edx
+ 1243              	L256:
+ 1244 0f59 C60200   		movb	$0, (%edx)
+ 1245              	L249:
+ 1246 0f5c 31C0     		xorl	%eax, %eax
+ 1247 0f5e 81FBF301 		cmpl	$499, %ebx
+ 1247      0000
+ 1248 0f64 8D5108   		leal	8(%ecx), %edx
+ 1249 0f67 770A     		ja	L260
+ 1250 0f69 89D8     		movl	%ebx, %eax
+ 1251 0f6b C1E005   		sall	$5, %eax
+ 1252 0f6e 01D8     		addl	%ebx, %eax
+ 1253 0f70 8D0482   		leal	(%edx,%eax,4), %eax
+ 1254              	L260:
+ 1255 0f73 C7406802 		movl	$2, 104(%eax)
+ 1255      000000
+ 1256 0f7a E8000000 		call	_io_sti
+ 1256      00
+ 1257 0f7f 31C0     		xorl	%eax, %eax
+ 1258              	L242:
+ 1259 0f81 8B5DF4   		movl	-12(%ebp), %ebx
+ 1260 0f84 8B75F8   		movl	-8(%ebp), %esi
+ 1261 0f87 8B7DFC   		movl	-4(%ebp), %edi
+ 1262 0f8a 89EC     		movl	%ebp, %esp
+ 1263 0f8c 5D       		popl	%ebp
+ 1264 0f8d C3       		ret
+ 1265 0f8e 89F6     		.p2align 4,,7
+ 1266              	L246:
+ 1267 0f90 8BBE7417 		movl	6004(%esi), %edi
+ 1267      0000
+ 1268 0f96 85FF     		testl	%edi, %edi
+ 1269 0f98 7427     		je	L265
+ 1270 0f9a 8D045B   		leal	(%ebx,%ebx,2), %eax
+ 1271 0f9d 8D0486   		leal	(%esi,%eax,4), %eax
+ 1272 0fa0 8B5008   		movl	8(%eax), %edx
+ 1273 0fa3 85D2     		testl	%edx, %edx
+ 1274 0fa5 7438     		je	L248
+ 1275 0fa7 BEFCFFFF 		movl	$-4, %esi
+ 1275      FF
+ 1276 0fac E977FFFF 		jmp	L262
+ 1276      FF
+ 1277              		.p2align 4,,7
+ 1278              	L264:
+ 1279 0fb1 BFFEFFFF 		movl	$-2, %edi
+ 1279      FF
+ 1280 0fb6 89B9DC01 		movl	%edi, 66012(%ecx)
+ 1280      0100
+ 1281 0fbc E96DFFFF 		jmp	L245
+ 1281      FF
+ 1282              		.p2align 4,,7
+GAS LISTING task.gas 			page 32
+
+
+ 1283              	L265:
+ 1284 0fc1 8D045B   		leal	(%ebx,%ebx,2), %eax
+ 1285 0fc4 8D448604 		leal	4(%esi,%eax,4), %eax
+ 1286 0fc8 89867417 		movl	%eax, 6004(%esi)
+ 1286      0000
+ 1287 0fce 894004   		movl	%eax, 4(%eax)
+ 1288 0fd1 8B867417 		movl	6004(%esi), %eax
+ 1288      0000
+ 1289 0fd7 894008   		movl	%eax, 8(%eax)
+ 1290 0fda E94FFFFF 		jmp	L245
+ 1290      FF
+ 1291              	L248:
+ 1292 0fdf 8B5708   		movl	8(%edi), %edx
+ 1293 0fe2 83C004   		addl	$4, %eax
+ 1294 0fe5 897804   		movl	%edi, 4(%eax)
+ 1295 0fe8 895008   		movl	%edx, 8(%eax)
+ 1296 0feb 894204   		movl	%eax, 4(%edx)
+ 1297 0fee 8B967417 		movl	6004(%esi), %edx
+ 1297      0000
+ 1298 0ff4 894208   		movl	%eax, 8(%edx)
+ 1299 0ff7 E932FFFF 		jmp	L245
+ 1299      FF
+ 1300              	L263:
+ 1301 0ffc E8000000 		call	_io_sti
+ 1301      00
+ 1302 1001 B8FFFFFF 		movl	$-1, %eax
+ 1302      FF
+ 1303 1006 E976FFFF 		jmp	L242
+ 1303      FF
+ 1304 100b 90       		.align 2
+ 1305 100c 8D742600 		.p2align 4,,15
+ 1306              	.globl __Z14thread_suspendi
+ 1307              		.def	__Z14thread_suspendi;	.scl	2;	.type	32;	.endef
+ 1308              	__Z14thread_suspendi:
+ 1309 1010 55       		pushl	%ebp
+ 1310 1011 89E5     		movl	%esp, %ebp
+ 1311 1013 57       		pushl	%edi
+ 1312 1014 56       		pushl	%esi
+ 1313 1015 53       		pushl	%ebx
+ 1314 1016 81EC2C01 		subl	$300, %esp
+ 1314      0000
+ 1315 101c 8B7508   		movl	8(%ebp), %esi
+ 1316 101f E8000000 		call	_io_cli
+ 1316      00
+ 1317 1024 8B1D0400 		movl	_ptr_thctl, %ebx
+ 1317      0000
+ 1318 102a B9FFFFFF 		movl	$-1, %ecx
+ 1318      FF
+ 1319 102f 898DE4FE 		movl	%ecx, -284(%ebp)
+ 1319      FFFF
+ 1320 1035 8D93DC01 		leal	66012(%ebx), %edx
+ 1320      0100
+ 1321 103b 8B827417 		movl	6004(%edx), %eax
+ 1321      0000
+ 1322 1041 85C0     		testl	%eax, %eax
+ 1323 1043 7414     		je	L268
+ 1324 1045 29D0     		subl	%edx, %eax
+GAS LISTING task.gas 			page 33
+
+
+ 1325 1047 83E804   		subl	$4, %eax
+ 1326 104a C1F802   		sarl	$2, %eax
+ 1327 104d 69C0ABAA 		imull	$-1431655765, %eax, %eax
+ 1327      AAAA
+ 1328 1053 8985E4FE 		movl	%eax, -284(%ebp)
+ 1328      FFFF
+ 1329              	L268:
+ 1330 1059 893424   		movl	%esi, (%esp)
+ 1331 105c E8DFF0FF 		call	__Z13thread_existsi
+ 1331      FF
+ 1332 1061 84C0     		testb	%al, %al
+ 1333 1063 BAFFFFFF 		movl	$-1, %edx
+ 1333      FF
+ 1334 1068 0F84AB00 		je	L266
+ 1334      0000
+ 1335 106e 31C0     		xorl	%eax, %eax
+ 1336 1070 81FEF301 		cmpl	$499, %esi
+ 1336      0000
+ 1337 1076 8D5308   		leal	8(%ebx), %edx
+ 1338 1079 0F86A700 		jbe	L299
+ 1338      0000
+ 1339              	L273:
+ 1340 107f 83786802 		cmpl	$2, 104(%eax)
+ 1341 1083 BAFEFFFF 		movl	$-2, %edx
+ 1341      FF
+ 1342 1088 0F858B00 		jne	L266
+ 1342      0000
+ 1343 108e 8B935019 		movl	72016(%ebx), %edx
+ 1343      0100
+ 1344 1094 85D2     		testl	%edx, %edx
+ 1345 1096 7418     		je	L275
+ 1346 1098 89D0     		movl	%edx, %eax
+ 1347 109a 31C9     		xorl	%ecx, %ecx
+ 1348 109c 8D742600 		.p2align 4,,15
+ 1349              	L278:
+ 1350 10a0 8B4004   		movl	4(%eax), %eax
+ 1351 10a3 41       		incl	%ecx
+ 1352 10a4 39C2     		cmpl	%eax, %edx
+ 1353 10a6 75F8     		jne	L278
+ 1354 10a8 49       		decl	%ecx
+ 1355 10a9 BAFDFFFF 		movl	$-3, %edx
+ 1355      FF
+ 1356 10ae 7469     		je	L266
+ 1357              	L275:
+ 1358 10b0 85F6     		testl	%esi, %esi
+ 1359 10b2 8DBBDC01 		leal	66012(%ebx), %edi
+ 1359      0100
+ 1360 10b8 B8FFFFFF 		movl	$-1, %eax
+ 1360      FF
+ 1361 10bd 7811     		js	L298
+ 1362 10bf 81FEF301 		cmpl	$499, %esi
+ 1362      0000
+ 1363 10c5 0F8E9F00 		jle	L283
+ 1363      0000
+ 1364 10cb B8FBFFFF 		movl	$-5, %eax
+ 1364      FF
+ 1365              	L298:
+GAS LISTING task.gas 			page 34
+
+
+ 1366 10d0 8983DC01 		movl	%eax, 66012(%ebx)
+ 1366      0100
+ 1367              	L282:
+ 1368 10d6 31D2     		xorl	%edx, %edx
+ 1369 10d8 81FEF301 		cmpl	$499, %esi
+ 1369      0000
+ 1370 10de 8D839419 		leal	72084(%ebx), %eax
+ 1370      0100
+ 1371 10e4 7703     		ja	L289
+ 1372 10e6 8D1430   		leal	(%eax,%esi), %edx
+ 1373              	L289:
+ 1374 10e9 C60201   		movb	$1, (%edx)
+ 1375 10ec 31C0     		xorl	%eax, %eax
+ 1376 10ee 81FEF301 		cmpl	$499, %esi
+ 1376      0000
+ 1377 10f4 8D5308   		leal	8(%ebx), %edx
+ 1378 10f7 770A     		ja	L293
+ 1379 10f9 89F0     		movl	%esi, %eax
+ 1380 10fb C1E005   		sall	$5, %eax
+ 1381 10fe 01F0     		addl	%esi, %eax
+ 1382 1100 8D0482   		leal	(%edx,%eax,4), %eax
+ 1383              	L293:
+ 1384 1103 C7406801 		movl	$1, 104(%eax)
+ 1384      000000
+ 1385 110a E8000000 		call	_io_sti
+ 1385      00
+ 1386 110f 39B5E4FE 		cmpl	%esi, -284(%ebp)
+ 1386      FFFF
+ 1387 1115 741E     		je	L300
+ 1388 1117 31D2     		xorl	%edx, %edx
+ 1389              	L266:
+ 1390 1119 81C42C01 		addl	$300, %esp
+ 1390      0000
+ 1391 111f 89D0     		movl	%edx, %eax
+ 1392 1121 5B       		popl	%ebx
+ 1393 1122 5E       		popl	%esi
+ 1394 1123 5F       		popl	%edi
+ 1395 1124 5D       		popl	%ebp
+ 1396 1125 C3       		ret
+ 1397              		.p2align 4,,7
+ 1398              	L299:
+ 1399 1126 89F0     		movl	%esi, %eax
+ 1400 1128 C1E005   		sall	$5, %eax
+ 1401 112b 01F0     		addl	%esi, %eax
+ 1402 112d 8D0482   		leal	(%edx,%eax,4), %eax
+ 1403 1130 E94AFFFF 		jmp	L273
+ 1403      FF
+ 1404              	L300:
+ 1405 1135 8B150400 		movl	_ptr_thctl, %edx
+ 1405      0000
+ 1406 113b B9FFFFFF 		movl	$-1, %ecx
+ 1406      FF
+ 1407 1140 81C2DC01 		addl	$66012, %edx
+ 1407      0100
+ 1408 1146 8B827417 		movl	6004(%edx), %eax
+ 1408      0000
+ 1409 114c 85C0     		testl	%eax, %eax
+GAS LISTING task.gas 			page 35
+
+
+ 1410 114e 740E     		je	L297
+ 1411 1150 29D0     		subl	%edx, %eax
+ 1412 1152 83E804   		subl	$4, %eax
+ 1413 1155 C1F802   		sarl	$2, %eax
+ 1414 1158 69C8ABAA 		imull	$-1431655765, %eax, %ecx
+ 1414      AAAA
+ 1415              	L297:
+ 1416 115e 890C24   		movl	%ecx, (%esp)
+ 1417 1161 E82AF0FF 		call	__Z18thread_switch_byidi
+ 1417      FF
+ 1418 1166 31D2     		xorl	%edx, %edx
+ 1419 1168 EBAF     		jmp	L266
+ 1420              	L283:
+ 1421 116a 8D0476   		leal	(%esi,%esi,2), %eax
+ 1422 116d 8D548704 		leal	4(%edi,%eax,4), %edx
+ 1423 1171 8B4A04   		movl	4(%edx), %ecx
+ 1424 1174 85C9     		testl	%ecx, %ecx
+ 1425 1176 0F845AFF 		je	L282
+ 1425      FFFF
+ 1426 117c 8B4208   		movl	8(%edx), %eax
+ 1427 117f 894108   		movl	%eax, 8(%ecx)
+ 1428 1182 894804   		movl	%ecx, 4(%eax)
+ 1429 1185 C7420800 		movl	$0, 8(%edx)
+ 1429      000000
+ 1430 118c C7420400 		movl	$0, 4(%edx)
+ 1430      000000
+ 1431 1193 39977417 		cmpl	%edx, 6004(%edi)
+ 1431      0000
+ 1432 1199 0F8537FF 		jne	L282
+ 1432      FFFF
+ 1433 119f 898F7417 		movl	%ecx, 6004(%edi)
+ 1433      0000
+ 1434 11a5 E92CFFFF 		jmp	L282
+ 1434      FF
+ 1435              		.def	_memset;	.scl	2;	.type	32;	.endef
+ 1436              		.def	_memcpy;	.scl	2;	.type	32;	.endef
+ 1437              		.def	__ZN6dsctbl11getPhysAddrEP18segment_descriptorj;	.scl	3;	.type	32;	.endef
+ 1438              		.def	__ZN4task18loadThreadToKernelEiijiPv;	.scl	3;	.type	32;	.endef
+ 1439              		.def	__Z14thread_currentv;	.scl	3;	.type	32;	.endef
+ 1440              		.def	__Z11layer_printP8LayerCtl5uid_tPc;	.scl	3;	.type	32;	.endef
+ 1441              		.def	_io_sti;	.scl	3;	.type	32;	.endef
+ 1442              		.def	_io_cli;	.scl	3;	.type	32;	.endef
+ 1443              		.def	_task_change;	.scl	3;	.type	32;	.endef
+ 1444              		.def	_sprintf;	.scl	2;	.type	32;	.endef
+ 1445              		.def	__Z17find_bit_in_arrayPKcii;	.scl	3;	.type	32;	.endef
+ 1446              		.def	__Z10thread_addi;	.scl	3;	.type	32;	.endef
+ 1447              		.def	__Z15memmng_alloc_4ki;	.scl	3;	.type	32;	.endef
+ 1448              		.def	__Z12thread_allocv;	.scl	3;	.type	32;	.endef
+ 1449              		.def	__Z12set_segmdescP18segment_descriptorjii;	.scl	3;	.type	32;	.endef
+ 1450 11aa 90909090 		.def	__Z9set_timerjj;	.scl	3;	.type	32;	.endef
+ 1450      9090
+GAS LISTING task.gas 			page 36
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 task.cpp
+            task.gas:5      .bss:00000000 _mt_tr
+            task.gas:9      .bss:00000004 _ptr_thctl
+            task.gas:132    .text:00000140 __Z13thread_existsi
+            task.gas:172    .text:00000190 __Z18thread_switch_byidi
+            task.gas:223    .text:00000210 __Z13thread_switchv
+            task.gas:279    .text:000002c0 __Z11reg_dump_00PKci
+            task.gas:319    .text:00000310 __Z15dump_threadlistv
+            task.gas:447    .text:00000440 __Z10dump_thctlv
+            task.gas:791    .text:00000950 __ZN4task19loadCurrentToKernelEijiPv
+            task.gas:812    .text:00000990 __Z13thread_createPFiPvES_ij
+            task.gas:868    .text:00000a70 __Z14threadctl_initv
+            task.gas:1050   .text:00000cf0 __Z16thread_terminatei
+            task.gas:1207   .text:00000ee0 __Z13thread_resumei
+            task.gas:1308   .text:00001010 __Z14thread_suspendi
+            task.gas:727    .text:000008a0 __ZN4task18loadThreadToKernelEiijiPv
+            task.gas:197    .text:000001e0 __Z14thread_currentv
+            task.gas:16     .text:00000000 __Z10thread_addi
+            task.gas:88     .text:000000d0 __Z12thread_allocv
+
+UNDEFINED SYMBOLS
+_l_console
+_layerctl
+_thctl_timer
+_memset
+_memcpy
+__ZN6dsctbl11getPhysAddrEP18segment_descriptorj
+__Z11layer_printP8LayerCtl5uid_tPc
+_io_sti
+_io_cli
+_task_change
+_sprintf
+__Z17find_bit_in_arrayPKcii
+__Z15memmng_alloc_4ki
+__Z12set_segmdescP18segment_descriptorjii
+__Z9set_timerjj

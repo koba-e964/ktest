@@ -1,0 +1,141 @@
+GAS LISTING stdc/format.gas 			page 1
+
+
+   1              		.file	"format.c"
+   2              		.text
+   3              		.balign 2
+   4              		.p2align 4,,15
+   5              	.globl _printf
+   6              		.def	_printf;	.scl	2;	.type	32;	.endef
+   7              	_printf:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 83EC0C   		subl	$12, %esp
+  11 0006 8D450C   		leal	12(%ebp), %eax
+  12 0009 50       		pushl	%eax
+  13 000a 8B4508   		movl	8(%ebp), %eax
+  14 000d 50       		pushl	%eax
+  15 000e 68010080 		pushl	$-1904214015
+  15      8E
+  16 0013 E8080000 		call	_vfprintf
+  16      00
+  17 0018 89EC     		movl	%ebp, %esp
+  18 001a 5D       		popl	%ebp
+  19 001b C3       		ret
+  20              		.balign 2
+  21 001c 8D742600 		.p2align 4,,15
+  22              	.globl _vfprintf
+  23              		.def	_vfprintf;	.scl	2;	.type	32;	.endef
+  24              	_vfprintf:
+  25 0020 55       		pushl	%ebp
+  26 0021 89E5     		movl	%esp, %ebp
+  27 0023 57       		pushl	%edi
+  28 0024 56       		pushl	%esi
+  29 0025 31FF     		xorl	%edi, %edi
+  30 0027 53       		pushl	%ebx
+  31 0028 81EC1C02 		subl	$540, %esp
+  31      0000
+  32 002e 89F6     		.p2align 4,,7
+  33              	L9:
+  34 0030 83EC0C   		subl	$12, %esp
+  35 0033 8B4510   		movl	16(%ebp), %eax
+  36 0036 50       		pushl	%eax
+  37 0037 8D450C   		leal	12(%ebp), %eax
+  38 003a 50       		pushl	%eax
+  39 003b 8D85E4FD 		leal	-540(%ebp), %eax
+  39      FFFF
+  40 0041 50       		pushl	%eax
+  41 0042 8D85E8FD 		leal	-536(%ebp), %eax
+  41      FFFF
+  42 0048 68000200 		pushl	$512
+  42      00
+  43 004d 50       		pushl	%eax
+  44 004e E8000000 		call	_format_helper
+  44      00
+  45 0053 83C420   		addl	$32, %esp
+  46 0056 89C3     		movl	%eax, %ebx
+  47 0058 85C0     		testl	%eax, %eax
+  48 005a 7550     		jne	L10
+  49 005c 8B85E4FD 		movl	-540(%ebp), %eax
+  49      FFFF
+GAS LISTING stdc/format.gas 			page 2
+
+
+  50 0062 85C0     		testl	%eax, %eax
+  51 0064 743C     		je	L4
+  52 0066 83EC0C   		subl	$12, %esp
+  53 0069 50       		pushl	%eax
+  54 006a E8000000 		call	_malloc
+  54      00
+  55 006f 8B8DE4FD 		movl	-540(%ebp), %ecx
+  55      FFFF
+  56 0075 89C6     		movl	%eax, %esi
+  57 0077 8B5D10   		movl	16(%ebp), %ebx
+  58 007a 58       		popl	%eax
+  59 007b 8D450C   		leal	12(%ebp), %eax
+  60 007e 53       		pushl	%ebx
+  61 007f 50       		pushl	%eax
+  62 0080 6A00     		pushl	$0
+  63 0082 51       		pushl	%ecx
+  64 0083 56       		pushl	%esi
+  65 0084 E8000000 		call	_format_helper
+  65      00
+  66 0089 8B5508   		movl	8(%ebp), %edx
+  67 008c 83C420   		addl	$32, %esp
+  68 008f 89C3     		movl	%eax, %ebx
+  69 0091 01DF     		addl	%ebx, %edi
+  70 0093 52       		pushl	%edx
+  71 0094 50       		pushl	%eax
+  72 0095 6A01     		pushl	$1
+  73 0097 56       		pushl	%esi
+  74 0098 E8000000 		call	_fwrite
+  74      00
+  75 009d 83C410   		addl	$16, %esp
+  76 00a0 EB8E     		jmp	L9
+  77              	L4:
+  78 00a2 8D65F4   		leal	-12(%ebp), %esp
+  79 00a5 89F8     		movl	%edi, %eax
+  80 00a7 5B       		popl	%ebx
+  81 00a8 5E       		popl	%esi
+  82 00a9 5F       		popl	%edi
+  83 00aa 5D       		popl	%ebp
+  84 00ab C3       		ret
+  85              	L10:
+  86 00ac 8B4508   		movl	8(%ebp), %eax
+  87 00af 01DF     		addl	%ebx, %edi
+  88 00b1 50       		pushl	%eax
+  89 00b2 8D85E8FD 		leal	-536(%ebp), %eax
+  89      FFFF
+  90 00b8 53       		pushl	%ebx
+  91 00b9 6A01     		pushl	$1
+  92 00bb 50       		pushl	%eax
+  93 00bc E8000000 		call	_fwrite
+  93      00
+  94 00c1 8B450C   		movl	12(%ebp), %eax
+  95 00c4 83C410   		addl	$16, %esp
+  96 00c7 803800   		cmpb	$0, (%eax)
+  97 00ca 0F8560FF 		jne	L9
+  97      FFFF
+  98 00d0 EBD0     		jmp	L4
+  99              		.def	_malloc;	.scl	2;	.type	32;	.endef
+GAS LISTING stdc/format.gas 			page 3
+
+
+ 100              		.def	_fwrite;	.scl	2;	.type	32;	.endef
+ 101              		.def	_format_helper;	.scl	2;	.type	32;	.endef
+ 102 00d2 90909090 		.def	_vfprintf;	.scl	2;	.type	32;	.endef
+ 102      90909090 
+ 102      90909090 
+ 102      9090
+GAS LISTING stdc/format.gas 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 format.c
+     stdc/format.gas:7      .text:00000000 _printf
+     stdc/format.gas:24     .text:00000020 _vfprintf
+
+UNDEFINED SYMBOLS
+_malloc
+_fwrite
+_format_helper

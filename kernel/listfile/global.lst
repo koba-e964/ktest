@@ -1,0 +1,113 @@
+GAS LISTING global.gas 			page 1
+
+
+   1              		.file	"global.cpp"
+   2              	.globl _fat12img
+   3              		.bss
+   4              		.align 4
+   5              	_fat12img:
+   6 0000 00000000 		.space 4
+   7              	.globl _lymouse
+   8              		.align 4
+   9              	_lymouse:
+  10 0004 00000000 		.space 4
+  11              	.globl _req_fifo
+  12              		.align 4
+  13              	_req_fifo:
+  14 0008 00000000 		.space 16
+  14      00000000 
+  14      00000000 
+  14      00000000 
+  15              	.globl _mouse_fifo
+  16              		.align 4
+  17              	_mouse_fifo:
+  18 0018 00000000 		.space 16
+  18      00000000 
+  18      00000000 
+  18      00000000 
+  19              	.globl _key_fifo
+  20              		.align 4
+  21              	_key_fifo:
+  22 0028 00000000 		.space 16
+  22      00000000 
+  22      00000000 
+  22      00000000 
+  23              	.globl _l_console
+  24              		.align 4
+  25              	_l_console:
+  26 0038 00000000 		.space 4
+  27              	.globl _layerctl
+  28              		.align 4
+  29              	_layerctl:
+  30 003c 00000000 		.space 4
+  31              	.globl __ZN4proc7procctlE
+  32              		.align 4
+  33              	__ZN4proc7procctlE:
+  34 0040 00000000 		.space 4
+  35              	.globl __ZN2io5iomng6screenE
+  36              		.align 4
+  37              	__ZN2io5iomng6screenE:
+  38 0044 00000000 		.space 4
+  39              	.globl __ZN2io5iomng5iomngE
+  40              		.align 4
+  41              	__ZN2io5iomng5iomngE:
+  42 0048 00000000 		.space 4
+  43              	.globl _winctl
+  44 004c 00000000 		.align 32
+  44      00000000 
+  44      00000000 
+  44      00000000 
+  44      00000000 
+GAS LISTING global.gas 			page 2
+
+
+  45              	_winctl:
+  46 0060 00000000 		.space 115720
+  46      00000000 
+  46      00000000 
+  46      00000000 
+  46      00000000 
+  47              	.globl _timerctl
+  48 1c468 00000000 		.align 32
+  48      00000000 
+  48      00000000 
+  48      00000000 
+  48      00000000 
+  49              	_timerctl:
+  50 1c480 00000000 		.space 14028
+  50      00000000 
+  50      00000000 
+  50      00000000 
+  50      00000000 
+  51              	.globl _thctl_timer
+  52 1fb4c 00000000 		.data
+  52      00000000 
+  52      00000000 
+  52      00000000 
+  52      00000000 
+  53              		.align 4
+  54              	_thctl_timer:
+  55 0000 FFFFFFFF 		.long	-1
+  55      00000000 
+  55      00000000 
+  55      00000000 
+GAS LISTING global.gas 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 global.cpp
+          global.gas:5      .bss:00000000 _fat12img
+          global.gas:9      .bss:00000004 _lymouse
+          global.gas:13     .bss:00000008 _req_fifo
+          global.gas:17     .bss:00000018 _mouse_fifo
+          global.gas:21     .bss:00000028 _key_fifo
+          global.gas:25     .bss:00000038 _l_console
+          global.gas:29     .bss:0000003c _layerctl
+          global.gas:33     .bss:00000040 __ZN4proc7procctlE
+          global.gas:37     .bss:00000044 __ZN2io5iomng6screenE
+          global.gas:41     .bss:00000048 __ZN2io5iomng5iomngE
+          global.gas:45     .bss:00000060 _winctl
+          global.gas:49     .bss:0001c480 _timerctl
+          global.gas:54     .data:00000000 _thctl_timer
+
+NO UNDEFINED SYMBOLS

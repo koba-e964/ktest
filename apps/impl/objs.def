@@ -1,0 +1,3 @@
+CLIBS=stdc/strlen.obj stdc/strnlen.obj stdc/rand.obj stdc/format.obj
+NLIBS=native_io.obj sys.obj entry.obj io.obj 
+LIBS=$(NLIBS) $(CLIBS)

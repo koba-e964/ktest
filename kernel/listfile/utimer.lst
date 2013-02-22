@@ -1,0 +1,92 @@
+GAS LISTING utimer.gas 			page 1
+
+
+   1              		.file	"utimer.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __Z13uSleep_wakeupii
+   6              		.def	__Z13uSleep_wakeupii;	.scl	2;	.type	32;	.endef
+   7              	__Z13uSleep_wakeupii:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 83EC08   		subl	$8, %esp
+  11 0006 8B4508   		movl	8(%ebp), %eax
+  12 0009 890424   		movl	%eax, (%esp)
+  13 000c E8000000 		call	__Z13thread_resumei
+  13      00
+  14 0011 C9       		leave
+  15 0012 31C0     		xorl	%eax, %eax
+  16 0014 C3       		ret
+  17 0015 90       		.align 2
+  18 0016 8D76008D 		.p2align 4,,15
+  18      BC270000 
+  18      0000
+  19              	.globl __Z6uSleepj
+  20              		.def	__Z6uSleepj;	.scl	2;	.type	32;	.endef
+  21              	__Z6uSleepj:
+  22 0020 55       		pushl	%ebp
+  23 0021 89E5     		movl	%esp, %ebp
+  24 0023 83EC28   		subl	$40, %esp
+  25 0026 895DF8   		movl	%ebx, -8(%ebp)
+  26 0029 8B5D08   		movl	8(%ebp), %ebx
+  27 002c 8975FC   		movl	%esi, -4(%ebp)
+  28 002f 85DB     		testl	%ebx, %ebx
+  29 0031 750D     		jne	L6
+  30 0033 8B5DF8   		movl	-8(%ebp), %ebx
+  31 0036 31C0     		xorl	%eax, %eax
+  32 0038 8B75FC   		movl	-4(%ebp), %esi
+  33 003b 89EC     		movl	%ebp, %esp
+  34 003d 5D       		popl	%ebp
+  35 003e C3       		ret
+  36 003f 90       		.p2align 4,,7
+  37              	L6:
+  38 0040 E8000000 		call	__Z14thread_currentv
+  38      00
+  39 0045 83FBFF   		cmpl	$-1, %ebx
+  40 0048 89C6     		movl	%eax, %esi
+  41 004a 7421     		je	L4
+  42 004c 8944240C 		movl	%eax, 12(%esp)
+  43 0050 31C9     		xorl	%ecx, %ecx
+  44 0052 BA000000 		movl	$__Z13uSleep_wakeupii, %edx
+  44      00
+  45 0057 894C2410 		movl	%ecx, 16(%esp)
+  46 005b 31C0     		xorl	%eax, %eax
+  47 005d 89542408 		movl	%edx, 8(%esp)
+  48 0061 89442404 		movl	%eax, 4(%esp)
+  49 0065 891C24   		movl	%ebx, (%esp)
+  50 0068 E8000000 		call	__Z14set_timer_procjjPFiiiEii
+  50      00
+  51              	L4:
+GAS LISTING utimer.gas 			page 2
+
+
+  52 006d 893424   		movl	%esi, (%esp)
+  53 0070 E8000000 		call	__Z14thread_suspendi
+  53      00
+  54 0075 8B5DF8   		movl	-8(%ebp), %ebx
+  55 0078 31C0     		xorl	%eax, %eax
+  56 007a 8B75FC   		movl	-4(%ebp), %esi
+  57 007d 89EC     		movl	%ebp, %esp
+  58 007f 5D       		popl	%ebp
+  59 0080 C3       		ret
+  60              		.def	__Z14thread_suspendi;	.scl	3;	.type	32;	.endef
+  61              		.def	__Z14set_timer_procjjPFiiiEii;	.scl	3;	.type	32;	.endef
+  62              		.def	__Z14thread_currentv;	.scl	3;	.type	32;	.endef
+  63 0081 90909090 		.def	__Z13thread_resumei;	.scl	3;	.type	32;	.endef
+  63      90909090 
+  63      90909090 
+  63      909090
+GAS LISTING utimer.gas 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 utimer.cpp
+          utimer.gas:7      .text:00000000 __Z13uSleep_wakeupii
+          utimer.gas:21     .text:00000020 __Z6uSleepj
+
+UNDEFINED SYMBOLS
+__Z14thread_suspendi
+__Z14set_timer_procjjPFiiiEii
+__Z14thread_currentv
+__Z13thread_resumei

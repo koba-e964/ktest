@@ -1,0 +1,941 @@
+GAS LISTING proc/proc.gas 			page 1
+
+
+   1              		.file	"proc.cpp"
+   2              		.text
+   3              		.align 2
+   4              		.p2align 4,,15
+   5              	.globl __ZN4proc7ProcCtlC2Ev
+   6              		.def	__ZN4proc7ProcCtlC2Ev;	.scl	2;	.type	32;	.endef
+   7              	__ZN4proc7ProcCtlC2Ev:
+   8 0000 55       		pushl	%ebp
+   9 0001 89E5     		movl	%esp, %ebp
+  10 0003 5D       		popl	%ebp
+  11 0004 C3       		ret
+  12 0005 90       		.align 2
+  13 0006 8D76008D 		.p2align 4,,15
+  13      BC270000 
+  13      0000
+  14              	.globl __ZN4proc7ProcCtlC1Ev
+  15              		.def	__ZN4proc7ProcCtlC1Ev;	.scl	2;	.type	32;	.endef
+  16              	__ZN4proc7ProcCtlC1Ev:
+  17 0010 55       		pushl	%ebp
+  18 0011 89E5     		movl	%esp, %ebp
+  19 0013 5D       		popl	%ebp
+  20 0014 C3       		ret
+  21              		.section .rdata,"dr"
+  22              	LC0:
+  23 0000 50726F63 		.ascii "ProcCtl::ctor\12\0"
+  23      43746C3A 
+  23      3A63746F 
+  23      720A00
+  24              		.text
+  25 0015 90       		.align 2
+  26 0016 8D76008D 		.p2align 4,,15
+  26      BC270000 
+  26      0000
+  27              	.globl __ZN4proc7ProcCtl4ctorEv
+  28              		.def	__ZN4proc7ProcCtl4ctorEv;	.scl	2;	.type	32;	.endef
+  29              	__ZN4proc7ProcCtl4ctorEv:
+  30 0020 55       		pushl	%ebp
+  31 0021 B8000000 		movl	$LC0, %eax
+  31      00
+  32 0026 89E5     		movl	%esp, %ebp
+  33 0028 56       		pushl	%esi
+  34 0029 53       		pushl	%ebx
+  35 002a 83EC20   		subl	$32, %esp
+  36 002d 8B5D08   		movl	8(%ebp), %ebx
+  37 0030 89442408 		movl	%eax, 8(%esp)
+  38 0034 A1000000 		movl	_l_console, %eax
+  38      00
+  39 0039 89442404 		movl	%eax, 4(%esp)
+  40 003d A1000000 		movl	_layerctl, %eax
+  40      00
+  41 0042 890424   		movl	%eax, (%esp)
+  42 0045 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+  42      00
+  43 004a 31C0     		xorl	%eax, %eax
+  44 004c BAF40100 		movl	$500, %edx
+  44      00
+  45 0051 EB0D9090 		.p2align 4,,15
+GAS LISTING proc/proc.gas 			page 2
+
+
+  45      90909090 
+  45      90909090 
+  45      909090
+  46              	L8:
+  47 0060 C70483FF 		movl	$-1, (%ebx,%eax,4)
+  47      FFFFFF
+  48 0067 40       		incl	%eax
+  49 0068 39C2     		cmpl	%eax, %edx
+  50 006a 7FF4     		jg	L8
+  51 006c C745F0FF 		movl	$-1, -16(%ebp)
+  51      FFFFFF
+  52 0073 31C9     		xorl	%ecx, %ecx
+  53 0075 BE640000 		movl	$100, %esi
+  53      00
+  54 007a C745F400 		movl	$0, -12(%ebp)
+  54      000000
+  55 0081 EB0D9090 		.p2align 4,,15
+  55      90909090 
+  55      90909090 
+  55      909090
+  56              	L13:
+  57 0090 8B45F0   		movl	-16(%ebp), %eax
+  58 0093 8B55F4   		movl	-12(%ebp), %edx
+  59 0096 8984CBD0 		movl	%eax, 2000(%ebx,%ecx,8)
+  59      070000
+  60 009d 8994CBD4 		movl	%edx, 2004(%ebx,%ecx,8)
+  60      070000
+  61 00a4 41       		incl	%ecx
+  62 00a5 39CE     		cmpl	%ecx, %esi
+  63 00a7 7FE7     		jg	L13
+  64 00a9 83C420   		addl	$32, %esp
+  65 00ac 5B       		popl	%ebx
+  66 00ad 5E       		popl	%esi
+  67 00ae 5D       		popl	%ebp
+  68 00af C3       		ret
+  69              		.align 2
+  70              		.p2align 4,,15
+  71              	.globl __ZN4proc7ProcCtl6createEiPi
+  72              		.def	__ZN4proc7ProcCtl6createEiPi;	.scl	2;	.type	32;	.endef
+  73              	__ZN4proc7ProcCtl6createEiPi:
+  74 00b0 55       		pushl	%ebp
+  75 00b1 31C0     		xorl	%eax, %eax
+  76 00b3 89E5     		movl	%esp, %ebp
+  77 00b5 57       		pushl	%edi
+  78 00b6 BA640000 		movl	$100, %edx
+  78      00
+  79 00bb 56       		pushl	%esi
+  80 00bc 53       		pushl	%ebx
+  81 00bd 83EC0C   		subl	$12, %esp
+  82 00c0 8B5D08   		movl	8(%ebp), %ebx
+  83 00c3 8B7D10   		movl	16(%ebp), %edi
+  84 00c6 EB05     		jmp	L25
+  85              	L45:
+  86 00c8 40       		incl	%eax
+  87 00c9 39C2     		cmpl	%eax, %edx
+  88 00cb 7E76     		jle	L44
+  89              	L25:
+GAS LISTING proc/proc.gas 			page 3
+
+
+  90 00cd 83BCC3D0 		cmpl	$-1, 2000(%ebx,%eax,8)
+  90      070000FF 
+  91 00d5 75F1     		jne	L45
+  92 00d7 83F8FF   		cmpl	$-1, %eax
+  93 00da 89C6     		movl	%eax, %esi
+  94 00dc 7465     		je	L44
+  95 00de A1000000 		movl	_timerctl, %eax
+  95      00
+  96 00e3 83F8FF   		cmpl	$-1, %eax
+  97 00e6 7454     		je	L46
+  98              	L27:
+  99 00e8 8984F3D0 		movl	%eax, 2000(%ebx,%esi,8)
+  99      070000
+ 100 00ef C7042410 		movl	$8208, (%esp)
+ 100      200000
+ 101 00f6 E8000000 		call	__Z15memmng_alloc_4ki
+ 101      00
+ 102 00fb 8984F3D4 		movl	%eax, 2004(%ebx,%esi,8)
+ 102      070000
+ 103 0102 89C2     		movl	%eax, %edx
+ 104 0104 31C9     		xorl	%ecx, %ecx
+ 105              	L32:
+ 106 0106 8B048F   		movl	(%edi,%ecx,4), %eax
+ 107 0109 89048A   		movl	%eax, (%edx,%ecx,4)
+ 108 010c 41       		incl	%ecx
+ 109 010d 83F902   		cmpl	$2, %ecx
+ 110 0110 7EF4     		jle	L32
+ 111 0112 B8030000 		movl	$3, %eax
+ 111      00
+ 112 0117 B9000400 		movl	$1024, %ecx
+ 112      00
+ 113 011c 8D742600 		.p2align 4,,15
+ 114              	L37:
+ 115 0120 C70482FF 		movl	$-1, (%edx,%eax,4)
+ 115      FFFFFF
+ 116 0127 40       		incl	%eax
+ 117 0128 39C1     		cmpl	%eax, %ecx
+ 118 012a 7FF4     		jg	L37
+ 119 012c 8B450C   		movl	12(%ebp), %eax
+ 120 012f 893483   		movl	%esi, (%ebx,%eax,4)
+ 121 0132 83C40C   		addl	$12, %esp
+ 122 0135 89F0     		movl	%esi, %eax
+ 123 0137 5B       		popl	%ebx
+ 124 0138 5E       		popl	%esi
+ 125 0139 5F       		popl	%edi
+ 126 013a 5D       		popl	%ebp
+ 127 013b C3       		ret
+ 128              	L46:
+ 129 013c B8FEFFFF 		movl	$-2, %eax
+ 129      FF
+ 130 0141 EBA5     		jmp	L27
+ 131              	L44:
+ 132 0143 83C40C   		addl	$12, %esp
+ 133 0146 B8FFFFFF 		movl	$-1, %eax
+ 133      FF
+ 134 014b 5B       		popl	%ebx
+ 135 014c 5E       		popl	%esi
+GAS LISTING proc/proc.gas 			page 4
+
+
+ 136 014d 5F       		popl	%edi
+ 137 014e 5D       		popl	%ebp
+ 138 014f C3       		ret
+ 139              		.align 2
+ 140              		.p2align 4,,15
+ 141              	.globl __ZN4proc8ProcData4initEiPviS1_
+ 142              		.def	__ZN4proc8ProcData4initEiPviS1_;	.scl	2;	.type	32;	.endef
+ 143              	__ZN4proc8ProcData4initEiPviS1_:
+ 144 0150 55       		pushl	%ebp
+ 145 0151 89E5     		movl	%esp, %ebp
+ 146 0153 8B5508   		movl	8(%ebp), %edx
+ 147 0156 8B450C   		movl	12(%ebp), %eax
+ 148 0159 89820020 		movl	%eax, 8192(%edx)
+ 148      0000
+ 149 015f 8B4510   		movl	16(%ebp), %eax
+ 150 0162 89820420 		movl	%eax, 8196(%edx)
+ 150      0000
+ 151 0168 8B4518   		movl	24(%ebp), %eax
+ 152 016b 89820C20 		movl	%eax, 8204(%edx)
+ 152      0000
+ 153 0171 5D       		popl	%ebp
+ 154 0172 C3       		ret
+ 155              		.section .rdata,"dr"
+ 156 000f 00       		.align 4
+ 157              	LC1:
+ 158 0010 696E6974 		.ascii "init:procctl=%08x,sizeof(ProcCtl)=%08x\12\0"
+ 158      3A70726F 
+ 158      6363746C 
+ 158      3D253038 
+ 158      782C7369 
+ 159              		.text
+ 160 0173 90       		.align 2
+ 161 0174 8DB60000 		.p2align 4,,15
+ 161      00008DBF 
+ 161      00000000 
+ 162              	.globl __ZN4proc7ProcCtl4initEv
+ 163              		.def	__ZN4proc7ProcCtl4initEv;	.scl	2;	.type	32;	.endef
+ 164              	__ZN4proc7ProcCtl4initEv:
+ 165 0180 55       		pushl	%ebp
+ 166 0181 89E5     		movl	%esp, %ebp
+ 167 0183 53       		pushl	%ebx
+ 168 0184 81EC1401 		subl	$276, %esp
+ 168      0000
+ 169 018a 8D9DF8FE 		leal	-264(%ebp), %ebx
+ 169      FFFF
+ 170 0190 C70424F0 		movl	$2800, (%esp)
+ 170      0A0000
+ 171 0197 E8000000 		call	__Z15memmng_alloc_4ki
+ 171      00
+ 172 019c 89442408 		movl	%eax, 8(%esp)
+ 173 01a0 B9F00A00 		movl	$2800, %ecx
+ 173      00
+ 174 01a5 BA100000 		movl	$LC1, %edx
+ 174      00
+ 175 01aa 894C240C 		movl	%ecx, 12(%esp)
+ 176 01ae 89542404 		movl	%edx, 4(%esp)
+ 177 01b2 891C24   		movl	%ebx, (%esp)
+GAS LISTING proc/proc.gas 			page 5
+
+
+ 178 01b5 A3000000 		movl	%eax, __ZN4proc7procctlE
+ 178      00
+ 179 01ba E8000000 		call	_sprintf
+ 179      00
+ 180 01bf 895C2408 		movl	%ebx, 8(%esp)
+ 181 01c3 A1000000 		movl	_l_console, %eax
+ 181      00
+ 182 01c8 89442404 		movl	%eax, 4(%esp)
+ 183 01cc A1000000 		movl	_layerctl, %eax
+ 183      00
+ 184 01d1 890424   		movl	%eax, (%esp)
+ 185 01d4 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 185      00
+ 186 01d9 A1000000 		movl	__ZN4proc7procctlE, %eax
+ 186      00
+ 187 01de 890424   		movl	%eax, (%esp)
+ 188 01e1 E83AFEFF 		call	__ZN4proc7ProcCtl4ctorEv
+ 188      FF
+ 189 01e6 81C41401 		addl	$276, %esp
+ 189      0000
+ 190 01ec 5B       		popl	%ebx
+ 191 01ed 5D       		popl	%ebp
+ 192 01ee C3       		ret
+ 193              		.section .rdata,"dr"
+ 194              		.align 4
+ 195              	LC2:
+ 196 0038 50726F63 		.ascii "ProcCtl::current pid_tbl=%08x,pd=%08x,prid=%d\12\0"
+ 196      43746C3A 
+ 196      3A637572 
+ 196      72656E74 
+ 196      20706964 
+ 197              		.text
+ 198 01ef 90       		.align 2
+ 199              		.p2align 4,,15
+ 200              	.globl __ZNK4proc7ProcCtl7currentEv
+ 201              		.def	__ZNK4proc7ProcCtl7currentEv;	.scl	2;	.type	32;	.endef
+ 202              	__ZNK4proc7ProcCtl7currentEv:
+ 203 01f0 55       		pushl	%ebp
+ 204 01f1 89E5     		movl	%esp, %ebp
+ 205 01f3 81EC2801 		subl	$296, %esp
+ 205      0000
+ 206 01f9 895DF8   		movl	%ebx, -8(%ebp)
+ 207 01fc 8B5D08   		movl	8(%ebp), %ebx
+ 208 01ff 8975FC   		movl	%esi, -4(%ebp)
+ 209 0202 E8000000 		call	__Z14thread_currentv
+ 209      00
+ 210 0207 8B0483   		movl	(%ebx,%eax,4), %eax
+ 211 020a 8BB4C3D4 		movl	2004(%ebx,%eax,8), %esi
+ 211      070000
+ 212 0211 895C2408 		movl	%ebx, 8(%esp)
+ 213 0215 BB380000 		movl	$LC2, %ebx
+ 213      00
+ 214 021a 895C2404 		movl	%ebx, 4(%esp)
+ 215 021e 8D9DF8FE 		leal	-264(%ebp), %ebx
+ 215      FFFF
+ 216 0224 8974240C 		movl	%esi, 12(%esp)
+ 217 0228 891C24   		movl	%ebx, (%esp)
+GAS LISTING proc/proc.gas 			page 6
+
+
+ 218 022b 89442410 		movl	%eax, 16(%esp)
+ 219 022f E8000000 		call	_sprintf
+ 219      00
+ 220 0234 895C2408 		movl	%ebx, 8(%esp)
+ 221 0238 A1000000 		movl	_l_console, %eax
+ 221      00
+ 222 023d 89442404 		movl	%eax, 4(%esp)
+ 223 0241 A1000000 		movl	_layerctl, %eax
+ 223      00
+ 224 0246 890424   		movl	%eax, (%esp)
+ 225 0249 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 225      00
+ 226 024e 89F0     		movl	%esi, %eax
+ 227 0250 8B5DF8   		movl	-8(%ebp), %ebx
+ 228 0253 8B75FC   		movl	-4(%ebp), %esi
+ 229 0256 89EC     		movl	%ebp, %esp
+ 230 0258 5D       		popl	%ebp
+ 231 0259 C3       		ret
+ 232              		.section .rdata,"dr"
+ 233              	LC3:
+ 234 0067 50726F63 		.ascii "ProcData::open(%s,%x)\12\0"
+ 234      44617461 
+ 234      3A3A6F70 
+ 234      656E2825 
+ 234      732C2578 
+ 235              		.text
+ 236              		.align 2
+ 237 025a 8DB60000 		.p2align 4,,15
+ 237      0000
+ 238              	.globl __ZN4proc8ProcData4openEPKci
+ 239              		.def	__ZN4proc8ProcData4openEPKci;	.scl	2;	.type	32;	.endef
+ 240              	__ZN4proc8ProcData4openEPKci:
+ 241 0260 55       		pushl	%ebp
+ 242 0261 89E5     		movl	%esp, %ebp
+ 243 0263 56       		pushl	%esi
+ 244 0264 53       		pushl	%ebx
+ 245 0265 81EC3001 		subl	$304, %esp
+ 245      0000
+ 246 026b 8D9DF8FE 		leal	-264(%ebp), %ebx
+ 246      FFFF
+ 247 0271 891C24   		movl	%ebx, (%esp)
+ 248 0274 8B4510   		movl	16(%ebp), %eax
+ 249 0277 8B750C   		movl	12(%ebp), %esi
+ 250 027a 8944240C 		movl	%eax, 12(%esp)
+ 251 027e B8670000 		movl	$LC3, %eax
+ 251      00
+ 252 0283 89742408 		movl	%esi, 8(%esp)
+ 253 0287 89442404 		movl	%eax, 4(%esp)
+ 254 028b E8000000 		call	_sprintf
+ 254      00
+ 255 0290 895C2408 		movl	%ebx, 8(%esp)
+ 256 0294 A1000000 		movl	_l_console, %eax
+ 256      00
+ 257 0299 89442404 		movl	%eax, 4(%esp)
+ 258 029d A1000000 		movl	_layerctl, %eax
+ 258      00
+ 259 02a2 890424   		movl	%eax, (%esp)
+GAS LISTING proc/proc.gas 			page 7
+
+
+ 260 02a5 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 260      00
+ 261 02aa 893424   		movl	%esi, (%esp)
+ 262 02ad 8D85E4FE 		leal	-284(%ebp), %eax
+ 262      FFFF
+ 263 02b3 89442408 		movl	%eax, 8(%esp)
+ 264 02b7 8D85E8FE 		leal	-280(%ebp), %eax
+ 264      FFFF
+ 265 02bd 89442404 		movl	%eax, 4(%esp)
+ 266 02c1 E8000000 		call	__ZN2fs5fat129nameParseEPKcPcS3_
+ 266      00
+ 267 02c6 81C43001 		addl	$304, %esp
+ 267      0000
+ 268 02cc B8FFFFFF 		movl	$-1, %eax
+ 268      FF
+ 269 02d1 5B       		popl	%ebx
+ 270 02d2 5E       		popl	%esi
+ 271 02d3 5D       		popl	%ebp
+ 272 02d4 C3       		ret
+ 273              		.section .rdata,"dr"
+ 274 007e 0000     		.align 4
+ 275              	LC4:
+ 276 0080 50726F63 		.ascii "ProcData::write this=%08x,fd_tbl=%08x,fd=%d,length=%x,dev_id=%x\12\0"
+ 276      44617461 
+ 276      3A3A7772 
+ 276      69746520 
+ 276      74686973 
+ 277              		.text
+ 278 02d5 90       		.align 2
+ 279 02d6 8D76008D 		.p2align 4,,15
+ 279      BC270000 
+ 279      0000
+ 280              	.globl __ZN4proc8ProcData5writeEiPvi
+ 281              		.def	__ZN4proc8ProcData5writeEiPvi;	.scl	2;	.type	32;	.endef
+ 282              	__ZN4proc8ProcData5writeEiPvi:
+ 283 02e0 55       		pushl	%ebp
+ 284 02e1 89E5     		movl	%esp, %ebp
+ 285 02e3 81EC4801 		subl	$328, %esp
+ 285      0000
+ 286 02e9 895DF4   		movl	%ebx, -12(%ebp)
+ 287 02ec 8B4508   		movl	8(%ebp), %eax
+ 288 02ef 8D9DE8FE 		leal	-280(%ebp), %ebx
+ 288      FFFF
+ 289 02f5 8975F8   		movl	%esi, -8(%ebp)
+ 290 02f8 8B550C   		movl	12(%ebp), %edx
+ 291 02fb 8B7514   		movl	20(%ebp), %esi
+ 292 02fe 897DFC   		movl	%edi, -4(%ebp)
+ 293 0301 8B3C90   		movl	(%eax,%edx,4), %edi
+ 294 0304 8944240C 		movl	%eax, 12(%esp)
+ 295 0308 89442408 		movl	%eax, 8(%esp)
+ 296 030c B8800000 		movl	$LC4, %eax
+ 296      00
+ 297 0311 89542410 		movl	%edx, 16(%esp)
+ 298 0315 897C2418 		movl	%edi, 24(%esp)
+ 299 0319 89742414 		movl	%esi, 20(%esp)
+ 300 031d 891C24   		movl	%ebx, (%esp)
+ 301 0320 89442404 		movl	%eax, 4(%esp)
+GAS LISTING proc/proc.gas 			page 8
+
+
+ 302 0324 E8000000 		call	_sprintf
+ 302      00
+ 303 0329 895C2408 		movl	%ebx, 8(%esp)
+ 304 032d A1000000 		movl	_l_console, %eax
+ 304      00
+ 305 0332 89442404 		movl	%eax, 4(%esp)
+ 306 0336 A1000000 		movl	_layerctl, %eax
+ 306      00
+ 307 033b 890424   		movl	%eax, (%esp)
+ 308 033e E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 308      00
+ 309 0343 89B5E0FE 		movl	%esi, -288(%ebp)
+ 309      FFFF
+ 310 0349 8B4510   		movl	16(%ebp), %eax
+ 311 034c 897C2404 		movl	%edi, 4(%esp)
+ 312 0350 8985E4FE 		movl	%eax, -284(%ebp)
+ 312      FFFF
+ 313 0356 8D85E0FE 		leal	-288(%ebp), %eax
+ 313      FFFF
+ 314 035c 8944240C 		movl	%eax, 12(%esp)
+ 315 0360 B8020000 		movl	$2, %eax
+ 315      00
+ 316 0365 89442408 		movl	%eax, 8(%esp)
+ 317 0369 A1000000 		movl	__ZN2io5iomng5iomngE, %eax
+ 317      00
+ 318 036e 890424   		movl	%eax, (%esp)
+ 319 0371 E8000000 		call	__ZN2io5iomng9IOManager6accessEiiPv
+ 319      00
+ 320 0376 8B5DF4   		movl	-12(%ebp), %ebx
+ 321 0379 8B75F8   		movl	-8(%ebp), %esi
+ 322 037c 8B7DFC   		movl	-4(%ebp), %edi
+ 323 037f 89EC     		movl	%ebp, %esp
+ 324 0381 5D       		popl	%ebp
+ 325 0382 C3       		ret
+ 326              		.section .rdata,"dr"
+ 327              	LC5:
+ 328 00c1 6170703A 		.ascii "app:name=%s,name=%s,\0"
+ 328      6E616D65 
+ 328      3D25732C 
+ 328      6E616D65 
+ 328      3D25732C 
+ 329              	LC6:
+ 330 00d6 73697A65 		.ascii "size=%x\12\0"
+ 330      3D25780A 
+ 330      00
+ 331              	LC7:
+ 332 00df 6170702E 		.ascii "app.entry=%08x\12\0"
+ 332      656E7472 
+ 332      793D2530 
+ 332      38780A00 
+ 333              	LC9:
+ 334 00ef 4170706C 		.ascii "Application : app_thid=%d\12\0"
+ 334      69636174 
+ 334      696F6E20 
+ 334      3A206170 
+ 334      705F7468 
+ 335              	LC10:
+GAS LISTING proc/proc.gas 			page 9
+
+
+ 336 010a 73746172 		.ascii "start_app:screen=%d\12\0"
+ 336      745F6170 
+ 336      703A7363 
+ 336      7265656E 
+ 336      3D25640A 
+ 337 011f 00       		.text
+ 338 0383 90       		.align 2
+ 339 0384 8DB60000 		.p2align 4,,15
+ 339      00008DBF 
+ 339      00000000 
+ 340              	.globl __ZN4proc7ProcCtl9start_appEPKc
+ 341              		.def	__ZN4proc7ProcCtl9start_appEPKc;	.scl	2;	.type	32;	.endef
+ 342              	__ZN4proc7ProcCtl9start_appEPKc:
+ 343 0390 55       		pushl	%ebp
+ 344 0391 FC       		cld
+ 345 0392 89E5     		movl	%esp, %ebp
+ 346 0394 57       		pushl	%edi
+ 347 0395 B9020000 		movl	$2, %ecx
+ 347      00
+ 348 039a 56       		pushl	%esi
+ 349 039b 8D7DD8   		leal	-40(%ebp), %edi
+ 350 039e 53       		pushl	%ebx
+ 351 039f 81EC6C01 		subl	$364, %esp
+ 351      0000
+ 352 03a5 8DB5C4FE 		leal	-316(%ebp), %esi
+ 352      FFFF
+ 353 03ab 8B4508   		movl	8(%ebp), %eax
+ 354 03ae 8D5DD8   		leal	-40(%ebp), %ebx
+ 355 03b1 8985C0FE 		movl	%eax, -320(%ebp)
+ 355      FFFF
+ 356 03b7 31C0     		xorl	%eax, %eax
+ 357 03b9 F3       		rep
+ 358 03ba AB       		stosl
+ 359 03bb C60700   		movb	$0, (%edi)
+ 360 03be 31C0     		xorl	%eax, %eax
+ 361 03c0 BF002600 		movl	$9728, %edi
+ 361      00
+ 362 03c5 8985C4FE 		movl	%eax, -316(%ebp)
+ 362      FFFF
+ 363 03cb 8B450C   		movl	12(%ebp), %eax
+ 364 03ce 89742408 		movl	%esi, 8(%esp)
+ 365 03d2 895C2404 		movl	%ebx, 4(%esp)
+ 366 03d6 890424   		movl	%eax, (%esp)
+ 367 03d9 E8000000 		call	__ZN2fs5fat129nameParseEPKcPcS3_
+ 367      00
+ 368 03de 89742410 		movl	%esi, 16(%esp)
+ 369 03e2 B8E00000 		movl	$224, %eax
+ 369      00
+ 370 03e7 89442408 		movl	%eax, 8(%esp)
+ 371 03eb A1000000 		movl	_fat12img, %eax
+ 371      00
+ 372 03f0 895C240C 		movl	%ebx, 12(%esp)
+ 373 03f4 897C2404 		movl	%edi, 4(%esp)
+ 374 03f8 890424   		movl	%eax, (%esp)
+ 375 03fb E8000000 		call	__ZN2fs10FAT12Image7getInfoEiiPKcS2_
+ 375      00
+ 376 0400 8974240C 		movl	%esi, 12(%esp)
+GAS LISTING proc/proc.gas 			page 10
+
+
+ 377 0404 8D95D8FE 		leal	-296(%ebp), %edx
+ 377      FFFF
+ 378 040a BEC10000 		movl	$LC5, %esi
+ 378      00
+ 379 040f 895C2408 		movl	%ebx, 8(%esp)
+ 380 0413 891424   		movl	%edx, (%esp)
+ 381 0416 8985BCFE 		movl	%eax, -324(%ebp)
+ 381      FFFF
+ 382 041c 89742404 		movl	%esi, 4(%esp)
+ 383 0420 E8000000 		call	_sprintf
+ 383      00
+ 384 0425 8D85D8FE 		leal	-296(%ebp), %eax
+ 384      FFFF
+ 385 042b 89442408 		movl	%eax, 8(%esp)
+ 386 042f A1000000 		movl	_l_console, %eax
+ 386      00
+ 387 0434 89442404 		movl	%eax, 4(%esp)
+ 388 0438 A1000000 		movl	_layerctl, %eax
+ 388      00
+ 389 043d 890424   		movl	%eax, (%esp)
+ 390 0440 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 390      00
+ 391 0445 8B9DBCFE 		movl	-324(%ebp), %ebx
+ 391      FFFF
+ 392 044b B8FFFFFF 		movl	$-1, %eax
+ 392      FF
+ 393 0450 85DB     		testl	%ebx, %ebx
+ 394 0452 0F842D03 		je	L53
+ 394      0000
+ 395 0458 8B95BCFE 		movl	-324(%ebp), %edx
+ 395      FFFF
+ 396 045e B9D60000 		movl	$LC6, %ecx
+ 396      00
+ 397 0463 8D85D8FE 		leal	-296(%ebp), %eax
+ 397      FFFF
+ 398 0469 8B521C   		movl	28(%edx), %edx
+ 399 046c 894C2404 		movl	%ecx, 4(%esp)
+ 400 0470 890424   		movl	%eax, (%esp)
+ 401 0473 8995B8FE 		movl	%edx, -328(%ebp)
+ 401      FFFF
+ 402 0479 89542408 		movl	%edx, 8(%esp)
+ 403 047d E8000000 		call	_sprintf
+ 403      00
+ 404 0482 A1000000 		movl	_l_console, %eax
+ 404      00
+ 405 0487 8D95D8FE 		leal	-296(%ebp), %edx
+ 405      FFFF
+ 406 048d 89542408 		movl	%edx, 8(%esp)
+ 407 0491 89442404 		movl	%eax, 4(%esp)
+ 408 0495 A1000000 		movl	_layerctl, %eax
+ 408      00
+ 409 049a 890424   		movl	%eax, (%esp)
+ 410 049d E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 410      00
+ 411 04a2 8B85B8FE 		movl	-328(%ebp), %eax
+ 411      FFFF
+ 412 04a8 890424   		movl	%eax, (%esp)
+GAS LISTING proc/proc.gas 			page 11
+
+
+ 413 04ab E8000000 		call	__Z15memmng_alloc_4ki
+ 413      00
+ 414 04b0 89442408 		movl	%eax, 8(%esp)
+ 415 04b4 89C7     		movl	%eax, %edi
+ 416 04b6 8B95B8FE 		movl	-328(%ebp), %edx
+ 416      FFFF
+ 417 04bc 8B85BCFE 		movl	-324(%ebp), %eax
+ 417      FFFF
+ 418 04c2 89542404 		movl	%edx, 4(%esp)
+ 419 04c6 890424   		movl	%eax, (%esp)
+ 420 04c9 E8000000 		call	__ZN7tmpCode11readFileAllEPN2fs9FAT12InfoEiPc
+ 420      00
+ 421 04ce 8B17     		movl	(%edi), %edx
+ 422 04d0 8995B4FE 		movl	%edx, -332(%ebp)
+ 422      FFFF
+ 423 04d6 891424   		movl	%edx, (%esp)
+ 424 04d9 E8000000 		call	__Z15memmng_alloc_4ki
+ 424      00
+ 425 04de 8985B0FE 		movl	%eax, -336(%ebp)
+ 425      FFFF
+ 426 04e4 8B85B4FE 		movl	-332(%ebp), %eax
+ 426      FFFF
+ 427 04ea 890424   		movl	%eax, (%esp)
+ 428 04ed E8000000 		call	__Z15memmng_alloc_4ki
+ 428      00
+ 429 04f2 8985ACFE 		movl	%eax, -340(%ebp)
+ 429      FFFF
+ 430 04f8 8B570C   		movl	12(%edi), %edx
+ 431 04fb 8B5F14   		movl	20(%edi), %ebx
+ 432 04fe 8B85B0FE 		movl	-336(%ebp), %eax
+ 432      FFFF
+ 433 0504 8B7710   		movl	16(%edi), %esi
+ 434 0507 8995A8FE 		movl	%edx, -344(%ebp)
+ 434      FFFF
+ 435 050d 895C2408 		movl	%ebx, 8(%esp)
+ 436 0511 01FB     		addl	%edi, %ebx
+ 437 0513 897C2404 		movl	%edi, 4(%esp)
+ 438 0517 890424   		movl	%eax, (%esp)
+ 439 051a E8000000 		call	_memcpy
+ 439      00
+ 440 051f 89742408 		movl	%esi, 8(%esp)
+ 441 0523 8B95ACFE 		movl	-340(%ebp), %edx
+ 441      FFFF
+ 442 0529 8B85A8FE 		movl	-344(%ebp), %eax
+ 442      FFFF
+ 443 052f 895C2404 		movl	%ebx, 4(%esp)
+ 444 0533 31DB     		xorl	%ebx, %ebx
+ 445 0535 01D0     		addl	%edx, %eax
+ 446 0537 890424   		movl	%eax, (%esp)
+ 447 053a E8000000 		call	_memcpy
+ 447      00
+ 448 053f B81B0000 		movl	$27, %eax
+ 448      00
+ 449 0544 8D95D8FE 		leal	-296(%ebp), %edx
+ 449      FFFF
+ 450 054a 89442408 		movl	%eax, 8(%esp)
+ 451 054e B8DF0000 		movl	$LC7, %eax
+GAS LISTING proc/proc.gas 			page 12
+
+
+ 451      00
+ 452 0553 891424   		movl	%edx, (%esp)
+ 453 0556 89442404 		movl	%eax, 4(%esp)
+ 454 055a E8000000 		call	_sprintf
+ 454      00
+ 455 055f 8D85D8FE 		leal	-296(%ebp), %eax
+ 455      FFFF
+ 456 0565 89442408 		movl	%eax, 8(%esp)
+ 457 0569 A1000000 		movl	_l_console, %eax
+ 457      00
+ 458 056e 89442404 		movl	%eax, 4(%esp)
+ 459 0572 A1000000 		movl	_layerctl, %eax
+ 459      00
+ 460 0577 890424   		movl	%eax, (%esp)
+ 461 057a E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 461      00
+ 462 057f E8000000 		call	__Z12thread_allocv
+ 462      00
+ 463 0584 8B150000 		movl	_ptr_thctl, %edx
+ 463      0000
+ 464 058a 89C6     		movl	%eax, %esi
+ 465 058c 83C208   		addl	$8, %edx
+ 466 058f 3DF30100 		cmpl	$499, %eax
+ 466      00
+ 467 0594 0F86F601 		jbe	L60
+ 467      0000
+ 468              	L57:
+ 469 059a C7432402 		movl	$514, 36(%ebx)
+ 469      020000
+ 470 05a1 8B95A8FE 		movl	-344(%ebp), %edx
+ 470      FFFF
+ 471 05a7 8D04F5B8 		leal	4024(,%esi,8), %eax
+ 471      0F0000
+ 472 05ae 894360   		movl	%eax, 96(%ebx)
+ 473 05b1 31C0     		xorl	%eax, %eax
+ 474 05b3 89838000 		movl	%eax, 128(%ebx)
+ 474      0000
+ 475 05b9 B89A4000 		movl	$16538, %eax
+ 475      00
+ 476 05be 895338   		movl	%edx, 56(%ebx)
+ 477 05c1 C743201B 		movl	$27, 32(%ebx)
+ 477      000000
+ 478 05c8 C7436400 		movl	$1073741824, 100(%ebx)
+ 478      000040
+ 479 05cf C743480C 		movl	$12, 72(%ebx)
+ 479      000000
+ 480 05d6 C7434C04 		movl	$4, 76(%ebx)
+ 480      000000
+ 481 05dd C743500C 		movl	$12, 80(%ebx)
+ 481      000000
+ 482 05e4 C743540C 		movl	$12, 84(%ebx)
+ 482      000000
+ 483 05eb C743580C 		movl	$12, 88(%ebx)
+ 483      000000
+ 484 05f2 C7435C0C 		movl	$12, 92(%ebx)
+ 484      000000
+ 485 05f9 C7436802 		movl	$2, 104(%ebx)
+GAS LISTING proc/proc.gas 			page 13
+
+
+ 485      000000
+ 486 0600 C7437C00 		movl	$0, 124(%ebx)
+ 486      000000
+ 487 0607 8944240C 		movl	%eax, 12(%esp)
+ 488 060b 8B85B0FE 		movl	-336(%ebp), %eax
+ 488      FFFF
+ 489 0611 89442408 		movl	%eax, 8(%esp)
+ 490 0615 B8FFFF00 		movl	$65535, %eax
+ 490      00
+ 491 061a 89442404 		movl	%eax, 4(%esp)
+ 492 061e 8D436C   		leal	108(%ebx), %eax
+ 493 0621 890424   		movl	%eax, (%esp)
+ 494 0624 E8000000 		call	__Z12set_segmdescP18segment_descriptorjii
+ 494      00
+ 495 0629 8B95ACFE 		movl	-340(%ebp), %edx
+ 495      FFFF
+ 496 062f B9924000 		movl	$16530, %ecx
+ 496      00
+ 497 0634 8D4374   		leal	116(%ebx), %eax
+ 498 0637 894C240C 		movl	%ecx, 12(%esp)
+ 499 063b 890424   		movl	%eax, (%esp)
+ 500 063e 89542408 		movl	%edx, 8(%esp)
+ 501 0642 BAFFFF00 		movl	$65535, %edx
+ 501      00
+ 502 0647 89542404 		movl	%edx, 4(%esp)
+ 503 064b E8000000 		call	__Z12set_segmdescP18segment_descriptorjii
+ 503      00
+ 504 0650 893424   		movl	%esi, (%esp)
+ 505 0653 E8000000 		call	__Z10thread_addi
+ 505      00
+ 506 0658 893424   		movl	%esi, (%esp)
+ 507 065b E8000000 		call	__Z14thread_suspendi
+ 507      00
+ 508 0660 89742408 		movl	%esi, 8(%esp)
+ 509 0664 B8EF0000 		movl	$LC9, %eax
+ 509      00
+ 510 0669 89442404 		movl	%eax, 4(%esp)
+ 511 066d 8D85D8FE 		leal	-296(%ebp), %eax
+ 511      FFFF
+ 512 0673 890424   		movl	%eax, (%esp)
+ 513 0676 E8000000 		call	_sprintf
+ 513      00
+ 514 067b A1000000 		movl	_l_console, %eax
+ 514      00
+ 515 0680 8D95D8FE 		leal	-296(%ebp), %edx
+ 515      FFFF
+ 516 0686 89542408 		movl	%edx, 8(%esp)
+ 517 068a 89442404 		movl	%eax, 4(%esp)
+ 518 068e A1000000 		movl	_layerctl, %eax
+ 518      00
+ 519 0693 890424   		movl	%eax, (%esp)
+ 520 0696 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 520      00
+ 521 069b 893C24   		movl	%edi, (%esp)
+ 522 069e 8B85B8FE 		movl	-328(%ebp), %eax
+ 522      FFFF
+ 523 06a4 89442404 		movl	%eax, 4(%esp)
+GAS LISTING proc/proc.gas 			page 14
+
+
+ 524 06a8 E8000000 		call	__Z14memmng_free_4kPvi
+ 524      00
+ 525 06ad A1000000 		movl	__ZN2io5iomng6screenE, %eax
+ 525      00
+ 526 06b2 8D95D8FE 		leal	-296(%ebp), %edx
+ 526      FFFF
+ 527 06b8 891424   		movl	%edx, (%esp)
+ 528 06bb 89442408 		movl	%eax, 8(%esp)
+ 529 06bf B80A0100 		movl	$LC10, %eax
+ 529      00
+ 530 06c4 89442404 		movl	%eax, 4(%esp)
+ 531 06c8 E8000000 		call	_sprintf
+ 531      00
+ 532 06cd 8D85D8FE 		leal	-296(%ebp), %eax
+ 532      FFFF
+ 533 06d3 89442408 		movl	%eax, 8(%esp)
+ 534 06d7 A1000000 		movl	_l_console, %eax
+ 534      00
+ 535 06dc 89442404 		movl	%eax, 4(%esp)
+ 536 06e0 A1000000 		movl	_layerctl, %eax
+ 536      00
+ 537 06e5 890424   		movl	%eax, (%esp)
+ 538 06e8 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 538      00
+ 539 06ed 89742404 		movl	%esi, 4(%esp)
+ 540 06f1 B8FFFFFF 		movl	$-1, %eax
+ 540      FF
+ 541 06f6 8B95C0FE 		movl	-320(%ebp), %edx
+ 541      FFFF
+ 542 06fc 8985C8FE 		movl	%eax, -312(%ebp)
+ 542      FFFF
+ 543 0702 A1000000 		movl	__ZN2io5iomng6screenE, %eax
+ 543      00
+ 544 0707 891424   		movl	%edx, (%esp)
+ 545 070a 8985CCFE 		movl	%eax, -308(%ebp)
+ 545      FFFF
+ 546 0710 8985D0FE 		movl	%eax, -304(%ebp)
+ 546      FFFF
+ 547 0716 8D85C8FE 		leal	-312(%ebp), %eax
+ 547      FFFF
+ 548 071c 89442408 		movl	%eax, 8(%esp)
+ 549 0720 E88BF9FF 		call	__ZN4proc7ProcCtl6createEiPi
+ 549      FF
+ 550 0725 8B95ACFE 		movl	-340(%ebp), %edx
+ 550      FFFF
+ 551 072b 89542410 		movl	%edx, 16(%esp)
+ 552 072f 8B95B4FE 		movl	-332(%ebp), %edx
+ 552      FFFF
+ 553 0735 8954240C 		movl	%edx, 12(%esp)
+ 554 0739 8B95B0FE 		movl	-336(%ebp), %edx
+ 554      FFFF
+ 555 073f 89542408 		movl	%edx, 8(%esp)
+ 556 0743 8B95B4FE 		movl	-332(%ebp), %edx
+ 556      FFFF
+ 557 0749 89542404 		movl	%edx, 4(%esp)
+ 558 074d 8B95C0FE 		movl	-320(%ebp), %edx
+ 558      FFFF
+GAS LISTING proc/proc.gas 			page 15
+
+
+ 559 0753 8B84C2D4 		movl	2004(%edx,%eax,8), %eax
+ 559      070000
+ 560 075a 890424   		movl	%eax, (%esp)
+ 561 075d E8EEF9FF 		call	__ZN4proc8ProcData4initEiPviS1_
+ 561      FF
+ 562 0762 E8000000 		call	_load_eflags
+ 562      00
+ 563 0767 89C3     		movl	%eax, %ebx
+ 564 0769 E8000000 		call	_io_cli
+ 564      00
+ 565 076e 893424   		movl	%esi, (%esp)
+ 566 0771 E8000000 		call	__Z13thread_resumei
+ 566      00
+ 567 0776 E8000000 		call	__Z15dump_threadlistv
+ 567      00
+ 568 077b 891C24   		movl	%ebx, (%esp)
+ 569 077e E8000000 		call	_store_eflags
+ 569      00
+ 570 0783 31C0     		xorl	%eax, %eax
+ 571              	L53:
+ 572 0785 81C46C01 		addl	$364, %esp
+ 572      0000
+ 573 078b 5B       		popl	%ebx
+ 574 078c 5E       		popl	%esi
+ 575 078d 5F       		popl	%edi
+ 576 078e 5D       		popl	%ebp
+ 577 078f C3       		ret
+ 578              		.p2align 4,,7
+ 579              	L60:
+ 580 0790 C1E005   		sall	$5, %eax
+ 581 0793 01F0     		addl	%esi, %eax
+ 582 0795 8D1C82   		leal	(%edx,%eax,4), %ebx
+ 583 0798 E9FDFDFF 		jmp	L57
+ 583      FF
+ 584              		.def	_memcpy;	.scl	2;	.type	32;	.endef
+ 585              		.def	__ZN2io5iomng9IOManager6accessEiiPv;	.scl	3;	.type	32;	.endef
+ 586              		.def	__Z14thread_currentv;	.scl	3;	.type	32;	.endef
+ 587              		.def	_store_eflags;	.scl	3;	.type	32;	.endef
+ 588              		.def	__Z15dump_threadlistv;	.scl	3;	.type	32;	.endef
+ 589              		.def	__Z13thread_resumei;	.scl	3;	.type	32;	.endef
+ 590              		.def	_io_cli;	.scl	3;	.type	32;	.endef
+ 591              		.def	_load_eflags;	.scl	3;	.type	32;	.endef
+ 592              		.def	__ZN4proc8ProcData4initEiPviS1_;	.scl	3;	.type	32;	.endef
+ 593              		.def	__Z14memmng_free_4kPvi;	.scl	3;	.type	32;	.endef
+ 594              		.def	__Z14thread_suspendi;	.scl	3;	.type	32;	.endef
+ 595              		.def	__Z10thread_addi;	.scl	3;	.type	32;	.endef
+ 596              		.def	__Z12set_segmdescP18segment_descriptorjii;	.scl	3;	.type	32;	.endef
+ 597              		.def	__Z12thread_allocv;	.scl	3;	.type	32;	.endef
+ 598              		.def	__ZN7tmpCode11readFileAllEPN2fs9FAT12InfoEiPc;	.scl	3;	.type	32;	.endef
+ 599              		.def	__Z15memmng_alloc_4ki;	.scl	3;	.type	32;	.endef
+ 600              		.def	_sprintf;	.scl	2;	.type	32;	.endef
+ 601              		.def	__ZN2fs10FAT12Image7getInfoEiiPKcS2_;	.scl	3;	.type	32;	.endef
+ 602              		.def	__ZN2fs5fat129nameParseEPKcPcS3_;	.scl	3;	.type	32;	.endef
+ 603 079d 909090   		.def	__Z11layer_printP8LayerCtl5uid_tPc;	.scl	3;	.type	32;	.endef
+GAS LISTING proc/proc.gas 			page 16
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 proc.cpp
+       proc/proc.gas:7      .text:00000000 __ZN4proc7ProcCtlC2Ev
+       proc/proc.gas:16     .text:00000010 __ZN4proc7ProcCtlC1Ev
+       proc/proc.gas:29     .text:00000020 __ZN4proc7ProcCtl4ctorEv
+       proc/proc.gas:73     .text:000000b0 __ZN4proc7ProcCtl6createEiPi
+       proc/proc.gas:164    .text:00000180 __ZN4proc7ProcCtl4initEv
+       proc/proc.gas:202    .text:000001f0 __ZNK4proc7ProcCtl7currentEv
+       proc/proc.gas:240    .text:00000260 __ZN4proc8ProcData4openEPKci
+       proc/proc.gas:282    .text:000002e0 __ZN4proc8ProcData5writeEiPvi
+       proc/proc.gas:342    .text:00000390 __ZN4proc7ProcCtl9start_appEPKc
+       proc/proc.gas:143    .text:00000150 __ZN4proc8ProcData4initEiPviS1_
+
+UNDEFINED SYMBOLS
+_l_console
+_layerctl
+_timerctl
+__ZN4proc7procctlE
+__ZN2io5iomng5iomngE
+_fat12img
+_ptr_thctl
+__ZN2io5iomng6screenE
+_memcpy
+__ZN2io5iomng9IOManager6accessEiiPv
+__Z14thread_currentv
+_store_eflags
+__Z15dump_threadlistv
+__Z13thread_resumei
+_io_cli
+_load_eflags
+__Z14memmng_free_4kPvi
+__Z14thread_suspendi
+__Z10thread_addi
+__Z12set_segmdescP18segment_descriptorjii
+__Z12thread_allocv
+__ZN7tmpCode11readFileAllEPN2fs9FAT12InfoEiPc
+__Z15memmng_alloc_4ki
+_sprintf
+__ZN2fs10FAT12Image7getInfoEiiPKcS2_
+__ZN2fs5fat129nameParseEPKcPcS3_
+__Z11layer_printP8LayerCtl5uid_tPc

@@ -1,0 +1,126 @@
+GAS LISTING stdc/rand.gas 			page 1
+
+
+   1              		.file	"rand.c"
+   2              		.text
+   3              		.balign 2
+   4              		.p2align 4,,15
+   5              	.globl _srand
+   6              		.def	_srand;	.scl	2;	.type	32;	.endef
+   7              	_srand:
+   8 0000 55       		pushl	%ebp
+   9 0001 31C9     		xorl	%ecx, %ecx
+  10 0003 89E5     		movl	%esp, %ebp
+  11 0005 53       		pushl	%ebx
+  12 0006 BB000000 		movl	$_state, %ebx
+  12      00
+  13 000b 8B5508   		movl	8(%ebp), %edx
+  14              	L6:
+  15 000e 89D0     		movl	%edx, %eax
+  16 0010 25BEBAFE 		andl	$-889275714, %eax
+  16      CA
+  17 0015 89048B   		movl	%eax, (%ebx,%ecx,4)
+  18 0018 41       		incl	%ecx
+  19 0019 8D0452   		leal	(%edx,%edx,2), %eax
+  20 001c 8D04C0   		leal	(%eax,%eax,8), %eax
+  21 001f C1E004   		sall	$4, %eax
+  22 0022 01D0     		addl	%edx, %eax
+  23 0024 83F903   		cmpl	$3, %ecx
+  24 0027 8D548001 		leal	1(%eax,%eax,4), %edx
+  25 002b 7EE1     		jle	L6
+  26 002d A10C0000 		movl	_state+12, %eax
+  26      00
+  27 0032 85C0     		testl	%eax, %eax
+  28 0034 750A     		jne	L1
+  29 0036 C7050C00 		movl	$-889275714, _state+12
+  29      0000BEBA 
+  29      FECA
+  30              	L1:
+  31 0040 5B       		popl	%ebx
+  32 0041 5D       		popl	%ebp
+  33 0042 C3       		ret
+  34 0043 90       		.balign 2
+  35 0044 8DB60000 		.p2align 4,,15
+  35      00008DBF 
+  35      00000000 
+  36              	.globl _rand
+  37              		.def	_rand;	.scl	2;	.type	32;	.endef
+  38              	_rand:
+  39 0050 55       		pushl	%ebp
+  40 0051 31C9     		xorl	%ecx, %ecx
+  41 0053 89E5     		movl	%esp, %ebp
+  42 0055 57       		pushl	%edi
+  43 0056 56       		pushl	%esi
+  44 0057 BF000000 		movl	$_state, %edi
+  44      00
+  45 005c 8B350C00 		movl	_state+12, %esi
+  45      0000
+  46 0062 53       		pushl	%ebx
+  47 0063 81E60000 		andl	$1073741824, %esi
+  47      0040
+GAS LISTING stdc/rand.gas 			page 2
+
+
+  48 0069 31DB     		xorl	%ebx, %ebx
+  49 006b C1EE1E   		shrl	$30, %esi
+  50 006e F7DE     		negl	%esi
+  51              	L15:
+  52 0070 C1EB1F   		shrl	$31, %ebx
+  53 0073 8B148F   		movl	(%edi,%ecx,4), %edx
+  54 0076 8D0412   		leal	(%edx,%edx), %eax
+  55 0079 09D8     		orl	%ebx, %eax
+  56 007b 89D3     		movl	%edx, %ebx
+  57 007d 89048F   		movl	%eax, (%edi,%ecx,4)
+  58 0080 81E30000 		andl	$-2147483648, %ebx
+  58      0080
+  59 0086 41       		incl	%ecx
+  60 0087 83F903   		cmpl	$3, %ecx
+  61 008a 7EE4     		jle	L15
+  62 008c 89F0     		movl	%esi, %eax
+  63 008e 8B150000 		movl	_state, %edx
+  63      0000
+  64 0094 250B0000 		andl	$-2147483637, %eax
+  64      80
+  65 0099 31D0     		xorl	%edx, %eax
+  66 009b 89C3     		movl	%eax, %ebx
+  67 009d A3000000 		movl	%eax, _state
+  67      00
+  68 00a2 C1EB03   		shrl	$3, %ebx
+  69 00a5 31C3     		xorl	%eax, %ebx
+  70 00a7 89D8     		movl	%ebx, %eax
+  71 00a9 C1E005   		sall	$5, %eax
+  72 00ac 31C3     		xorl	%eax, %ebx
+  73 00ae 89D8     		movl	%ebx, %eax
+  74 00b0 C1E80B   		shrl	$11, %eax
+  75 00b3 31C3     		xorl	%eax, %ebx
+  76 00b5 89D8     		movl	%ebx, %eax
+  77 00b7 C1E011   		sall	$17, %eax
+  78 00ba 31C3     		xorl	%eax, %ebx
+  79 00bc 89D8     		movl	%ebx, %eax
+  80 00be C1E810   		shrl	$16, %eax
+  81 00c1 31C3     		xorl	%eax, %ebx
+  82 00c3 81E3FF7F 		andl	$32767, %ebx
+  82      0000
+  83 00c9 89D8     		movl	%ebx, %eax
+  84 00cb 5B       		popl	%ebx
+  85 00cc 5E       		popl	%esi
+  86 00cd 5F       		popl	%edi
+  87 00ce 5D       		popl	%ebp
+  88 00cf C3       		ret
+  89              		.data
+  90              		.balign 16
+  91              	_state:
+  92 0000 00000000 		.space 16
+  92      00000000 
+  92      00000000 
+  92      00000000 
+GAS LISTING stdc/rand.gas 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 rand.c
+       stdc/rand.gas:7      .text:00000000 _srand
+       stdc/rand.gas:91     .data:00000000 _state
+       stdc/rand.gas:38     .text:00000050 _rand
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,277 @@
+     1 00000000                                 ; naskfunc
+     2 00000000                                 ; TAB=4
+     3 00000000                                 
+     4 00000000                                 [FORMAT "WCOFF"]        ; オブジェクトファイルを作るモード  
+     5 00000000                                 [INSTRSET "i486p"]      ; 486の命令まで使いたいという記述
+     6 00000000                                 [BITS 32]               ; 32ビットモード用の機械語を作らせる
+     7 00000000                                 [FILE "naskfunc.nas"]   ; ソースファイル名情報
+     8 00000000                                 
+     9 00000000                                     GLOBAL  _io_hlt, _io_cli, _io_sti,_io_stihlt, _io_out8
+    10 00000000                                     GLOBAL  _load_eflags, _store_eflags,_load_cr0,_store_cr0
+    11 00000000                                 
+    12 00000000                                     GLOBAL  _load_gdtr, _load_idtr
+    13 00000000                                     GLOBAL  _asm_inthandler0c , _asm_inthandler0d , _asm_inthandler20,_asm_inthandler21, _asm_inthandler26, _asm_inthandler2c , _asm_inthandler40
+    14 00000000                                     global  _io_out16,_io_out32,_io_in8,_io_in16,_io_in32
+    15 00000000                                 
+    16 00000000                                     EXTERN _inthandler0c, _inthandler0d , _inthandler20 , _inthandler21, _inthandler26 , _inthandler2c , _app_syscall
+    17 00000000                                 
+    18 00000000                                 	global _farjmp,_farcall
+    19 00000000                                 	global _task_change
+    20 00000000                                 	global _load_tr
+    21 00000000                                 	global _lock_acquire, _lock_release
+    22                                          [SECTION .text]
+    23 00000000                                 
+    24 00000000                                 _io_hlt:  ;; void io_hlt(void);
+    25 00000000 F4                                  HLT   ;; CPUの休止命令
+    26 00000001 C3                                  RET   ;; 無限ループの場合は必ずこれを入れること
+    27 00000002                                 
+    28 00000002                                 _io_cli:  ;; void io_cli(void);
+    29 00000002 FA                                  CLI   ;; 割り込み拒否
+    30 00000003 C3                                  RET
+    31 00000004                                 
+    32 00000004                                 _io_sti:  ;; void io_sti(void);
+    33 00000004 FB                                  STI   ;; 割り込み許可
+    34 00000005 C3                                  RET
+    35 00000006                                 _io_stihlt: ; void io_stihlt(void)
+    36 00000006 FB                              	sti
+    37 00000007 F4                              	hlt
+    38 00000008 C3                              	ret
+    39 00000009                                 
+    40 00000009                                 _io_out8:              ;; void io_out8(int port, int data);
+    41 00000009 8B 54 24 04                         MOV    EDX,[ESP+4] ;; 書き込み先ポート
+    42 0000000D 8A 44 24 08                         MOV    AL,[ESP+8]  ;; 書き込むデータ
+    43 00000011 EE                                  OUT    DX,AL
+    44 00000012 C3                                  RET
+    45 00000013                                 _io_out16:
+    46 00000013 8B 54 24 04                     	mov edx,[esp+4]
+    47 00000017 8B 44 24 08                     	mov eax,[esp+8]
+    48 0000001B 66 EF                           	out dx,ax
+    49 0000001D C3                              	ret
+    50 0000001E                                 _io_out32:
+    51 0000001E 8B 54 24 04                     	mov edx,[esp+4]
+    52 00000022 8B 44 24 08                     	mov eax,[esp+8]
+    53 00000026 EF                              	out dx,eax
+    54 00000027 C3                              	ret
+    55 00000028                                 _io_in8:	;int io_in8(int port);
+    56 00000028 8B 54 24 04                     	mov edx,[esp+4]
+    57 0000002C 31 C0                           	xor eax,eax
+    58 0000002E EC                              	in al,dx
+    59 0000002F C3                              	ret
+    60 00000030                                 _io_in16:	;int io_in16(int port);
+    61 00000030 8B 54 24 04                     	mov edx,[esp+4]
+    62 00000034 31 C0                           	xor eax,eax
+    63 00000036 66 ED                           	in ax,dx
+    64 00000038 C3                              	ret
+    65 00000039                                 _io_in32:	;int io_in32(int port);
+    66 00000039 8B 54 24 04                     	mov edx,[esp+4]
+    67 0000003D ED                              	in eax,dx
+    68 0000003E C3                              	ret
+    69 0000003F                                 
+    70 0000003F                                 _io_load_eflags:       ;; int io_load_eflags(void);
+    71 0000003F 9C                                  PUSHFD             ;; フラグレジスタをスタックへ格納
+    72 00000040 58                                  POP    EAX         ;; そしてEAXレジスタに取り出す
+    73 00000041 C3                                  RET                ;; EAXレジスタに入っているデータが戻り値？
+    74 00000042                                 
+    75 00000042                                 _io_store_eflags:      ;; void io_store_eflags(int eflags);
+    76 00000042 8B 44 24 04                         MOV    EAX,[ESP+4] ;; ESP+4に引数のeflagsが入っているらしい
+    77 00000046 50                                  PUSH   EAX         ;; 引数のeflagsをスタックに入れる
+    78 00000047 9D                                  POPFD              ;; そしてフラグレジスタに取り出す
+    79 00000048 C3                                  RET
+    80 00000049                                 
+    81 00000049                                 
+    82 00000049                                 _load_gdtr:            ;; void load_gdtr(int limit, int addr);
+    83 00000049 66 8B 44 24 04                      MOV    AX,[ESP+4]  ;; GDTRレジスタは48ビット（6バイト）で、
+    84 0000004E 66 89 44 24 06                      MOV    [ESP+6],AX  ;; 下位16ビットがGDTのリミット値（GDTのサイズの意？）
+    85 00000053 0F 01 54 24 06                      LGDT  [ESP+6]      ;; 上位32ビットがGDTのアドレスだから、
+    86 00000058 C3                                  RET                ;; limit(4byte), addr(4byte)の引数から
+    87 00000059                                                        ;; うまく計算してレジスタに書き込んでいる
+    88 00000059                                 
+    89 00000059                                 _load_idtr:            ;; void load_idtr(int limit, int addr);
+    90 00000059 66 8B 44 24 04                      MOV    AX,[ESP+4]  ;; GDTの場合は同じ
+    91 0000005E 66 89 44 24 06                      MOV    [ESP+6],AX  ;; こっちではLIDT命令を使うだけ
+    92 00000063 0F 01 5C 24 06                      LIDT  [ESP+6]
+    93 00000068 C3                                  RET
+    94 00000069                                 
+    95 00000069                                 _asm_inthandler0c:
+    96 00000069 FB                              		STI
+    97 0000006A 06                              		PUSH	ES
+    98 0000006B 1E                              		PUSH	DS
+    99 0000006C 60                              		PUSHAD
+   100 0000006D 89 E0                           		MOV		EAX,ESP
+   101 0000006F 50                              		PUSH	EAX
+   102 00000070 66 B8 0008                      		MOV		AX,0x08
+   103 00000074 8E D0                           		mov		ss,ax
+   104 00000076 8E D8                           		MOV		DS,AX
+   105 00000078 8E C0                           		MOV		ES,AX
+   106 0000007A E8 [00000000]                   		CALL	_inthandler0c
+   107 0000007F 58                              		POP		EAX
+   108 00000080 61                              		POPAD
+   109 00000081 1F                              		POP		DS
+   110 00000082 07                              		POP		ES
+   111 00000083 83 C4 04                        		ADD		ESP,4			; INT 0x0c でも、これが必要
+   112 00000086                                 	label:
+   113 00000086 FB                              		sti
+   114 00000087 F4                              		hlt
+   115 00000088 EB FC                           		jmp label
+   116 0000008A CF                              		IRETD
+   117 0000008B                                 
+   118 0000008B                                 _asm_inthandler0d:
+   119 0000008B                                 		;STI
+   120 0000008B 06                              		PUSH	ES
+   121 0000008C 1E                              		PUSH	DS
+   122 0000008D 60                              		PUSHAD
+   123 0000008E 89 E0                           		MOV		EAX,ESP
+   124 00000090 50                              		PUSH	EAX
+   125 00000091 66 B8 0008                      		MOV		AX,0x08
+   126 00000095 8E D0                           		mov		ss,ax
+   127 00000097 8E D8                           		MOV		DS,AX
+   128 00000099 8E C0                           		MOV		ES,AX
+   129 0000009B E8 [00000000]                   		CALL	_inthandler0d
+   130 000000A0 58                              		POP		EAX
+   131 000000A1 61                              		POPAD
+   132 000000A2 1F                              		POP		DS
+   133 000000A3 07                              		POP		ES
+   134 000000A4 83 C4 04                        		ADD		ESP,4			; INT 0x0d では、これが必要
+   135 000000A7 CF                              		IRETD
+   136 000000A8                                 	
+   137 000000A8                                 _asm_inthandler20:
+   138 000000A8 06                                  PUSH  ES           ;; ESとDSをスタックへ
+   139 000000A9 1E                                  PUSH  DS           ;; さらにPUSHADで基本的な8レジスタをスタックへ
+   140 000000AA 60                                  PUSHAD             ;; push eax, ecx, edx, ebx, esi, edi, esp, ebp
+   141 000000AB 89 E0                               MOV   EAX,ESP
+   142 000000AD 50                                  PUSH  EAX
+   143 000000AE 66 8C D0                            MOV   AX,SS        ;; DS = ES = SS
+   144 000000B1 8E D8                               MOV   DS,AX        ;; C言語のコードはDS, ES, SSがすべて同じセグメントでなければ
+   145 000000B3 8E C0                               MOV   ES,AX        ;; うまく実行してくれない（頼むぜC言語～）。
+   146 000000B5 E8 [00000000]                       CALL  _inthandler20
+   147 000000BA 58                                  POP   EAX
+   148 000000BB 61                                  POPAD              ;; この割り込み処理が実行された後は
+   149 000000BC 1F                                  POP   DS           ;; 実行される前とまったく同じレジスタの状態に
+   150 000000BD 07                                  POP   ES           ;; しておかなければならないので、このようにわざわざ戻している
+   151 000000BE CF                                  IRETD
+   152 000000BF                                  
+   153 000000BF                                 _asm_inthandler21:     ;; キーボード割り込み時に実行される
+   154 000000BF 06                                  PUSH  ES           ;; ESとDSをスタックへ
+   155 000000C0 1E                                  PUSH  DS           ;; さらにPUSHADで基本的な8レジスタをスタックへ
+   156 000000C1 60                                  PUSHAD             ;; push eax, ecx, edx, ebx, esi, edi, esp, ebp
+   157 000000C2 89 E0                               MOV   EAX,ESP
+   158 000000C4 50                                  PUSH  EAX
+   159 000000C5 66 8C D0                            MOV   AX,SS        ;; DS = ES = SS
+   160 000000C8 8E D8                               MOV   DS,AX        ;; C言語のコードはDS, ES, SSがすべて同じセグメントでなければ
+   161 000000CA 8E C0                               MOV   ES,AX        ;; うまく実行してくれない（頼むぜC言語～）。
+   162 000000CC E8 [00000000]                       CALL  _inthandler21
+   163 000000D1 58                                  POP   EAX
+   164 000000D2 61                                  POPAD              ;; この割り込み処理が実行された後は
+   165 000000D3 1F                                  POP   DS           ;; 実行される前とまったく同じレジスタの状態に
+   166 000000D4 07                                  POP   ES           ;; しておかなければならないので、このようにわざわざ戻している
+   167 000000D5 CF                                  IRETD
+   168 000000D6                                 _asm_inthandler26:     ;; キーボード割り込み時に実行される
+   169 000000D6 06                                  PUSH  ES           ;; ESとDSをスタックへ
+   170 000000D7 1E                                  PUSH  DS           ;; さらにPUSHADで基本的な8レジスタをスタックへ
+   171 000000D8 60                                  PUSHAD             ;; push eax, ecx, edx, ebx, esi, edi, esp, ebp
+   172 000000D9 89 E0                               MOV   EAX,ESP
+   173 000000DB 50                                  PUSH  EAX
+   174 000000DC 66 8C D0                            MOV   AX,SS        ;; DS = ES = SS
+   175 000000DF 8E D8                               MOV   DS,AX        ;; C言語のコードはDS, ES, SSがすべて同じセグメントでなければ
+   176 000000E1 8E C0                               MOV   ES,AX        ;; うまく実行してくれない（頼むぜC言語～）。
+   177 000000E3 E8 [00000000]                       CALL  _inthandler26
+   178 000000E8 58                                  POP   EAX
+   179 000000E9 61                                  POPAD              ;; この割り込み処理が実行された後は
+   180 000000EA 1F                                  POP   DS           ;; 実行される前とまったく同じレジスタの状態に
+   181 000000EB 07                                  POP   ES           ;; しておかなければならないので、このようにわざわざ戻している
+   182 000000EC CF                                  IRETD
+   183 000000ED                                 
+   184 000000ED                                 _asm_inthandler2c:     ;; マウス割り込み時に実行される
+   185 000000ED 06                                  PUSH  ES           ;; その他のコードは_asm_inthandler21と同じ
+   186 000000EE 1E                                  PUSH  DS
+   187 000000EF 60                                  PUSHAD
+   188 000000F0 89 E0                               MOV    EAX,ESP
+   189 000000F2 50                                  PUSH  EAX
+   190 000000F3 66 8C D0                            MOV    AX,SS
+   191 000000F6 8E D8                               MOV    DS,AX
+   192 000000F8 8E C0                               MOV    ES,AX
+   193 000000FA E8 [00000000]                       CALL  _inthandler2c
+   194 000000FF 58                                  POP    EAX
+   195 00000100 61                                  POPAD
+   196 00000101 1F                                  POP    DS
+   197 00000102 07                                  POP    ES
+   198 00000103 CF                                  IRETD
+   199 00000104                                 _asm_inthandler40:     ;; Application SystemCall (eax=num,ecx=a0,edx=a1,ebx=a3)
+   200 00000104 06                                  PUSH  ES           ;; ESとDSをスタックへ
+   201 00000105 1E                                  PUSH  DS           ;; さらにPUSHADで基本的な8レジスタをスタックへ
+   202 00000106 56                                  push esi
+   203 00000107 57                                  push edi
+   204 00000108 55                                  push ebp             ;; push esi, edi, esp, ebp
+   205 00000109 66 8C D6                             mov   si,ss
+   206 0000010C 66 BF 0008                           MOV   di,08        ;; DS = ES = SS = 8 ; kernel data
+   207 00000110 8E D7                                mov   ss,di
+   208 00000112 89 E5                                 mov   ebp,esp
+   209 00000114 BC 0026B000                           mov   esp,0x0026b000 ;;free space,size=0x3000(12KiB)
+   210 00000119 8E DF                                 MOV   DS,di        ;; C言語のコードはDS, ES, SSがすべて同じセグメントでなければ
+   211 0000011B 8E C7                                 MOV   ES,di        ;; うまく実行してくれない（頼むぜC言語～）。
+   212 0000011D 56                                    push esi           ;; old ss
+   213 0000011E 55                                    push ebp           ;; old esp
+   214 0000011F 53                                     push ebx
+   215 00000120 52                                     push edx
+   216 00000121 51                                     push ecx
+   217 00000122 50                                     push eax
+   218 00000123 E8 [00000000]                          CALL  _app_syscall
+   219 00000128 83 C4 10                               add  esp,16
+   220 0000012B 5D                                    pop  ebp
+   221 0000012C 5E                                    pop  esi
+   222 0000012D 89 EC                                 mov  esp,ebp
+   223 0000012F 8E D6                                mov  ss,si         ;;return to the application
+   224 00000131 5D                                  pop ebp
+   225 00000132 5F                                  pop edi
+   226 00000133 5E                                  pop esi            
+   227 00000134 1F                                  POP   DS           
+   228 00000135 07                                  POP   ES           
+   229 00000136 CF                                  IRETD
+   230 00000137                                  	
+   231 00000137                                 _load_eflags:	;uint load_eflags(void);
+   232 00000137 9C                              	pushfd
+   233 00000138 58                              	pop eax
+   234 00000139 C3                              	ret
+   235 0000013A                                 _store_eflags:	;void store_eflags(uint newflags);
+   236 0000013A 8B 44 24 04                     	mov eax,[4+esp]
+   237 0000013E 50                              	push eax
+   238 0000013F 9D                              	popfd
+   239 00000140 C3                              	ret
+   240 00000141                                 _load_cr0:
+   241 00000141 0F 20 C0                        	mov eax,cr0
+   242 00000144 C3                              	ret
+   243 00000145                                 _store_cr0:	;void store_cr0(uint);
+   244 00000145 8B 44 24 04                     	mov eax,[4+esp]
+   245 00000149 0F 22 C0                        	mov cr0,eax
+   246 0000014C C3                              	ret
+   247 0000014D                                 _farjmp: ; void farjmp(int proc,int new_cs)
+   248 0000014D FF 6C 24 04                     	jmp far [4+esp]
+   249 00000151 C3                              	ret
+   250 00000152                                 _farcall:
+   251 00000152 FF 5C 24 04                     	call far [4+esp]
+   252 00000156 C3                              	ret
+   253 00000157                                 _task_change ; void task_change(int new_cs)
+   254 00000157 FF 74 24 04                     	push dword [4+esp]
+   255 0000015B 6A 00                           	push 0
+   256 0000015D FF 2C 24                        	jmp far [esp]
+   257 00000160 83 C4 08                        	add esp,8
+   258 00000163 C3                              	ret
+   259 00000164                                 
+   260 00000164                                 _load_tr:
+   261 00000164 0F 00 5C 24 04                  	ltr [4+esp]
+   262 00000169 C3                              	ret
+   263 0000016A                                 _lock_acquire: ; void lock_acquire(int *val);
+   264 0000016A 8B 4C 24 04                     	mov ecx,[4+esp]
+   265 0000016E B8 00000001                     	mov eax,1
+   266 00000173                                 loop262:
+   267 00000173 87 01                           	xchg eax,[ecx] ; atomically xchg 1 with *val
+   268 00000175 85 C0                           	test eax,eax
+   269 00000177 75 FA                           	jne loop262
+   270 00000179                                 ;end of loop262
+   271 00000179 C3                              	ret
+   272 0000017A                                 
+   273 0000017A                                 _lock_release: ;void lock_release(int *val);
+   274 0000017A 8B 4C 24 04                     	mov ecx,[4+esp]
+   275 0000017E C7 01 00000000                  	mov dword[ecx],0
+   276 00000184 C3                              	ret
+   277 00000185                                 

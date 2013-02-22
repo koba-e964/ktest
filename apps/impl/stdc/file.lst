@@ -1,0 +1,101 @@
+GAS LISTING stdc/file.gas 			page 1
+
+
+   1              		.file	"file.c"
+   2              		.text
+   3              		.balign 2
+   4              		.p2align 4,,15
+   5              	.globl _fopen
+   6              		.def	_fopen;	.scl	2;	.type	32;	.endef
+   7              	_fopen:
+   8 0000 55       		pushl	%ebp
+   9 0001 31C0     		xorl	%eax, %eax
+  10 0003 89E5     		movl	%esp, %ebp
+  11 0005 51       		pushl	%ecx
+  12 0006 51       		pushl	%ecx
+  13 0007 8B550C   		movl	12(%ebp), %edx
+  14 000a 85D2     		testl	%edx, %edx
+  15 000c 7437     		je	L1
+  16 000e 8A02     		movb	(%edx), %al
+  17 0010 31C9     		xorl	%ecx, %ecx
+  18 0012 84C0     		testb	%al, %al
+  19 0014 741E     		je	L17
+  20              		.p2align 4,,7
+  21              	L15:
+  22 0016 0FBEC0   		movsbl	%al,%eax
+  23 0019 83F862   		cmpl	$98, %eax
+  24 001c 7442     		je	L10
+  25 001e 83F862   		cmpl	$98, %eax
+  26 0021 7F2D     		jg	L14
+  27 0023 83F82B   		cmpl	$43, %eax
+  28 0026 7405     		je	L6
+  29 0028 83F861   		cmpl	$97, %eax
+  30              	L18:
+  31 002b 741A     		je	L19
+  32              	L6:
+  33 002d 42       		incl	%edx
+  34 002e 8A02     		movb	(%edx), %al
+  35 0030 84C0     		testb	%al, %al
+  36 0032 75E2     		jne	L15
+  37              	L17:
+  38 0034 8B4508   		movl	8(%ebp), %eax
+  39 0037 52       		pushl	%edx
+  40 0038 52       		pushl	%edx
+  41 0039 51       		pushl	%ecx
+  42 003a 50       		pushl	%eax
+  43 003b E8000000 		call	_kos_open
+  43      00
+  44 0040 2D000080 		subl	$1904214016, %eax
+  44      71
+  45              	L1:
+  46 0045 C9       		leave
+  47 0046 C3       		ret
+  48              		.p2align 4,,7
+  49              	L19:
+  50 0047 83C902   		orl	$2, %ecx
+  51 004a EBE1     		jmp	L6
+  52 004c 8D742600 		.p2align 4,,7
+  53              	L14:
+  54 0050 83F872   		cmpl	$114, %eax
+  55 0053 74D8     		je	L6
+GAS LISTING stdc/file.gas 			page 2
+
+
+  56 0055 83F877   		cmpl	$119, %eax
+  57 0058 EBD1     		jmp	L18
+  58 005a 8DB60000 		.p2align 4,,7
+  58      0000
+  59              	L10:
+  60 0060 83C904   		orl	$4, %ecx
+  61 0063 EBC8     		jmp	L6
+  62 0065 90       		.balign 2
+  63 0066 8D76008D 		.p2align 4,,15
+  63      BC270000 
+  63      0000
+  64              	.globl _fclose
+  65              		.def	_fclose;	.scl	2;	.type	32;	.endef
+  66              	_fclose:
+  67 0070 55       		pushl	%ebp
+  68 0071 89E5     		movl	%esp, %ebp
+  69 0073 8B4508   		movl	8(%ebp), %eax
+  70 0076 05000080 		addl	$1904214016, %eax
+  70      71
+  71 007b 894508   		movl	%eax, 8(%ebp)
+  72 007e 5D       		popl	%ebp
+  73 007f E9000000 		jmp	_kos_close
+  73      00
+  74              		.def	_kos_close;	.scl	2;	.type	32;	.endef
+  75 0084 90909090 		.def	_kos_open;	.scl	2;	.type	32;	.endef
+  75      90909090 
+  75      90909090 
+GAS LISTING stdc/file.gas 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 file.c
+       stdc/file.gas:7      .text:00000000 _fopen
+       stdc/file.gas:66     .text:00000070 _fclose
+
+UNDEFINED SYMBOLS
+_kos_close
+_kos_open

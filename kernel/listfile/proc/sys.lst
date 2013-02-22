@@ -1,0 +1,396 @@
+GAS LISTING proc/sys.gas 			page 1
+
+
+   1              		.file	"sys.cpp"
+   2              		.section .rdata,"dr"
+   3              	LC1:
+   4 0000 6E696F5F 		.ascii "nio_proc case 2:\12\0"
+   4      70726F63 
+   4      20636173 
+   4      6520323A 
+   4      0A00
+   5              	LC0:
+   6 0012 6572726F 		.ascii "errorcode=%08x\12\0"
+   6      72636F64 
+   6      653D2530 
+   6      38780A00 
+   7              		.text
+   8              		.align 2
+   9              		.p2align 4,,15
+  10              	.globl __ZN4proc3sys8nio_procEiiii
+  11              		.def	__ZN4proc3sys8nio_procEiiii;	.scl	2;	.type	32;	.endef
+  12              	__ZN4proc3sys8nio_procEiiii:
+  13 0000 55       		pushl	%ebp
+  14 0001 89E5     		movl	%esp, %ebp
+  15 0003 81EC1801 		subl	$280, %esp
+  15      0000
+  16 0009 895DF4   		movl	%ebx, -12(%ebp)
+  17 000c 8B4508   		movl	8(%ebp), %eax
+  18 000f 8B5D0C   		movl	12(%ebp), %ebx
+  19 0012 897DFC   		movl	%edi, -4(%ebp)
+  20 0015 85C0     		testl	%eax, %eax
+  21 0017 8975F8   		movl	%esi, -8(%ebp)
+  22 001a 8B7D14   		movl	20(%ebp), %edi
+  23 001d 0F848D00 		je	L3
+  23      0000
+  24 0023 83F802   		cmpl	$2, %eax
+  25 0026 0F85EB00 		jne	L11
+  25      0000
+  26 002c 893C24   		movl	%edi, (%esp)
+  27 002f E8000000 		call	__Z15memmng_alloc_4ki
+  27      00
+  28 0034 89C6     		movl	%eax, %esi
+  29 0036 B8000000 		movl	$LC1, %eax
+  29      00
+  30 003b 89442408 		movl	%eax, 8(%esp)
+  31 003f A1000000 		movl	_l_console, %eax
+  31      00
+  32 0044 89442404 		movl	%eax, 4(%esp)
+  33 0048 A1000000 		movl	_layerctl, %eax
+  33      00
+  34 004d 890424   		movl	%eax, (%esp)
+  35 0050 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+  35      00
+  36 0055 8974240C 		movl	%esi, 12(%esp)
+  37 0059 897C2408 		movl	%edi, 8(%esp)
+  38 005d 8B5510   		movl	16(%ebp), %edx
+  39 0060 C7042401 		movl	$1, (%esp)
+  39      000000
+  40 0067 89542404 		movl	%edx, 4(%esp)
+  41 006b E8000000 		call	__ZN4task19loadCurrentToKernelEijiPv
+GAS LISTING proc/sys.gas 			page 2
+
+
+  41      00
+  42 0070 A1000000 		movl	__ZN4proc7procctlE, %eax
+  42      00
+  43 0075 890424   		movl	%eax, (%esp)
+  44 0078 E8000000 		call	__ZNK4proc7ProcCtl7currentEv
+  44      00
+  45 007d 890424   		movl	%eax, (%esp)
+  46 0080 895C2404 		movl	%ebx, 4(%esp)
+  47 0084 897C240C 		movl	%edi, 12(%esp)
+  48 0088 89742408 		movl	%esi, 8(%esp)
+  49 008c E8000000 		call	__ZN4proc8ProcData5writeEiPvi
+  49      00
+  50 0091 897C2404 		movl	%edi, 4(%esp)
+  51 0095 89C3     		movl	%eax, %ebx
+  52 0097 893424   		movl	%esi, (%esp)
+  53 009a E8000000 		call	__Z14memmng_free_4kPvi
+  53      00
+  54 009f 89D8     		movl	%ebx, %eax
+  55              	L1:
+  56 00a1 8B5DF4   		movl	-12(%ebp), %ebx
+  57 00a4 8B75F8   		movl	-8(%ebp), %esi
+  58 00a7 8B7DFC   		movl	-4(%ebp), %edi
+  59 00aa 89EC     		movl	%ebp, %esp
+  60 00ac 5D       		popl	%ebp
+  61 00ad C3       		ret
+  62 00ae 89F6     		.p2align 4,,7
+  63              	L3:
+  64 00b0 83FB64   		cmpl	$100, %ebx
+  65 00b3 89D8     		movl	%ebx, %eax
+  66 00b5 7F59     		jg	L12
+  67              	L5:
+  68 00b7 89442408 		movl	%eax, 8(%esp)
+  69 00bb 8D9D78FF 		leal	-136(%ebp), %ebx
+  69      FFFF
+  70 00c1 895C240C 		movl	%ebx, 12(%esp)
+  71 00c5 8B4510   		movl	16(%ebp), %eax
+  72 00c8 C7042401 		movl	$1, (%esp)
+  72      000000
+  73 00cf 89442404 		movl	%eax, 4(%esp)
+  74 00d3 E8000000 		call	__ZN4task19loadCurrentToKernelEijiPv
+  74      00
+  75 00d8 85C0     		testl	%eax, %eax
+  76 00da 7542     		jne	L6
+  77 00dc C645DC00 		movb	$0, -36(%ebp)
+  78 00e0 A1000000 		movl	__ZN4proc7procctlE, %eax
+  78      00
+  79 00e5 890424   		movl	%eax, (%esp)
+  80 00e8 E8000000 		call	__ZNK4proc7ProcCtl7currentEv
+  80      00
+  81 00ed 890424   		movl	%eax, (%esp)
+  82 00f0 897C2408 		movl	%edi, 8(%esp)
+  83 00f4 895C2404 		movl	%ebx, 4(%esp)
+  84 00f8 E8000000 		call	__ZN4proc8ProcData4openEPKci
+  84      00
+  85 00fd 8B5DF4   		movl	-12(%ebp), %ebx
+  86 0100 8B75F8   		movl	-8(%ebp), %esi
+  87 0103 8B7DFC   		movl	-4(%ebp), %edi
+GAS LISTING proc/sys.gas 			page 3
+
+
+  88 0106 89EC     		movl	%ebp, %esp
+  89 0108 5D       		popl	%ebp
+  90 0109 C3       		ret
+  91 010a 8DB60000 		.p2align 4,,7
+  91      0000
+  92              	L12:
+  93 0110 B8640000 		movl	$100, %eax
+  93      00
+  94 0115 EBA0     		jmp	L5
+  95              	L11:
+  96 0117 B8FFFFFF 		movl	$-1, %eax
+  96      FF
+  97 011c EB83     		jmp	L1
+  98              	L6:
+  99 011e 89442408 		movl	%eax, 8(%esp)
+ 100 0122 BA120000 		movl	$LC0, %edx
+ 100      00
+ 101 0127 8D9DF8FE 		leal	-264(%ebp), %ebx
+ 101      FFFF
+ 102 012d 89542404 		movl	%edx, 4(%esp)
+ 103 0131 891C24   		movl	%ebx, (%esp)
+ 104 0134 E8000000 		call	_sprintf
+ 104      00
+ 105 0139 895C2408 		movl	%ebx, 8(%esp)
+ 106 013d A1000000 		movl	_l_console, %eax
+ 106      00
+ 107 0142 89442404 		movl	%eax, 4(%esp)
+ 108 0146 A1000000 		movl	_layerctl, %eax
+ 108      00
+ 109 014b 890424   		movl	%eax, (%esp)
+ 110 014e E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 110      00
+ 111 0153 B80015D5 		movl	$-1160440576, %eax
+ 111      BA
+ 112 0158 E944FFFF 		jmp	L1
+ 112      FF
+ 113              		.section .rdata,"dr"
+ 114              	LC2:
+ 115 0022 53746163 		.ascii "Stack Exception!\12\0"
+ 115      6B204578 
+ 115      63657074 
+ 115      696F6E21 
+ 115      0A00
+ 116              		.text
+ 117 015d 90       		.align 2
+ 118 015e 89F6     		.p2align 4,,15
+ 119              	.globl _inthandler0c
+ 120              		.def	_inthandler0c;	.scl	2;	.type	32;	.endef
+ 121              	_inthandler0c:
+ 122 0160 55       		pushl	%ebp
+ 123 0161 B9220000 		movl	$LC2, %ecx
+ 123      00
+ 124 0166 89E5     		movl	%esp, %ebp
+ 125 0168 83EC18   		subl	$24, %esp
+ 126 016b 894C2408 		movl	%ecx, 8(%esp)
+ 127 016f A1000000 		movl	_l_console, %eax
+ 127      00
+GAS LISTING proc/sys.gas 			page 4
+
+
+ 128 0174 89442404 		movl	%eax, 4(%esp)
+ 129 0178 A1000000 		movl	_layerctl, %eax
+ 129      00
+ 130 017d 890424   		movl	%eax, (%esp)
+ 131 0180 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 131      00
+ 132 0185 E8000000 		call	__Z14thread_currentv
+ 132      00
+ 133 018a 894508   		movl	%eax, 8(%ebp)
+ 134 018d C9       		leave
+ 135 018e E9000000 		jmp	__Z16thread_terminatei
+ 135      00
+ 136              		.section .rdata,"dr"
+ 137              		.align 4
+ 138              	LC3:
+ 139 0034 47656E65 		.ascii "General Protection Exception.\12@esp=%08x\0"
+ 139      72616C20 
+ 139      50726F74 
+ 139      65637469 
+ 139      6F6E2045 
+ 140              		.text
+ 141 0193 90       		.align 2
+ 142 0194 8DB60000 		.p2align 4,,15
+ 142      00008DBF 
+ 142      00000000 
+ 143              	.globl _inthandler0d
+ 144              		.def	_inthandler0d;	.scl	2;	.type	32;	.endef
+ 145              	_inthandler0d:
+ 146 01a0 55       		pushl	%ebp
+ 147 01a1 89E5     		movl	%esp, %ebp
+ 148 01a3 53       		pushl	%ebx
+ 149 01a4 83EC54   		subl	$84, %esp
+ 150 01a7 E8000000 		call	_load_eflags
+ 150      00
+ 151 01ac 89C3     		movl	%eax, %ebx
+ 152 01ae E8000000 		call	_io_cli
+ 152      00
+ 153 01b3 8B4508   		movl	8(%ebp), %eax
+ 154 01b6 89442408 		movl	%eax, 8(%esp)
+ 155 01ba B8340000 		movl	$LC3, %eax
+ 155      00
+ 156 01bf 89442404 		movl	%eax, 4(%esp)
+ 157 01c3 8D45B8   		leal	-72(%ebp), %eax
+ 158 01c6 890424   		movl	%eax, (%esp)
+ 159 01c9 E8000000 		call	_sprintf
+ 159      00
+ 160 01ce 891C24   		movl	%ebx, (%esp)
+ 161 01d1 E8000000 		call	_store_eflags
+ 161      00
+ 162 01d6 E8000000 		call	__Z14thread_currentv
+ 162      00
+ 163 01db 890424   		movl	%eax, (%esp)
+ 164 01de E8000000 		call	__Z16thread_terminatei
+ 164      00
+ 165 01e3 83C454   		addl	$84, %esp
+ 166 01e6 5B       		popl	%ebx
+ 167 01e7 5D       		popl	%ebp
+GAS LISTING proc/sys.gas 			page 5
+
+
+ 168 01e8 C3       		ret
+ 169              		.section .rdata,"dr"
+ 170              		.align 4
+ 171              	LC4:
+ 172 005c 54687265 		.ascii "ThreadID = %d \12syscall_%x(%x,%x,%x)\12\0"
+ 172      61644944 
+ 172      203D2025 
+ 172      64200A73 
+ 172      79736361 
+ 173 0081 00000000 		.text
+ 173      00000000 
+ 173      00000000 
+ 173      000000
+ 174 01e9 90       		.align 2
+ 175 01ea 8DB60000 		.p2align 4,,15
+ 175      0000
+ 176              	.globl _app_syscall
+ 177              		.def	_app_syscall;	.scl	2;	.type	32;	.endef
+ 178              	_app_syscall:
+ 179 01f0 55       		pushl	%ebp
+ 180 01f1 89E5     		movl	%esp, %ebp
+ 181 01f3 81EC8800 		subl	$136, %esp
+ 181      0000
+ 182 01f9 8975F8   		movl	%esi, -8(%ebp)
+ 183 01fc 8B7508   		movl	8(%ebp), %esi
+ 184 01ff 895DF4   		movl	%ebx, -12(%ebp)
+ 185 0202 8D5DA8   		leal	-88(%ebp), %ebx
+ 186 0205 897DFC   		movl	%edi, -4(%ebp)
+ 187 0208 89F7     		movl	%esi, %edi
+ 188 020a C1EF10   		shrl	$16, %edi
+ 189 020d E8000000 		call	_load_eflags
+ 189      00
+ 190 0212 8945A4   		movl	%eax, -92(%ebp)
+ 191 0215 E8000000 		call	_io_cli
+ 191      00
+ 192 021a C7459CFF 		movl	$-1, -100(%ebp)
+ 192      FFFFFF
+ 193 0221 89F0     		movl	%esi, %eax
+ 194 0223 25FFFF00 		andl	$65535, %eax
+ 194      00
+ 195 0228 8945A0   		movl	%eax, -96(%ebp)
+ 196 022b E8000000 		call	__Z14thread_currentv
+ 196      00
+ 197 0230 89442408 		movl	%eax, 8(%esp)
+ 198 0234 8B5514   		movl	20(%ebp), %edx
+ 199 0237 B85C0000 		movl	$LC4, %eax
+ 199      00
+ 200 023c 8974240C 		movl	%esi, 12(%esp)
+ 201 0240 89542418 		movl	%edx, 24(%esp)
+ 202 0244 8B5510   		movl	16(%ebp), %edx
+ 203 0247 89442404 		movl	%eax, 4(%esp)
+ 204 024b 891C24   		movl	%ebx, (%esp)
+ 205 024e 89542414 		movl	%edx, 20(%esp)
+ 206 0252 8B550C   		movl	12(%ebp), %edx
+ 207 0255 89542410 		movl	%edx, 16(%esp)
+ 208 0259 E8000000 		call	_sprintf
+ 208      00
+GAS LISTING proc/sys.gas 			page 6
+
+
+ 209 025e 895C2408 		movl	%ebx, 8(%esp)
+ 210 0262 A1000000 		movl	_l_console, %eax
+ 210      00
+ 211 0267 89442404 		movl	%eax, 4(%esp)
+ 212 026b A1000000 		movl	_layerctl, %eax
+ 212      00
+ 213 0270 890424   		movl	%eax, (%esp)
+ 214 0273 E8000000 		call	__Z11layer_printP8LayerCtl5uid_tPc
+ 214      00
+ 215 0278 83FE02   		cmpl	$2, %esi
+ 216 027b 7448     		je	L20
+ 217 027d 83FF02   		cmpl	$2, %edi
+ 218 0280 741E     		je	L21
+ 219              	L17:
+ 220 0282 8B45A4   		movl	-92(%ebp), %eax
+ 221 0285 890424   		movl	%eax, (%esp)
+ 222 0288 E8000000 		call	_store_eflags
+ 222      00
+ 223 028d 8B459C   		movl	-100(%ebp), %eax
+ 224              	L15:
+ 225 0290 8B5DF4   		movl	-12(%ebp), %ebx
+ 226 0293 8B75F8   		movl	-8(%ebp), %esi
+ 227 0296 8B7DFC   		movl	-4(%ebp), %edi
+ 228 0299 89EC     		movl	%ebp, %esp
+ 229 029b 5D       		popl	%ebp
+ 230 029c C3       		ret
+ 231 029d 8D7600   		.p2align 4,,7
+ 232              	L21:
+ 233 02a0 8B4514   		movl	20(%ebp), %eax
+ 234 02a3 8B5510   		movl	16(%ebp), %edx
+ 235 02a6 8944240C 		movl	%eax, 12(%esp)
+ 236 02aa 8B450C   		movl	12(%ebp), %eax
+ 237 02ad 89542408 		movl	%edx, 8(%esp)
+ 238 02b1 8B55A0   		movl	-96(%ebp), %edx
+ 239 02b4 89442404 		movl	%eax, 4(%esp)
+ 240 02b8 891424   		movl	%edx, (%esp)
+ 241 02bb E840FDFF 		call	__ZN4proc3sys8nio_procEiiii
+ 241      FF
+ 242 02c0 89459C   		movl	%eax, -100(%ebp)
+ 243 02c3 EBBD     		jmp	L17
+ 244              	L20:
+ 245 02c5 E8000000 		call	__Z14thread_currentv
+ 245      00
+ 246 02ca 890424   		movl	%eax, (%esp)
+ 247 02cd E8000000 		call	__Z16thread_terminatei
+ 247      00
+ 248 02d2 B8FFFFFF 		movl	$-1, %eax
+ 248      FF
+ 249 02d7 EBB7     		jmp	L15
+ 250              		.def	_store_eflags;	.scl	3;	.type	32;	.endef
+ 251              		.def	_io_cli;	.scl	3;	.type	32;	.endef
+ 252              		.def	_load_eflags;	.scl	3;	.type	32;	.endef
+ 253              		.def	__Z14thread_currentv;	.scl	3;	.type	32;	.endef
+ 254              		.def	__Z16thread_terminatei;	.scl	3;	.type	32;	.endef
+ 255              		.def	__Z14memmng_free_4kPvi;	.scl	3;	.type	32;	.endef
+ 256              		.def	__ZN4proc8ProcData5writeEiPvi;	.scl	3;	.type	32;	.endef
+ 257              		.def	__Z15memmng_alloc_4ki;	.scl	3;	.type	32;	.endef
+GAS LISTING proc/sys.gas 			page 7
+
+
+ 258              		.def	__ZN4proc8ProcData4openEPKci;	.scl	3;	.type	32;	.endef
+ 259              		.def	__ZNK4proc7ProcCtl7currentEv;	.scl	3;	.type	32;	.endef
+ 260              		.def	__Z11layer_printP8LayerCtl5uid_tPc;	.scl	3;	.type	32;	.endef
+ 261              		.def	_sprintf;	.scl	2;	.type	32;	.endef
+ 262 02d9 90909090 		.def	__ZN4task19loadCurrentToKernelEijiPv;	.scl	3;	.type	32;	.endef
+ 262      909090
+GAS LISTING proc/sys.gas 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 sys.cpp
+        proc/sys.gas:12     .text:00000000 __ZN4proc3sys8nio_procEiiii
+        proc/sys.gas:121    .text:00000160 _inthandler0c
+        proc/sys.gas:145    .text:000001a0 _inthandler0d
+        proc/sys.gas:178    .text:000001f0 _app_syscall
+
+UNDEFINED SYMBOLS
+_l_console
+_layerctl
+__ZN4proc7procctlE
+_store_eflags
+_io_cli
+_load_eflags
+__Z14thread_currentv
+__Z16thread_terminatei
+__Z14memmng_free_4kPvi
+__ZN4proc8ProcData5writeEiPvi
+__Z15memmng_alloc_4ki
+__ZN4proc8ProcData4openEPKci
+__ZNK4proc7ProcCtl7currentEv
+__Z11layer_printP8LayerCtl5uid_tPc
+_sprintf
+__ZN4task19loadCurrentToKernelEijiPv
